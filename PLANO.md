@@ -41,9 +41,9 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - [x] Eventos (`/eventos`) — álbuns de `eventos.html` (2006–2007), rotulados como **histórico**; seção pronta para álbum novo
 
 ## Etapa 5 — Som e Acessórios + Produtos
-- [ ] `content/produtos.ts` gerado a partir de `produtos/*.html` (47 itens: slug, título, descrição, fotos)
-- [ ] Som e Acessórios (`/som-e-acessorios`) — catálogo com filtro/busca
-- [ ] Rota dinâmica `/produtos/[slug]` com `generateStaticParams`
+- [x] `content/produtos.json` gerado a partir de `produtos/*.html` (47 itens: slug, título, descrição, fotos)
+- [x] Som e Acessórios (`/som-e-acessorios`) — catálogo com filtro/busca
+- [x] Rota dinâmica `/produtos/[slug]` com `generateStaticParams`
 
 ## Etapa 6 — Qualidade
 - [ ] Imagens otimizadas (`next/image`, redimensionar originais pesadas para `public/fotos`)
