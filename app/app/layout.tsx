@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { site } from "@/lib/site";
+import { site, siteUrl } from "@/lib/site";
 
 const display = Barlow_Condensed({
   variable: "--font-display",
@@ -18,7 +18,31 @@ const body = Barlow({
   weight: ["400", "500", "600"],
 });
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  name: site.name,
+  url: siteUrl,
+  telephone: "+55-24-2246-4978",
+  foundingDate: String(site.founded),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    addressCountry: "BR",
+  },
+  sameAs: [site.social.instagram.href, site.social.facebook.href],
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: site.name,
+    images: [{ url: "/img/hero/automotiva.jpg", width: 952, height: 370 }],
+  },
   title: {
     default: `${site.name} — Película, Som e Acessórios em Petrópolis`,
     template: `%s · ${site.shortName}`,
@@ -35,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
   );

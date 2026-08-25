@@ -28,7 +28,7 @@ export default function ContatoPage() {
         intro="Utilize o formulário abaixo para enviar seu contato, ou se preferir, ligue para nós."
       />
 
-      <section className="container-x grid gap-14 pb-24 md:grid-cols-[1fr_1fr] md:gap-20">
+      <section className="container-x grid gap-14 border-t border-line pt-14 pb-24 md:grid-cols-[1.15fr_1fr] md:gap-20 md:pt-20">
         <Reveal>
           <ContactForm />
         </Reveal>

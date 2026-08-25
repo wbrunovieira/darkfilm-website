@@ -47,8 +47,8 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 
 ## Etapa 6 — Qualidade
 - [ ] Imagens otimizadas (`next/image`, redimensionar originais pesadas para `public/fotos`)
-- [ ] Metadata por página (title, description), OpenGraph, sitemap, robots
-- [ ] JSON-LD `LocalBusiness`
+- [x] Metadata por página (title, description), OpenGraph, sitemap, robots
+- [x] JSON-LD `LocalBusiness`
 - [ ] Teste em celular real, `npm run build` limpo, Lighthouse
 - [ ] Deploy (Vercel) com HTTPS
 

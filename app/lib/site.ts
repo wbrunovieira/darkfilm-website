@@ -1,4 +1,7 @@
 // Dados fixos da empresa. Fonte: site original (rodapé e página "A Empresa").
+
+/** Domínio de produção. Sobrescreva com NEXT_PUBLIC_SITE_URL em preview. */
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thedarkfilm.com.br";
 export const site = {
   name: "The Dark Film & Sound",
   shortName: "The Dark Film",
