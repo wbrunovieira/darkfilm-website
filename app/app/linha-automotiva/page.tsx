@@ -5,6 +5,7 @@ import { PageHero } from "@/components/PageHero";
 import { Bullets, Section } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
+import { TintSimulator } from "@/components/TintSimulator";
 import { ArrowIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -71,6 +72,8 @@ export default function LinhaAutomotivaPage() {
           .
         </p>
       </Section>
+
+      <TintSimulator image="/img/galeria/10.jpg" />
 
       <Section
         eyebrow="Proteção e segurança"

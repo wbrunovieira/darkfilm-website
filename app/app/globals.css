@@ -137,6 +137,37 @@ body {
 .prose-dark a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
 .prose-dark a:hover { color: var(--red-2); }
 
+/* Slider do simulador de película */
+.tint-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--red) var(--p, 50%), var(--bg-3) var(--p, 50%));
+  outline: none;
+}
+.tint-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fg);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 6px 18px rgba(0, 0, 0, 0.5);
+  cursor: grab;
+  transition: transform 0.2s;
+}
+.tint-range::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.1); }
+.tint-range::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fg);
+  border: 3px solid var(--bg);
+  cursor: grab;
+}
+.tint-range:focus-visible { box-shadow: 0 0 0 3px var(--red-deep); }
+
 /* ---------- Motion ---------- */
 @keyframes marquee {
   from { transform: translateX(0); }
