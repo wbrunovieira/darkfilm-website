@@ -8,21 +8,22 @@ Legenda: `[ ]` a fazer · `[~]` em andamento · `[x]` feito
 - [x] `create-next-app` (App Router, TS, Tailwind v4, `app/` sem `src/`)
 - [x] `motion` instalado
 - [x] Repositório GitHub público: https://github.com/wbrunovieira/darkfilm-website
-- [ ] Design system em `app/app/globals.css`: paleta (preto/grafite + vermelho da logo), fontes (display + texto via `next/font`), espaçamento, `prefers-reduced-motion`
-- [ ] `lib/site.ts`: dados fixos (nome, endereço, telefones, WhatsApp, redes, fundação 1992, clientes)
-- [ ] Layout global: `Header` (logo + nav + menu mobile), `Footer`, `WhatsAppFloat`, transição de página
-- [ ] Logo: `imagens/principal/logoTDF.png` → `public/logo.png` (avaliar recorte/limpeza)
+- [x] Design system em `app/app/globals.css`: paleta (preto/grafite + vermelho da logo), fontes Barlow Condensed + Barlow via `next/font`, utilities (`container-x`, `display`, `eyebrow`, `tint-overlay`, `grain`, `photo`), `prefers-reduced-motion`
+- [x] `lib/site.ts`: dados fixos (nome, endereço, telefones, WhatsApp, redes, fundação 1992, clientes, nav)
+- [x] Layout global: `Header` (logo + nav + dropdown Películas + menu mobile), `Footer`, `WhatsAppFloat`, `Reveal` (motion)
+- [x] Logo: `imagens/principal/logoTDF.png` → `public/img/marca/logo.png`
+- Animação: `motion/react` para reveal em scroll, stagger do hero e menu mobile; CSS puro para marquee, zoom lento e hover
 
 ## Etapa 1 — Home (`/`) — prioridade máxima, é o que vai pra reunião
 Componentes (cada um copia texto/imagem do `index.html` original na hora de ser feito):
-- [ ] `Hero` — foto grande com movimento sutil + claim + CTA WhatsApp. Fotos: `fotos/destaques-*.jpg` (3 slides antigos: Arquitetônica / Automotiva / Som)
-- [ ] `TrustBar` — "desde 1992", "credenciada 3M", "Petrópolis/RJ"
-- [ ] `ServicesGrid` — Película automotiva, Película arquitetônica, Som & acessórios, Envelopamento, Polimento de faróis, Lavagem a seco, Conserto de para-brisa (textos dos cards originais)
-- [ ] `Seal3M` — chamada para a página 3M
-- [ ] `Clients` — GE Celma, Tec Auto (Ford), Fundação Cultural de Petrópolis, Carl Zeiss
-- [ ] `GalleryPreview` — 6–8 fotos de `fotos/galeria-*.jpg` + link
-- [ ] `Novidade` — medidor de transmissão luminosa (`imgPocketDetective.jpg`, `imgTintMeter.jpg`)
-- [ ] `ContactCTA` — telefones, WhatsApp, endereço
+- [x] `Hero` — Kombi da The Dark Film (`destaques-…_2.jpg`) com zoom lento + claim + CTA WhatsApp
+- [x] `TrustBar` — marquee: desde 1992, credenciada 3M, serviços
+- [x] `Services` — 3 destaques (textos do slider original) + 4 cards (para-brisa, envelopamento, lavagem a seco, faróis)
+- [x] `Seal3M` — texto da página 3M original, link para `/3m`
+- [x] `Clients` — GE Celma, Tec Auto (Ford), Fundação Cultural de Petrópolis, Carl Zeiss
+- [x] `GalleryPreview` — 5 fotos de `fotos/galeria-*.jpg` + link
+- [x] `Novidade` — medidor de transmissão luminosa (`imgPocketDetective.jpg`, `imgTintMeter.jpg`)
+- [x] `ContactCTA` — telefones, WhatsApp, endereço (reutilizável nas outras páginas)
 - Vídeo do YouTube da home original está morto → **não incluir** (pendência: cliente decide se quer vídeo novo)
 
 ## Etapa 2 — A Empresa (`/a-empresa`) e Contato (`/contato`)
