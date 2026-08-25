@@ -2,16 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { site, whatsappUrl, yearsInBusiness } from "@/lib/site";
 import { ArrowIcon, WhatsAppIcon } from "../icons";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
-  const reduce = useReducedMotion();
   const fade = (delay: number) => ({
-    initial: reduce ? false : { opacity: 0, y: 28 },
+    initial: { opacity: 0, y: 28 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.9, delay, ease },
   });
@@ -32,7 +31,7 @@ export function Hero() {
         {/* faixa vermelha: a "película" descendo sobre o vidro */}
         <motion.div
           aria-hidden
-          initial={reduce ? false : { scaleY: 0 }}
+          initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ duration: 1.4, ease, delay: 0.2 }}
           className="absolute left-5 top-0 h-full w-px origin-top bg-gradient-to-b from-red via-red/60 to-transparent sm:left-8 lg:left-12"

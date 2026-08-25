@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -16,9 +16,8 @@ type Props = {
 };
 
 export function PageHero({ eyebrow, title, intro, image, imagePosition = "center", compact }: Props) {
-  const reduce = useReducedMotion();
   const fade = (delay: number) => ({
-    initial: reduce ? false : { opacity: 0, y: 24 },
+    initial: { opacity: 0, y: 24 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.8, delay, ease },
   });

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import type { ComponentProps } from "react";
 
 const variants: Variants = {
@@ -13,12 +13,14 @@ type Props = ComponentProps<typeof motion.div> & {
   once?: boolean;
 };
 
-/** Revela o conteúdo ao entrar no viewport. Sem movimento se o usuário preferir. */
+// `prefers-reduced-motion` é tratado globalmente em <MotionProvider> (MotionConfig),
+// por isso `initial` é sempre "hidden": mesmo HTML no servidor e no cliente.
+
+/** Revela o conteúdo ao entrar no viewport. */
 export function Reveal({ delay = 0, once = true, children, ...rest }: Props) {
-  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={reduce ? false : "hidden"}
+      initial="hidden"
       whileInView="show"
       viewport={{ once, margin: "0px 0px -10% 0px" }}
       variants={variants}
@@ -36,10 +38,9 @@ export function RevealGroup({
   children,
   ...rest
 }: ComponentProps<typeof motion.div> & { stagger?: number }) {
-  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={reduce ? false : "hidden"}
+      initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "0px 0px -10% 0px" }}
       transition={{ staggerChildren: stagger }}

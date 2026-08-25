@@ -51,7 +51,7 @@ export function PhotoGrid({ photos, limit, columns = "4" }: Props) {
             <motion.button
               type="button"
               onClick={() => setOpen(i)}
-              initial={reduce ? false : { opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -5% 0px" }}
               transition={{ duration: 0.5, delay: (i % 4) * 0.05 }}

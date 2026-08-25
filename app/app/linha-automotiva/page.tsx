@@ -73,7 +73,7 @@ export default function LinhaAutomotivaPage() {
         </p>
       </Section>
 
-      <TintSimulator image="/img/galeria/10.jpg" />
+      <TintSimulator />
 
       <Section
         eyebrow="Proteção e segurança"

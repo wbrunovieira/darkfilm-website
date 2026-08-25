@@ -158,15 +158,31 @@ body {
   transition: transform 0.2s;
 }
 .tint-range::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.1); }
+.tint-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-3);
+}
+.tint-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--red);
+}
 .tint-range::-moz-range-thumb {
   width: 26px;
   height: 26px;
   border-radius: 50%;
   background: var(--fg);
   border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--line-strong), 0 6px 18px rgba(0, 0, 0, 0.5);
   cursor: grab;
 }
-.tint-range:focus-visible { box-shadow: 0 0 0 3px var(--red-deep); }
+.tint-range::-moz-range-thumb:active { cursor: grabbing; }
+.tint-range { cursor: pointer; }
+.tint-range:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 6px;
+}
 
 /* ---------- Motion ---------- */
 @keyframes marquee {
