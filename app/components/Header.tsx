@@ -31,13 +31,16 @@ export function Header() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-40 transition-[background-color,border-color,backdrop-filter] duration-500 ${
-        scrolled || open
-          ? "border-b border-line bg-bg/85 backdrop-blur-md"
-          : "border-b border-transparent bg-gradient-to-b from-bg/80 to-transparent"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-40">
+      {/* A barra tem o backdrop-blur; o painel do menu fica FORA dela, porque
+          backdrop-filter cria containing block e prenderia o `fixed` do painel. */}
+      <div
+        className={`transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          scrolled || open
+            ? "border-b border-line bg-bg/85 backdrop-blur-md"
+            : "border-b border-transparent bg-gradient-to-b from-bg/80 to-transparent"
+        }`}
+      >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
         <Link href="/" aria-label="Início" onClick={() => setOpen(false)} className="relative z-50 shrink-0">
           <Image
@@ -139,6 +142,7 @@ export function Header() {
             </span>
           </button>
         </div>
+      </div>
       </div>
 
       <AnimatePresence>
