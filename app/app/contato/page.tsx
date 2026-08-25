@@ -107,7 +107,7 @@ export default function ContatoPage() {
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-fg px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-bg transition-colors hover:bg-white"
+                className="inline-flex items-center gap-2 rounded-full bg-fg px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-bg transition-[background-color,color,transform] duration-300 hover:-translate-y-0.5 hover:bg-red hover:text-white"
               >
                 <GoogleMapsIcon className="size-4" /> Google Maps
               </a>
@@ -115,7 +115,7 @@ export default function ContatoPage() {
                 href={wazeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-bg/70 px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-fg backdrop-blur transition-colors hover:border-[#33ccff] hover:text-[#33ccff]"
+                className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-bg/70 px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-fg backdrop-blur transition-[border-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-[#33ccff] hover:text-[#33ccff]"
               >
                 <WazeIcon className="size-4" /> Waze
               </a>

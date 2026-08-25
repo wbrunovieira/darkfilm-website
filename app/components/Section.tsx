@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
+import { CountUp } from "./CountUp";
 
 /** Bloco de conteúdo: título à esquerda, corpo à direita (empilha no mobile). */
 export function Section({
@@ -49,7 +50,9 @@ export function Bullets({ items }: { items: ReactNode[] }) {
 export function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="border-l-2 border-red pl-5">
-      <p className="display text-5xl text-fg md:text-6xl">{value}</p>
+      <p className="display text-5xl text-fg md:text-6xl">
+        <CountUp value={value} />
+      </p>
       <p className="mt-2 text-sm text-fg-2">{label}</p>
     </div>
   );
