@@ -3,16 +3,19 @@ import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { site, whatsappUrl } from "@/lib/site";
-import { InstagramIcon, FacebookIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/icons";
+import { InstagramIcon, FacebookIcon, GoogleMapsIcon, PhoneIcon, PinIcon, WazeIcon, WhatsAppIcon } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Contato",
   description: `Fale com a The Dark Film em Petrópolis/RJ: WhatsApp ${site.whatsapp.label}, telefones ${site.phones.map((p) => p.label).join(" e ")}. ${site.address.full}.`,
 };
 
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+const enderecoQuery = encodeURIComponent(
   `${site.address.street}, ${site.address.district}, ${site.address.city} - ${site.address.state}`,
-)}&z=16&output=embed`;
+);
+const mapSrc = `https://www.google.com/maps?q=${enderecoQuery}&z=16&output=embed`;
+const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${enderecoQuery}`;
+const wazeUrl = `https://waze.com/ul?q=${enderecoQuery}&navigate=yes`;
 
 export default function ContatoPage() {
   return (
@@ -85,14 +88,39 @@ export default function ContatoPage() {
       </section>
 
       <section className="container-x pb-8">
-        <Reveal className="overflow-hidden rounded-lg border border-line">
+        <Reveal className="group relative overflow-hidden rounded-lg border border-line">
+          {/* P&B no repouso; hover/foco revela as cores originais do mapa. */}
           <iframe
             title={`Mapa: ${site.address.full}`}
             src={mapSrc}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="block h-[420px] w-full grayscale invert-[0.92] hue-rotate-180 contrast-[0.9]"
+            className="block h-[420px] w-full grayscale invert-[0.92] hue-rotate-180 contrast-[0.9] transition-[filter] duration-700 ease-out group-hover:grayscale-0 group-hover:invert-0 group-hover:hue-rotate-0 group-hover:contrast-100 group-focus-within:grayscale-0 group-focus-within:invert-0 group-focus-within:hue-rotate-0 group-focus-within:contrast-100 md:h-[480px]"
           />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-3 bg-gradient-to-t from-bg via-bg/70 to-transparent p-4 md:p-6">
+            <p className="text-sm text-fg-2">
+              <span className="block font-display text-xs uppercase tracking-[0.2em] text-fg-3">Como chegar</span>
+              {site.address.full}
+            </p>
+            <div className="pointer-events-auto flex gap-2">
+              <a
+                href={googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-fg px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-bg transition-colors hover:bg-white"
+              >
+                <GoogleMapsIcon className="size-4" /> Google Maps
+              </a>
+              <a
+                href={wazeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-line-strong bg-bg/70 px-4 py-2.5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-fg backdrop-blur transition-colors hover:border-[#33ccff] hover:text-[#33ccff]"
+              >
+                <WazeIcon className="size-4" /> Waze
+              </a>
+            </div>
+          </div>
         </Reveal>
       </section>
     </>

@@ -44,6 +44,26 @@ export function PhoneIcon(p: P) {
   );
 }
 
+export function GoogleMapsIcon(p: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden {...p}>
+      <path d="M12 22s7-7.1 7-12.5A7 7 0 0 0 5 9.5C5 14.9 12 22 12 22z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </svg>
+  );
+}
+
+export function WazeIcon(p: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden {...p}>
+      <path d="M20 11a8 8 0 0 1-9.6 7.8L6 21v-3.6A8 8 0 1 1 20 11z" />
+      <circle cx="9.5" cy="10" r="0.6" fill="currentColor" />
+      <circle cx="14.5" cy="10" r="0.6" fill="currentColor" />
+      <path d="M9 13.5c1.5 1.5 4.5 1.5 6 0" />
+    </svg>
+  );
+}
+
 export function PinIcon(p: P) {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden {...p}>
