@@ -2,6 +2,7 @@ import { site, yearsInBusiness } from "@/lib/site";
 
 const items = [
   `Desde ${site.founded}`,
+  `${site.google.rating.toLocaleString("pt-BR")} no Google · ${site.google.reviews} avaliações`,
   "Credenciada 3M",
   "Película automotiva",
   "Película arquitetônica",

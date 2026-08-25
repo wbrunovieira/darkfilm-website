@@ -53,6 +53,8 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - [ ] Deploy (Vercel) com HTTPS
 
 ## Pendências para o cliente
+- **Google Perfil da Empresa:** enviar o link curto da ficha (ou Place ID) para o selo apontar direto; informar **horário de funcionamento** (não existe no site antigo). Fora do site, o cliente precisa corrigir na ficha: categoria "Loja" → "Loja de películas/insulfilm automotivo" (+ "Som automotivo"), nome "TheDarkFilm" → "The Dark Film & Sound", bairro "Valparaíso" vs "Cel. Veiga" (confirmar qual é o certo), e o site cadastrado (http → https quando o novo entrar no ar).
+- Nota 4,6 / 255 avaliações está fixa em `lib/site.ts` (data 25/08/2026); atualizar à mão ou, após fechar, buscar ao vivo via Google Places API.
 - **Simulador de película (Linha Automotiva):** confirmar leitura da Res. CONTRAN 960/2022 + 989/2022 (para-brisa 75%, dianteiras 70%, traseiros sem mínimo com retrovisores externos). O site antigo citava a Res. 254/2007 (revogada) com 28% nos traseiros.
 - Destino do formulário de contato (e-mail? WhatsApp?)
 - Vídeo novo para a home (o antigo está indisponível)

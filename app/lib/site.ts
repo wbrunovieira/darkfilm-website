@@ -29,6 +29,16 @@ export const site = {
       href: "https://www.facebook.com/pages/The-Dark-Film-Sound/134567593333951",
     },
   },
+  // Ficha no Google (Perfil da Empresa). Nota e contagem informadas em 25/08/2026 — atualizar à mão.
+  // PENDÊNCIA: trocar `url` pelo link curto da ficha (g.page/...) ou Place ID quando o cliente enviar.
+  google: {
+    rating: 4.6,
+    reviews: 255,
+    updatedAt: "2026-08-25",
+    url: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("The Dark Film Petrópolis"),
+  },
+  // PENDÊNCIA: horário de funcionamento não consta no site antigo — pedir ao cliente.
+  hours: null as null | string,
   // Clientes atendidos, conforme página "A Empresa" do site original.
   clients: [
     "GE Celma",

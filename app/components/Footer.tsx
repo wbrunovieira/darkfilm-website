@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { nav, site, whatsappUrl, type NavLink } from "@/lib/site";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "./icons";
+import { GoogleBadge } from "./GoogleBadge";
 
 const links: NavLink[] = nav.flatMap((n) => ("children" in n ? n.children : [n]));
 
@@ -22,6 +23,9 @@ export function Footer() {
             <a href={site.social.facebook.href} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="grid size-10 place-items-center rounded-full border border-line-strong text-fg-2 transition-colors hover:border-red hover:text-fg">
               <FacebookIcon className="size-5" />
             </a>
+          </div>
+          <div className="mt-5">
+            <GoogleBadge />
           </div>
         </div>
 

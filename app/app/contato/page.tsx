@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
+import { GoogleBadge } from "@/components/GoogleBadge";
 import { Reveal } from "@/components/Reveal";
 import { site, whatsappUrl } from "@/lib/site";
 import { InstagramIcon, FacebookIcon, GoogleMapsIcon, PhoneIcon, PinIcon, WazeIcon, WhatsAppIcon } from "@/components/icons";
@@ -74,6 +75,13 @@ export default function ContatoPage() {
                 {site.address.district} — {site.address.city}/{site.address.state}
               </p>
             </div>
+          </div>
+
+          <div className="rounded-lg border border-line bg-bg-2 p-5">
+            <GoogleBadge variant="hero" />
+            <p className="mt-3 text-sm text-fg-2">
+              Avaliações reais de clientes na nossa ficha do Google.
+            </p>
           </div>
 
           <div className="flex gap-3">

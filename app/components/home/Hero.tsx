@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { site, whatsappUrl, yearsInBusiness } from "@/lib/site";
 import { ArrowIcon, WhatsAppIcon } from "../icons";
+import { GoogleBadge } from "../GoogleBadge";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -81,6 +82,10 @@ export function Hero() {
             Conhecer as películas
             <ArrowIcon className="size-5 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
+        </motion.div>
+
+        <motion.div {...fade(1.05)} className="mt-8">
+          <GoogleBadge variant="hero" />
         </motion.div>
       </div>
 
