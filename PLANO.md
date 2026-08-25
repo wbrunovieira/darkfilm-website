@@ -37,8 +37,8 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - [x] 3M (`/3m`) — maior texto do site, tratado como página de autoridade
 
 ## Etapa 4 — Galeria e Eventos
-- [ ] Galeria (`/galeria`) — ~85 fotos de `galeria-de-fotos.html`, grid masonry, lazy load, lightbox acessível
-- [ ] Eventos (`/eventos`) — álbuns de `eventos.html` (2006–2007), rotulados como **histórico**; seção pronta para álbum novo
+- [x] Galeria (`/galeria`) — ~85 fotos de `galeria-de-fotos.html`, grid masonry, lazy load, lightbox acessível
+- [x] Eventos (`/eventos`) — álbuns de `eventos.html` (2006–2007), rotulados como **histórico**; seção pronta para álbum novo
 
 ## Etapa 5 — Som e Acessórios + Produtos
 - [ ] `content/produtos.ts` gerado a partir de `produtos/*.html` (47 itens: slug, título, descrição, fotos)
