@@ -117,6 +117,26 @@ body {
   filter: saturate(0.85) contrast(1.06);
 }
 
+/* Texto corrido das páginas internas */
+.prose-dark {
+  color: var(--fg-2);
+  line-height: 1.7;
+  font-size: 1.0625rem;
+}
+.prose-dark > * + * { margin-top: 1.1em; }
+.prose-dark strong { color: var(--fg); font-weight: 600; }
+.prose-dark h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  line-height: 1.05;
+  color: var(--fg);
+  margin-top: 2em;
+}
+.prose-dark a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.prose-dark a:hover { color: var(--red-2); }
+
 /* ---------- Motion ---------- */
 @keyframes marquee {
   from { transform: translateX(0); }

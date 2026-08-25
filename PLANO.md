@@ -27,14 +27,14 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - Vídeo do YouTube da home original está morto → **não incluir** (pendência: cliente decide se quer vídeo novo)
 
 ## Etapa 2 — A Empresa (`/a-empresa`) e Contato (`/contato`)
-- [ ] A Empresa: texto de `a-empresa.html` (1992, missão, serviços, clientes), foto `imagens/empresa/fotoTheDark.jpg`
-- [ ] Contato: formulário (nome, e-mail, telefone, mensagem) → **pendência: destino do envio** (por ora action que abre WhatsApp/mailto); telefones, endereço, mapa (Google Maps embed do endereço)
+- [x] A Empresa: texto de `a-empresa.html` (1992, missão, serviços, clientes), foto `imagens/empresa/fotoTheDark.jpg`
+- [x] Contato: formulário (nome, e-mail, telefone, mensagem) → **pendência: destino do envio** (por ora action que abre WhatsApp/mailto); telefones, endereço, mapa (Google Maps embed do endereço)
 
 ## Etapa 3 — Páginas de película
-- [ ] Linha Automotiva (`/linha-automotiva`) — texto de `linha-automotiva.html`
-- [ ] Linha Arquitetônica (`/linha-arquitetonica`) — texto de `linha-arquitetonica.html`
-- [ ] Características do Film (`/caracteristicas-do-film`) — conteúdo técnico de `caracteristicas-film.html`
-- [ ] 3M (`/3m`) — maior texto do site, tratado como página de autoridade
+- [x] Linha Automotiva (`/linha-automotiva`) — texto de `linha-automotiva.html`
+- [x] Linha Arquitetônica (`/linha-arquitetonica`) — texto de `linha-arquitetonica.html`
+- [x] Características do Film (`/caracteristicas-do-film`) — conteúdo técnico de `caracteristicas-film.html`
+- [x] 3M (`/3m`) — maior texto do site, tratado como página de autoridade
 
 ## Etapa 4 — Galeria e Eventos
 - [ ] Galeria (`/galeria`) — ~85 fotos de `galeria-de-fotos.html`, grid masonry, lazy load, lightbox acessível
