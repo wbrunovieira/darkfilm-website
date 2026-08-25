@@ -21,8 +21,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
-
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -41,7 +39,7 @@ export function Header() {
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between md:h-20">
-        <Link href="/" aria-label="Início" className="relative z-50 shrink-0">
+        <Link href="/" aria-label="Início" onClick={() => setOpen(false)} className="relative z-50 shrink-0">
           <Image
             src="/img/marca/logo.png"
             alt={site.name}
@@ -171,6 +169,7 @@ export function Header() {
                         <Link
                           key={c.href}
                           href={c.href}
+                          onClick={() => setOpen(false)}
                           className={`block border-b border-line py-4 font-display text-3xl font-semibold uppercase ${
                             isActive(c.href) ? "text-red-2" : "text-fg"
                           }`}
