@@ -35,7 +35,8 @@ function GoogleG(p: { className?: string }) {
   );
 }
 
-/** Selo com a nota do Google. `variant="hero"` é maior e com fundo; `"inline"` é compacto. */
+/** Selo com a nota do Google. `variant="hero"` é um pouco maior, sem pílula (para não
+ *  competir com o botão flutuante do WhatsApp); `"inline"` é compacto. */
 export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline" }) {
   const { rating, reviews, url } = site.google;
   const label = `${rating.toLocaleString("pt-BR")} de 5 no Google, ${reviews} avaliações`;
@@ -47,18 +48,12 @@ export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${label}. Abrir avaliações no Google`}
-        className="group inline-flex items-center gap-4 rounded-full border border-line-strong bg-bg/60 py-2.5 pl-3 pr-5 backdrop-blur transition-colors hover:border-fg-3"
+        className="group inline-flex items-center gap-3 text-sm text-fg-2 transition-colors hover:text-fg"
       >
-        <span className="grid size-9 place-items-center rounded-full bg-white">
-          <GoogleG className="size-5" />
-        </span>
-        <span className="flex flex-col leading-tight">
-          <span className="flex items-center gap-2">
-            <span className="display text-2xl text-fg">{rating.toLocaleString("pt-BR")}</span>
-            <Stars rating={rating} />
-          </span>
-          <span className="text-xs text-fg-2">{reviews} avaliações no Google</span>
-        </span>
+        <GoogleG className="size-5" />
+        <span className="display text-xl text-fg">{rating.toLocaleString("pt-BR")}</span>
+        <Stars rating={rating} />
+        <span>{reviews} avaliações no Google</span>
       </a>
     );
   }

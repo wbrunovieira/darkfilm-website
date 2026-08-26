@@ -34,6 +34,10 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Viewport largo e baixo (MacBook com janela reduzida, notebooks 1366×768 com barra
+   do navegador): o hero precisa caber inteiro acima da dobra. */
+@custom-variant short (@media (max-height: 720px) and (min-width: 48rem));
+
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
@@ -91,6 +95,24 @@ body {
   background:
     linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.55) 45%, rgba(11, 11, 13, 0.2) 100%),
     linear-gradient(to right, rgba(11, 11, 13, 0.85) 0%, rgba(11, 11, 13, 0.1) 70%);
+}
+
+/* Variante do hero: mais pesada em cima e à esquerda (onde o texto assenta sobre o
+   mosaico preto-e-branco da oficina) e um "respiro" radial que preserva a Kombi
+   à direita. O objetivo não é escurecer tudo — é tirar contraste de onde há letra. */
+@utility tint-overlay-hero {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 55% at 72% 62%, rgba(11, 11, 13, 0) 0%, rgba(11, 11, 13, 0.55) 100%),
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.7) 40%, rgba(11, 11, 13, 0.5) 75%, rgba(11, 11, 13, 0.75) 100%),
+    linear-gradient(to right, rgba(11, 11, 13, 0.92) 0%, rgba(11, 11, 13, 0.6) 45%, rgba(11, 11, 13, 0.05) 100%);
+}
+
+/* Foto do hero: contraste abaixo de 1 para amansar o mosaico, sem lavar a Kombi */
+@utility photo-hero {
+  filter: saturate(0.6) contrast(0.92) brightness(0.9);
 }
 
 /* Grain: disfarça baixa resolução e dá textura */
