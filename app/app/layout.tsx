@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
-    images: [{ url: "/img/hero/automotiva.jpg", width: 952, height: 370 }],
+    images: [{ url: "/img/hero/oficina-kombi.jpg", width: 1000, height: 749 }],
   },
   title: {
     default: `${site.name} — Película, Som e Acessórios em Petrópolis`,

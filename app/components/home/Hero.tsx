@@ -2,12 +2,46 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { site, whatsappUrl, yearsInBusiness } from "@/lib/site";
 import { ArrowIcon, WhatsAppIcon } from "../icons";
 import { GoogleBadge } from "../GoogleBadge";
 
 const ease = [0.16, 1, 0.3, 1] as const;
+
+/** Placas da parede da loja (assets do site original), reinterpretadas: escurecidas,
+ *  em parallax leve, e só nos cantos — não espalhadas pela tela. */
+function Placas() {
+  const { scrollY } = useScroll();
+  const yTopo = useTransform(scrollY, [0, 800], [0, -120]);
+  const enter = (delay: number, x: number, rot: number) => ({
+    initial: { opacity: 0, x, rotate: rot },
+    animate: { opacity: 1, x: 0, rotate: 0 },
+    transition: { duration: 1.4, delay, ease },
+  });
+
+  return (
+    <>
+      <motion.div
+        aria-hidden
+        style={{ y: yTopo }}
+        className="pointer-events-none absolute -right-6 top-14 z-0 w-[46vw] max-w-[330px] md:-right-2 md:top-20 md:w-[30vw] md:max-w-[440px]"
+      >
+        <motion.div {...enter(0.5, 60, 6)}>
+          <Image
+            src="/img/marca/placas-topo.png"
+            alt=""
+            width={472}
+            height={439}
+            priority
+            className="h-auto w-full opacity-70 saturate-[0.8] contrast-[1.05] drop-shadow-[0_30px_40px_rgba(0,0,0,0.7)] md:opacity-85"
+          />
+        </motion.div>
+      </motion.div>
+
+    </>
+  );
+}
 
 export function Hero() {
   const fade = (delay: number) => ({
@@ -18,15 +52,15 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden grain">
-      {/* Foto de fundo: Kombi da The Dark Film (site original). */}
+      {/* Foto de fundo: Kombi da The Dark Film dentro da oficina (álbum de eventos, 2014). */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/img/hero/automotiva.jpg"
+          src="/img/hero/oficina-kombi.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="photo object-cover object-[60%_center] animate-slow-zoom"
+          className="photo object-cover object-[70%_45%] animate-slow-zoom"
         />
         <div className="tint-overlay" />
         {/* faixa vermelha: a "película" descendo sobre o vidro */}
@@ -39,7 +73,9 @@ export function Hero() {
         />
       </div>
 
-      <div className="container-x flex min-h-[100svh] flex-col justify-end pb-16 pt-32 md:pb-24">
+      <Placas />
+
+      <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-end pb-16 pt-32 md:pb-24">
         <motion.p {...fade(0.3)} className="eyebrow mb-5">
           {site.city}/{site.state} · desde {site.founded}
         </motion.p>
