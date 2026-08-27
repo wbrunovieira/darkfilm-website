@@ -15,8 +15,8 @@ const items = [
 export function TrustBar() {
   const row = [...items, ...items];
   return (
-    <div className="relative border-y border-line bg-bg-2 py-4 overflow-hidden" aria-hidden>
-      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap font-display text-sm font-medium uppercase tracking-[0.25em] text-fg-3">
+    <div className="ripas grain border-y border-line py-5 overflow-hidden" aria-hidden>
+      <div className="flex w-max animate-marquee gap-10 whitespace-nowrap font-display text-sm font-medium uppercase tracking-[0.25em] text-fg-2">
         {row.map((t, i) => (
           <span key={i} className="flex items-center gap-10">
             {t}

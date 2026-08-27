@@ -8,7 +8,9 @@ const links: NavLink[] = nav.flatMap((n) => ("children" in n ? n.children : [n])
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 border-t border-line bg-bg-2">
+    <footer className="relative mt-24 bg-bg-2">
+      {/* régua de ripas: a parede da loja fechando a página */}
+      <div aria-hidden className="ripas grain h-10 border-y border-line md:h-12" />
       <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Image src="/img/marca/logo.png" alt={site.name} width={200} height={66} className="h-14 w-auto" />

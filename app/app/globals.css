@@ -129,6 +129,27 @@ body {
   }
 }
 
+/* Ripas de madeira da parede da loja (asset do site antigo, escurecido).
+   Usar como MATERIAL em faixas curtas — nunca atrás de texto corrido. */
+@utility ripas {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--bg-2);
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, rgba(11, 11, 13, 0.55), rgba(11, 11, 13, 0.25) 30%, rgba(11, 11, 13, 0.25) 70%, rgba(11, 11, 13, 0.55)),
+      url("/img/marca/ripas.jpg");
+    background-size: auto, 800px auto;
+    background-repeat: repeat, repeat;
+    opacity: 0.9;
+  }
+}
+
 @utility hairline {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent);
