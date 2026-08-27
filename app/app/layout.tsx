@@ -38,6 +38,8 @@ const jsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  // Proposta em subdomínio da agência: não indexar (ver robots.ts).
+  robots: siteUrl.includes("thedarkfilm.com.br") ? undefined : { index: false, follow: false },
   openGraph: {
     type: "website",
     locale: "pt_BR",

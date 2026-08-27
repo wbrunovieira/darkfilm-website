@@ -50,7 +50,7 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - [x] Metadata por página (title, description), OpenGraph, sitemap, robots
 - [x] JSON-LD `LocalBusiness`
 - [ ] Teste em celular real, `npm run build` limpo, Lighthouse
-- [ ] Deploy (Vercel) com HTTPS
+- [x] Deploy (Vercel) com HTTPS — proposta em https://thedarkfilm.wbdigitalsolutions.com (noindex até ir para o domínio final)
 
 ## Pendências para o cliente
 - **Google Perfil da Empresa:** enviar o link curto da ficha (ou Place ID) para o selo apontar direto; informar **horário de funcionamento** (não existe no site antigo). Fora do site, o cliente precisa corrigir na ficha: categoria "Loja" → "Loja de películas/insulfilm automotivo" (+ "Som automotivo"), nome "TheDarkFilm" → "The Dark Film & Sound", bairro "Valparaíso" vs "Cel. Veiga" (confirmar qual é o certo), e o site cadastrado (http → https quando o novo entrar no ar).
