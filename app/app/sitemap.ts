@@ -11,7 +11,6 @@ const paginas = [
   "/3m",
   "/som-e-acessorios",
   "/galeria",
-  "/eventos",
   "/contato",
 ];
 

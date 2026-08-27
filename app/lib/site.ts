@@ -73,6 +73,5 @@ export const nav: NavItem[] = [
   },
   { href: "/som-e-acessorios", label: "Som e Acessórios" },
   { href: "/galeria", label: "Galeria" },
-  { href: "/eventos", label: "Eventos" },
   { href: "/contato", label: "Contato" },
 ];

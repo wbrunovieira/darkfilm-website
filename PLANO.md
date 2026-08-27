@@ -38,7 +38,7 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 
 ## Etapa 4 — Galeria e Eventos
 - [x] Galeria (`/galeria`) — ~85 fotos de `galeria-de-fotos.html`, grid masonry, lazy load, lightbox acessível
-- [x] Eventos (`/eventos`) — álbuns de `eventos.html` (2006–2007), rotulados como **histórico**; seção pronta para álbum novo
+- ~~Eventos~~ — removida a pedido (27/08/2026); fotos de 2006–2014 ficaram só no `site-original/`
 
 ## Etapa 5 — Som e Acessórios + Produtos
 - [x] `content/produtos.json` gerado a partir de `produtos/*.html` (47 itens: slug, título, descrição, fotos)
