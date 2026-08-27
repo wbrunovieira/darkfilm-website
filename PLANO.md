@@ -60,3 +60,6 @@ Componentes (cada um copia texto/imagem do `index.html` original na hora de ser 
 - Vídeo novo para a home (o antigo está indisponível)
 - Fotos novas de eventos (as atuais são de 2006–2007)
 - Confirmar lista de serviços/produtos ainda ativos (catálogo é de 2013–2015)
+
+## Simulador de película
+- [x] Página própria `/simulador` (no menu Películas) + embutido em Linha Automotiva + teaser funcional na Home

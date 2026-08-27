@@ -9,6 +9,7 @@ const paginas = [
   "/linha-arquitetonica",
   "/caracteristicas-do-film",
   "/3m",
+  "/simulador",
   "/som-e-acessorios",
   "/galeria",
   "/contato",

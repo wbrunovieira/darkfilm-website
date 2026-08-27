@@ -69,6 +69,7 @@ export const nav: NavItem[] = [
       { href: "/linha-arquitetonica", label: "Linha Arquitetônica" },
       { href: "/caracteristicas-do-film", label: "Características do Film" },
       { href: "/3m", label: "Credenciada 3M" },
+      { href: "/simulador", label: "Simulador de tonalidade" },
     ],
   },
   { href: "/som-e-acessorios", label: "Som e Acessórios" },

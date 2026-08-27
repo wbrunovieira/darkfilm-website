@@ -25,7 +25,7 @@ import { whatsappUrl } from "@/lib/site";
  * - A lei mede a transmitância do conjunto vidro + película; o número da película sozinha
  *   não é o valor final. Por isso o rótulo é cauteloso e aponta para a medição na loja.
  */
-const TONALIDADES = [5, 20, 35, 50, 70] as const;
+export const TONALIDADES = [5, 20, 35, 50, 70] as const;
 
 type VidroId = "parabrisa" | "dianteiras" | "traseiras";
 const VIDROS: { id: VidroId; nome: string; min: number | null; nota: string }[] = [
@@ -46,14 +46,22 @@ const MIN = 5;
 const MAX = 90;
 
 /** Curva perceptual: o escurecimento linear em sRGB fica "sujo" demais nos tons claros. */
-function shadeFor(vlt: number) {
+export function shadeFor(vlt: number) {
   return 1 - Math.pow(vlt / 100, 0.6);
 }
 
 // Janela lateral traseira, em % do quadro (polígono compartilhado pela moldura e pela película).
-const WINDOW_POLY = "5% 16%, 56% 5%, 95% 9%, 96% 84%, 5% 89%";
+export const WINDOW_POLY = "5% 16%, 56% 5%, 95% 9%, 96% 84%, 5% 89%";
+export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
 
-export function TintSimulator({ image = "/img/simulador/cena.jpg" }: { image?: string }) {
+export function TintSimulator({
+  image = "/img/simulador/cena.jpg",
+  showHeading = true,
+}: {
+  image?: string;
+  /** false na página /simulador, que já tem PageHero. */
+  showHeading?: boolean;
+}) {
   const [vlt, setVlt] = useState<number>(35);
   const [vidro, setVidro] = useState<VidroId>("traseiras");
   const id = useId();
@@ -73,7 +81,12 @@ export function TintSimulator({ image = "/img/simulador/cena.jpg" }: { image?: s
   const ctaText = `Olá! Usei o simulador do site e quero orçamento de película G${vlt} para ${limite.nome.toLowerCase()}.`;
 
   return (
-    <section className="container-x border-t border-line py-16 md:py-24" aria-labelledby={`${id}-title`}>
+    <section
+      className="container-x border-t border-line py-16 md:py-24"
+      aria-labelledby={showHeading ? `${id}-title` : undefined}
+      aria-label={showHeading ? undefined : "Simulador de tonalidade de película"}
+    >
+      {showHeading && (
       <Reveal className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="eyebrow mb-3">Simulador</p>
@@ -87,6 +100,7 @@ export function TintSimulator({ image = "/img/simulador/cena.jpg" }: { image?: s
           + película — na loja medimos o valor final com equipamento próprio.
         </p>
       </Reveal>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         {/* ---------- Janela ---------- */}
