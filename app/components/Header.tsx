@@ -88,9 +88,12 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={`relative px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] transition-colors hover:text-fg ${
-                  isActive(item.href) ? "text-fg" : "text-fg-2"
+                  isActive(item.href) ? "text-fg" : item.highlight ? "text-red-2" : "text-fg-2"
                 }`}
               >
+                {item.highlight && (
+                  <span aria-hidden className="mr-1.5 inline-block size-1.5 rounded-full bg-red-2 align-middle animate-pulse-ring-slow" />
+                )}
                 {item.label}
                 {isActive(item.href) && (
                   <motion.span
@@ -179,6 +182,11 @@ export function Header() {
                           }`}
                         >
                           {c.label}
+                          {c.highlight && (
+                            <span className="ml-3 rounded-full bg-red px-2 py-0.5 align-middle font-display text-xs font-semibold tracking-[0.18em] text-white">
+                              Novo
+                            </span>
+                          )}
                         </Link>
                       ))}
                     </motion.li>

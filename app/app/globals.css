@@ -244,12 +244,15 @@ body {
 .animate-marquee { animation: marquee 40s linear infinite; }
 .animate-slow-zoom { animation: slow-zoom 18s ease-out forwards; }
 .animate-pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
+@keyframes blink-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.animate-pulse-ring-slow { animation: blink-soft 2.4s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .animate-marquee,
   .animate-slow-zoom,
-  .animate-pulse-ring {
+  .animate-pulse-ring,
+  .animate-pulse-ring-slow {
     animation: none !important;
   }
   *,

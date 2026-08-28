@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 import { useId, useState } from "react";
 import { Reveal } from "../Reveal";
 import { ArrowIcon } from "../icons";
-import { TONALIDADES, WINDOW_POINTS, WINDOW_POLY, shadeFor } from "../TintSimulator";
+import { ROTULOS, TONALIDADES, WINDOW_POINTS, WINDOW_POLY, shadeFor } from "../TintSimulator";
 
 /** Versão compacta e funcional do simulador para a home: só janela + presets + link. */
 export function SimuladorTeaser() {
@@ -58,10 +58,11 @@ export function SimuladorTeaser() {
               <polygon points={WINDOW_POINTS} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="0.7" vectorEffect="non-scaling-stroke" />
             </svg>
             <p className="absolute left-3 top-3 rounded-md border border-white/15 bg-bg/80 px-3 py-2 backdrop-blur md:left-4 md:top-4" aria-live="polite">
-              <span className="block font-display text-[11px] uppercase tracking-[0.22em] text-fg-2">Transmissão luminosa</span>
-              <span className="display block text-3xl tabular-nums text-fg md:text-4xl">
-                {vlt}
-                <span className="text-lg text-fg-2">%</span>
+              <span className="block font-display text-base font-semibold uppercase leading-none text-fg md:text-lg">
+                {ROTULOS[vlt as (typeof TONALIDADES)[number]]} <span className="text-fg-3">· G{vlt}</span>
+              </span>
+              <span className="mt-1 block text-xs text-fg-2">
+                deixa passar <strong className="tabular-nums text-fg">{vlt}%</strong> da luz
               </span>
             </p>
           </div>
@@ -73,16 +74,17 @@ export function SimuladorTeaser() {
                   type="button"
                   onClick={() => setVlt(t)}
                   aria-pressed={vlt === t}
-                  className={`min-h-11 rounded-full border px-4 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-colors ${
+                  aria-label={`${ROTULOS[t]}, código G${t}`}
+                  className={`min-h-11 rounded-full border px-4 text-sm font-semibold transition-colors ${
                     vlt === t ? "border-red bg-red text-white" : "border-line-strong text-fg-2 hover:border-fg-3 hover:text-fg"
                   }`}
                 >
-                  G{t}
+                  {ROTULOS[t]} <span className={`font-display text-xs tracking-[0.15em] ${vlt === t ? "text-white/70" : "text-fg-3"}`}>G{t}</span>
                 </button>
               ))}
             </div>
             <Link href="/simulador" className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-fg-3 hover:text-fg">
-              Limites legais e linhas 3M →
+              Ver o que a lei permite em cada vidro →
             </Link>
           </div>
         </Reveal>

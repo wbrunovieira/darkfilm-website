@@ -23,7 +23,7 @@ export default function SimuladorPage() {
             Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>
           </>
         }
-        intro="Arraste para escolher a transmissão de luz. O número da tonalidade (G5, G20…) é a porcentagem de luz visível que atravessa a película. A lei considera o conjunto vidro + película — na loja medimos o valor final com equipamento próprio."
+        intro="Em três passos: escolha o vidro do carro, escolha quão escura quer a película e veja como fica — e se a lei permite naquele vidro. Na loja medimos o valor final com equipamento próprio."
       />
 
       <TintSimulator showHeading={false} />

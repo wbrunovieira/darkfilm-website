@@ -57,7 +57,7 @@ export function yearsInBusiness(now = new Date()) {
   return now.getFullYear() - site.founded;
 }
 
-export type NavLink = { href: string; label: string };
+export type NavLink = { href: string; label: string; highlight?: boolean };
 export type NavItem = NavLink | { label: string; children: NavLink[] };
 
 export const nav: NavItem[] = [
@@ -69,9 +69,9 @@ export const nav: NavItem[] = [
       { href: "/linha-arquitetonica", label: "Linha Arquitetônica" },
       { href: "/caracteristicas-do-film", label: "Características do Film" },
       { href: "/3m", label: "Credenciada 3M" },
-      { href: "/simulador", label: "Simulador de tonalidade" },
     ],
   },
+  { href: "/simulador", label: "Simulador", highlight: true },
   { href: "/som-e-acessorios", label: "Som e Acessórios" },
   { href: "/galeria", label: "Galeria" },
   { href: "/contato", label: "Contato" },
