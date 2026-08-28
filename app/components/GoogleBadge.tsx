@@ -1,20 +1,22 @@
+import { useId } from "react";
 import { site } from "@/lib/site";
 
-function Stars({ rating }: { rating: number }) {
+function Stars({ rating, uid, className = "size-4" }: { rating: number; uid: string; className?: string }) {
   return (
     <span className="inline-flex gap-0.5" aria-hidden>
       {[1, 2, 3, 4, 5].map((i) => {
         const fill = Math.max(0, Math.min(1, rating - (i - 1)));
+        const gid = `${uid}-star-${i}`;
         return (
-          <svg key={i} viewBox="0 0 20 20" className="size-4">
+          <svg key={i} viewBox="0 0 20 20" className={className}>
             <defs>
-              <linearGradient id={`star-${i}`}>
+              <linearGradient id={gid}>
                 <stop offset={`${fill * 100}%`} stopColor="#FBBC04" />
                 <stop offset={`${fill * 100}%`} stopColor="rgba(255,255,255,0.18)" />
               </linearGradient>
             </defs>
             <path
-              fill={`url(#star-${i})`}
+              fill={`url(#${gid})`}
               d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L10 14.9l-5.3 2.8 1.1-5.9L1.5 7.7l5.9-.8z"
             />
           </svg>
@@ -35,11 +37,45 @@ function GoogleG(p: { className?: string }) {
   );
 }
 
-/** Selo com a nota do Google. `variant="hero"` é um pouco maior, sem pílula (para não
- *  competir com o botão flutuante do WhatsApp); `"inline"` é compacto. */
-export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline" }) {
+/**
+ * Selo com a nota do Google.
+ * - `"inline"`: compacto (rodapé, listas).
+ * - `"hero"`: uma linha, um pouco maior, sem pílula.
+ * - `"card"`: nota grande com estrelas e contagem em duas linhas — para
+ *   blocos de prova social (A Empresa, Contato).
+ * Os ids dos gradientes usam `useId` para não colidir quando há mais de um
+ * selo na mesma página.
+ */
+export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline" | "card" }) {
+  const uid = useId();
   const { rating, reviews, url } = site.google;
-  const label = `${rating.toLocaleString("pt-BR")} de 5 no Google, ${reviews} avaliações`;
+  const ratingText = rating.toLocaleString("pt-BR");
+  const label = `${ratingText} de 5 no Google, ${reviews} avaliações`;
+  const aria = `${label}. Abrir avaliações no Google`;
+
+  if (variant === "card") {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={aria}
+        className="group flex items-center gap-5 text-fg-2 transition-colors hover:text-fg"
+      >
+        <span className="display text-6xl leading-none text-fg md:text-7xl">{ratingText}</span>
+        <span className="grid gap-1.5">
+          <Stars rating={rating} uid={uid} className="size-5" />
+          <span className="inline-flex items-center gap-2 text-sm">
+            <GoogleG className="size-4" />
+            {reviews} avaliações no Google
+          </span>
+          <span className="text-xs text-fg-3 transition-colors group-hover:text-red-2">
+            Ver avaliações →
+          </span>
+        </span>
+      </a>
+    );
+  }
 
   if (variant === "hero") {
     return (
@@ -47,12 +83,12 @@ export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`${label}. Abrir avaliações no Google`}
+        aria-label={aria}
         className="group inline-flex items-center gap-3 text-sm text-fg-2 transition-colors hover:text-fg"
       >
         <GoogleG className="size-5" />
-        <span className="display text-xl text-fg">{rating.toLocaleString("pt-BR")}</span>
-        <Stars rating={rating} />
+        <span className="display text-xl text-fg">{ratingText}</span>
+        <Stars rating={rating} uid={uid} />
         <span>{reviews} avaliações no Google</span>
       </a>
     );
@@ -63,12 +99,12 @@ export function GoogleBadge({ variant = "inline" }: { variant?: "hero" | "inline
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${label}. Abrir avaliações no Google`}
+      aria-label={aria}
       className="inline-flex items-center gap-2 text-sm text-fg-2 transition-colors hover:text-fg"
     >
       <GoogleG className="size-4" />
-      <span className="font-display text-base font-semibold text-fg">{rating.toLocaleString("pt-BR")}</span>
-      <Stars rating={rating} />
+      <span className="font-display text-base font-semibold text-fg">{ratingText}</span>
+      <Stars rating={rating} uid={uid} />
       <span>({reviews})</span>
     </a>
   );

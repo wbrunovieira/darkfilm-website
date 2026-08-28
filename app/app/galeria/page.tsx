@@ -10,10 +10,13 @@ export const metadata: Metadata = {
     "Trabalhos da The Dark Film: película arquitetônica e automotiva, envelopamento e acessórios automotivos em Petrópolis/RJ.",
 };
 
-const albums = galeria.map((a) => ({
-  title: a.title.replace(/^Film /, ""),
-  photos: a.photos.map((p) => ({ ...p, alt: a.title })),
-}));
+const albums = galeria.map((a) => {
+  const title = a.title.replace(/^Film /, "");
+  return {
+    title,
+    photos: a.photos.map((p) => ({ ...p, alt: `${title} — The Dark Film`, album: title })),
+  };
+});
 const total = albums.reduce((n, a) => n + a.photos.length, 0);
 
 export default function GaleriaPage() {
@@ -21,7 +24,7 @@ export default function GaleriaPage() {
     <>
       <PageHero
         compact
-        eyebrow={`Galeria · ${total} fotos`}
+        eyebrow={`Galeria · ${total} fotos · ${albums.length} álbuns`}
         title={
           <>
             Trabalhos <span className="text-red-2">de verdade.</span>

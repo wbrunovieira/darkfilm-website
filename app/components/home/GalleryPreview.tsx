@@ -8,42 +8,56 @@ const photos = ["08", "10", "11", "12", "09"];
 
 export function GalleryPreview() {
   return (
-    <section className="bg-bg-2 py-24 md:py-32">
+    <section className="atmo relative overflow-hidden bg-bg-2 py-24 md:py-32">
       <div className="container-x">
         <Reveal className="mb-12 flex items-end justify-between gap-6">
           <div>
             <p className="eyebrow mb-4">Trabalhos</p>
-            <h2 className="display text-4xl md:text-6xl">Na oficina</h2>
+            <h2 className="display text-4xl md:text-6xl">
+              Na oficina<span className="text-red-2">.</span>
+            </h2>
           </div>
           <Link
             href="/galeria"
-            className="group hidden items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-fg-2 hover:text-fg sm:inline-flex"
+            className="group link-grow hidden items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-fg-2 transition-colors hover:text-fg sm:inline-flex"
           >
             Ver galeria completa
-            <ArrowIcon className="size-4 transition-transform group-hover:translate-x-1" />
+            <ArrowIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </Reveal>
 
-        <RevealGroup className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+        <RevealGroup stagger={0.1} className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {photos.map((p, i) => (
             <RevealItem
               key={p}
-              className={`relative overflow-hidden rounded-md ${i === 0 ? "col-span-2 aspect-[16/9] md:col-span-2" : "aspect-[4/3]"}`}
+              className={`photo-tile relative overflow-hidden rounded-md border border-line ${
+                i === 0 ? "col-span-2 aspect-[16/9] md:col-span-2" : "aspect-[4/3]"
+              }`}
             >
-              <Image
-                src={`/img/galeria/${p}.jpg`}
-                alt="Trabalho realizado pela The Dark Film"
-                fill
-                sizes="(min-width: 768px) 33vw, 50vw"
-                className="photo object-cover transition-transform duration-700 ease-out-expo hover:scale-105"
-              />
+              <Link href="/galeria" className="absolute inset-0 block focus-visible:outline-2 focus-visible:outline-fg">
+                <Image
+                  src={`/img/galeria/${p}.jpg`}
+                  alt="Trabalho realizado pela The Dark Film"
+                  fill
+                  sizes={i === 0 ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
+                  className="photo object-cover"
+                />
+                <span aria-hidden className="photo-veil" />
+                <span
+                  aria-hidden
+                  className="photo-cap absolute bottom-3 left-3 flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.2em] text-fg md:bottom-4 md:left-4"
+                >
+                  <span className="h-px w-5 bg-red" />
+                  0{i + 1} / 0{photos.length}
+                </span>
+              </Link>
             </RevealItem>
           ))}
         </RevealGroup>
 
         <Link
           href="/galeria"
-          className="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-fg-2 sm:hidden"
+          className="mt-8 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-fg-2 sm:hidden"
         >
           Ver galeria completa <ArrowIcon className="size-4" />
         </Link>

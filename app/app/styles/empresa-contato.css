@@ -1,0 +1,275 @@
+/* ============================================================
+   Escopo: PageHero (todas as internas), A Empresa, Contato, 404.
+   Só CSS puro + tokens do globals.css — sem @apply, sem Tailwind.
+   ============================================================ */
+
+/* ---------- PageHero: atmosfera ---------- */
+
+/* Camada de fundo sem foto: brasa vermelha no canto, vinheta embaixo e um
+   "sheen" diagonal de película (faixa levemente mais clara, quase invisível). */
+.hero-atmo {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(56% 70% at 84% -6%, rgba(209, 20, 31, 0.22), transparent 70%),
+    radial-gradient(40% 50% at 10% 110%, rgba(255, 255, 255, 0.035), transparent 70%),
+    linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.025) 50%, transparent 62%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg) 85%);
+}
+
+/* Com foto: pesa o canto esquerdo (onde o texto assenta) e deixa a foto
+   respirar à direita; um leve calor vermelho no topo direito. */
+.hero-atmo-photo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(50% 60% at 88% 0%, rgba(209, 20, 31, 0.18), transparent 70%),
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.6) 40%, rgba(11, 11, 13, 0.35) 100%),
+    linear-gradient(to right, rgba(11, 11, 13, 0.92) 0%, rgba(11, 11, 13, 0.55) 45%, rgba(11, 11, 13, 0.15) 100%);
+}
+
+/* Réguas verticais muito discretas, como marcação de bancada. Escondidas no
+   mobile para não competir com o título. */
+.hero-rules {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 0;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px);
+  background-size: 25% 100%;
+  background-position: 12.5% 0;
+  mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+}
+@media (min-width: 48rem) {
+  .hero-rules { opacity: 1; }
+}
+
+/* Linha de base do hero: desenha da esquerda pra direita. */
+.hero-baseline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--red) 0, var(--line-strong) 18%, var(--line-strong) 82%, transparent);
+  transform-origin: left center;
+}
+
+/* ---------- Números grandes / linha do tempo (A Empresa) ---------- */
+
+.num-xl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  font-size: clamp(4.5rem, 12vw, 9.5rem);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Número "fantasma": só o contorno, funciona como elemento gráfico. */
+.num-ghost {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  font-size: clamp(9rem, 28vw, 24rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Trilho da linha do tempo */
+.tl {
+  position: relative;
+}
+.tl-rail {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0.5rem;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--red), var(--line-strong) 30%, var(--line-strong) 85%, transparent);
+  transform-origin: top center;
+}
+.tl-node {
+  position: absolute;
+  left: 0;
+  top: 0.35rem;
+  width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+}
+.tl-node::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--fg-3);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tl-node[data-hot="true"] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(209, 20, 31, 0.14);
+}
+.tl-node[data-hot="true"]::after {
+  background: var(--red-2);
+}
+.tl-item:hover .tl-node::after {
+  transform: scale(1.4);
+  background: var(--fg);
+}
+
+/* Bloco de cliente: nome enorme com índice e brilho no hover */
+.client-cell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.client-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(60% 80% at 50% 110%, rgba(209, 20, 31, 0.22), transparent 70%);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.client-cell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.client-cell:hover { color: var(--fg); }
+.client-cell:hover::before { opacity: 1; }
+.client-cell:hover::after { transform: scaleX(1); }
+
+/* Foto da loja: duotone (cinza + calor vermelho) com grain por cima */
+.duotone {
+  filter: grayscale(1) contrast(1.15) brightness(0.8);
+}
+.duotone-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background: linear-gradient(110deg, #3a0a0f 0%, #7a0a12 45%, #1a1b1f 100%);
+  opacity: 0.85;
+}
+.duotone-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.25) 45%, rgba(11, 11, 13, 0.15) 100%),
+    radial-gradient(70% 90% at 50% 50%, transparent 40%, rgba(11, 11, 13, 0.7) 100%);
+}
+
+/* ---------- Painéis (Contato) ---------- */
+
+/* Superfície com gradiente sutil, hairline e um brilho no canto superior. */
+.panel {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(60% 50% at 0% 0%, rgba(255, 255, 255, 0.045), transparent 70%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg));
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line-strong) 30%, var(--line-strong) 70%, transparent);
+  pointer-events: none;
+}
+
+/* Cartão de canal: hairline lateral cresce e ícone ganha cor no hover */
+.channel {
+  position: relative;
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.channel::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.channel:hover::before,
+.channel:focus-within::before { transform: scaleY(1); }
+
+/* WhatsApp: halo verde muito discreto */
+.channel-wa {
+  background:
+    radial-gradient(70% 90% at 0% 50%, rgba(37, 211, 102, 0.12), transparent 70%),
+    var(--bg-2);
+}
+.channel-wa::before { background: #25D366; }
+.channel-wa:hover { transform: translateY(-2px); border-color: rgba(37, 211, 102, 0.55); }
+
+/* Mapa: base P&B, cores sobem no hover/foco. */
+.map-frame {
+  display: block;
+  width: 100%;
+  filter: grayscale(1) invert(0.92) hue-rotate(180deg) contrast(0.9);
+  transition: filter 0.7s ease-out;
+}
+.map-wrap:hover .map-frame,
+.map-wrap:focus-within .map-frame {
+  filter: none;
+}
+.map-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.55) 22%, transparent 45%),
+    linear-gradient(to bottom, rgba(11, 11, 13, 0.6), transparent 25%);
+  transition: opacity 0.7s ease-out;
+}
+.map-wrap:hover .map-veil,
+.map-wrap:focus-within .map-veil { opacity: 0.55; }
+
+/* ---------- 404 ---------- */
+.nf-atmo {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background:
+    radial-gradient(50% 60% at 85% 20%, rgba(209, 20, 31, 0.2), transparent 70%),
+    radial-gradient(40% 50% at 10% 100%, rgba(255, 255, 255, 0.04), transparent 70%),
+    var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-baseline,
+  .tl-rail { transform: none !important; }
+}

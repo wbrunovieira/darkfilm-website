@@ -1,0 +1,425 @@
+/* ---------- Páginas de película (automotiva, arquitetônica, características, 3M, simulador) ----------
+   Tokens vêm de globals.css. Tudo aqui é prefixado com `pel-`. */
+
+/* Fundo com atmosfera: brilho radial discreto + vinheta, para seções que não devem ser cor chapada. */
+.pel-atmo {
+  position: relative;
+  isolation: isolate;
+}
+.pel-atmo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 60% at 85% 0%, rgba(209, 20, 31, 0.13), transparent 70%),
+    radial-gradient(40% 50% at 0% 100%, rgba(255, 255, 255, 0.035), transparent 70%),
+    linear-gradient(to bottom, var(--bg-2), var(--bg));
+}
+.pel-atmo--cool::before {
+  background:
+    radial-gradient(50% 55% at 10% 0%, rgba(255, 255, 255, 0.05), transparent 70%),
+    radial-gradient(45% 50% at 100% 100%, rgba(209, 20, 31, 0.09), transparent 70%),
+    linear-gradient(to bottom, var(--bg), var(--bg-2));
+}
+
+/* Tile de benefício: ícone + título + texto. Hover: borda sobe, ícone ganha o vermelho. */
+.pel-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg-2) 80%, transparent);
+  transition:
+    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s;
+}
+.pel-tile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .pel-tile:hover {
+    border-color: var(--line-strong);
+    background: var(--bg-2);
+    transform: translateY(-3px);
+  }
+  .pel-tile:hover::after {
+    transform: scaleX(1);
+  }
+  .pel-tile:hover .pel-icon {
+    color: var(--red-2);
+    border-color: color-mix(in srgb, var(--red) 55%, transparent);
+  }
+}
+
+/* Caixa do ícone (44px, alvo confortável) */
+.pel-icon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  background: var(--bg);
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background-color 0.25s;
+}
+.pel-icon > svg {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+.pel-icon--sm {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+.pel-icon--sm > svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.pel-icon--accent {
+  color: var(--red-2);
+  border-color: color-mix(in srgb, var(--red) 55%, transparent);
+}
+
+/* Número grande "vazado", para blocos de destaque e índices decorativos */
+.pel-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  user-select: none;
+}
+
+/* Escala de tonalidade (G5 → G70): do escuro ao claro, com "vidro" em cima */
+.pel-scale {
+  position: relative;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(to right, #050506 0%, #2a2b2f 35%, #7d7f85 70%, #d9d8d3 100%);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+/* Faixa de transmissão luminosa (3M): trilho escuro→claro; o intervalo da película ganha
+   um recorte com borda vermelha e o resto fica esmaecido. --from/--to em %. */
+.pel-band {
+  --from: 0%;
+  --to: 100%;
+  position: relative;
+  height: 0.875rem;
+  border-radius: 3px;
+  background: linear-gradient(to right, #050506 0%, #34353a 40%, #8b8d93 75%, #e6e4de 100%);
+  box-shadow: inset 0 0 0 1px var(--line);
+  overflow: hidden;
+}
+.pel-band::before,
+.pel-band::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(11, 11, 13, 0.78);
+}
+.pel-band::before {
+  left: 0;
+  width: var(--from);
+}
+.pel-band::after {
+  right: 0;
+  width: calc(100% - var(--to));
+}
+.pel-band__range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--from);
+  width: calc(var(--to) - var(--from));
+  box-shadow: inset 0 0 0 1.5px var(--red-2);
+  border-radius: 3px;
+  z-index: 1;
+}
+.pel-band-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--fg-3);
+}
+
+/* Cards do catálogo 3M */
+.pel-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--bg-2), color-mix(in srgb, var(--bg-2) 60%, var(--bg)));
+  transition: border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pel-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(60% 50% at 0% 0%, rgba(209, 20, 31, 0.14), transparent 70%);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) {
+  .pel-card:hover {
+    border-color: var(--line-strong);
+  }
+  .pel-card:hover::before {
+    opacity: 1;
+  }
+}
+/* Número decorativo gigante no canto do card */
+.pel-card__ghost {
+  position: absolute;
+  right: -0.25rem;
+  top: -0.75rem;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(6rem, 14vw, 11rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.03);
+  user-select: none;
+}
+
+/* Amostras de categoria de film (Características). Só CSS: nenhuma foto. */
+.pel-swatch {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0d0e11;
+}
+.pel-swatch::after {
+  /* reflexo de vidro comum a todas */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.16) 0%, transparent 32%, transparent 68%, rgba(255, 255, 255, 0.06) 100%);
+  pointer-events: none;
+}
+.pel-swatch--reflexivo {
+  background: linear-gradient(135deg, #cfd2d6 0%, #6d7076 40%, #23252a 60%, #9ea1a6 100%);
+}
+.pel-swatch--fume {
+  background: linear-gradient(180deg, #1e1f23 0%, #0a0a0c 100%);
+}
+.pel-swatch--transparente {
+  background: linear-gradient(180deg, #31343a 0%, #1c1e22 100%);
+}
+.pel-swatch--jateado {
+  background: #3a3c41;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.pel-swatch--decorativo {
+  background-color: #17181c;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0 2px, transparent 2px 14px),
+    linear-gradient(180deg, #2a2c31, #141519);
+}
+.pel-swatch--seguranca {
+  background: linear-gradient(180deg, #2a2c31 0%, #16171b 100%);
+  background-image:
+    linear-gradient(20deg, transparent 49.4%, rgba(255, 255, 255, 0.25) 49.6%, rgba(255, 255, 255, 0.25) 50.2%, transparent 50.4%),
+    linear-gradient(-35deg, transparent 49.4%, rgba(255, 255, 255, 0.2) 49.6%, rgba(255, 255, 255, 0.2) 50.2%, transparent 50.4%),
+    linear-gradient(70deg, transparent 49.4%, rgba(255, 255, 255, 0.18) 49.6%, rgba(255, 255, 255, 0.18) 50.2%, transparent 50.4%),
+    linear-gradient(180deg, #2a2c31 0%, #16171b 100%);
+}
+.pel-swatch__label {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(243, 241, 236, 0.75);
+  mix-blend-mode: difference;
+}
+
+/* Comparativo com/sem película: dois painéis, divisor central com marcador */
+.pel-compare {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.pel-compare__half {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.pel-compare__half > img {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 200%;
+  max-width: none;
+  object-fit: cover;
+  filter: saturate(0.5) contrast(1.05);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pel-compare__half--left > img {
+  left: 0;
+}
+.pel-compare__half--right > img {
+  right: 0;
+}
+@media (hover: hover) {
+  .pel-compare:hover .pel-compare__half > img {
+    transform: scale(1.03);
+  }
+}
+.pel-compare__tag {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(11, 11, 13, 0.82);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+.pel-compare__tag--bad {
+  color: var(--fg-2);
+}
+.pel-compare__tag::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--red);
+  flex: none;
+}
+.pel-compare__tag--bad::before {
+  background: var(--fg-3);
+}
+
+/* Coluna esquerda das seções: fica presa ao rolar (só desktop, e só se o corpo for maior) */
+@media (width >= 48rem) {
+  .pel-sticky {
+    position: sticky;
+    top: 7rem;
+    align-self: start;
+  }
+}
+
+/* Linha de spec (3M): ícone + valor grande + rótulo */
+.pel-spec {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.pel-spec__value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.pel-spec__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+/* Tabela comparativa (3M) */
+.pel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.pel-table th,
+.pel-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+.pel-table thead th {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  border-bottom-color: var(--line-strong);
+}
+.pel-table tbody th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  color: var(--fg);
+}
+.pel-table td {
+  color: var(--fg-2);
+  font-variant-numeric: tabular-nums;
+}
+.pel-table tbody tr {
+  transition: background-color 0.2s;
+}
+@media (hover: hover) {
+  .pel-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.025);
+  }
+}
+
+/* Passo numerado (Simulador · como funciona) */
+.pel-step {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-top: 1px solid var(--line-strong);
+}
+.pel-step__n {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  color: var(--red-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pel-tile,
+  .pel-tile::after,
+  .pel-card,
+  .pel-card::before,
+  .pel-compare__half > img {
+    transition: none !important;
+  }
+}

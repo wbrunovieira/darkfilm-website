@@ -126,12 +126,14 @@ export function ContactForm() {
     );
   }
 
+  // `hidden` é fixo (sem ramificar por reduced-motion) para o HTML do servidor
+  // bater com o do cliente; o <MotionConfig reducedMotion="user"> global cuida do resto.
   const stagger = {
     hidden: {},
-    show: { transition: { staggerChildren: reduce ? 0 : 0.07, delayChildren: reduce ? 0 : 0.05 } },
+    show: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
   };
   const item = {
-    hidden: reduce ? { opacity: 1 } : { opacity: 0, y: 14 },
+    hidden: { opacity: 0, y: 14 },
     show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
   };
 
@@ -162,7 +164,7 @@ export function ContactForm() {
                 aria-checked={active}
                 onClick={() => setSubject(active ? null : s)}
                 className={[
-                  "relative isolate rounded-full border px-4 py-2 text-sm transition-colors duration-300",
+                  "relative isolate min-h-11 rounded-full border px-4 py-2 text-sm transition-[color,border-color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
                   active
                     ? "border-red text-white"
@@ -266,12 +268,10 @@ export function ContactForm() {
           ].join(" ")}
         >
           {/* brilho que atravessa no hover */}
-          {!reduce && (
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-y-0 -left-1/3 -z-10 w-1/3 -skew-x-12 bg-white/15 opacity-0 transition-[transform,opacity] duration-700 ease-out group-hover:translate-x-[400%] group-hover:opacity-100"
-            />
-          )}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 -left-1/3 -z-10 w-1/3 -skew-x-12 bg-white/15 opacity-0 transition-[transform,opacity] duration-700 ease-out group-hover:translate-x-[400%] group-hover:opacity-100 motion-reduce:hidden"
+          />
           <AnimatePresence mode="wait" initial={false}>
             {opening ? (
               <motion.span
@@ -398,7 +398,7 @@ function Field({
     placeholder: focused ? placeholder : undefined,
     className: [
       "peer block w-full min-w-0 bg-transparent px-0 pt-6 pb-3 text-[1.0625rem] text-fg",
-      "placeholder:text-fg-3/70 outline-none",
+      "placeholder:text-fg-3/70 outline-none caret-red-2",
       multiline ? "min-h-36 resize-y leading-relaxed" : "",
     ].join(" "),
   };

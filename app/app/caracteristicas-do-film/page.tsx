@@ -1,9 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { Bullets, Section, Stat } from "@/components/Section";
+import { Section, Stat } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
+import {
+  BuildingIcon,
+  ColorIcon,
+  CostIcon,
+  CurtainIcon,
+  EnergyIcon,
+  HeatIcon,
+  LayersIcon,
+  NoiseIcon,
+  PrivacyIcon,
+  ShatterIcon,
+  UvIcon,
+  WarrantyIcon,
+} from "@/components/icons/peliculas";
 
 export const metadata: Metadata = {
   title: "Características do Film",
@@ -12,12 +26,26 @@ export const metadata: Metadata = {
 };
 
 const categorias = [
-  { nome: "Reflexivos", desc: "efeito espelho" },
-  { nome: "Não reflexivos", desc: "fumê" },
-  { nome: "Transparentes", desc: "" },
-  { nome: "Privativos", desc: "jateado" },
-  { nome: "Decorativos", desc: "decorfilm" },
-  { nome: "Segurança", desc: "" },
+  { nome: "Reflexivos", desc: "efeito espelho", swatch: "reflexivo" },
+  { nome: "Não reflexivos", desc: "fumê", swatch: "fume" },
+  { nome: "Transparentes", desc: "", swatch: "transparente" },
+  { nome: "Privativos", desc: "jateado", swatch: "jateado" },
+  { nome: "Decorativos", desc: "decorfilm", swatch: "decorativo" },
+  { nome: "Segurança", desc: "", swatch: "seguranca" },
+];
+
+// Os 10 benefícios da página original, cada um com seu ícone.
+const beneficios = [
+  { icon: <UvIcon />, big: "99%", t: "Filtra até 99% os raios ultravioleta, protegendo móveis e utensílios do desgaste causado pela ação solar." },
+  { icon: <HeatIcon />, big: "79%", t: "Filtra até 79% dos raios solares, tornando a temperatura interna agradável." },
+  { icon: <NoiseIcon />, big: "30%", t: "Reduz até 30% dos ruídos, deixando o ambiente mais silencioso." },
+  { icon: <PrivacyIcon />, t: "Proporciona conforto, segurança e privacidade com sofisticação, não permitindo a visão de fora para dentro, evitando inclusive a ação de ladrões." },
+  { icon: <BuildingIcon />, t: "Valoriza a construção proporcionando um toque de requinte à arquitetura, conferindo uma imagem moderna e futurista." },
+  { icon: <ColorIcon />, t: "Transforma vidro incolor em vidro colorido, espelhado, temperado, espião etc., e é imperceptível." },
+  { icon: <ShatterIcon />, t: "Transforma qualquer vidro em forte laminado, que ao romper não estilhaça, protegendo pessoas e objetos." },
+  { icon: <CostIcon />, t: "Reduz custos: vidro incolor + film tem custo muito inferior ao de um vidro colorido, temperado ou espião, além destes não controlarem a ação dos raios solares." },
+  { icon: <EnergyIcon />, t: "Economiza energia em ambientes com ar condicionado, porque controla a ação dos raios solares e aumenta o rendimento da refrigeração." },
+  { icon: <CurtainIcon />, t: "Elimina o uso e manutenção de cortinas." },
 ];
 
 // Texto copiado da página "Características Film" do site original.
@@ -40,53 +68,104 @@ export default function CaracteristicasPage() {
         image="/img/peliculas/insulfim2.jpg"
       />
 
+      {/* Anatomia do film, em três palavras do próprio texto: cor, metalização, espessura. */}
+      <section className="pel-atmo border-t border-line">
+        <div className="container-x grid gap-10 py-14 md:grid-cols-[auto_1fr] md:items-center md:gap-16 md:py-20">
+          <Reveal className="flex items-center gap-5">
+            <span className="pel-icon pel-icon--accent"><LayersIcon /></span>
+            <p className="display text-3xl md:text-4xl">Laminado<br />de poliéster</p>
+          </Reveal>
+          <RevealGroup className="grid grid-cols-3 divide-x divide-line border-y border-line" stagger={0.08}>
+            {["Cor", "Metalização", "Espessura"].map((t, i) => (
+              <RevealItem key={t} className="px-4 py-5 md:px-6">
+                <p className="font-display text-xs tracking-[0.2em] text-fg-3">Variação 0{i + 1}</p>
+                <p className="mt-2 font-display text-lg font-semibold uppercase leading-none md:text-2xl">{t}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
       <section className="container-x border-t border-line py-16 md:py-24">
-        <Reveal className="mb-10">
+        <Reveal className="mb-10 md:mb-14">
           <p className="eyebrow mb-3">Categorias</p>
-          <h2 className="display text-3xl md:text-5xl">Dividido nas seguintes categorias:</h2>
+          <h2 className="display max-w-3xl text-3xl md:text-5xl">Dividido nas seguintes categorias:</h2>
         </Reveal>
-        <RevealGroup className="grid grid-cols-2 border-t border-l border-line md:grid-cols-3">
+        <RevealGroup className="grid grid-cols-2 gap-3 md:grid-cols-3" stagger={0.07}>
           {categorias.map((c, i) => (
-            <RevealItem key={c.nome} className="border-b border-r border-line p-6 md:p-8">
-              <p className="font-display text-sm text-fg-3">0{i + 1}</p>
-              <p className="display mt-3 text-2xl md:text-3xl">{c.nome}</p>
-              {c.desc && <p className="mt-1 text-sm text-fg-2">{c.desc}</p>}
+            <RevealItem key={c.nome} className="pel-tile !p-0">
+              <div className={`pel-swatch pel-swatch--${c.swatch}`}>
+                <span className="pel-swatch__label">{c.desc || c.nome}</span>
+              </div>
+              <div className="px-5 pb-5 md:px-6 md:pb-6">
+                <p className="font-display text-xs tracking-[0.2em] text-fg-3">0{i + 1}</p>
+                <p className="display mt-1.5 text-2xl md:text-3xl">{c.nome}</p>
+                {c.desc && <p className="mt-1 text-sm text-fg-2">{c.desc}</p>}
+              </div>
             </RevealItem>
           ))}
         </RevealGroup>
-        <RevealGroup className="mt-4 grid grid-cols-3 gap-4">
+        <RevealGroup className="mt-3 grid grid-cols-3 gap-3">
           {["insulfim1", "insulfim3", "insulfim4"].map((f) => (
-            <RevealItem key={f} className="relative aspect-[4/3] overflow-hidden rounded-md">
+            <RevealItem key={f} className="grain relative aspect-[4/3] overflow-hidden border border-line">
               <Image src={`/img/peliculas/${f}.jpg`} alt="" fill sizes="33vw" className="photo object-cover" />
             </RevealItem>
           ))}
         </RevealGroup>
       </section>
 
-      <section className="container-x grid gap-10 border-t border-line py-16 md:grid-cols-3 md:py-24">
-        <Reveal><Stat value="99%" label="Dos raios ultravioleta filtrados" /></Reveal>
-        <Reveal delay={0.1}><Stat value="79%" label="Dos raios solares filtrados" /></Reveal>
-        <Reveal delay={0.2}><Stat value="30%" label="De redução de ruídos" /></Reveal>
+      <section className="pel-atmo pel-atmo--cool border-t border-line">
+        <div className="container-x grid gap-10 py-16 md:grid-cols-3 md:py-24">
+          <Reveal><Stat value="99%" label="Dos raios ultravioleta filtrados" icon={<UvIcon />} /></Reveal>
+          <Reveal delay={0.1}><Stat value="79%" label="Dos raios solares filtrados" icon={<HeatIcon />} /></Reveal>
+          <Reveal delay={0.2}><Stat value="30%" label="De redução de ruídos" icon={<NoiseIcon />} /></Reveal>
+        </div>
       </section>
 
-      <Section eyebrow="Benefícios" title="Conforto, segurança e economia.">
-        <Bullets
-          items={[
-            "Filtra até 99% os raios ultravioleta, protegendo móveis e utensílios do desgaste causado pela ação solar.",
-            "Filtra até 79% dos raios solares, tornando a temperatura interna agradável.",
-            "Reduz até 30% dos ruídos, deixando o ambiente mais silencioso.",
-            "Proporciona conforto, segurança e privacidade com sofisticação, não permitindo a visão de fora para dentro, evitando inclusive a ação de ladrões.",
-            "Valoriza a construção proporcionando um toque de requinte à arquitetura, conferindo uma imagem moderna e futurista.",
-            "Transforma vidro incolor em vidro colorido, espelhado, temperado, espião etc., e é imperceptível.",
-            "Transforma qualquer vidro em forte laminado, que ao romper não estilhaça, protegendo pessoas e objetos.",
-            "Reduz custos: vidro incolor + film tem custo muito inferior ao de um vidro colorido, temperado ou espião, além destes não controlarem a ação dos raios solares.",
-            "Economiza energia em ambientes com ar condicionado, porque controla a ação dos raios solares e aumenta o rendimento da refrigeração.",
-            "Elimina o uso e manutenção de cortinas.",
-          ]}
-        />
-      </Section>
+      <section className="container-x border-t border-line py-16 md:py-24">
+        <Reveal className="mb-10 md:mb-14">
+          <p className="eyebrow mb-3">Benefícios</p>
+          <h2 className="display text-3xl md:text-5xl">Conforto, segurança e economia.</h2>
+        </Reveal>
+        <RevealGroup className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
+          {beneficios.map((b, i) => (
+            <RevealItem key={i} className={`pel-tile ${i === 0 ? "sm:col-span-2 lg:col-span-1 lg:row-span-2" : ""}`}>
+              <div className="flex items-center justify-between">
+                <span className="pel-icon">{b.icon}</span>
+                <span className="font-display text-xs tracking-[0.2em] text-fg-3">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              {b.big && <p className="display text-5xl text-fg md:text-6xl">{b.big}</p>}
+              <p className="text-sm leading-relaxed text-fg-2">{b.t}</p>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+      </section>
 
-      <Section eyebrow="Garantia" title="Econômico ou profissional.">
+      <Section
+        eyebrow="Garantia"
+        title="Econômico ou profissional."
+        tone="atmo"
+        after={
+          <RevealGroup className="grid gap-3 sm:grid-cols-2" stagger={0.12}>
+            <RevealItem className="pel-tile">
+              <span className="pel-icon"><WarrantyIcon /></span>
+              <div>
+                <p className="font-display text-xs tracking-[0.2em] text-fg-3">Econômico</p>
+                <p className="display mt-2 text-6xl md:text-7xl">2 <span className="text-3xl md:text-4xl">anos</span></p>
+                <p className="mt-3 text-sm text-fg-2">garantia de até 2 anos</p>
+              </div>
+            </RevealItem>
+            <RevealItem className="pel-tile">
+              <span className="pel-icon pel-icon--accent"><WarrantyIcon /></span>
+              <div>
+                <p className="font-display text-xs tracking-[0.2em] text-red-2">Profissional</p>
+                <p className="display mt-2 text-6xl md:text-7xl">5 <span className="text-3xl md:text-4xl">anos</span></p>
+                <p className="mt-3 text-sm text-fg-2">garantia de até 5 anos, Linhas Arquitetônica e Automotiva</p>
+              </div>
+            </RevealItem>
+          </RevealGroup>
+        }
+      >
         <p>
           Fabricado nos tipos: <strong>Econômico</strong>, com garantia até 2 anos, e{" "}
           <strong>Profissional</strong>, com garantia de até 5 anos para as Linhas
