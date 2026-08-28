@@ -3,6 +3,7 @@ import Link from "next/link";
 import { nav, site, whatsappUrl, type NavLink } from "@/lib/site";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "./icons";
 import { GoogleBadge } from "./GoogleBadge";
+import { WBSignature } from "./WBSignature";
 
 const links: NavLink[] = nav.flatMap((n) => ("children" in n ? n.children : [n]));
 
@@ -67,8 +68,9 @@ export function Footer() {
       </div>
 
       <div className="border-t border-line">
-        <div className="container-x flex flex-col gap-2 py-5 text-xs text-fg-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-x flex flex-col items-center gap-4 py-5 text-xs text-fg-3 md:flex-row md:justify-between">
           <p>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</p>
+          <WBSignature variant="bare" className="text-fg-2" />
           <p className="font-display uppercase tracking-[0.2em]">Credenciada 3M · Petrópolis/RJ</p>
         </div>
       </div>
