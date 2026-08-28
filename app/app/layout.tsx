@@ -44,8 +44,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
-    images: [{ url: "/img/hero/oficina-kombi.jpg", width: 1000, height: 749 }],
+    // Card 1200x630 (proporção que WhatsApp/Facebook renderizam como preview compacto).
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Veículo com película de controle solar aplicada na oficina da The Dark Film & Sound",
+      },
+    ],
   },
+  twitter: { card: "summary_large_image" },
   title: {
     default: `${site.name} — Película, Som e Acessórios em Petrópolis`,
     template: `%s · ${site.shortName}`,

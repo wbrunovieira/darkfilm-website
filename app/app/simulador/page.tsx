@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "Simulador de Película",
   description:
     "Simule a tonalidade da película automotiva (G5 a G70), veja o que a lei permite em cada vidro e quais películas 3M atendem a faixa. The Dark Film, Petrópolis/RJ.",
-  openGraph: { images: [{ url: "/img/simulador/cena.jpg", width: 540, height: 720 }] },
 };
 
 // Mínimos de transmissão luminosa por vidro (Resolução CONTRAN 960/2022, alterada pela 989/2022).
