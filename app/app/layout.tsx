@@ -44,17 +44,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
-    // Card 1200x630 (proporção que WhatsApp/Facebook renderizam como preview compacto).
+    // Thumbnail pequeno de propósito: o WhatsApp só monta o card grande quando a
+    // imagem tem 300px ou mais. Abaixo disso ele usa a miniatura quadrada ao lado
+    // do texto, que foi o pedido do cliente.
     images: [
       {
         url: "/og.jpg",
-        width: 1200,
-        height: 630,
+        width: 240,
+        height: 240,
         alt: "Veículo com película de controle solar aplicada na oficina da The Dark Film & Sound",
       },
     ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary" },
   title: {
     default: `${site.name} — Película, Som e Acessórios em Petrópolis`,
     template: `%s · ${site.shortName}`,
