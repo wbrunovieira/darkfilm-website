@@ -60,3 +60,10 @@ npx create-next-app@latest app --typescript --tailwind --app --no-src-dir --impo
 - Conferir que nenhuma foto pesada está travando o carregamento
 - Conferir `prefers-reduced-motion`
 - Nenhum texto inventado: tudo que está escrito veio do conteúdo real ou está marcado como pendência
+
+## 7. Infraestrutura (domínio, DNS e e-mail)
+
+Antes de apontar o domínio para o site novo, ler
+[`docs/DOMINIO-DNS-EMAIL.md`](./docs/DOMINIO-DNS-EMAIL.md): quem é o titular, quais contatos existem
+no Registro.br, a zona DNS inteira que precisa ser recriada (o SPF e o MX do e-mail do cliente
+inclusive) e o checklist de migração.
