@@ -265,6 +265,11 @@ continua na Compuland. Um problema de cada vez. A migração do e-mail fica como
       para `fuzzy4.compuland.com.br` e o SPF foi mantido igual — qualquer mudança de servidor ou IP
       do e-mail, precisam nos avisar para atualizarmos
 - [ ] Conferir apex e `www` respondendo em HTTPS
+- [ ] **Avisar o cliente por escrito: NÃO cancelar o serviço da Compuland.** O site saiu de lá, mas o
+      e-mail dele continua hospedado no servidor deles. Cancelar por conta própria mata o e-mail —
+      risco real, porque a virada do site dá a sensação de que a relação com o provedor acabou
+- [ ] Descobrir quanto ele paga hoje à Compuland (eles têm "Boleto On-line"; provedor pequeno costuma
+      cobrar site + e-mail num pacote só). É a âncora de preço para uma eventual migração do e-mail
 - [ ] Refazer as medições do [`BASELINE-E-METAS.md`](./BASELINE-E-METAS.md) e preencher a coluna "depois"
 
 ### Pendências para perguntar ao cliente
