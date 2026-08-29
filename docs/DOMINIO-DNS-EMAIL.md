@@ -50,8 +50,36 @@ Confirmado na documentação do Registro.br em 29/08/2026:
 > Fonte: <https://registro.br/ajuda/gerenciamento-de-conta/> e
 > <https://registro.br/ajuda/gerenciamento-de-conta/alterar-servidores-dns/>
 
-**Consequência prática:** basta o cliente adicionar a WB Digital Solutions como **contato técnico**.
-Não precisa mexer em titularidade. Para isso é preciso ter um handle no Registro.br (criado com CPF).
+**Consequência prática:** basta o cliente designar a WB Digital Solutions como **contato técnico**.
+Não precisa mexer em titularidade.
+
+### Só existe UM contato técnico por domínio
+
+Verificado no WHOIS: o campo `tech-c` é único, nunca repete. Amostra de 29/08/2026:
+
+```
+globo.com.br      owner-c: CLKED1   tech-c: CTG6
+uol.com.br        owner-c: CAU12    tech-c: CTU6
+compuland.com.br  owner-c: HCJ      tech-c: HCJ
+```
+
+Ou seja, **não dá para ter a WB e a Compuland como técnicos ao mesmo tempo** — designar a WB
+substitui o Helio nesse papel.
+
+**Isso não afeta o e-mail.** O `tech-c` governa uma coisa só: quem pode trocar os nameservers no
+nível do registro. Não é credencial de acesso ao servidor da Compuland. O e-mail continua
+funcionando porque o MX aponta para o servidor deles e o cliente paga a caixa lá — nada disso passa
+pelo Registro.br. Eles seguem administrando as contas normalmente.
+
+O que eles perdem é poder trocar a delegação de DNS por conta própria, que é exatamente o objetivo:
+o fornecedor que está sendo substituído não deve controlar o apontamento no dia da virada.
+
+**Em troca, o MX passa a ser responsabilidade nossa.** Se a Compuland trocar o servidor ou o IP do
+e-mail, não vão conseguir corrigir sozinhos. Avisar por escrito na virada (ver seção 6).
+
+**O handle não precisa ser pessoa física.** O da Globo (`CTG6`) é `person: Contato` — handle de
+equipe. Dá para criar no CNPJ da WB Digital Solutions em vez do CPF, e não amarrar o domínio de um
+cliente a uma pessoa.
 
 ---
 
@@ -175,8 +203,9 @@ continua na Compuland. Um problema de cada vez. A migração do e-mail fica como
 
 ## 6. Plano de migração (checklist)
 
-- [ ] Cliente adiciona a WB Digital Solutions como **contato técnico** no Registro.br
-      (precisa de handle criado com CPF)
+- [ ] Criar handle da WB Digital Solutions no Registro.br (preferir CNPJ a CPF, ver seção 1)
+- [ ] Cliente designa a WB como **contato técnico** — isso *substitui* a Compuland no papel;
+      não afeta o e-mail deles (ver seção 1)
 - [ ] Confirmar com o cliente que ele tem o **login do Registro.br** em mãos, antes de qualquer troca
 - [ ] Pedir ao cliente/Compuland a lista completa de registros da zona (o AXFR é negado; a tabela da
       seção 2 pode não ser exaustiva) — atenção a subdomínios e a qualquer coisa de e-mail
@@ -189,6 +218,9 @@ continua na Compuland. Um problema de cada vez. A migração do e-mail fica como
       — não fazer no meio de um dia de movimento)
 - [ ] Trocar os NS no Registro.br para os da Cloudflare
 - [ ] Depois de propagar: **testar o e-mail do cliente enviando E recebendo** antes de dar por encerrado
+- [ ] Avisar a Compuland por escrito: o DNS passou a ser administrado por nós, o MX segue apontado
+      para `fuzzy4.compuland.com.br` e o SPF foi mantido igual — qualquer mudança de servidor ou IP
+      do e-mail, precisam nos avisar para atualizarmos
 - [ ] Conferir apex e `www` respondendo em HTTPS
 - [ ] Refazer as medições do [`BASELINE-E-METAS.md`](./BASELINE-E-METAS.md) e preencher a coluna "depois"
 
