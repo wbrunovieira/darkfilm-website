@@ -186,10 +186,12 @@ Software identificado pelos banners:
 | --- | --- | --- |
 | SMTP | `220 sv.compuland.com.br ESMTP Postfix` (limite de 50 MB/mensagem) | — |
 | IMAP | `Courier-IMAP ready. Copyright 1998-2008` | linha parada em **2008** |
-| Webmail | `webmail.compuland.com.br` — Apache **2.0.61** + PHP **5.2.6**, só HTTP | 2007 / 2008 |
+| Webmail | **RainLoop** em `https://fuzzy3.compuland.com.br/` — PHP 7.2.31, **HTTPS com certificado válido** (DigiCert/RapidSSL, 02/04/2026 → 17/10/2026) | — |
 
-O webmail só responde em HTTP; a versão HTTPS do host não conecta. O redirect
-`sv.compuland.com.br/webmail/` → `https://www.compuland.com.br/webmail/` leva a um **404**.
+> **Erro corrigido (29/08/2026):** uma versão anterior deste documento dizia que o webmail não tinha
+> HTTPS. Errado. `webmail.compuland.com.br` é a **página do portal** do provedor (HTTP, Apache 2.0.61),
+> não o webmail — ela só contém o link "Acessar meus emails", que aponta para `fuzzy3` com HTTPS
+> válido. **Não usar "o webmail dele é inseguro" como argumento de venda: é falso e verificável.**
 
 ### Achado sério: o envio de e-mail não tem criptografia disponível
 
@@ -201,14 +203,21 @@ Testadas as três portas de envio em `sv.compuland.com.br`:
 | 587 (submissão) | `AUTH PLAIN` anunciado, **sem STARTTLS** |
 | 465 (SMTPS) | conexão **recusada** |
 
-Não existe caminho cifrado para enviar e-mail por esse servidor. Toda vez que o cliente manda uma
-mensagem, **usuário e senha saem em texto puro pela rede** — capturável em Wi-Fi de café, hotel ou
-aeroporto.
+Não existe caminho cifrado para enviar e-mail por esse servidor. Quem usa **um programa de e-mail**
+(Outlook, app do celular configurado por SMTP) manda usuário e senha em texto puro pela rede.
 
-A leitura está melhor: o IMAP na porta 143 anuncia `STARTTLS`, então receber pode ser cifrado *se*
-o programa de e-mail dele estiver configurado para isso.
+**Mas isso só vale se o cliente usar programa de e-mail.** Se ele usa só o webmail (RainLoop, com
+HTTPS válido), a senha dele vai cifrada e o problema não o atinge. **Descobrir como ele usa antes de
+levantar o assunto** — pergunta simples: "você entra num site pra ver seu e-mail, ou usa um programa
+no celular/computador?"
 
-**Isso é argumento de venda concreto**, do mesmo tipo que já sustentou a venda do site novo.
+A leitura por IMAP está coberta: a porta 143 anuncia `STARTTLS`.
+
+Conclusão para a venda: **não vender a migração pela segurança.** O argumento é condicional e, se o
+cliente perguntar à Compuland, o certificado do webmail desmente a parte visível. Ângulos honestos e
+que costumam doer de verdade: volume de spam recebido, e-mail do cliente caindo em spam (testável —
+mandar da conta dele para um Gmail e ver onde cai), experiência no celular, e a consolidação de
+fornecedor depois que o site sair da Compuland.
 
 ---
 
