@@ -134,9 +134,43 @@ infraestrutura própria do provedor, não revenda de nuvem.
 | `sv.compuland.com.br` | 200.194.160.21 | SMTP/IMAP (envia e lê) |
 | `fuzzy3.compuland.com.br` | 200.194.160.14 | saída autorizada no SPF |
 
-Curiosidade que vale para a conversa: o site institucional da própria Compuland
-(`www.compuland.com.br`) roda **Apache 2.4.65 + PHP 8.4.13 com HTTPS funcionando**. Eles
-modernizaram a casa deles; a hospedagem compartilhada onde o cliente está é que ficou para trás.
+### A própria Compuland também não tem HTTPS
+
+Verificado em 29/08/2026. O Chrome mostra "Não seguro" no site deles, igual ao do cliente.
+O caminho completo:
+
+| URL | Resultado |
+| --- | --- |
+| `https://compuland.com.br` | TLS falha — protocolo obsoleto e certificado não confiável |
+| `https://www.compuland.com.br` | 200, mas é um stub de 284 bytes com `<meta http-equiv="refresh" url=http://www.compuland.com.br>` — **devolve o visitante para o HTTP** |
+| `http://www.compuland.com.br` | 301 → `http://sv.compuland.com.br` |
+| `http://compuland.com.br` | o site de verdade: **Apache 2.0.61 (2007) + PHP 5.2.6 (2008)**, só HTTP |
+
+Existe um certificado Let's Encrypt válido (emitido 11/07/2026, vence 09/10/2026), mas cobre apenas
+o nome `www.compuland.com.br` e não entrega conteúdo — HTTPS montado pela metade e nunca terminado.
+
+A home deles tem um bloco "Notícias no mundo — Fonte: BBC News" que carrega vazio: widget de RSS
+quebrado, provavelmente porque o feed da BBC hoje exige HTTPS e o PHP 5.2.6 não consegue buscar.
+
+> **Erro corrigido:** a primeira versão deste documento dizia que a Compuland tinha HTTPS
+> funcionando. Era um mal-entendido meu — o endpoint moderno que encontrei é só o stub de redirect.
+
+**Uso na venda:** dá para mostrar o aviso "Não seguro" do site do cliente e o do provedor lado a
+lado, na reunião, sem explicar nada técnico.
+
+### A empresa está ativa
+
+Consulta ao CNPJ (Receita Federal via BrasilAPI, 29/08/2026):
+
+- **COMPULAND INFORMATICA LTDA** — CNPJ 00.554.257/0001-95
+- Situação cadastral **ATIVA** desde 22/06/2022; atividade iniciada em 11/04/1995
+- Petrópolis/RJ, microempresa, CNAE *Provedores de acesso às redes de comunicações*
+
+Sinais técnicos de operação recente: domínio renovado em 25/01/2026 (vence 09/02/2027), certificado
+Let's Encrypt renovado automaticamente em julho/2026, DNS e servidor de e-mail respondendo.
+
+É um provedor de banda larga pequeno em que hospedagem é negócio secundário — não uma empresa
+abandonada. O que está parado é a infraestrutura de hospedagem, não a empresa.
 
 ---
 
@@ -276,6 +310,21 @@ echo | openssl s_client -connect sv.compuland.com.br:465 -brief
 
 # Webmail: versão do servidor
 curl -s -m 12 -D- -o /dev/null http://webmail.compuland.com.br/ | grep -iE "^(HTTP|server|x-powered-by)"
+```
+
+```bash
+# HTTPS da Compuland: seguir a cadeia inteira, não testar só uma URL
+for u in http://compuland.com.br/ https://compuland.com.br/ \
+         http://www.compuland.com.br/ https://www.compuland.com.br/ \
+         http://sv.compuland.com.br/; do
+  echo -n "$u → "; curl -s -o /dev/null -m 12 -w "code=%{http_code} redir=%{redirect_url}\n" "$u"
+done
+
+# o "site" em https://www é um stub de redirect — olhar o conteúdo, não só o código HTTP
+curl -s -m 15 https://www.compuland.com.br/
+
+# situação do CNPJ na Receita
+curl -s https://brasilapi.com.br/api/cnpj/v1/00554257000195 | python3 -m json.tool | head -30
 ```
 
 Só leitura de banner público — nada aqui tenta autenticar.
