@@ -6,6 +6,7 @@ import { SimuladorTeaser } from "@/components/home/SimuladorTeaser";
 import { Clients } from "@/components/home/Clients";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { Novidade } from "@/components/home/Novidade";
+import { Playlist } from "@/components/home/Playlist";
 import { ContactCTA } from "@/components/ContactCTA";
 
 /** Separador entre seções de mesmo fundo (hairline com ponto). */
@@ -29,6 +30,7 @@ export default function Home() {
       <Clients />
       <GalleryPreview />
       <Novidade />
+      <Playlist />
       <ContactCTA />
     </>
   );
