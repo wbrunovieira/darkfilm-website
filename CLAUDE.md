@@ -102,3 +102,15 @@ Diretrizes:
 - As fotos de evento são antigas (2006-2007). Não apresente como recentes. Ou trate como "histórico", ou deixe a seção pronta pra receber foto nova.
 - Otimize as imagens: as originais vieram de 2013, muitas são pesadas e pequenas ao mesmo tempo.
 - Trate a credencial 3M com destaque, é diferencial competitivo real.
+
+## ⚠️ Sempre rastreie o trabalho como issues (skill `track-work`)
+
+Toda melhoria, correção, feature ou débito técnico DEVE virar uma issue no
+projeto "THe Dark Film - Website" (`cmth8gfvz00wdqj01gh9igfo9`) no WB Project
+Manager, com o status em dia (Backlog/Todo → In Progress → Done). Antes de
+planejar ou iniciar trabalho não-trivial, e sempre que descobrir um bug/melhoria,
+invoque a skill **`track-work`** (`.claude/skills/track-work/SKILL.md`) — ela tem
+o projectId, os status IDs, os milestones, a localização da API key e o CLI `pm.sh`.
+
+O board é a fonte da verdade sobre o andamento. `PLANO.md` e `docs/DOMINIO-DNS-EMAIL.md`
+seguem valendo como registro do escopo e do levantamento técnico.
