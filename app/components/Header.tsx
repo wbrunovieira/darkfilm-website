@@ -11,6 +11,8 @@ import { WhatsAppIcon } from "./icons";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  /** Rótulo do submenu aberto no desktop; null quando todos estão fechados. */
+  const [submenu, setSubmenu] = useState<string | null>(null);
   const pathname = usePathname();
   const reduce = useReducedMotion();
 
@@ -27,6 +29,17 @@ export function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    setSubmenu(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!submenu) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setSubmenu(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [submenu]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
@@ -56,32 +69,72 @@ export function Header() {
         <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
           {nav.map((item) =>
             "children" in item ? (
-              <div key={item.label} className="group relative">
+              <div
+                key={item.label}
+                className="relative"
+                onMouseEnter={() => setSubmenu(item.label)}
+                onMouseLeave={() => setSubmenu(null)}
+                onBlur={(e) => {
+                  // só fecha quando o foco sai do conjunto botão + lista
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) setSubmenu(null);
+                }}
+              >
                 <button
-                  className="flex items-center gap-1 px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] text-fg-2 transition-colors hover:text-fg"
+                  type="button"
+                  onClick={() => setSubmenu((v) => (v === item.label ? null : item.label))}
+                  onFocus={() => setSubmenu(item.label)}
                   aria-haspopup="true"
+                  aria-expanded={submenu === item.label}
+                  aria-controls={`submenu-${item.label}`}
+                  className={`flex items-center gap-1 px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] transition-colors hover:text-fg ${
+                    submenu === item.label ? "text-fg" : "text-fg-2"
+                  }`}
                 >
                   {item.label}
-                  <svg viewBox="0 0 12 12" className="size-3 opacity-60" aria-hidden>
+                  <motion.svg
+                    viewBox="0 0 12 12"
+                    className="size-3 opacity-60"
+                    aria-hidden
+                    animate={{ rotate: submenu === item.label ? 180 : 0 }}
+                    transition={reduce ? { duration: 0 } : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  >
                     <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
+                  </motion.svg>
                 </button>
-                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                  <ul className="min-w-56 rounded-md border border-line bg-bg-2 p-2 shadow-2xl">
-                    {item.children.map((c) => (
-                      <li key={c.href}>
-                        <Link
-                          href={c.href}
-                          className={`block rounded px-3 py-2 text-sm transition-colors hover:bg-bg-3 hover:text-fg ${
-                            isActive(c.href) ? "text-red-2" : "text-fg-2"
-                          }`}
-                        >
-                          {c.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+
+                <AnimatePresence initial={false}>
+                  {submenu === item.label && (
+                    <motion.div
+                      id={`submenu-${item.label}`}
+                      className="absolute left-0 top-full overflow-hidden pt-2"
+                      initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0, y: -4 }}
+                      animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto", y: 0 }}
+                      exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0, y: -4 }}
+                      transition={{ duration: reduce ? 0 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <ul className="min-w-56 rounded-md border border-line bg-bg-2 p-2 shadow-2xl">
+                        {item.children.map((c, ci) => (
+                          <motion.li
+                            key={c.href}
+                            initial={reduce ? false : { opacity: 0, x: -6 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: reduce ? 0 : 0.06 + ci * 0.045, duration: 0.3 }}
+                          >
+                            <Link
+                              href={c.href}
+                              onClick={() => setSubmenu(null)}
+                              className={`block rounded px-3 py-2 text-sm transition-colors hover:bg-bg-3 hover:text-fg ${
+                                isActive(c.href) ? "text-red-2" : "text-fg-2"
+                              }`}
+                            >
+                              {c.label}
+                            </Link>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
               <Link
