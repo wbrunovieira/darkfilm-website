@@ -42,6 +42,8 @@ export function Header() {
   }, [submenu]);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  /** O item com submenu conta como atual quando a página é um dos filhos. */
+  const grupoAtivo = (filhos: { href: string }[]) => filhos.some((c) => isActive(c.href));
 
   return (
     <header className="fixed inset-x-0 top-0 z-40">
@@ -86,8 +88,9 @@ export function Header() {
                   aria-haspopup="true"
                   aria-expanded={submenu === item.label}
                   aria-controls={`submenu-${item.label}`}
-                  className={`flex items-center gap-1 px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] transition-colors hover:text-fg ${
-                    submenu === item.label ? "text-fg" : "text-fg-2"
+                  data-atual={grupoAtivo(item.children)}
+                  className={`nav-link flex items-center gap-1 px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] hover:text-fg ${
+                    submenu === item.label || grupoAtivo(item.children) ? "text-fg" : "text-fg-2"
                   }`}
                 >
                   {item.label}
@@ -100,6 +103,13 @@ export function Header() {
                   >
                     <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </motion.svg>
+                  {grupoAtivo(item.children) && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute inset-x-3 -bottom-0.5 h-0.5 bg-red"
+                      transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                    />
+                  )}
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -140,13 +150,12 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] transition-colors hover:text-fg ${
-                  isActive(item.href) ? "text-fg" : item.highlight ? "text-red-2" : "text-fg-2"
+                data-atual={isActive(item.href)}
+                className={`nav-link px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] hover:text-fg ${
+                  isActive(item.href) ? "text-fg" : "text-fg-2"
                 }`}
               >
-                {item.highlight && (
-                  <span aria-hidden className="mr-1.5 inline-block size-1.5 rounded-full bg-red-2 align-middle animate-pulse-ring-slow" />
-                )}
+                {item.highlight && <span aria-hidden className="nav-novo" />}
                 {item.label}
                 {isActive(item.href) && (
                   <motion.span

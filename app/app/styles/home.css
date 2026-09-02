@@ -236,3 +236,54 @@
   .sheen::after { display: none; }
   .card-lift:hover { transform: none; }
 }
+
+/* ---------- Navegação do topo ---------- */
+
+/* Sublinhado que cresce do centro no hover. Fica em cinza de propósito: o vermelho
+   é reservado para indicar a PÁGINA ATUAL, e ter dois sinais vermelhos competindo
+   fazia o item "Simulador" parecer a página em que se está. */
+.nav-link {
+  position: relative;
+  transition: color 0.28s var(--ease-out-expo);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: -0.125rem;
+  height: 1px;
+  background: var(--fg-3);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.38s var(--ease-out-expo), background-color 0.28s ease;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+/* No item da página atual o sublinhado vermelho do motion já está lá: some com o cinza. */
+.nav-link[data-atual="true"]::after {
+  display: none;
+}
+
+/* Ponto de "novidade": marca discreta, sem pulsar e sem pintar o texto. */
+.nav-novo {
+  display: inline-block;
+  width: 0.3rem;
+  height: 0.3rem;
+  margin-right: 0.4rem;
+  border-radius: 9999px;
+  background: var(--red-2);
+  vertical-align: middle;
+  opacity: 0.85;
+  transition: opacity 0.28s ease, transform 0.38s var(--ease-out-expo);
+}
+.nav-link:hover .nav-novo {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after { transition: none; }
+}
