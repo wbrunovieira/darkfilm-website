@@ -47,8 +47,8 @@ export default function LinhaAutomotivaPage() {
           </>
         }
         intro="Utilizamos somente film de linha profissional, com proteção antirrisco e técnica avançada de encolhimento térmico, evitando emendas em vidros mais boleados, resultando perfeita aplicação."
-        image="/img/galeria/08.jpg"
-        imagePosition="center 60%"
+        image="/img/novo/aplicacao-carros--peugeot-2008-frente-faixa-solar.jpg"
+        imagePosition="center 55%"
       />
 
       {/* Os três argumentos do texto de abertura, em tiles — o que diferencia a aplicação. */}
