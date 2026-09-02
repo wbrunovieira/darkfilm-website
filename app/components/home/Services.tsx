@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CardVideo } from "../CardVideo";
 import type { ComponentType, SVGProps } from "react";
 import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
@@ -16,30 +17,35 @@ import {
 type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 
 // Textos copiados do slider e dos cards da home original.
-const featured: { href: string; title: string; text: string; img: string; icon: Icon }[] = [
+const featured: { href: string; title: string; text: string; img: string; video?: string; icon: Icon }[] = [
   {
     href: "/linha-automotiva",
     title: "Linha Automotiva",
     text: "Film de linha profissional com proteção anti-risco e encolhimento térmico: aplicação perfeita, sem emendas em vidros boleados.",
-    img: "/img/novo/aplicacao-carros--audi-tt-frente-pelicula.jpg",
+    // Aplicação da película no vidro traseiro, filmada por dentro do carro.
+    img: "/video/automotiva-aplicacao.jpg",
+    video: "/video/automotiva-aplicacao.mp4",
     icon: FilmAutoIcon,
   },
   {
     href: "/linha-arquitetonica",
     title: "Linha Arquitetônica",
     text: "Segurança e proteção, privacidade, redução da descoloração, decoração de interiores e redução dos custos de refrigeração.",
-    // Quadro extraído de um vídeo do cliente: não veio nenhuma FOTO de linha
-    // arquitetônica no material, mas vieram 12 vídeos. É trabalho real dele, em
-    // 720x1280 — resolução menor que a das fotos, e ainda assim melhor que a
-    // imagem genérica de prédio de vidro que estava aqui.
-    img: "/img/novo/arquitetonica--aplicacao-espatula-vidro.jpg",
+    // Não veio nenhuma FOTO de linha arquitetônica no material do cliente, mas
+    // vieram 12 vídeos. Em quadro parado a cena não se lia como arquitetura;
+    // em movimento, o serviço fica evidente. O poster é o mesmo quadro.
+    img: "/video/arquitetonica-aplicacao.jpg",
+    video: "/video/arquitetonica-aplicacao.mp4",
     icon: FilmArchIcon,
   },
   {
     href: "/som-e-acessorios",
     title: "Som & Acessórios",
     text: "As melhores soluções no mercado de som e acessórios você encontra aqui. Venha nos fazer uma visita.",
-    img: "/img/novo/multimidia--peugeot-208-painel-multimidia.jpg",
+    // Câmera 360 funcionando na central multimídia; o piso xadrez que aparece na
+    // tela é o da própria loja.
+    img: "/video/som-camera-360.jpg",
+    video: "/video/som-camera-360.mp4",
     icon: SoundIcon,
   },
 ];
@@ -82,13 +88,21 @@ export function Services() {
                     i === 0 ? "min-h-[30rem] md:h-full md:min-h-0" : "min-h-[22rem] md:min-h-[24rem]"
                   }`}
                 >
-                  <Image
-                    src={s.img}
-                    alt=""
-                    fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    className="photo object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
-                  />
+                  {s.video ? (
+                    <CardVideo
+                      src={s.video}
+                      poster={s.img}
+                      className="photo absolute inset-0 size-full object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+                    />
+                  ) : (
+                    <Image
+                      src={s.img}
+                      alt=""
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="photo object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+                    />
+                  )}
                   <div className="tint-overlay" />
 
                   {/* topo: ícone + numeração */}
