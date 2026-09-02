@@ -28,8 +28,11 @@ const featured: { href: string; title: string; text: string; img: string; icon: 
     href: "/linha-arquitetonica",
     title: "Linha Arquitetônica",
     text: "Segurança e proteção, privacidade, redução da descoloração, decoração de interiores e redução dos custos de refrigeração.",
-    // pendente: nenhuma foto nova de linha arquitetônica veio no material do cliente
-    img: "/img/hero/arquitetonica.jpg",
+    // Quadro extraído de um vídeo do cliente: não veio nenhuma FOTO de linha
+    // arquitetônica no material, mas vieram 12 vídeos. É trabalho real dele, em
+    // 720x1280 — resolução menor que a das fotos, e ainda assim melhor que a
+    // imagem genérica de prédio de vidro que estava aqui.
+    img: "/img/novo/arquitetonica--aplicacao-espatula-vidro.jpg",
     icon: FilmArchIcon,
   },
   {
