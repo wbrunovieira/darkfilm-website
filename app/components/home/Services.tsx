@@ -143,7 +143,7 @@ export function Services() {
                   href={s.href}
                   className="group card-lift flex h-full flex-col overflow-hidden rounded-lg border border-line bg-bg-2"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="media-mask relative aspect-[4/3]">
                     <Image
                       src={s.img}
                       alt=""

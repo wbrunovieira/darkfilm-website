@@ -55,7 +55,6 @@
     transform 0.45s var(--ease-out-expo),
     border-color 0.3s ease,
     box-shadow 0.45s var(--ease-out-expo);
-  will-change: transform;
 }
 .card-lift:hover,
 .card-lift:focus-visible {
@@ -67,7 +66,11 @@
   outline-offset: 3px;
 }
 
-/* Brilho diagonal que passa uma vez ao entrar com o mouse. */
+/* Brilho diagonal que passa uma vez ao entrar com o mouse.
+   O retorno é instantâneo de propósito: com transição também na saída, o brilho
+   atravessava o card de novo ao tirar o mouse, e isso aparecia como um pisca
+   branco na linha entre a foto e o texto. Só a ida é animada; a volta salta para
+   fora da tela sem transição. */
 .sheen {
   position: relative;
   overflow: hidden;
@@ -77,12 +80,18 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.09) 50%, transparent 65%);
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.07) 50%, transparent 65%);
   transform: translateX(-120%);
+  transition: transform 0s;
+}
+.sheen:hover::after,
+.sheen:focus-visible::after {
+  transform: translateX(120%);
   transition: transform 0.9s var(--ease-out-expo);
 }
-.sheen:hover::after {
-  transform: translateX(120%);
+/* Sem brilho para quem pede menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  .sheen::after { display: none; }
 }
 
 /* Ícone dentro de card: sobe e ganha o vermelho. */

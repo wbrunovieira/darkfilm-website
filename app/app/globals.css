@@ -160,6 +160,20 @@ body {
 }
 
 /* Foto tratada: leve dessaturação + contraste, esconde artefatos JPEG antigos */
+/* Recorte de mídia sem borda de camada.
+   Quando o card sobe no hover (transform), ele vira camada composta na GPU. A partir
+   daí o `overflow: hidden` do container da foto deixa de ser recorte de pintura e passa
+   a ser borda de camada, com antialias próprio — e como a geometria cai em subpixel
+   (aspect-[4/3] sobre 282px dá 211,5px de altura), essa borda acende como uma linha
+   clara na junção da foto com o texto. A máscara faz o recorte acontecer junto com a
+   pintura da imagem, sem borda intermediária.
+   Atenção: os reflexos comuns para esse artefato (translateZ(0), will-change,
+   backface-visibility) pioram o caso — não reintroduzir. */
+@utility media-mask {
+  -webkit-mask-image: linear-gradient(#000 0 0);
+  mask-image: linear-gradient(#000 0 0);
+}
+
 @utility photo {
   filter: saturate(0.85) contrast(1.06);
 }
