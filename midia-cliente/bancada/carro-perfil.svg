@@ -1,0 +1,315 @@
+<svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carro de perfil">
+<defs>
+  <linearGradient id="pBody" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#39414c"/>
+    <stop offset=".16" stop-color="#252b33"/>
+    <stop offset=".30" stop-color="#191d23"/>
+    <stop offset=".44" stop-color="#12151a"/>
+    <stop offset=".56" stop-color="#242a32"/>
+    <stop offset=".66" stop-color="#171b21"/>
+    <stop offset=".86" stop-color="#0e1116"/>
+    <stop offset="1"   stop-color="#0a0c10"/>
+  </linearGradient>
+
+  <linearGradient id="pStrip" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#9fb2c8" stop-opacity="0"/>
+    <stop offset=".06" stop-color="#a9bacf" stop-opacity=".18"/>
+    <stop offset=".26" stop-color="#dfe9f6" stop-opacity=".48"/>
+    <stop offset=".44" stop-color="#b9c9dc" stop-opacity=".34"/>
+    <stop offset=".64" stop-color="#dfe9f6" stop-opacity=".40"/>
+    <stop offset=".90" stop-color="#8fa2b8" stop-opacity=".16"/>
+    <stop offset="1"   stop-color="#8fa2b8" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="pBelt" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity=".46"/>
+    <stop offset=".40" stop-color="#000" stop-opacity=".08"/>
+    <stop offset=".62" stop-color="#93aac4" stop-opacity=".12"/>
+    <stop offset="1"   stop-color="#93aac4" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="pLow" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity="0"/>
+    <stop offset=".38" stop-color="#000" stop-opacity=".42"/>
+    <stop offset=".74" stop-color="#000" stop-opacity=".34"/>
+    <stop offset=".92" stop-color="#8fa0b2" stop-opacity=".20"/>
+    <stop offset="1"   stop-color="#b3c2d3" stop-opacity=".30"/>
+  </linearGradient>
+
+  <linearGradient id="pEdgeHi" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ecf3fc" stop-opacity=".44"/>
+    <stop offset="1" stop-color="#ecf3fc" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="pEnds" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#000" stop-opacity=".22"/>
+    <stop offset=".12" stop-color="#000" stop-opacity="0"/>
+    <stop offset=".88" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1"   stop-color="#000" stop-opacity=".18"/>
+  </linearGradient>
+
+  <linearGradient id="pGlass" x1=".10" y1="0" x2=".62" y2="1">
+    <stop offset="0"   stop-color="#7f94ad" stop-opacity=".40"/>
+    <stop offset=".36" stop-color="#313d4a" stop-opacity=".48"/>
+    <stop offset=".72" stop-color="#1a2028" stop-opacity=".54"/>
+    <stop offset="1"   stop-color="#3d4d60" stop-opacity=".44"/>
+  </linearGradient>
+  <linearGradient id="pGlassTop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity=".42"/>
+    <stop offset=".50" stop-color="#000" stop-opacity="0"/>
+  </linearGradient>
+
+  <radialGradient id="pTire" cx=".40" cy=".28" r=".82">
+    <stop offset=".46" stop-color="#2b2f35"/>
+    <stop offset=".78" stop-color="#171b1f"/>
+    <stop offset="1"   stop-color="#08090c"/>
+  </radialGradient>
+  <radialGradient id="pRim" cx=".33" cy=".24" r=".86">
+    <stop offset="0"   stop-color="#e8eff6"/>
+    <stop offset=".40" stop-color="#9ca8b5"/>
+    <stop offset=".76" stop-color="#59626d"/>
+    <stop offset="1"   stop-color="#2d333a"/>
+  </radialGradient>
+  <linearGradient id="pSpoke" x1=".1" y1="0" x2=".9" y2="1">
+    <stop offset="0"   stop-color="#f3f7fc"/>
+    <stop offset=".42" stop-color="#b0bbc8"/>
+    <stop offset="1"   stop-color="#4e565f"/>
+  </linearGradient>
+
+  <linearGradient id="pHead" x1="0" y1="0" x2=".85" y2=".7">
+    <stop offset="0"   stop-color="#ffffff"/>
+    <stop offset=".24" stop-color="#cbdcef"/>
+    <stop offset=".62" stop-color="#5a6e86"/>
+    <stop offset="1"   stop-color="#151b22"/>
+  </linearGradient>
+  <linearGradient id="pTail" x1="1" y1="0" x2="0" y2=".7">
+    <stop offset="0"   stop-color="#ff969b"/>
+    <stop offset=".28" stop-color="#e2202a"/>
+    <stop offset=".74" stop-color="#881015"/>
+    <stop offset="1"   stop-color="#2e0407"/>
+  </linearGradient>
+
+  <linearGradient id="pCabin" x1="0" y1="0" x2=".3" y2="1">
+    <stop offset="0"   stop-color="#171c22"/>
+    <stop offset=".45" stop-color="#0d1116"/>
+    <stop offset="1"   stop-color="#161b21"/>
+  </linearGradient>
+  <radialGradient id="pFloor" cx=".5" cy=".5" r=".5">
+    <stop offset="0"   stop-color="#000" stop-opacity=".85"/>
+    <stop offset=".42" stop-color="#000" stop-opacity=".34"/>
+    <stop offset="1"   stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+
+  <path id="pShell" d="M 36,149
+    C 28,148 23,142 23,133 L 23,114
+    C 23,106 26,101 32,98 L 40,95
+    C 72,90 104,84 132,79
+    C 146,72 162,55 180,45
+    C 212,41 250,41 288,45
+    C 304,53 320,64 332,74
+    L 360,77 C 369,78 375,83 376,91
+    L 377,118 C 377,131 372,143 361,149
+    L 334.8,150 A 30.5,30.5 0 0,0 281.2,150
+    L 118.8,150 A 30.5,30.5 0 0,0 65.2,150
+    L 34,149 Z"/>
+  <clipPath id="pClip"><use href="#pShell"/></clipPath>
+
+  <g id="pWheel">
+    <circle r="26.5" fill="url(#pTire)"/>
+    <circle r="26.5" fill="none" stroke="#434a52" stroke-width=".9" stroke-opacity=".9"/>
+    <g stroke="#0d0f12" stroke-width="1.2" stroke-opacity=".65">
+      <path d="M0,26.5 L0,22.8"/><path d="M9,24.9 L7.8,21.4"/><path d="M-9,24.9 L-7.8,21.4"/>
+      <path d="M17.1,20.3 L14.8,17.5"/><path d="M-17.1,20.3 L-14.8,17.5"/>
+      <path d="M23,13.2 L19.9,11.4"/><path d="M-23,13.2 L-19.9,11.4"/>
+      <path d="M26.1,4.6 L22.6,4"/><path d="M-26.1,4.6 L-22.6,4"/>
+    </g>
+    <circle r="22.4" fill="none" stroke="#000" stroke-width="3.2" stroke-opacity=".45"/>
+    <circle r="18.6" fill="#090a0d"/>
+    <circle r="16.8" fill="#0d1013"/>
+    <circle r="13.4" fill="#373e46"/>
+    <circle r="13.4" fill="none" stroke="#11151a" stroke-width="1.1"/>
+    <circle r="8.6"  fill="#242a32"/>
+    <path d="M -13.2,-3.4 A 13.6,13.6 0 0,1 -6.5,-12 L -4.6,-9.3 A 10.1,10.1 0 0,0 -9.7,-3 Z" fill="#c2141d"/>
+    <g fill="url(#pSpoke)">
+      <g><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(72)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(144)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(216)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(288)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+    </g>
+    <circle r="16.8" fill="none" stroke="url(#pRim)" stroke-width="2.5"/>
+    <circle r="18.1" fill="none" stroke="#000" stroke-width="1" stroke-opacity=".5"/>
+    <circle r="15.5" fill="none" stroke="#000" stroke-width=".7" stroke-opacity=".45"/>
+    <circle r="5.4" fill="#2c333b"/>
+    <circle r="5.4" fill="none" stroke="url(#pRim)" stroke-width="1.2"/>
+    <circle r="1.8" fill="#0b0d10"/>
+  </g>
+</defs>
+
+<!-- chão -->
+<ellipse cx="200" cy="161" rx="188" ry="12" fill="url(#pFloor)"/>
+<ellipse cx="92"  cy="161" rx="32" ry="5.5" fill="#000" opacity=".62"/>
+<ellipse cx="308" cy="161" rx="32" ry="5.5" fill="#000" opacity=".62"/>
+
+<!-- rodas -->
+<use href="#pWheel" x="92"  y="135.5"/>
+<use href="#pWheel" x="308" y="135.5" transform="rotate(24,308,135.5)"/>
+
+<!-- carroceria -->
+<use href="#pShell" fill="url(#pBody)"/>
+
+<g clip-path="url(#pClip)">
+  <!-- brilhos colados ao contorno -->
+  <path d="M180,45 C212,41 250,41 288,45 L287,50.5 C250,46.5 212,46.5 181,50.5 Z" fill="url(#pEdgeHi)"/>
+  <path d="M40,95 C72,89 104,84 132,79 L133,85 C105,90 73,95 41,101 Z" fill="url(#pEdgeHi)" opacity=".9"/>
+  <path d="M132,79 C146,72 162,55 180,45 L184,48.5 C166,59 150,75 136,82 Z" fill="#cbd9ea" opacity=".13"/>
+  <path d="M288,45 C304,53 320,64 332,74 L327,76.5 C316,66 302,56 285,49 Z" fill="#cbd9ea" opacity=".11"/>
+
+  <!-- cintura -->
+  <path d="M24,78 L340,71 L340,100 L24,107 Z" fill="url(#pBelt)"/>
+
+  <!-- faixa de reflexo do ambiente -->
+  <path d="M20,96 C96,88 250,83 384,85 L384,104 C250,102 96,107 20,115 Z" fill="url(#pStrip)"/>
+  <path d="M20,99.5 C96,91.5 250,86.5 384,88.5 L384,92.5 C250,90.5 96,95.5 20,103.5 Z" fill="#f0f6fd" opacity=".17"/>
+
+  <!-- corpo inferior + bounce -->
+  <path d="M24,110 L384,104 L384,152 L24,152 Z" fill="url(#pLow)"/>
+
+  <!-- escurecer as pontas -->
+  <rect x="18" y="40" width="368" height="114" fill="url(#pEnds)"/>
+
+  <!-- vincos -->
+  <path d="M30,103 C104,94 250,89 380,91" fill="none" stroke="#000" stroke-width="1.9" stroke-opacity=".42"/>
+  <path d="M30,101.2 C104,92.2 250,87.2 380,89.2" fill="none" stroke="#d9e4f2" stroke-width="1" stroke-opacity=".36"/>
+  <path d="M54,131 C150,126 282,124 368,125" fill="none" stroke="#000" stroke-width="1.5" stroke-opacity=".38"/>
+  <path d="M54,129.6 C150,124.6 282,122.6 368,123.6" fill="none" stroke="#bbc9d9" stroke-width=".7" stroke-opacity=".22"/>
+
+  <!-- soleira -->
+  <path d="M116,143 C174,141 254,140 292,140 L292,152 L116,152 Z" fill="#05070a" opacity=".74"/>
+  <path d="M116,143 C174,141 254,140 292,140" fill="none" stroke="#000" stroke-width="1.2" stroke-opacity=".6"/>
+
+  <!-- recortes de painel -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M132,79 C129,104 127,128 126,150" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M133.7,79.6 C130.7,104 128.7,128 127.7,150" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M231,75 L229,150" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M232.7,75 L230.7,150" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M280,73 L280,124" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M281.7,73 L281.7,124" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M332,74 C344,78 356,85 363,96" stroke="#050609" stroke-width="1.3" stroke-opacity=".72"/>
+    <path d="M41,98 C73,92 105,87 131,82" stroke="#050609" stroke-width="1.2" stroke-opacity=".5"/>
+  </g>
+
+  <!-- arcos -->
+  <path d="M118.8,150 A 30.5,30.5 0 0,1 65.2,150" fill="none" stroke="#000" stroke-width="9" stroke-opacity=".52"/>
+  <path d="M118.8,150 A 30.5,30.5 0 0,1 65.2,150" fill="none" stroke="#000" stroke-width="2.6" stroke-opacity=".75"/>
+  <path d="M334.8,150 A 30.5,30.5 0 0,1 281.2,150" fill="none" stroke="#000" stroke-width="9" stroke-opacity=".52"/>
+  <path d="M334.8,150 A 30.5,30.5 0 0,1 281.2,150" fill="none" stroke="#000" stroke-width="2.6" stroke-opacity=".75"/>
+  <path d="M120,148 A 32.5,32.5 0 0,1 64,148" fill="none" stroke="#bccbdb" stroke-width="1" stroke-opacity=".32"/>
+  <path d="M336,148 A 32.5,32.5 0 0,1 280,148" fill="none" stroke="#bccbdb" stroke-width="1" stroke-opacity=".32"/>
+
+  <g id="pNose">
+  <!-- grade superior -->
+  <path d="M22,113 C34,111.4 48,110 62,109.4 L60,123 C46,123.6 32,125.4 22,127 Z" fill="#04060a" opacity=".92"/>
+  <path d="M22,112.6 C34,111 48,109.6 62,109" fill="none" stroke="#9fadbd" stroke-width=".9" stroke-opacity=".5"/>
+  <g stroke="#39424c" stroke-width=".7" stroke-opacity=".32" fill="none">
+    <path d="M23,116 C35,114.6 48,113.4 61,112.8"/>
+    <path d="M23,119.4 C35,118 48,116.8 60.6,116.2"/>
+    <path d="M23,122.8 C35,121.4 47,120.4 60.2,119.8"/>
+  </g>
+  <!-- vinco do para-choque -->
+  <path d="M22,129.5 C36,128 54,126.6 74,126" fill="none" stroke="#000" stroke-width="1.3" stroke-opacity=".45"/>
+  <path d="M22,128.3 C36,126.8 54,125.4 74,124.8" fill="none" stroke="#9fadbd" stroke-width=".6" stroke-opacity=".26"/>
+  <!-- tomada de ar inferior -->
+  <path d="M24,133 C38,131.6 54,130.6 72,130.2 L70,143 C52,143.4 36,145 25,146.5 Z" fill="#04060a" opacity=".9"/>
+  <path d="M25,135.4 C39,134 54,133 71,132.6" fill="none" stroke="#5c6672" stroke-width=".7" stroke-opacity=".45"/>
+  <ellipse cx="60" cy="136.5" rx="6.5" ry="4" fill="#0f1319"/>
+  <ellipse cx="60" cy="135.6" rx="4.6" ry="2.4" fill="#8fa4bb" opacity=".35"/>
+  </g>
+
+  <!-- traseira: costura do para-choque + difusor -->
+  <path d="M336,121 C352,120.4 366,120 377,119.8" fill="none" stroke="#000" stroke-width="1.4" stroke-opacity=".5"/>
+  <path d="M336,119.7 C352,119.1 366,118.7 377,118.5" fill="none" stroke="#9fadbd" stroke-width=".6" stroke-opacity=".24"/>
+  <path d="M338,137 C354,136 370,135 380,135 L380,152 L338,152 Z" fill="#04060a" opacity=".8"/>
+  <path d="M342,140 C356,139.2 368,138.6 376,138.4" fill="none" stroke="#4b545f" stroke-width=".7" stroke-opacity=".4"/>
+  <!-- refletores traseiros -->
+  <rect x="340" y="126" width="12" height="3" rx="1.5" fill="#5e1218"/>
+</g>
+
+<!-- luz de contorno -->
+<g fill="none" stroke-linecap="round">
+  <path d="M40,95 C72,89 104,84 132,79 C146,72 162,55 180,45 C212,41 250,41 288,45 C304,53 320,64 332,74 L360,77"
+        stroke="#e4edf8" stroke-width="1.5" stroke-opacity=".64"/>
+  <path d="M23,114 C23,106 26,101 32,98 L40,95" stroke="#e4edf8" stroke-width="1.4" stroke-opacity=".5"/>
+  <path d="M360,77 C369,78 375,83 376,91 L377,118" stroke="#e4edf8" stroke-width="1.4" stroke-opacity=".54"/>
+  <path d="M377,118 C377,131 372,142 361,148" stroke="#e4edf8" stroke-width="1.1" stroke-opacity=".34"/>
+  <path d="M23,133 C23,141 28,147 36,149" stroke="#e4edf8" stroke-width="1" stroke-opacity=".26"/>
+</g>
+
+<!-- faróis / lanternas -->
+<g>
+  <g id="pHeadlamp">
+  <!-- farol -->
+  <path d="M25,100 C35,98 46,96.2 56,95.4 C60.5,95 62.5,97 61.6,100.4 L60,106.2 C48,107.8 35,109.6 25,111 Z" fill="url(#pHead)"/>
+  <path d="M26.5,101.8 C36,100 46,98.4 56,97.6" fill="none" stroke="#fff" stroke-width="2.1" stroke-opacity=".95" stroke-linecap="round"/>
+  <path d="M26.5,106.6 C36,105.2 45,104 54,103.2" fill="none" stroke="#dcecfb" stroke-width="1" stroke-opacity=".45" stroke-linecap="round"/>
+  <path d="M25,100 C35,98 46,96.2 56,95.4 C60.5,95 62.5,97 61.6,100.4 L60,106.2 C48,107.8 35,109.6 25,111 Z" fill="none" stroke="#070a0d" stroke-width="1" stroke-opacity=".85"/>
+  </g>
+  <!-- lanterna -->
+  <path d="M334,82.6 C348,83.6 362,85 372,86.2 C375.6,86.7 377,88.4 377,91 L377,96.4 C377,99 375.6,100.2 372,99.8 C362,98.8 348,97.2 334,95.8 Z" fill="url(#pTail)"/>
+  <path d="M337,86.6 C351,87.6 364,89 374,90.2" fill="none" stroke="#ffc6c9" stroke-width="1.9" stroke-opacity=".92" stroke-linecap="round"/>
+  <path d="M337,92.6 C350,93.4 362,94.6 371,95.4" fill="none" stroke="#ff707a" stroke-width="1" stroke-opacity=".55" stroke-linecap="round"/>
+  <path d="M334,82.6 C348,83.6 362,85 372,86.2 C375.6,86.7 377,88.4 377,91 L377,96.4 C377,99 375.6,100.2 372,99.8 C362,98.8 348,97.2 334,95.8 Z" fill="none" stroke="#070a0d" stroke-width="1" stroke-opacity=".85"/>
+</g>
+
+<!-- interior da cabine (opaco, atras dos vidros) -->
+<g fill="url(#pCabin)">
+  <polygon points="140,78 176,50 184,50 154,78"/>
+  <polygon points="160,77.5 190,50 230,47 228,75"/>
+  <polygon points="234,75 234,47 270,48.5 276,73"/>
+  <polygon points="280,49 290,50 320,73 308,73"/>
+</g>
+<g pointer-events="none" opacity=".55">
+  <path d="M196,74 C202,66 210,62 220,61 L226,74 Z" fill="#2b333d"/>
+  <path d="M244,73 C250,66 258,63 266,63 L268,73 Z" fill="#262d36"/>
+  <path d="M186,52 L228,49 L228,55 L188,58 Z" fill="#11151a"/>
+  <path d="M236,49 L270,50 L270,56 L236,55 Z" fill="#11151a"/>
+</g>
+<!-- ===== VIDROS (seletores) ===== -->
+<g stroke-width="1.1" stroke-linejoin="round">
+  <polygon data-vidro="parabrisa" points="140,78 176,50 184,50 154,78" fill="url(#pGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="dianteiro" points="160,77.5 190,50 230,47 228,75" fill="url(#pGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="traseiro"  points="234,75 234,47 270,48.5 276,73" fill="url(#pGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="vigia"     points="280,49 290,50 320,73 308,73" fill="url(#pGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+</g>
+
+<!-- reflexos sobre os vidros -->
+<g pointer-events="none">
+  <path d="M145,78 L174,55 L180,55 L151,78 Z" fill="#eaf3fd" opacity=".14"/>
+  <path d="M178,77.5 L196,54 L212,53 L196,76.5 Z" fill="#eaf3fd" opacity=".10"/>
+  <path d="M240,75 L240,53 L252,52.6 L248,75 Z" fill="#eaf3fd" opacity=".085"/>
+  <path d="M287,54 L293,54.4 L312,73 L305,73 Z" fill="#eaf3fd" opacity=".085"/>
+  <g fill="url(#pGlassTop)">
+    <polygon points="140,78 176,50 184,50 154,78"/>
+    <polygon points="160,77.5 190,50 230,47 228,75"/>
+    <polygon points="234,75 234,47 270,48.5 276,73"/>
+    <polygon points="280,49 290,50 320,73 308,73"/>
+  </g>
+  <path d="M141,76.6 L227,73.6 M235,73.6 L275,71.6 M309,71.6 L319,71.6" stroke="#dceaf7" stroke-width=".8" stroke-opacity=".34" fill="none"/>
+</g>
+
+<!-- detalhes -->
+<g>
+  <path d="M161,76 C154,75 146,73 141,70 C138,68.2 139,65 143,65 L159,66.6 Z" fill="#161a20"/>
+  <path d="M142.4,66 L158,67.4 L158,70 L143.6,68.4 Z" fill="#66727f" opacity=".85"/>
+  <path d="M161,76 C154,75 146,73 141,70 C138,68.2 139,65 143,65 L159,66.6" fill="none" stroke="#bac8d8" stroke-width=".7" stroke-opacity=".5"/>
+  <rect x="200" y="84" width="18" height="3.4" rx="1.7" fill="#07090c"/>
+  <rect x="200" y="83.2" width="18" height="2.4" rx="1.2" fill="#a6b4c4" opacity=".55"/>
+  <rect x="248" y="82" width="18" height="3.4" rx="1.7" fill="#07090c"/>
+  <rect x="248" y="81.2" width="18" height="2.4" rx="1.2" fill="#a6b4c4" opacity=".55"/>
+  <path d="M140,78.6 L332,73.6" fill="none" stroke="#d2dfed" stroke-width="1" stroke-opacity=".34"/>
+  <circle cx="296" cy="90" r="4.6" fill="none" stroke="#070a0d" stroke-width="1.1" stroke-opacity=".7"/>
+  <circle cx="296" cy="89.2" r="4.6" fill="none" stroke="#9fb0c2" stroke-width=".5" stroke-opacity=".22"/>
+  <path d="M252,43.6 C257,40.4 264,40 267,43.2 Z" fill="#181d24"/>
+</g>
+</svg>

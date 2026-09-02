@@ -1,0 +1,35 @@
+<!doctype html><meta charset="utf-8">
+<title>bancada — carros do simulador</title>
+<style>
+  body{background:#0b0b0d;margin:0;padding:32px 24px 80px;font-family:system-ui;color:#5f646b}
+  h2{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#4b5058;font-weight:600;margin:34px 0 14px;text-align:center}
+  .row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .box{padding:18px;background:#121316;border:1px solid rgba(255,255,255,.08);border-radius:12px}
+  .w520{width:520px}.w430{width:430px}.w820{width:820px}
+  svg{display:block;width:100%}
+  small{display:block;margin-top:10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4b4f55}
+</style>
+
+<h2>lado a lado — mesma família</h2>
+<div class="row">
+  <div class="box w520"><div data-car="perfil"></div><small>carro-perfil.svg · viewBox 0 0 400 190</small></div>
+  <div class="box w520"><div data-car="frontal"></div><small>carro-frontal.svg · viewBox 0 0 400 200</small></div>
+</div>
+
+<h2>estados do seletor · 430px (tamanho real do site)</h2>
+<div class="row">
+  <div class="box w430"><div data-car="frontal" data-sel="parabrisa"></div><small>1 · para-brisa → 3/4 frontal</small></div>
+  <div class="box w430"><div data-car="perfil" data-sel="dianteiro"></div><small>2 · vidros dianteiros → perfil</small></div>
+  <div class="box w430"><div data-car="perfil" data-sel="traseiro vigia"></div><small>3 · vidros traseiros → perfil</small></div>
+  <div class="box w430"><div data-car="perfil"></div><small>perfil neutro</small></div>
+  <div class="box w430"><div data-car="frontal"></div><small>3/4 neutro</small></div>
+  <div class="box w430"><div data-car="perfil" data-sel="dianteiro traseiro vigia"></div><small>todos os laterais</small></div>
+</div>
+
+<h2>ampliado</h2>
+<div class="row">
+  <div class="box w820"><div data-car="perfil"></div></div>
+</div>
+<div class="row">
+  <div class="box w820"><div data-car="frontal"></div></div>
+</div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { CARRO_FRONTAL, CARRO_PERFIL } from "./simulador/carros";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useId, useState } from "react";
@@ -77,64 +78,33 @@ export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
 /* ---------- Diagrama do carro (vista lateral, frente à esquerda) ---------- */
 // Áreas de vidro em coordenadas do viewBox 0 0 400 150. Só apresentação: os controles
 // reais são os radios; o SVG é aria-hidden e apenas atalho de clique.
-/* Pictograma, não ilustração realista.
-   Tentar imitar um carro de verdade em SVG à mão cai no meio-termo: nem foto, nem
-   diagrama — e meio-termo lê como amador. Aqui a linguagem é a de um desenho
-   técnico: traço único, sem gradiente, sem falso cromado, sem detalhe supérfluo.
-   O que precisa ficar evidente é QUAL vidro está selecionado, não a marca do carro. */
-const CAR_GLASS: { id: VidroId; points: string }[] = [
-  { id: "parabrisa", points: "108,46 134,24 151,23 129,46" },
-  { id: "dianteiras", points: "157,23 194,22 194,46 135,46" },
-  { id: "traseiras", points: "200,22 236,21 236,46 200,46" },
-  { id: "traseiras", points: "242,21 251,22 265,45 242,46" },
-];
+/* Desenho do carro: dois SVGs vetoriais, injetados como HTML.
+   São dois porque o seletor tem três opções e o para-brisa NÃO aparece num perfil
+   puro — fica escondido pela coluna A. Então o perfil serve aos vidros dianteiros e
+   traseiros, e a vista 3/4 frontal serve ao para-brisa.
+   Os quatro polígonos `data-vidro` são estilizados por CSS (ver .carro-diagrama no
+   globals) e clicados por delegação, sem converter o SVG para JSX. */
+const VIDRO_DO_POLIGONO: Record<string, VidroId> = {
+  parabrisa: "parabrisa",
+  dianteiro: "dianteiras",
+  traseiro: "traseiras",
+  vigia: "traseiras",
+};
 
 function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) => void }) {
-  const traco = "rgba(255,255,255,0.55)";
+  const svg = vidro === "parabrisa" ? CARRO_FRONTAL : CARRO_PERFIL;
   return (
-    <svg
-      aria-hidden
-      viewBox="0 0 360 130"
-      className="block w-full select-none"
-      style={{ maxHeight: 200 }}
-    >
-      {/* Carroceria: um só contorno, espessura constante. */}
-      <path
-        d="M16,88 C16,80 19,74 27,72 L48,66 C68,58 86,52 104,48 L134,26 C140,22 148,20 158,20 L224,19 C236,19 242,21 246,26 L266,48 C288,52 312,56 330,60 C340,63 344,70 344,78 L344,90 C344,95 341,98 336,98 L286,98 A18,18 0 0,0 250,98 L104,98 A18,18 0 0,0 68,98 L24,98 C19,98 16,94 16,88 Z"
-        fill="rgba(255,255,255,0.045)"
-        stroke={traco}
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-      />
-      {/* Cintura: separa a estufa da lataria. */}
-      <path d="M104,48 L266,48" stroke={traco} strokeWidth="1.6" />
-      {/* Rodas: círculo e cubo, sem raios — a esse tamanho, raio vira ruído. */}
-      {[86, 268].map((cx) => (
-        <g key={cx}>
-          <circle cx={cx} cy="98" r="18" fill="var(--color-bg-2, #121316)" stroke={traco} strokeWidth="1.6" />
-          <circle cx={cx} cy="98" r="6" fill="none" stroke={traco} strokeWidth="1.4" />
-        </g>
-      ))}
-      {/* Vidros */}
-      {CAR_GLASS.map((g, i) => {
-        const on = g.id === vidro;
-        return (
-          <polygon
-            key={i}
-            points={g.points}
-            onClick={() => onPick(g.id)}
-            className="cursor-pointer transition-[fill,stroke] duration-200"
-            fill={on ? "rgba(226,32,40,0.5)" : "rgba(255,255,255,0.1)"}
-            stroke={on ? "#ff4d55" : traco}
-            strokeWidth={on ? 2.2 : 1.6}
-            strokeLinejoin="round"
-          />
-        );
-      })}
-      <text x="16" y="122" fill="rgba(255,255,255,0.4)" fontSize="8" letterSpacing="1.8" fontFamily="inherit">
-        ◀ FRENTE
-      </text>
-    </svg>
+    <div
+      className="carro-diagrama"
+      data-sel={vidro}
+      onClick={(e) => {
+        const alvo = (e.target as HTMLElement).closest?.("[data-vidro]");
+        const chave = alvo?.getAttribute("data-vidro");
+        const destino = chave ? VIDRO_DO_POLIGONO[chave] : undefined;
+        if (destino) onPick(destino);
+      }}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
   );
 }
 

@@ -75,11 +75,13 @@ export default function LinhaArquitetonicaPage() {
           </>
         }
         intro="A utilização de film em vidros residenciais, comerciais e industriais produz solução atrativa e eficiente: segurança, privacidade, economia e decoração."
-        image="/img/novo/arquitetonica--paineis-vidro-obra.jpg"
-        /* O quadro é vertical (720x1280) e o hero é uma faixa larga: 22% da altura
-           é onde entram o andaime e a estrutura do prédio, que dão a leitura de obra.
-           Mais abaixo só aparece o vidro isolado, que fica abstrato. */
-        imagePosition="center 22%"
+        /* Sem foto de fundo, de propósito. Todo o material de arquitetura que o
+           cliente enviou é vídeo vertical de baixa resolução: numa faixa larga com a
+           máscara escura do hero, qualquer quadro vira estática visual. O quadro da
+           obra que estava aqui era vidro coberto de adesivos de proteção e não se lia
+           como nada. Melhor tipografia limpa do que imagem ruim — volta quando vier
+           foto de arquitetura de verdade (ver a issue de pedidos ao cliente).
+        */
       />
 
       {/* Os quatro pilares do texto de abertura + números do corpo, num só bloco de atmosfera. */}

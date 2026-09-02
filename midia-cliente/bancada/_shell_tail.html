@@ -1,0 +1,15 @@
+<script>
+document.querySelectorAll('[data-car]').forEach(slot=>{
+  const tpl=document.getElementById('t-'+slot.dataset.car);
+  if(!tpl) return;
+  slot.appendChild(tpl.content.cloneNode(true));
+  (slot.dataset.sel||'').split(/\s+/).filter(Boolean).forEach(k=>{
+    const p=slot.querySelector('[data-vidro="'+k+'"]');
+    if(!p)return;
+    p.setAttribute('fill','rgba(226,32,40,.5)');
+    p.setAttribute('stroke','#ff4d55');
+    p.setAttribute('stroke-opacity','1');
+    p.setAttribute('stroke-width','1.6');
+  });
+});
+</script>

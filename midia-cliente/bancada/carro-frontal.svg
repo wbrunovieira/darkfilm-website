@@ -1,0 +1,421 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carro em 3/4 frontal">
+<defs>
+
+  <linearGradient id="FpBody" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#39414c"/>
+    <stop offset=".16" stop-color="#252b33"/>
+    <stop offset=".30" stop-color="#191d23"/>
+    <stop offset=".44" stop-color="#12151a"/>
+    <stop offset=".56" stop-color="#242a32"/>
+    <stop offset=".66" stop-color="#171b21"/>
+    <stop offset=".86" stop-color="#0e1116"/>
+    <stop offset="1"   stop-color="#0a0c10"/>
+  </linearGradient>
+
+  <linearGradient id="FpStrip" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#9fb2c8" stop-opacity="0"/>
+    <stop offset=".06" stop-color="#a9bacf" stop-opacity=".18"/>
+    <stop offset=".26" stop-color="#dfe9f6" stop-opacity=".48"/>
+    <stop offset=".44" stop-color="#b9c9dc" stop-opacity=".34"/>
+    <stop offset=".64" stop-color="#dfe9f6" stop-opacity=".40"/>
+    <stop offset=".90" stop-color="#8fa2b8" stop-opacity=".16"/>
+    <stop offset="1"   stop-color="#8fa2b8" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="FpBelt" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity=".46"/>
+    <stop offset=".40" stop-color="#000" stop-opacity=".08"/>
+    <stop offset=".62" stop-color="#93aac4" stop-opacity=".12"/>
+    <stop offset="1"   stop-color="#93aac4" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="FpLow" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity="0"/>
+    <stop offset=".38" stop-color="#000" stop-opacity=".42"/>
+    <stop offset=".74" stop-color="#000" stop-opacity=".34"/>
+    <stop offset=".92" stop-color="#8fa0b2" stop-opacity=".20"/>
+    <stop offset="1"   stop-color="#b3c2d3" stop-opacity=".30"/>
+  </linearGradient>
+
+  <linearGradient id="FpEdgeHi" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ecf3fc" stop-opacity=".44"/>
+    <stop offset="1" stop-color="#ecf3fc" stop-opacity="0"/>
+  </linearGradient>
+
+  <linearGradient id="FpEnds" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0"   stop-color="#000" stop-opacity=".22"/>
+    <stop offset=".12" stop-color="#000" stop-opacity="0"/>
+    <stop offset=".88" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1"   stop-color="#000" stop-opacity=".18"/>
+  </linearGradient>
+
+  <linearGradient id="FpGlass" x1=".10" y1="0" x2=".62" y2="1">
+    <stop offset="0"   stop-color="#7f94ad" stop-opacity=".40"/>
+    <stop offset=".36" stop-color="#313d4a" stop-opacity=".48"/>
+    <stop offset=".72" stop-color="#1a2028" stop-opacity=".54"/>
+    <stop offset="1"   stop-color="#3d4d60" stop-opacity=".44"/>
+  </linearGradient>
+  <linearGradient id="FpGlassTop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0"   stop-color="#000" stop-opacity=".42"/>
+    <stop offset=".50" stop-color="#000" stop-opacity="0"/>
+  </linearGradient>
+
+  <radialGradient id="FpTire" cx=".40" cy=".28" r=".82">
+    <stop offset=".46" stop-color="#2b2f35"/>
+    <stop offset=".78" stop-color="#171b1f"/>
+    <stop offset="1"   stop-color="#08090c"/>
+  </radialGradient>
+  <radialGradient id="FpRim" cx=".33" cy=".24" r=".86">
+    <stop offset="0"   stop-color="#e8eff6"/>
+    <stop offset=".40" stop-color="#9ca8b5"/>
+    <stop offset=".76" stop-color="#59626d"/>
+    <stop offset="1"   stop-color="#2d333a"/>
+  </radialGradient>
+  <linearGradient id="FpSpoke" x1=".1" y1="0" x2=".9" y2="1">
+    <stop offset="0"   stop-color="#f3f7fc"/>
+    <stop offset=".42" stop-color="#b0bbc8"/>
+    <stop offset="1"   stop-color="#4e565f"/>
+  </linearGradient>
+
+  <linearGradient id="FpHead" x1="0" y1="0" x2=".85" y2=".7">
+    <stop offset="0"   stop-color="#ffffff"/>
+    <stop offset=".24" stop-color="#cbdcef"/>
+    <stop offset=".62" stop-color="#5a6e86"/>
+    <stop offset="1"   stop-color="#151b22"/>
+  </linearGradient>
+  <linearGradient id="FpTail" x1="1" y1="0" x2="0" y2=".7">
+    <stop offset="0"   stop-color="#ff969b"/>
+    <stop offset=".28" stop-color="#e2202a"/>
+    <stop offset=".74" stop-color="#881015"/>
+    <stop offset="1"   stop-color="#2e0407"/>
+  </linearGradient>
+
+  <linearGradient id="FpCabin" x1="0" y1="0" x2=".3" y2="1">
+    <stop offset="0"   stop-color="#171c22"/>
+    <stop offset=".45" stop-color="#0d1116"/>
+    <stop offset="1"   stop-color="#161b21"/>
+  </linearGradient>
+  <radialGradient id="FpFloor" cx=".5" cy=".5" r=".5">
+    <stop offset="0"   stop-color="#000" stop-opacity=".85"/>
+    <stop offset=".42" stop-color="#000" stop-opacity=".34"/>
+    <stop offset="1"   stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+
+  <path id="FpShell" d="M 36,149
+    C 28,148 23,142 23,133 L 23,114
+    C 23,106 26,101 32,98 L 40,95
+    C 72,90 104,84 132,79
+    C 146,72 162,55 180,45
+    C 212,41 250,41 288,45
+    C 304,53 320,64 332,74
+    L 360,77 C 369,78 375,83 376,91
+    L 377,118 C 377,131 372,143 361,149
+    L 334.8,150 A 30.5,30.5 0 0,0 281.2,150
+    L 118.8,150 A 30.5,30.5 0 0,0 65.2,150
+    L 34,149 Z"/>
+  <clipPath id="FpClip"><use href="#FpShell"/></clipPath>
+
+  <g id="FpWheel">
+    <circle r="26.5" fill="url(#FpTire)"/>
+    <circle r="26.5" fill="none" stroke="#434a52" stroke-width=".9" stroke-opacity=".9"/>
+    <g stroke="#0d0f12" stroke-width="1.2" stroke-opacity=".65">
+      <path d="M0,26.5 L0,22.8"/><path d="M9,24.9 L7.8,21.4"/><path d="M-9,24.9 L-7.8,21.4"/>
+      <path d="M17.1,20.3 L14.8,17.5"/><path d="M-17.1,20.3 L-14.8,17.5"/>
+      <path d="M23,13.2 L19.9,11.4"/><path d="M-23,13.2 L-19.9,11.4"/>
+      <path d="M26.1,4.6 L22.6,4"/><path d="M-26.1,4.6 L-22.6,4"/>
+    </g>
+    <circle r="22.4" fill="none" stroke="#000" stroke-width="3.2" stroke-opacity=".45"/>
+    <circle r="18.6" fill="#090a0d"/>
+    <circle r="16.8" fill="#0d1013"/>
+    <circle r="13.4" fill="#373e46"/>
+    <circle r="13.4" fill="none" stroke="#11151a" stroke-width="1.1"/>
+    <circle r="8.6"  fill="#242a32"/>
+    <path d="M -13.2,-3.4 A 13.6,13.6 0 0,1 -6.5,-12 L -4.6,-9.3 A 10.1,10.1 0 0,0 -9.7,-3 Z" fill="#c2141d"/>
+    <g fill="url(#FpSpoke)">
+      <g><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(72)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(144)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(216)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+      <g transform="rotate(288)"><path d="M-2.9,-5.8 L-4.4,-15.3 L0,-16.6 L4.4,-15.3 L2.9,-5.8 Z"/><path d="M0,-6.6 L2.9,-5.8 L4.4,-15.3 L0,-16.6 Z" fill="#000" fill-opacity=".36"/></g>
+    </g>
+    <circle r="16.8" fill="none" stroke="url(#FpRim)" stroke-width="2.5"/>
+    <circle r="18.1" fill="none" stroke="#000" stroke-width="1" stroke-opacity=".5"/>
+    <circle r="15.5" fill="none" stroke="#000" stroke-width=".7" stroke-opacity=".45"/>
+    <circle r="5.4" fill="#2c333b"/>
+    <circle r="5.4" fill="none" stroke="url(#FpRim)" stroke-width="1.2"/>
+    <circle r="1.8" fill="#0b0d10"/>
+  </g>
+
+  <linearGradient id="fHood" x1=".08" y1="0" x2=".92" y2=".9">
+    <stop offset="0"   stop-color="#646e7c"/>
+    <stop offset=".22" stop-color="#39414c"/>
+    <stop offset=".52" stop-color="#1c212a"/>
+    <stop offset=".80" stop-color="#151920"/>
+    <stop offset="1"   stop-color="#2b323c"/>
+  </linearGradient>
+  <linearGradient id="fRoof" x1=".1" y1="0" x2=".9" y2=".9">
+    <stop offset="0"   stop-color="#6c7684"/>
+    <stop offset=".30" stop-color="#3b4450"/>
+    <stop offset=".70" stop-color="#1b2027"/>
+    <stop offset="1"   stop-color="#262d36"/>
+  </linearGradient>
+  <linearGradient id="fPillar" x1=".1" y1="0" x2=".9" y2=".8">
+    <stop offset="0"   stop-color="#39414c"/>
+    <stop offset=".55" stop-color="#181c23"/>
+    <stop offset="1"   stop-color="#232932"/>
+  </linearGradient>
+  <linearGradient id="fFace" x1=".08" y1="0" x2=".85" y2=".9">
+    <stop offset="0"   stop-color="#454e5a"/>
+    <stop offset=".26" stop-color="#272e37"/>
+    <stop offset=".58" stop-color="#171b22"/>
+    <stop offset=".84" stop-color="#0f1218"/>
+    <stop offset="1"   stop-color="#1b212a"/>
+  </linearGradient>
+  <linearGradient id="fDeck" x1="0" y1="0" x2=".85" y2=".9">
+    <stop offset="0"   stop-color="#3a424d"/>
+    <stop offset=".55" stop-color="#1a1f26"/>
+    <stop offset="1"   stop-color="#242b34"/>
+  </linearGradient>
+  <linearGradient id="fWs" x1=".16" y1="0" x2=".74" y2="1">
+    <stop offset="0"   stop-color="#8fa3ba" stop-opacity=".34"/>
+    <stop offset=".26" stop-color="#41505f" stop-opacity=".46"/>
+    <stop offset=".60" stop-color="#171d25" stop-opacity=".58"/>
+    <stop offset=".86" stop-color="#232d3a" stop-opacity=".54"/>
+    <stop offset="1"   stop-color="#4a5d75" stop-opacity=".44"/>
+  </linearGradient>
+  <linearGradient id="fBl" x1=".2" y1="0" x2=".8" y2="1">
+    <stop offset="0"   stop-color="#5f7086" stop-opacity=".30"/>
+    <stop offset=".55" stop-color="#161c23" stop-opacity=".56"/>
+    <stop offset="1"   stop-color="#3a4a5e" stop-opacity=".40"/>
+  </linearGradient>
+  <linearGradient id="fSheen" x1=".1" y1="0" x2=".8" y2="1">
+    <stop offset="0"   stop-color="#dfe9f6" stop-opacity=".22"/>
+    <stop offset=".45" stop-color="#dfe9f6" stop-opacity=".07"/>
+    <stop offset="1"   stop-color="#dfe9f6" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="fLamp" x1="0" y1="0" x2=".9" y2=".7">
+    <stop offset="0"   stop-color="#ffffff"/>
+    <stop offset=".26" stop-color="#c9dbef"/>
+    <stop offset=".64" stop-color="#54677d"/>
+    <stop offset="1"   stop-color="#12181f"/>
+  </linearGradient>
+  <radialGradient id="fFloor" cx=".5" cy=".5" r=".5">
+    <stop offset="0"   stop-color="#000" stop-opacity=".85"/>
+    <stop offset=".45" stop-color="#000" stop-opacity=".30"/>
+    <stop offset="1"   stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <clipPath id="fCut"><rect x="166.71" y="0" width="161.34" height="200"/></clipPath>
+  <clipPath id="fShellC"><use href="#FpShell" transform="matrix(0.49678 -0.15725 0 0.83561 144.5739 44.2482)"/></clipPath>
+  <linearGradient id="fCorner" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#05070a" stop-opacity="0"/>
+    <stop offset="1" stop-color="#05070a" stop-opacity=".72"/>
+  </linearGradient>
+</defs>
+
+<!-- chão -->
+<ellipse cx="208" cy="158" rx="176" ry="30" fill="url(#fFloor)"/>
+<ellipse cx="160.8" cy="160.4" rx="44" ry="10" fill="#000" opacity=".62"/>
+<ellipse cx="267.9" cy="126.5" rx="40" ry="9" fill="#000" opacity=".58"/>
+
+<!-- roda dianteira do lado oposto -->
+<g transform="translate(96.69,128.06)">
+  <ellipse rx="26.5" ry="26.5" transform="matrix(0.49678 -0.15725 0 0.83561 0 0)" fill="#0a0c0f"/>
+  <ellipse rx="17"   ry="17"   transform="matrix(0.49678 -0.15725 0 0.83561 0 0)" fill="#171c22"/>
+</g>
+
+<!-- ===== superfícies superiores ===== -->
+<path d="M 309.50,53.91 C 307.53,53.59 302.15,52.73 297.67,52.01 C 293.18,51.30 288.70,50.58 282.60,49.61 C 276.51,48.63 268.26,47.31 261.09,46.17 C 253.91,45.02 245.66,43.70 239.57,42.73 C 233.47,41.75 228.81,41.01 224.50,40.32 C 220.20,39.63 215.54,38.88 213.74,38.60 L 227.70,36.91 L 238.46,38.33 L 253.52,40.45 L 275.04,43.74 L 296.56,47.33 L 311.62,50.03 L 323.46,52.25 Z"   fill="url(#fDeck)"/>
+<path d="M 122.06,73.97 C 127.03,72.40 141.81,67.72 151.88,64.53 C 161.95,61.34 172.91,57.88 182.47,54.85 C 192.03,51.82 202.76,48.43 209.23,46.38 C 215.70,44.33 219.27,43.20 221.27,42.57 L 213.74,42.65 L 201.70,46.46 L 174.94,54.93 L 144.35,64.61 L 114.53,74.05 Z"   fill="#12161c"/>
+<path d="M 287.52,36.94 C 285.55,36.52 280.17,35.39 275.68,34.41 C 271.20,33.43 266.72,32.28 260.62,31.07 C 254.52,29.86 245.74,28.23 239.10,27.14 C 232.47,26.06 226.01,25.23 220.81,24.57 C 215.61,23.91 211.48,23.54 207.90,23.18 C 204.31,22.83 200.73,22.58 199.29,22.46 L 221.06,39.70 L 229.31,40.91 L 241.84,42.80 L 259.94,45.63 L 281.73,49.20 L 297.31,51.85 L 309.50,53.91 Z" fill="url(#fPillar)"/>
+<path d="M 272.72,34.91 L 256.58,31.50 L 240.44,28.65 L 224.30,26.34 L 209.24,24.69 L 228.16,39.60 L 242.81,41.81 L 258.79,44.32 L 275.08,46.97 L 291.68,49.77 Z" fill="url(#fBl)" stroke="#8ba3bc" stroke-opacity=".28" stroke-width="1"/>
+<path d="M 234.38,53.76 C 232.48,53.36 227.24,52.34 222.98,51.36 C 218.72,50.38 214.69,49.14 208.83,47.90 C 202.97,46.65 194.41,44.99 187.79,43.90 C 181.18,42.81 174.52,42.01 169.15,41.38 C 163.78,40.74 159.38,40.41 155.58,40.09 C 151.77,39.76 147.87,39.55 146.33,39.45 L 199.29,22.46 L 207.90,23.18 L 220.81,24.57 L 239.10,27.14 L 260.62,31.07 L 275.68,34.41 L 287.52,36.94 Z"   fill="url(#fRoof)"/>
+<path d="M 210.29,89.49 C 208.19,89.12 202.43,88.10 197.72,87.28 C 193.00,86.46 188.27,85.64 182.01,84.60 C 175.75,83.55 166.80,82.08 160.15,81.01 C 153.50,79.94 147.19,78.97 142.11,78.19 C 137.02,77.41 133.10,76.84 129.66,76.33 C 126.23,75.82 122.86,75.34 121.50,75.15 L 146.33,39.45 L 155.58,40.09 L 169.15,41.38 L 187.79,43.90 L 208.83,47.90 L 222.98,51.36 L 234.38,53.76 Z" fill="url(#fPillar)"/>
+<path d="M 166.71,116.15 C 163.97,115.97 156.19,115.56 150.28,115.10 C 144.36,114.65 138.33,114.22 131.22,113.43 C 124.10,112.65 114.75,111.53 107.58,110.38 C 100.41,109.24 93.26,107.71 88.18,106.55 C 83.10,105.39 80.06,104.34 77.11,103.41 C 74.16,102.47 71.58,101.34 70.47,100.93 L 114.45,74.15 L 124.55,75.58 L 138.97,77.71 L 160.15,81.01 L 182.01,84.60 L 197.72,87.28 L 210.29,89.49 Z"   fill="url(#fHood)"/>
+<path d="M 208.00,90.99 C 205.90,90.62 200.14,89.59 195.42,88.78 C 190.71,87.96 185.98,87.14 179.72,86.09 C 173.46,85.05 165.03,83.65 157.86,82.51 C 150.68,81.36 142.61,80.12 136.68,79.21 C 130.74,78.31 126.34,77.68 122.26,77.08 C 118.17,76.49 113.84,75.89 112.16,75.65" fill="none" stroke="#04060a" stroke-width="1.1" stroke-opacity=".55"/>
+<path d="M 166.71,116.15 C 163.97,115.97 156.19,115.56 150.28,115.10 C 144.36,114.65 138.33,114.22 131.22,113.43 C 124.10,112.65 114.75,111.53 107.58,110.38 C 100.41,109.24 93.26,107.71 88.18,106.55 C 83.10,105.39 80.06,104.34 77.11,103.41 C 74.16,102.47 71.58,101.34 70.47,100.93 L 92.40,88.08 L 102.87,89.45 L 117.65,91.51 L 139.02,94.77 L 160.69,98.39 L 176.04,101.14 L 188.20,103.43 Z" fill="url(#fSheen)"/>
+<path d="M 234.38,53.76 C 232.48,53.36 227.24,52.34 222.98,51.36 C 218.72,50.38 214.69,49.14 208.83,47.90 C 202.97,46.65 194.41,44.99 187.79,43.90 C 181.18,42.81 174.52,42.01 169.15,41.38 C 163.78,40.74 159.38,40.41 155.58,40.09 C 151.77,39.76 147.87,39.55 146.33,39.45 L 175.38,30.05 L 183.98,30.82 L 196.90,32.25 L 215.19,34.84 L 236.71,38.74 L 251.77,42.02 L 263.61,44.51 Z" fill="url(#fSheen)" opacity=".7"/>
+<path d="M 166.71,116.15 C 163.97,115.97 156.19,115.56 150.28,115.10 C 144.36,114.65 138.33,114.22 131.22,113.43 C 124.10,112.65 114.75,111.53 107.58,110.38 C 100.41,109.24 93.26,107.71 88.18,106.55 C 83.10,105.39 80.06,104.34 77.11,103.41 C 74.16,102.47 71.58,101.34 70.47,100.93" fill="none" stroke="#e2ecf7" stroke-width="1.4" stroke-opacity=".5"/>
+<path d="M 234.38,53.76 C 232.48,53.36 227.24,52.34 222.98,51.36 C 218.72,50.38 214.69,49.14 208.83,47.90 C 202.97,46.65 194.41,44.99 187.79,43.90 C 181.18,42.81 174.52,42.01 169.15,41.38 C 163.78,40.74 159.38,40.41 155.58,40.09 C 151.77,39.76 147.87,39.55 146.33,39.45"   fill="none" stroke="#e2ecf7" stroke-width="1.3" stroke-opacity=".42"/>
+<path d="M 287.52,36.94 C 285.55,36.52 280.17,35.39 275.68,34.41 C 271.20,33.43 266.72,32.28 260.62,31.07 C 254.52,29.86 245.74,28.23 239.10,27.14 C 232.47,26.06 226.01,25.23 220.81,24.57 C 215.61,23.91 211.48,23.54 207.90,23.18 C 204.31,22.83 200.73,22.58 199.29,22.46" fill="none" stroke="#c3d2e3" stroke-width="1"   stroke-opacity=".26"/>
+
+<!-- ===== flanco: o mesmo carro do perfil ===== -->
+<g clip-path="url(#fCut)"><g transform="matrix(0.49678 -0.15725 0 0.83561 144.5739 44.2482)">
+
+
+<!-- rodas -->
+<use href="#FpWheel" x="92"  y="135.5"/>
+<use href="#FpWheel" x="308" y="135.5" transform="rotate(24,308,135.5)"/>
+
+<!-- carroceria -->
+<use href="#FpShell" fill="url(#FpBody)"/>
+
+<g clip-path="url(#FpClip)">
+  <!-- brilhos colados ao contorno -->
+  <path d="M180,45 C212,41 250,41 288,45 L287,50.5 C250,46.5 212,46.5 181,50.5 Z" fill="url(#FpEdgeHi)"/>
+  <path d="M40,95 C72,89 104,84 132,79 L133,85 C105,90 73,95 41,101 Z" fill="url(#FpEdgeHi)" opacity=".9"/>
+  <path d="M132,79 C146,72 162,55 180,45 L184,48.5 C166,59 150,75 136,82 Z" fill="#cbd9ea" opacity=".13"/>
+  <path d="M288,45 C304,53 320,64 332,74 L327,76.5 C316,66 302,56 285,49 Z" fill="#cbd9ea" opacity=".11"/>
+
+  <!-- cintura -->
+  <path d="M24,78 L340,71 L340,100 L24,107 Z" fill="url(#FpBelt)"/>
+
+  <!-- faixa de reflexo do ambiente -->
+  <path d="M20,96 C96,88 250,83 384,85 L384,104 C250,102 96,107 20,115 Z" fill="url(#FpStrip)"/>
+  <path d="M20,99.5 C96,91.5 250,86.5 384,88.5 L384,92.5 C250,90.5 96,95.5 20,103.5 Z" fill="#f0f6fd" opacity=".17"/>
+
+  <!-- corpo inferior + bounce -->
+  <path d="M24,110 L384,104 L384,152 L24,152 Z" fill="url(#FpLow)"/>
+
+  <!-- escurecer as pontas -->
+  <rect x="18" y="40" width="368" height="114" fill="url(#FpEnds)"/>
+
+  <!-- vincos -->
+  <path d="M30,103 C104,94 250,89 380,91" fill="none" stroke="#000" stroke-width="1.9" stroke-opacity=".42"/>
+  <path d="M30,101.2 C104,92.2 250,87.2 380,89.2" fill="none" stroke="#d9e4f2" stroke-width="1" stroke-opacity=".36"/>
+  <path d="M54,131 C150,126 282,124 368,125" fill="none" stroke="#000" stroke-width="1.5" stroke-opacity=".38"/>
+  <path d="M54,129.6 C150,124.6 282,122.6 368,123.6" fill="none" stroke="#bbc9d9" stroke-width=".7" stroke-opacity=".22"/>
+
+  <!-- soleira -->
+  <path d="M116,143 C174,141 254,140 292,140 L292,152 L116,152 Z" fill="#05070a" opacity=".74"/>
+  <path d="M116,143 C174,141 254,140 292,140" fill="none" stroke="#000" stroke-width="1.2" stroke-opacity=".6"/>
+
+  <!-- recortes de painel -->
+  <g stroke-linecap="round" fill="none">
+    <path d="M132,79 C129,104 127,128 126,150" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M133.7,79.6 C130.7,104 128.7,128 127.7,150" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M231,75 L229,150" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M232.7,75 L230.7,150" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M280,73 L280,124" stroke="#050609" stroke-width="1.4" stroke-opacity=".82"/>
+    <path d="M281.7,73 L281.7,124" stroke="#a6b7ca" stroke-width=".55" stroke-opacity=".17"/>
+    <path d="M332,74 C344,78 356,85 363,96" stroke="#050609" stroke-width="1.3" stroke-opacity=".72"/>
+    <path d="M41,98 C73,92 105,87 131,82" stroke="#050609" stroke-width="1.2" stroke-opacity=".5"/>
+  </g>
+
+  <!-- arcos -->
+  <path d="M118.8,150 A 30.5,30.5 0 0,1 65.2,150" fill="none" stroke="#000" stroke-width="9" stroke-opacity=".52"/>
+  <path d="M118.8,150 A 30.5,30.5 0 0,1 65.2,150" fill="none" stroke="#000" stroke-width="2.6" stroke-opacity=".75"/>
+  <path d="M334.8,150 A 30.5,30.5 0 0,1 281.2,150" fill="none" stroke="#000" stroke-width="9" stroke-opacity=".52"/>
+  <path d="M334.8,150 A 30.5,30.5 0 0,1 281.2,150" fill="none" stroke="#000" stroke-width="2.6" stroke-opacity=".75"/>
+  <path d="M120,148 A 32.5,32.5 0 0,1 64,148" fill="none" stroke="#bccbdb" stroke-width="1" stroke-opacity=".32"/>
+  <path d="M336,148 A 32.5,32.5 0 0,1 280,148" fill="none" stroke="#bccbdb" stroke-width="1" stroke-opacity=".32"/>
+
+  
+
+  <!-- traseira: costura do para-choque + difusor -->
+  <path d="M336,121 C352,120.4 366,120 377,119.8" fill="none" stroke="#000" stroke-width="1.4" stroke-opacity=".5"/>
+  <path d="M336,119.7 C352,119.1 366,118.7 377,118.5" fill="none" stroke="#9fadbd" stroke-width=".6" stroke-opacity=".24"/>
+  <path d="M338,137 C354,136 370,135 380,135 L380,152 L338,152 Z" fill="#04060a" opacity=".8"/>
+  <path d="M342,140 C356,139.2 368,138.6 376,138.4" fill="none" stroke="#4b545f" stroke-width=".7" stroke-opacity=".4"/>
+  <!-- refletores traseiros -->
+  <rect x="340" y="126" width="12" height="3" rx="1.5" fill="#5e1218"/>
+</g>
+
+<!-- luz de contorno -->
+<g fill="none" stroke-linecap="round">
+  <path d="M40,95 C72,89 104,84 132,79 C146,72 162,55 180,45 C212,41 250,41 288,45 C304,53 320,64 332,74 L360,77"
+        stroke="#e4edf8" stroke-width="1.5" stroke-opacity=".34"/>
+  <path d="M23,114 C23,106 26,101 32,98 L40,95" stroke="#e4edf8" stroke-width="1.4" stroke-opacity=".28"/>
+  <path d="M360,77 C369,78 375,83 376,91 L377,118" stroke="#e4edf8" stroke-width="1.4" stroke-opacity=".54"/>
+  <path d="M377,118 C377,131 372,142 361,148" stroke="#e4edf8" stroke-width="1.1" stroke-opacity=".34"/>
+  <path d="M23,133 C23,141 28,147 36,149" stroke="#e4edf8" stroke-width="1" stroke-opacity=".26"/>
+</g>
+
+<!-- faróis / lanternas -->
+<g>
+  
+  <!-- lanterna -->
+  <path d="M334,82.6 C348,83.6 362,85 372,86.2 C375.6,86.7 377,88.4 377,91 L377,96.4 C377,99 375.6,100.2 372,99.8 C362,98.8 348,97.2 334,95.8 Z" fill="url(#FpTail)"/>
+  <path d="M337,86.6 C351,87.6 364,89 374,90.2" fill="none" stroke="#ffc6c9" stroke-width="1.9" stroke-opacity=".92" stroke-linecap="round"/>
+  <path d="M337,92.6 C350,93.4 362,94.6 371,95.4" fill="none" stroke="#ff707a" stroke-width="1" stroke-opacity=".55" stroke-linecap="round"/>
+  <path d="M334,82.6 C348,83.6 362,85 372,86.2 C375.6,86.7 377,88.4 377,91 L377,96.4 C377,99 375.6,100.2 372,99.8 C362,98.8 348,97.2 334,95.8 Z" fill="none" stroke="#070a0d" stroke-width="1" stroke-opacity=".85"/>
+</g>
+
+<!-- interior da cabine (opaco, atras dos vidros) -->
+<g fill="url(#FpCabin)">
+  <polygon points="140,78 176,50 184,50 154,78"/>
+  <polygon points="160,77.5 190,50 230,47 228,75"/>
+  <polygon points="234,75 234,47 270,48.5 276,73"/>
+  <polygon points="280,49 290,50 320,73 308,73"/>
+</g>
+<g pointer-events="none" opacity=".55">
+  <path d="M196,74 C202,66 210,62 220,61 L226,74 Z" fill="#2b333d"/>
+  <path d="M244,73 C250,66 258,63 266,63 L268,73 Z" fill="#262d36"/>
+  <path d="M186,52 L228,49 L228,55 L188,58 Z" fill="#11151a"/>
+  <path d="M236,49 L270,50 L270,56 L236,55 Z" fill="#11151a"/>
+</g>
+<!-- ===== VIDROS (seletores) ===== -->
+<g stroke-width="1.1" stroke-linejoin="round">
+  <polygon data-vidro-perfil="parabrisa" points="140,78 176,50 184,50 154,78" fill="url(#FpGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="dianteiro" points="160,77.5 190,50 230,47 228,75" fill="url(#FpGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="traseiro"  points="234,75 234,47 270,48.5 276,73" fill="url(#FpGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+  <polygon data-vidro="vigia"     points="280,49 290,50 320,73 308,73" fill="url(#FpGlass)" stroke="#9ab2cb" stroke-opacity=".44"/>
+</g>
+
+<!-- reflexos sobre os vidros -->
+<g pointer-events="none">
+  <path d="M145,78 L174,55 L180,55 L151,78 Z" fill="#eaf3fd" opacity=".14"/>
+  <path d="M178,77.5 L196,54 L212,53 L196,76.5 Z" fill="#eaf3fd" opacity=".10"/>
+  <path d="M240,75 L240,53 L252,52.6 L248,75 Z" fill="#eaf3fd" opacity=".085"/>
+  <path d="M287,54 L293,54.4 L312,73 L305,73 Z" fill="#eaf3fd" opacity=".085"/>
+  <g fill="url(#FpGlassTop)">
+    <polygon points="140,78 176,50 184,50 154,78"/>
+    <polygon points="160,77.5 190,50 230,47 228,75"/>
+    <polygon points="234,75 234,47 270,48.5 276,73"/>
+    <polygon points="280,49 290,50 320,73 308,73"/>
+  </g>
+  <path d="M141,76.6 L227,73.6 M235,73.6 L275,71.6 M309,71.6 L319,71.6" stroke="#dceaf7" stroke-width=".8" stroke-opacity=".34" fill="none"/>
+</g>
+
+<!-- detalhes -->
+<g>
+  <path d="M161,76 C154,75 146,73 141,70 C138,68.2 139,65 143,65 L159,66.6 Z" fill="#161a20"/>
+  <path d="M142.4,66 L158,67.4 L158,70 L143.6,68.4 Z" fill="#66727f" opacity=".85"/>
+  <path d="M161,76 C154,75 146,73 141,70 C138,68.2 139,65 143,65 L159,66.6" fill="none" stroke="#bac8d8" stroke-width=".7" stroke-opacity=".5"/>
+  <rect x="200" y="84" width="18" height="3.4" rx="1.7" fill="#07090c"/>
+  <rect x="200" y="83.2" width="18" height="2.4" rx="1.2" fill="#a6b4c4" opacity=".55"/>
+  <rect x="248" y="82" width="18" height="3.4" rx="1.7" fill="#07090c"/>
+  <rect x="248" y="81.2" width="18" height="2.4" rx="1.2" fill="#a6b4c4" opacity=".55"/>
+  <path d="M140,78.6 L332,73.6" fill="none" stroke="#d2dfed" stroke-width="1" stroke-opacity=".34"/>
+  <circle cx="296" cy="90" r="4.6" fill="none" stroke="#070a0d" stroke-width="1.1" stroke-opacity=".7"/>
+  <circle cx="296" cy="89.2" r="4.6" fill="none" stroke="#9fb0c2" stroke-width=".5" stroke-opacity=".22"/>
+  <path d="M252,43.6 C257,40.4 264,40 267,43.2 Z" fill="#181d24"/>
+</g>
+
+</g></g>
+
+<g clip-path="url(#fCut)"><g clip-path="url(#fShellC)"><rect x="302.05" y="0" width="27" height="200" fill="url(#fCorner)"/></g></g>
+
+<!-- ===== face frontal ===== -->
+<path d="M 166.71,116.15 C 163.97,115.97 156.19,115.56 150.28,115.10 C 144.36,114.65 138.33,114.22 131.22,113.43 C 124.10,112.65 114.75,111.53 107.58,110.38 C 100.41,109.24 93.26,107.71 88.18,106.55 C 83.10,105.39 80.06,104.34 77.11,103.41 C 74.16,102.47 71.58,101.34 70.47,100.93 L 70.47,146.48 L 77.11,149.16 L 88.18,152.50 L 107.58,156.43 L 131.22,159.38 L 150.28,160.85 L 166.71,161.68 Z" fill="url(#fFace)"/>
+<path d="M 166.71,118.08 C 163.97,117.90 156.19,117.49 150.28,117.03 C 144.36,116.58 138.33,116.15 131.22,115.36 C 124.10,114.57 114.75,113.46 107.58,112.31 C 100.41,111.16 93.26,109.64 88.18,108.48 C 83.10,107.32 80.06,106.27 77.11,105.34 C 74.16,104.40 71.58,103.27 70.47,102.86" fill="none" stroke="#eef4fc" stroke-width="1.6" stroke-opacity=".30"/>
+<path d="M 141.85,130.61 C 139.80,130.46 133.47,130.07 129.51,129.73 C 125.55,129.39 121.74,129.00 118.08,128.56 C 114.43,128.12 110.93,127.64 107.58,127.10 C 104.23,126.57 101.04,125.98 98.00,125.35 C 94.96,124.72 92.07,124.04 89.34,123.31 C 86.61,122.58 82.89,121.36 81.60,120.97 L 81.60,132.87 L 89.34,135.21 L 98.00,137.25 L 107.58,139.00 L 118.08,140.46 L 129.51,141.63 L 141.85,142.50 Z" fill="#04060a"/>
+<path d="M 139.13,132.31 C 137.25,132.16 131.46,131.78 127.82,131.45 C 124.18,131.12 120.68,130.75 117.30,130.33 C 113.93,129.92 110.69,129.46 107.58,128.97 C 104.47,128.47 101.50,127.93 98.65,127.35 C 95.81,126.77 93.10,126.15 90.52,125.48 C 87.94,124.82 84.40,123.72 83.18,123.36 L 83.18,124.78 L 90.52,126.90 L 98.65,128.77 L 107.58,130.38 L 117.30,131.75 L 127.82,132.86 L 139.13,133.72 Z" fill="#3d4753" opacity=".26"/><path d="M 139.13,135.85 C 137.25,135.70 131.46,135.31 127.82,134.98 C 124.18,134.65 120.68,134.28 117.30,133.87 C 113.93,133.46 110.69,133.00 107.58,132.50 C 104.47,132.01 101.50,131.47 98.65,130.89 C 95.81,130.31 93.10,129.68 90.52,129.02 C 87.94,128.36 84.40,127.25 83.18,126.90 L 83.18,128.32 L 90.52,130.43 L 98.65,132.30 L 107.58,133.92 L 117.30,135.28 L 127.82,136.40 L 139.13,137.26 Z" fill="#3d4753" opacity=".26"/><path d="M 139.13,139.38 C 137.25,139.24 131.46,138.85 127.82,138.52 C 124.18,138.19 120.68,137.82 117.30,137.41 C 113.93,136.99 110.69,136.54 107.58,136.04 C 104.47,135.54 101.50,135.01 98.65,134.42 C 95.81,133.84 93.10,133.22 90.52,132.56 C 87.94,131.89 84.40,130.79 83.18,130.44 L 83.18,131.85 L 90.52,133.97 L 98.65,135.84 L 107.58,137.46 L 117.30,138.82 L 127.82,139.93 L 139.13,140.80 Z" fill="#3d4753" opacity=".26"/>
+<path d="M 141.85,130.61 C 139.80,130.46 133.47,130.07 129.51,129.73 C 125.55,129.39 121.74,129.00 118.08,128.56 C 114.43,128.12 110.93,127.64 107.58,127.10 C 104.23,126.57 101.04,125.98 98.00,125.35 C 94.96,124.72 92.07,124.04 89.34,123.31 C 86.61,122.58 82.89,121.36 81.60,120.97 L 81.60,132.87 L 89.34,135.21 L 98.00,137.25 L 107.58,139.00 L 118.08,140.46 L 129.51,141.63 L 141.85,142.50 Z" fill="none" stroke="#9dabbc" stroke-width=".9" stroke-opacity=".45"/>
+<path d="M 156.10,145.69 C 151.95,145.47 139.30,145.03 131.22,144.34 C 123.13,143.66 114.75,142.72 107.58,141.57 C 100.41,140.42 93.72,138.95 88.18,137.46 C 82.63,135.97 76.64,133.43 74.33,132.62" fill="none" stroke="#000" stroke-width="1.6" stroke-opacity=".45"/>
+<path d="M 146.02,147.55 C 143.69,147.40 136.53,147.02 132.08,146.66 C 127.62,146.31 123.35,145.89 119.26,145.42 C 115.18,144.95 111.29,144.41 107.58,143.82 C 103.88,143.23 100.36,142.58 97.03,141.87 C 93.70,141.15 90.56,140.38 87.60,139.55 C 84.65,138.72 80.69,137.33 79.31,136.88 L 79.31,148.14 L 87.60,150.81 L 97.03,153.12 L 107.58,155.08 L 119.26,156.68 L 132.08,157.92 L 146.02,158.80 Z" fill="#04060a"/>
+<path d="M 146.02,147.55 C 143.69,147.40 136.53,147.02 132.08,146.66 C 127.62,146.31 123.35,145.89 119.26,145.42 C 115.18,144.95 111.29,144.41 107.58,143.82 C 103.88,143.23 100.36,142.58 97.03,141.87 C 93.70,141.15 90.56,140.38 87.60,139.55 C 84.65,138.72 80.69,137.33 79.31,136.88 L 79.31,148.14 L 87.60,150.81 L 97.03,153.12 L 107.58,155.08 L 119.26,156.68 L 132.08,157.92 L 146.02,158.80 Z" fill="none" stroke="#5b6672" stroke-width=".8" stroke-opacity=".4"/>
+<path d="M 117.69,146.52 C 116.79,146.40 114.02,146.06 112.25,145.81 C 110.47,145.56 108.74,145.30 107.04,145.02 C 105.35,144.75 103.69,144.46 102.08,144.16 C 100.46,143.86 98.14,143.38 97.35,143.22 L 97.35,149.97 L 102.08,150.91 L 107.04,151.77 L 112.25,152.56 L 117.69,153.27 Z"  fill="#171c23"/>
+<path d="M 117.69,146.52 C 116.79,146.40 114.02,146.06 112.25,145.81 C 110.47,145.56 108.74,145.30 107.04,145.02 C 105.35,144.75 103.69,144.46 102.08,144.16 C 100.46,143.86 98.14,143.38 97.35,143.22 L 97.35,149.97 L 102.08,150.91 L 107.04,151.77 L 112.25,152.56 L 117.69,153.27 Z"  fill="none" stroke="#7d8a99" stroke-width=".7" stroke-opacity=".45"/>
+<path d="M 151.72,159.05 C 149.02,158.90 140.71,158.54 135.57,158.18 C 130.42,157.81 125.52,157.37 120.85,156.86 C 116.19,156.34 111.77,155.75 107.58,155.08 C 103.40,154.41 99.45,153.66 95.75,152.84 C 92.04,152.02 88.58,151.12 85.35,150.15 C 82.13,149.18 77.89,147.53 76.40,147.01 L 76.40,150.54 L 85.35,153.69 L 95.75,156.38 L 107.58,158.61 L 120.85,160.39 L 135.57,161.72 L 151.72,162.58 Z"    fill="#1a1f26"/>
+<path d="M 155.36,151.13 C 154.34,151.10 151.22,150.99 149.20,150.91 C 147.18,150.82 144.23,150.67 143.23,150.62 L 143.23,155.76 L 149.20,156.05 L 155.36,156.28 Z"   fill="#0d1116"/><path d="M 80.82,140.64 C 80.30,140.45 78.68,139.87 77.65,139.47 C 76.62,139.07 75.16,138.44 74.67,138.23 L 74.67,143.38 L 77.65,144.61 L 80.82,145.79 Z" fill="#0d1116"/>
+<path d="M 92.63,113.34 C 91.64,113.08 88.58,112.32 86.68,111.77 C 84.78,111.21 82.95,110.64 81.21,110.04 C 79.47,109.44 77.80,108.81 76.22,108.16 C 74.64,107.50 72.47,106.46 71.72,106.12 L 71.72,115.64 L 76.22,117.67 L 81.21,119.55 L 86.68,121.28 L 92.63,122.86 Z"  fill="url(#fLamp)" opacity=".72"/>
+<path d="M 90.82,113.66 C 89.99,113.43 87.44,112.77 85.84,112.29 C 84.24,111.82 82.69,111.32 81.21,110.81 C 79.73,110.30 78.30,109.77 76.93,109.22 C 75.56,108.67 73.66,107.80 73.00,107.51 L 73.00,109.70 L 76.93,111.40 L 81.21,113.00 L 85.84,114.48 L 90.82,115.85 Z" fill="#e6f0ff" opacity=".62"/>
+<path d="M 92.63,113.34 C 91.64,113.08 88.58,112.32 86.68,111.77 C 84.78,111.21 82.95,110.64 81.21,110.04 C 79.47,109.44 77.80,108.81 76.22,108.16 C 74.64,107.50 72.47,106.46 71.72,106.12 L 71.72,115.64 L 76.22,117.67 L 81.21,119.55 L 86.68,121.28 L 92.63,122.86 Z"  fill="none" stroke="#060a0e" stroke-width="1" stroke-opacity=".8"/>
+<path d="M 162.10,120.57 C 160.43,120.52 155.34,120.40 152.08,120.28 C 148.82,120.16 145.64,120.01 142.54,119.84 C 139.44,119.67 136.42,119.47 133.48,119.25 C 130.55,119.02 126.34,118.63 124.91,118.50 L 124.91,128.02 L 133.48,128.77 L 142.54,129.36 L 152.08,129.80 L 162.10,130.09 Z"  fill="url(#fLamp)"/>
+<path d="M 159.08,121.27 C 157.67,121.23 153.39,121.11 150.63,121.00 C 147.88,120.89 145.18,120.76 142.54,120.61 C 139.90,120.47 137.32,120.30 134.80,120.12 C 132.27,119.93 128.63,119.61 127.40,119.51 L 127.40,121.70 L 134.80,122.30 L 142.54,122.80 L 150.63,123.18 L 159.08,123.46 Z" fill="#ffffff" opacity=".95"/>
+<path d="M 162.10,120.57 C 160.43,120.52 155.34,120.40 152.08,120.28 C 148.82,120.16 145.64,120.01 142.54,119.84 C 139.44,119.67 136.42,119.47 133.48,119.25 C 130.55,119.02 126.34,118.63 124.91,118.50 L 124.91,128.02 L 133.48,128.77 L 142.54,129.36 L 152.08,129.80 L 162.10,130.09 Z"  fill="none" stroke="#060a0e" stroke-width="1.1" stroke-opacity=".85"/>
+
+<path d="M 166.71,120.65 L 179.70,117.56 L 180.47,123.24 L 166.71,129.91 Z" fill="url(#fLamp)" opacity=".9"/>
+<path d="M 166.71,121.42 L 178.94,118.45 L 179.32,119.74 L 166.71,123.61 Z" fill="#ffffff" opacity=".85"/>
+<path d="M 166.71,120.65 L 179.70,117.56 L 180.47,123.24 L 166.71,129.91 Z" fill="none" stroke="#060a0e" stroke-width="1" stroke-opacity=".85"/>
+
+<!-- ===== PARA-BRISA (seletor) ===== -->
+<polygon data-vidro="parabrisa" points="201.13,85.64 184.27,82.75 161.30,78.97 140.12,75.68 124.68,73.40 156.72,41.52 170.30,42.82 188.94,45.34 206.88,48.66 220.13,51.75"
+   fill="url(#fWs)" stroke="#9ab2cb" stroke-opacity=".45" stroke-width="1.2" stroke-linejoin="round"/>
+<g pointer-events="none">
+  <path d="M 201.13,85.64 L 161.30,78.97 L 188.94,45.34 L 220.13,51.75 Z" fill="#eaf3fd" opacity=".07"/>
+  <path d="M 140.12,75.68 L 124.68,73.40 L 156.72,41.52 L 170.30,42.82 Z" fill="#eaf3fd" opacity=".10"/>
+  <path d="M 180.39,82.48 L 176.03,64.40" stroke="#0c1116" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".85"/><path d="M 153.28,78.09 L 149.13,60.10" stroke="#0c1116" stroke-width="1.6" stroke-linecap="round" fill="none" opacity=".85"/>
+</g>
+
+</svg>
