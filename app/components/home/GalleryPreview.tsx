@@ -2,12 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
+import { CardVideo } from "../CardVideo";
 
 // 1 foto grande (2 colunas) + 4 = duas linhas fechadas no grid de 3 colunas.
 // A primeira é 16/9 e as outras 4/3, então todas aqui precisam ser paisagem.
 // Material novo do cliente (2024-2026); o `alt` descreve cada foto, em vez do
 // texto genérico que valia para todas.
-const photos = [
+const photos: { src: string; alt: string; video?: string }[] = [
   {
     src: "/img/novo/vitrine--land-rover-defender-perfil.jpg",
     alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
@@ -25,8 +26,12 @@ const photos = [
     alt: "Peugeot 2008 azul com película nos vidros, visto de trás",
   },
   {
-    src: "/img/novo/multimidia--racks-de-teto-transbike.jpg",
-    alt: "Racks de teto e suporte transbike expostos na loja",
+    // Vídeo no lugar de foto: o bloco promete "trabalhos na oficina" e cinco carros
+    // parados liam como catálogo. O movimento é o que diferencia. Mudo e sob demanda,
+    // como nos cards de serviço.
+    src: "/video/oficina-golf-mural.jpg",
+    video: "/video/oficina-golf-mural.mp4",
+    alt: "Golf com os vidros escurecidos na oficina, sob o mural da The Dark Film",
   },
 ];
 
@@ -59,13 +64,21 @@ export function GalleryPreview() {
               }`}
             >
               <Link href="/galeria" className="absolute inset-0 block focus-visible:outline-2 focus-visible:outline-fg">
-                <Image
-                  src={p.src}
-                  alt={p.alt}
-                  fill
-                  sizes={i === 0 ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
-                  className="photo object-cover"
-                />
+                {p.video ? (
+                  <CardVideo
+                    src={p.video}
+                    poster={p.src}
+                    className="photo absolute inset-0 size-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    sizes={i === 0 ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
+                    className="photo object-cover"
+                  />
+                )}
                 <span aria-hidden className="photo-veil" />
                 <span
                   aria-hidden

@@ -105,7 +105,11 @@ export function Services() {
                       alt=""
                       fill
                       sizes="(min-width: 768px) 33vw, 100vw"
-                      className="photo object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+                      // A imagem fica 2% maior que a caixa já em repouso: com `fill`, a borda
+                      // dela coincidiria exatamente com a borda da máscara, que é o pior caso
+                      // para o antialias da camada. Transbordando, o recorte sempre corta
+                      // miolo de imagem, nunca a aresta dela.
+                      className="photo scale-[1.02] object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.07]"
                     />
                   )}
                   <div className="tint-overlay" />
@@ -149,7 +153,11 @@ export function Services() {
                       alt=""
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="photo object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-105"
+                      // A imagem fica 2% maior que a caixa já em repouso: com `fill`, a borda
+                      // dela coincidiria exatamente com a borda da máscara, que é o pior caso
+                      // para o antialias da camada. Transbordando, o recorte sempre corta
+                      // miolo de imagem, nunca a aresta dela.
+                      className="photo scale-[1.02] object-cover transition-transform duration-1000 ease-out-expo group-hover:scale-[1.07]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg-2 via-bg-2/30 to-transparent" />
                     <span className="svc-icon absolute left-4 top-4 grid size-10 place-items-center rounded-full border border-white/15 bg-bg/60 text-fg backdrop-blur-sm">
