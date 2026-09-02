@@ -1,0 +1,270 @@
+arquivo,tipo,categoria,qualidade,orientacao,uso,alt,flags,data,largura,altura,mb,segundos,rotacao,sequencia
+20180120_152925.jpg,foto,envelopamento,5,retrato,card-servico,Capo de Mustang preto e branco listrado com logo The Dark Film na frente,nenhum,20180120,3096,4128,1.3,,,S001
+20220819_204141.jpg,foto,outro,3,retrato,galeria,Carro esportivo vermelho antigo exposto na loja sobre piso xadrez,bagunca-no-fundo,20220819,4000,3000,3.6,,,S016
+20221018_172427.jpg,foto,loja-fachada,4,paisagem,hero,Fachada da loja The Dark Film ao entardecer com letreiros 3M e Thule,placa-visivel,20221018,4000,3000,2.5,,,S008
+20221018_172440.jpg,foto,loja-fachada,4,paisagem,card-servico,Fachada com placa 3M Aplicador Autorizado e letreiro The Dark Film,nenhum,20221018,4000,3000,2.4,,,S008
+20221018_172443.jpg,foto,loja-fachada,4,paisagem,galeria,Fachada da loja com carro estacionado na frente e rodas expostas,placa-visivel;sequencia-parecida,20221018,4000,3000,2.1,,,S008
+20230119_175925.jpg,foto,outro,5,retrato,hero,Kombi antiga customizada azul-petroleo exposta na loja sobre piso xadrez,placa-visivel,20230119,4000,3000,2.1,,,S017
+20230121_172333.jpg,foto,pelicula-arquitetonica,1,retrato,descartar,Foto borrada de janelas com pelicula fosca em ambiente decorado com vasos,desfocada,20230121,4000,3000,2.1,,,S071
+20230130_162441.jpg,foto,outro,4,retrato,galeria,Interior da loja decorado com motos bicicletas e replica de carro de corrida,bagunca-no-fundo,20230130,4000,3000,2.3,,,S018
+20230130_162448.jpg,foto,outro,3,retrato,galeria,Area de convivencia da loja com decoracao vintage e geladeira de bebidas,bagunca-no-fundo,20230130,4000,3000,2.7,,,S018
+20230130_162455.jpg,foto,outro,4,retrato,galeria,Parede de rodas e carros de clientes estacionados dentro da oficina,bagunca-no-fundo,20230130,4000,3000,2.5,,,S018
+20230706_174852.jpg,foto,outro,5,retrato,hero,Porsche 356 vermelho de corrida estacionado em frente a loja ao entardecer,nenhum,20230706,4000,3000,3.5,,,S019
+20230803_094508.jpg,foto,pelicula-automotiva,4,retrato,card-servico,Jeep Wrangler Rubicon cinza com vidros escurecidos dentro da oficina,placa-visivel,20230803,4000,3000,2.2,,,S080
+20230805_152415.jpg,foto,outro,3,paisagem,galeria,Sedan perua e Fusca classicos estacionados dentro da oficina decorada,placa-visivel;bagunca-no-fundo,20230805,4000,3000,2.9,,,S020
+20231220_151747.jpg,foto,outro,5,retrato,hero,Land Rover Defender preto com rack de teto e estribos na oficina,sequencia-parecida,20231220,4080,3060,3.6,,,S021
+20231220_151754.jpg,foto,outro,5,retrato,galeria,Land Rover Defender preto vista lateral dentro da oficina,sequencia-parecida,20231220,4080,3060,3.6,,,S021
+20231220_151806.jpg,foto,outro,5,retrato,hero,Land Rover Defender preto visto de tras com luzes traseiras acesas,placa-visivel;sequencia-parecida,20231220,4080,3060,3.5,,,S021
+20231220_151820.jpg,foto,outro,5,retrato,hero,Land Rover Defender preto visto de frente com farol aceso na oficina,placa-visivel;sequencia-parecida,20231220,4080,3060,3.3,,,S021
+20231220_151831.jpg,foto,outro,5,retrato,galeria,Interior do Land Rover Defender com bancos e painel em couro caramelo,sequencia-parecida,20231220,4080,3060,3.8,,,S021
+20240327_143358.jpg,foto,outro,4,retrato,galeria,Porsche Boxster preto dentro da oficina com outros carros ao fundo,bagunca-no-fundo,20240327,4080,3060,4.1,,,S022
+20240327_143605.jpg,foto,outro,4,retrato,galeria,Traseira do Porsche Boxster preto dentro da oficina,sequencia-parecida;bagunca-no-fundo,20240327,4080,3060,4.4,,,S022
+20240327_143706.jpg,foto,outro,4,retrato,galeria,Interior do Porsche Boxster com bancos de couro caramelo e porta aberta,sequencia-parecida,20240327,4080,3060,3.8,,,S022
+20240327_143847.jpg,foto,outro,5,retrato,galeria,Detalhe de roda e pinca de freio vermelha em Porsche preto,sequencia-parecida,20240327,4080,3060,3.6,,,S022
+20240327_143930.jpg,foto,outro,4,retrato,galeria,Detalhe do emblema Boxster S na tampa traseira do carro preto,sequencia-parecida,20240327,4080,3060,4.7,,,S022
+20240327_144402.jpg,foto,outro,4,retrato,hero,Traseira do Porsche Boxster S com porta-placa personalizado The Dark Film,sequencia-parecida,20240327,4080,3060,3.9,,,S022
+20240327_144630.mp4,video,pelicula-automotiva,4,retrato,bloco-servico,Acabamento com politriz na borda do para-brisa apos instalacao de pelicula,rosto-visivel;vertical,20240327,1920,1080,10.1,4,-90,S081
+20240327_152441.mp4,video,pelicula-automotiva,1,retrato,descartar,Maos mexendo no vidro traseiro em cena escura e tremula dificil de identificar,escuro;tremido;vertical,20240327,1920,1080,13.4,6,-90,S082
+20240327_152515.mp4,video,pelicula-automotiva,1,retrato,descartar,Reflexo desfocado no para-brisa traseiro em imagem escura e ilegivel,escuro;tremido;vertical,20240327,1920,1080,10.2,4,-90,S082
+20240327_153501.mp4,video,pelicula-automotiva,2,retrato,descartar,Braco com pulseira da marca mexendo no vidro com logo Dark & Sound ao fundo,escuro;tremido;vertical,20240327,1920,1080,10.2,4,-90,S082
+20240519_003343.jpg,foto,envelopamento,3,retrato,galeria,Scooter com grafismo laranja estilo Gulf ao lado de lambreta antiga bege,escura,20240519,4080,3060,4.4,,,S002
+20240524_143429.mp4,video,outro,4,retrato,galeria,Interior limpo de Audi com tapete e pedaleira sem pessoas,vertical,20240524,1920,1080,20.5,9,-90,S023
+20240524_143638.mp4,video,outro,4,retrato,galeria,Grade dianteira de Volvo com placa The Dark Film carro pronto,vertical,20240524,1920,1080,19.0,9,-90,S023
+20240524_143654.mp4,video,outro,4,retrato,galeria,Grade dianteira de VW Golf azul com placa da empresa,vertical,20240524,1920,1080,11.3,5,-90,S023
+20240607_173044.jpg,foto,pelicula-automotiva,5,paisagem,hero,Porsche Cayenne branco com vidros traseiros escurecidos na oficina,placa-visivel,20240607,4080,3060,3.8,,,S083
+20240607_173054.jpg,foto,pelicula-automotiva,5,paisagem,hero,Porsche Cayenne branco visto de tras com pelicula escura nos vidros,sequencia-parecida,20240607,4080,3060,3.9,,,S083
+20240607_173126.jpg,foto,outro,5,paisagem,galeria,Interior do Porsche Cayenne com volante e painel em couro,sequencia-parecida,20240607,4080,3060,4.5,,,S024
+20240607_174228.jpg,foto,outro,4,retrato,galeria,Emblema e-hybrid em detalhe na lataria cinza do Porsche Cayenne,sequencia-parecida,20240607,4080,3060,3.6,,,S025
+20240607_174233.jpg,foto,outro,5,retrato,galeria,Detalhe de roda e pinca de freio verde neon em Porsche Cayenne,sequencia-parecida,20240607,4080,3060,3.9,,,S025
+20240704_140442.jpg,foto,pelicula-automotiva,5,retrato,hero,Porsche Panamera cinza com vidros escurecidos dentro da oficina,placa-visivel,20240704,4080,3060,3.4,,,S084
+20240704_140513.jpg,foto,pelicula-automotiva,5,retrato,hero,Porsche Panamera cinza visto de tras com porta-placa The Dark Film,placa-visivel;sequencia-parecida,20240704,4080,3060,3.7,,,S084
+20240704_140528.jpg,foto,outro,5,retrato,galeria,Detalhe de roda Michelin e pinca de freio no Porsche Panamera,sequencia-parecida,20240704,4080,3060,3.1,,,S026
+20240704_140557.jpg,foto,pelicula-automotiva,5,retrato,hero,Porsche Panamera cinza visto de frente dentro da oficina,sequencia-parecida,20240704,4080,3060,3.5,,,S084
+20240704_140634.jpg,foto,outro,5,retrato,galeria,Detalhe do volante e painel do Porsche Panamera,sequencia-parecida,20240704,4080,3060,2.8,,,S026
+20240705_142317.jpg,foto,loja-fachada,5,paisagem,hero,Fachada da loja The Dark Film em dia claro com placas 3M e Thule,nenhum,20240705,4080,3060,4.8,,,S009
+20240705_142320.jpg,foto,loja-fachada,5,paisagem,galeria,Fachada da loja The Dark Film em dia claro em outro angulo,sequencia-parecida,20240705,4080,3060,4.7,,,S009
+20240705_142349.jpg,foto,loja-fachada,5,paisagem,hero,Fachada da loja com rodas expostas placa 3M e carro estacionado,placa-visivel,20240705,4080,3060,3.9,,,S009
+20240705_142351.jpg,foto,loja-fachada,5,paisagem,card-servico,Fachada da loja com carro estacionado e funcionario curvado no porta-malas,placa-visivel,20240705,4080,3060,4.4,,,S009
+20240705_174447.jpg,foto,outro,5,retrato,hero,Sedan eletrico preto dentro da oficina com porta-placa The Dark Film,nenhum,20240705,4080,3060,3.1,,,S027
+20240705_174919.jpg,foto,pelicula-automotiva,5,retrato,hero,BYD preto visto de tras com vidros escurecidos e porta-placa The Dark Film,sequencia-parecida,20240705,4080,3060,3.2,,,S085
+20240712_164940.jpg,foto,outro,5,paisagem,galeria,Interior de Peugeot azul com volante e central multimidia,nenhum,20240712,4080,3060,2.9,,,S028
+20240712_165130.jpg,foto,pelicula-automotiva,5,paisagem,hero,Peugeot 2008 azul visto de tras com vidros traseiros escurecidos,nenhum,20240712,4080,3060,3.1,,,S086
+20240712_165418.jpg,foto,pelicula-automotiva,5,retrato,hero,Peugeot 2008 azul visto de frente com faixa solar e vidros escurecidos,sequencia-parecida,20240712,4080,3060,3.3,,,S086
+20240930_153131.jpg,foto,loja-fachada,5,retrato,hero,VW Golf vermelho estacionado em frente a loja em dia ensolarado,placa-visivel,20240930,4080,3060,3.9,,,S010
+20240930_153145.jpg,foto,loja-fachada,5,retrato,hero,VW Golf vermelho em frente a loja em outro angulo dia ensolarado,placa-visivel;sequencia-parecida,20240930,4080,3060,3.6,,,S010
+20240930_153632.jpg,foto,loja-fachada,5,retrato,hero,Fachada da loja com Jeep Willys e VW Golf vermelho estacionados,placa-visivel,20240930,4080,3060,3.5,,,S010
+20241003_110458.jpg,foto,outro,4,retrato,galeria,Decoracao da loja com TV antiga capacete stormtrooper e mascara Deadpool,nenhum,20241003,4080,3060,3.2,,,S029
+20241127_131651.mp4,video,outro,2,retrato,descartar,Interior de Kombi camper com bandeira do Brasil na janela imagem tremula,tremido;vertical,20241127,1920,1080,13.9,6,-90,S030
+20241206_134544.jpg,foto,envelopamento,4,retrato,antes-depois,Mitsubishi Lancer roxo metalico dentro da oficina com outros carros ao fundo,placa-visivel;bagunca-no-fundo,20241206,4080,3060,3.9,,,S003
+20241206_134634.jpg,foto,equipe,4,retrato,card-servico,Funcionario na recepcao da loja com letreiro 3M Aplicador Autorizado,rosto-visivel,20241206,4080,3060,3.5,,,S006
+20241206_152137.jpg,foto,loja-fachada,5,paisagem,hero,Fachada da loja com Fusca variante azul claro e Jeep estacionados,placa-visivel,20241206,4080,3060,5.1,,,S011
+20241206_152146.jpg,foto,loja-fachada,5,paisagem,hero,Fachada da loja The Dark Film com carro antigo e rodas expostas na calçada,placa-visivel,20241206,4080,3060,5.0,,,S011
+20241206_152155(1).jpg,foto,loja-fachada,5,retrato,hero,Fachada da loja com Jeep Willys exposto e rodas na vitrine,placa-visivel,20241206,4080,3060,3.8,,,S011
+20241206_152155.jpg,foto,loja-fachada,5,retrato,descartar,Fachada da loja com Jeep Willys exposto e rodas na vitrine (duplicata),placa-visivel;sequencia-parecida,20241206,4080,3060,3.8,,,S011
+20241206_152204(1).jpg,foto,equipe,4,retrato,galeria,Balcão de atendimento 3M com atendentes na loja,rosto-visivel,20241206,4080,3060,3.5,,,S007
+20241206_152204.jpg,foto,equipe,4,retrato,descartar,Balcão de atendimento 3M com atendentes na loja (duplicata),rosto-visivel;sequencia-parecida,20241206,4080,3060,3.5,,,S007
+20241212_143853.mp4,video,outro,4,retrato,galeria,Kombi azul clara com placa The Dark Film na frente,vertical,20241212,1920,1080,28.8,13,-90,S031
+20241212_144439.mp4,video,outro,4,retrato,galeria,Kombi vista de outro angulo emblema VW e placa da empresa,vertical,20241212,1920,1080,15.8,7,-90,S031
+20241212_144932.jpg,foto,outro,4,retrato,galeria,Volkswagen Fusca amarelo estacionado dentro da oficina,nenhum,20241212,4080,3060,2.9,,,S031
+20241212_144955.jpg,foto,outro,3,retrato,galeria,Interior da oficina com Kombi Fusca e outros carros estacionados,nenhum,20241212,4080,3060,3.0,,,S031
+20241212_145224.jpg,foto,outro,3,retrato,galeria,Vista geral da oficina com vários carros estacionados,nenhum,20241212,4080,3060,2.8,,,S031
+20241213_204806.jpg,foto,outro,5,retrato,galeria,Adesivo decorativo em vidro lateral de carro esportivo clássico laranja,nenhum,20241213,4080,3060,2.7,,,S032
+20241213_204836.jpg,foto,outro,4,paisagem,galeria,Interior da oficina com carro clássico laranja e Mini Cooper amarelo,placa-visivel,20241213,4080,3060,2.9,,,S032
+20241213_204930.jpg,foto,outro,4,paisagem,galeria,Interior de carro esportivo clássico com porta aberta e bancos de couro,nenhum,20241213,4080,3060,2.8,,,S032
+20241213_205003.jpg,foto,outro,5,retrato,galeria,Emblema Datsun 260Z em detalhe no painel do carro,nenhum,20241213,4080,3060,2.7,,,S032
+20241213_205046.jpg,foto,outro,5,paisagem,galeria,Detalhe do farol e capô dianteiro de carro esportivo clássico laranja,nenhum,20241213,4080,3060,2.7,,,S032
+20241213_205104.jpg,foto,outro,4,retrato,hero,Carro esportivo clássico laranja customizado dentro da oficina à noite,placa-visivel,20241213,4080,3060,3.0,,,S032
+20241213_205118.jpg,foto,outro,5,paisagem,hero,Perfil lateral de carro esportivo clássico Datsun Fairlady Z laranja,nenhum,20241213,4080,3060,2.6,,,S032
+20241213_205144.jpg,foto,outro,5,paisagem,hero,Traseira de carro esportivo clássico laranja customizado na oficina,placa-visivel,20241213,4080,3060,2.8,,,S032
+20250508_134133.jpg,foto,som-acessorios,4,retrato,card-servico,Santo-antônio HILUX instalado na caçamba de picape,nenhum,20250508,4080,3060,3.0,,,S101
+20250508_134141.jpg,foto,som-acessorios,4,retrato,card-servico,Detalhe do santo-antônio instalado sobre a caçamba da picape,nenhum,20250508,4080,3060,3.2,,,S101
+20250508_134152.jpg,foto,som-acessorios,5,retrato,hero,Picape Toyota Hilux branca com capota marítima e santo-antônio instalados,nenhum,20250508,4080,3060,3.2,,,S101
+20250508_141047.jpg,foto,outro,5,retrato,hero,Chevrolet Opala vermelho customizado com portas abertas na oficina,nenhum,20250508,4080,3060,3.7,,,S033
+20250508_141121.jpg,foto,outro,4,retrato,galeria,Motor exposto de Chevrolet Opala vermelho com capô aberto,nenhum,20250508,4080,3060,3.3,,,S033
+20250508_141243.jpg,foto,outro,4,retrato,galeria,Chevrolet Opala vermelho estacionado na rua em frente à oficina,placa-visivel,20250508,4080,3060,3.6,,,S033
+20250515_222420.mp4,video,som-acessorios,5,retrato,demo-som,Central multimidia instalada em Land Rover Defender tela com radio e CarPlay,vertical,20250515,1920,1080,119.7,57,-90,S102
+20250515_222558.mp4,video,som-acessorios,4,retrato,demo-som,Vista ampla do painel do Defender com central multimidia instalada,vertical,20250515,1920,1080,10.5,4,-90,S102
+20250515_222940.jpg,foto,som-acessorios,4,paisagem,pagina-som,Central multimídia automotiva instalada no painel de veículo 4x4,nenhum,20250515,4080,3060,2.8,,,S102
+20250515_222957(1).jpg,foto,som-acessorios,5,retrato,pagina-som,Central multimídia Pioneer instalada no painel do veículo,nenhum,20250515,4080,3060,2.8,,,S102
+20250515_222957.jpg,foto,som-acessorios,5,retrato,descartar,Central multimídia Pioneer instalada no painel do veículo (duplicata),sequencia-parecida,20250515,4080,3060,2.8,,,S102
+20250515_223033(1).jpg,foto,outro,5,paisagem,hero,Land Rover Defender preto na oficina com mural decorativo ao fundo,nenhum,20250515,4080,3060,3.2,,,S034
+20250515_223033.jpg,foto,outro,5,paisagem,descartar,Land Rover Defender preto na oficina com mural decorativo ao fundo (duplicata),sequencia-parecida,20250515,4080,3060,3.2,,,S034
+20250515_223111(1).jpg,foto,outro,5,retrato,hero,Land Rover Defender preto de frente na oficina The Dark Film,nenhum,20250515,4080,3060,3.2,,,S034
+20250515_223111.jpg,foto,outro,5,retrato,descartar,Land Rover Defender preto de frente na oficina The Dark Film (duplicata),sequencia-parecida,20250515,4080,3060,3.2,,,S034
+20250522_113357(1).jpg,foto,outro,4,paisagem,galeria,Painel interno de SUV moderno com central multimídia grande,nenhum,20250522,4080,3060,2.8,,,S035
+20250522_113357.jpg,foto,outro,4,paisagem,descartar,Painel interno de SUV moderno com central multimídia grande (duplicata),sequencia-parecida,20250522,4080,3060,2.8,,,S035
+20250522_113436.jpg,foto,pelicula-automotiva,5,paisagem,hero,SUV branco com vidros traseiros escurecidos por película na oficina,placa-visivel,20250522,4080,3060,3.8,,,S087
+20250522_113443.jpg,foto,pelicula-automotiva,5,paisagem,card-servico,SUV branco com vidros escurecidos por película e pessoa ao fundo,placa-visivel;rosto-visivel,20250522,4080,3060,4.2,,,S087
+20250522_113457.jpg,foto,pelicula-automotiva,5,paisagem,hero,SUV branco de frente com vidros escurecidos por película automotiva,placa-visivel,20250522,4080,3060,3.2,,,S087
+20250531_122824(1).mp4,video,outro,5,retrato,galeria,Audi TT azul na frente com logo The Dark na parede da loja,vertical,20250531,1920,1080,23.1,11,-90,S036
+20250531_122824.mp4,video,outro,5,retrato,galeria,Audi TT azul na frente com logo The Dark na parede da loja duplicado,vertical,20250531,1920,1080,23.1,11,-90,S036
+20250531_122848.jpg,foto,pelicula-automotiva,5,retrato,hero,Audi TT azul com vidros escurecidos por película na oficina The Dark Film,nenhum,20250531,4080,3060,3.4,,,S088
+20250531_122945.mp4,video,outro,5,retrato,galeria,Audi TT azul na traseira com placa The Dark Film e bandeira do Brasil,vertical,20250531,1920,1080,21.9,10,-90,S036
+20250531_123004.jpg,foto,pelicula-automotiva,5,retrato,hero,Audi TT azul visto de trás com vidros e teto solar escurecidos,nenhum,20250531,4080,3060,3.3,,,S088
+20250531_123014.jpg,foto,pelicula-automotiva,5,retrato,card-servico,Audi TT azul de frente com vidros escurecidos por película automotiva,placa-visivel,20250531,4080,3060,3.8,,,S088
+20250531_123256.jpg,foto,pelicula-automotiva,5,retrato,hero,Audi TT azul estacionado na oficina com vidros escurecidos,nenhum,20250531,4080,3060,3.7,,,S088
+20250531_123304.jpg,foto,pelicula-automotiva,5,retrato,pagina-pelicula,Detalhe da lanterna e vidro traseiro escurecido do Audi TT azul,nenhum,20250531,4080,3060,3.3,,,S088
+20250531_123319(1).jpg,foto,pelicula-automotiva,5,paisagem,hero,Audi TT azul em ângulo frontal lateral com vidros escurecidos por película,nenhum,20250531,4080,3060,3.3,,,S088
+20250531_123319.jpg,foto,pelicula-automotiva,5,paisagem,descartar,Audi TT azul em ângulo frontal lateral com vidros escurecidos (duplicata),sequencia-parecida,20250531,4080,3060,3.3,,,S088
+20250617_124853.jpg,foto,outro,5,retrato,galeria,Interior de BMW com bancos de couro vermelho e painel digital,nenhum,20250617,4080,3060,3.3,,,S037
+20250617_124917.jpg,foto,pelicula-automotiva,5,paisagem,hero,BMW Série 3 preto com porta aberta e vidros escurecidos por película,placa-visivel,20250617,4080,3060,2.9,,,S089
+20250621_144439(1).jpg,foto,outro,5,paisagem,hero,Chevrolet Chevette prata rebaixado customizado na oficina,nenhum,20250621,4080,3060,2.9,,,S038
+20250621_144439.jpg,foto,outro,5,paisagem,descartar,Chevrolet Chevette prata rebaixado customizado na oficina (duplicata),sequencia-parecida,20250621,4080,3060,2.9,,,S038
+20250718_122513.jpg,foto,loja-fachada,4,paisagem,galeria,Picape antiga customizada estacionada em frente à loja The Dark Film,nenhum,20250718,4080,3060,4.6,,,S012
+20250718_122616.jpg,foto,loja-fachada,5,retrato,hero,Fachada da loja The Dark Film com picape antiga estacionada na rua,nenhum,20250718,4080,3060,4.7,,,S012
+20250718_122620.jpg,foto,loja-fachada,5,retrato,hero,Fachada da loja com rodas expostas e picape antiga em primeiro plano,nenhum,20250718,4080,3060,4.6,,,S012
+20250718_122657.jpg,foto,loja-fachada,5,retrato,hero,Picape antiga com faróis amarelos em frente à vitrine de rodas da loja,nenhum,20250718,4080,3060,4.0,,,S012
+20250718_122707.jpg,foto,loja-fachada,5,retrato,hero,Picape antiga estacionada em frente à loja com caminhão ao fundo,nenhum,20250718,4080,3060,4.0,,,S012
+20250913_130618.jpg,foto,pelicula-automotiva,5,retrato,hero,Hatch elétrico cinza com vidros escurecidos por película na oficina,nenhum,20250913,4080,3060,3.2,,,S090
+20250913_130624(1).jpg,foto,produto-avulso,4,retrato,galeria,Detalhe de porta-placa traseiro com logo The Dark Film em carro cinza,sequencia-parecida,20250913,4080,3060,2.6,,,S098
+20250913_130624.jpg,foto,produto-avulso,4,retrato,descartar,Detalhe de porta-placa traseiro com logo The Dark Film em carro cinza (duplicata),sequencia-parecida,20250913,4080,3060,2.6,,,S098
+20250913_130646.jpg,foto,outro,4,retrato,galeria,Carro customizado cinza estacionado na loja com vidros escurecidos e placa visível,placa-visivel,20250913,4080,3060,3.1,,,S040
+20250913_130723.jpg,foto,outro,4,retrato,galeria,Traseira de carro customizado com porta-placa The Dark Film e difusor vermelho,sequencia-parecida,20250913,4080,3060,3.3,,,S040
+20250924_123944(1).jpg,foto,outro,4,retrato,galeria,Bicicleta motorizada vermelha decorativa ao lado de bomba de combustível antiga,placa-visivel;sequencia-parecida,20250924,4080,3060,4.0,,,S042
+20250924_123944.jpg,foto,outro,4,retrato,descartar,Bicicleta motorizada vermelha decorativa ao lado de bomba antiga (duplicata),placa-visivel;sequencia-parecida,20250924,4080,3060,4.0,,,S042
+20250924_123956(1).jpg,foto,outro,4,retrato,galeria,Bicicleta motorizada vermelha decorativa dentro da loja com piso xadrez,sequencia-parecida,20250924,4080,3060,3.3,,,S042
+20250924_123956.jpg,foto,outro,4,retrato,descartar,Bicicleta motorizada vermelha decorativa dentro da loja (duplicata),sequencia-parecida,20250924,4080,3060,3.3,,,S042
+20250924_172715(1).jpg,foto,outro,3,retrato,galeria,Bicicleta decorativa vermelha na loja com clientes sentados ao fundo,rosto-visivel;bagunca-no-fundo,20250924,4080,3060,3.5,,,S043
+20250924_172715.jpg,foto,outro,3,retrato,descartar,Bicicleta decorativa vermelha na loja com clientes ao fundo (duplicata),rosto-visivel;bagunca-no-fundo;sequencia-parecida,20250924,4080,3060,3.5,,,S043
+20250924_172929.jpg,foto,outro,3,retrato,galeria,Bicicleta Harley-Davidson decorativa preta dentro da loja com pneus empilhados,bagunca-no-fundo,20250924,4080,3060,3.3,,,S043
+20250924_173421.jpg,foto,loja-fachada,4,retrato,hero,Bicicleta Harley-Davidson decorativa na entrada da loja em dia de chuva,nenhum,20250924,4080,3060,3.3,,,S013
+20251002_103707.jpg,foto,outro,3,retrato,galeria,Scooter Lambretta antiga azul e creme exposta dentro da loja,bagunca-no-fundo,20251002,4080,3060,3.2,,,S044
+20251008_100352.jpg,foto,outro,3,retrato,galeria,Scooter Lambretta antiga azul e creme ao lado de bicicleta vermelha,bagunca-no-fundo,20251008,4080,3060,3.4,,,S045
+20251008_100452.jpg,foto,outro,4,retrato,galeria,Scooter Lambretta antiga na calçada em frente à loja com placa visível,placa-visivel,20251008,4080,3060,4.1,,,S045
+20251008_100459.jpg,foto,outro,4,retrato,galeria,Scooter Lambretta 150 LD azul e creme na calçada em close-up,nenhum,20251008,4080,3060,4.4,,,S045
+20251023_115043.jpg,foto,outro,3,paisagem,galeria,Oficina com carros e projetos em restauração (picape; sedã; réplica F1),bagunca-no-fundo;placa-visivel,20251023,4080,3060,3.9,,,S046
+20251023_115135.jpg,foto,outro,3,paisagem,galeria,Oficina com carros e projetos em restauração em outro ângulo,bagunca-no-fundo;sequencia-parecida,20251023,3264,2448,2.3,,,S046
+20251023_115219.jpg,foto,outro,3,paisagem,galeria,Traseira de picape antiga com feno na caçamba e réplica F1 ao fundo,bagunca-no-fundo;sequencia-parecida,20251023,3264,2448,2.9,,,S046
+20251107_194842.jpg,foto,outro,5,retrato,hero,Picape azul customizada com rodas esportivas em frente a mural da loja,nenhum,20251107,4080,3060,3.5,,,S047
+20251107_194859.jpg,foto,outro,4,retrato,galeria,Picape azul customizada em vista ampla do interior da loja,sequencia-parecida,20251107,3264,2448,2.3,,,S047
+20251107_195505.jpg,foto,outro,3,retrato,galeria,Motor exposto de carro antigo azul em manutenção com capô aberto,nenhum,20251107,4080,3060,3.0,,,S047
+20251107_195512.jpg,foto,outro,5,retrato,hero,Picape azul customizada com capô aberto mostrando o motor,sequencia-parecida;placa-visivel,20251107,4080,3060,3.2,,,S047
+20251107_195532(1).jpg,foto,outro,4,retrato,galeria,Picape azul customizada de frente com capô aberto e faróis auxiliares,sequencia-parecida;placa-visivel,20251107,4080,3060,3.4,,,S047
+20251107_195532.jpg,foto,outro,4,retrato,descartar,Picape azul customizada de frente com capô aberto (duplicata),sequencia-parecida;placa-visivel,20251107,4080,3060,3.4,,,S047
+20251111_162053(1).jpg,foto,som-acessorios,4,retrato,pagina-som,Central multimídia recém-instalada no painel de um carro com tela ligada,nenhum,20251111,4080,3060,2.8,,,S103
+20251111_162053.jpg,foto,som-acessorios,4,retrato,descartar,Central multimídia recém-instalada no painel de um carro (duplicata),sequencia-parecida,20251111,4080,3060,2.8,,,S103
+20251111_163411.jpg,foto,som-acessorios,3,retrato,pagina-som,Caixa de produto de central multimídia Yorks sobre o capô de um carro,bagunca-no-fundo,20251111,4080,3060,2.7,,,S104
+20251113_124703(1).mp4,video,pelicula-automotiva,5,retrato,hero-video,Maos aplicando pelicula com espatula no vidro traseiro lateral por dentro do carro,vertical,20251113,1280,720,8.5,5,-90,S091
+20251113_124703.mp4,video,pelicula-automotiva,5,retrato,bloco-servico,Mesma aplicacao de pelicula no vidro por dentro do carro duplicado,vertical,20251113,1280,720,8.5,5,-90,S091
+20251113_124812(1).mp4,video,outro,4,retrato,bloco-servico,Funcionario de costas com camisa The Dark Film trabalhando em conversivel branco,vertical,20251113,1280,720,19.2,13,-90,S048
+20251113_124812.mp4,video,outro,4,retrato,bloco-servico,Mesma cena do funcionario com o conversivel branco duplicado,vertical,20251113,1280,720,19.2,13,-90,S048
+20251113_124841.jpg,foto,pelicula-automotiva,3,retrato,pagina-pelicula,Técnico mexendo na traseira de um conversível branco dentro da loja,rosto-visivel,20251113,4080,3060,3.8,,,S091
+20251113_235340(1).jpg,foto,outro,4,retrato,galeria,Conversível branco com capota vermelha estacionado dentro da loja,nenhum,20251113,4080,3060,3.3,,,S049
+20251113_235340.jpg,foto,outro,4,retrato,descartar,Conversível branco com capota vermelha dentro da loja (duplicata),sequencia-parecida,20251113,4080,3060,3.3,,,S049
+20251113_235556(1).jpg,foto,outro,4,retrato,galeria,Traseira de conversível branco com porta-placa The Dark Film,nenhum,20251113,4080,3060,3.3,,,S049
+20251113_235556.jpg,foto,outro,4,retrato,descartar,Traseira de conversível branco com porta-placa The Dark Film (duplicata),sequencia-parecida,20251113,4080,3060,3.3,,,S049
+20251202_120006.jpg,foto,outro,3,retrato,descartar,Painel de SUV elétrico com tela grande; motorista refletido no retrovisor,rosto-visivel;reflexo-forte,20251202,4080,3060,3.0,,,S050
+20251204_163216.jpg,foto,outro,4,retrato,hero,Réplica de carro de Fórmula 1 com pintura Marlboro exposta na loja,nenhum,20251204,4080,3060,3.7,,,S051
+20251204_163249.jpg,foto,outro,3,retrato,galeria,Réplica de Fórmula 1 exposta na loja com pessoa ao fundo desfocada,bagunca-no-fundo,20251204,4080,3060,4.1,,,S051
+20251204_163305.jpg,foto,outro,4,retrato,galeria,Detalhe da roda e asa traseira da réplica de Fórmula 1,nenhum,20251204,4080,3060,3.6,,,S051
+20251204_163314.jpg,foto,outro,4,retrato,hero,Réplica de Fórmula 1 vista frontal com piso molhado refletindo luzes,reflexo-forte,20251204,4080,3060,2.9,,,S051
+20251204_163359.mp4,video,loja-fachada,4,retrato,galeria,Replica de carro de F1 decorativa na loja paredes com placas antigas,vertical,20251204,1280,720,19.0,12,-90,S014
+20251204_163421.mp4,video,loja-fachada,4,retrato,galeria,Replica de F1 outro angulo letreiro A1000m ao fundo,vertical,20251204,1280,720,19.0,12,-90,S014
+20251204_163441.mp4,video,loja-fachada,4,retrato,galeria,Replica de F1 com letreiro The Dark film & sound ao fundo,vertical,20251204,1280,720,13.9,9,-90,S014
+20251204_163503.jpg,foto,outro,4,retrato,galeria,Réplica de Fórmula 1 em vista frontal ampla com decoração da loja,bagunca-no-fundo;sequencia-parecida,20251204,4080,3060,3.6,,,S051
+20251204_163510.jpg,foto,outro,4,retrato,galeria,Réplica de Fórmula 1 em vista frontal em ângulo diferente,bagunca-no-fundo;sequencia-parecida,20251204,4080,3060,3.5,,,S051
+20251219_190818.mp4,video,som-acessorios,4,retrato,bloco-servico,Homem descendo de picape usando estribo eletrico retratil,rosto-visivel;vertical,20251219,1280,720,16.7,11,-90,S105
+20251219_191023.mp4,video,outro,3,retrato,galeria,SUV Mitsubishi Triton na frente com placa The Dark Film em ambiente noturno,vertical,20251219,1280,720,10.0,6,-90,S052
+20260130_111550.mp4,video,pelicula-arquitetonica,5,retrato,hero-video,Instalador aplicando pelicula em janela residencial com vista para morro,rosto-visivel;vertical,20260130,1280,720,6.9,4,-90,S072
+20260130_112558.jpg,foto,pelicula-arquitetonica,3,retrato,pagina-pelicula,Casa moderna com grandes janelas de vidro escurecido vista da rua,nenhum,20260130,4080,3060,2.4,,,S073
+20260204_160816.jpg,foto,outro,3,retrato,galeria,SUV preto customizado de traseira com placa visível e pessoa ao fundo,placa-visivel;rosto-visivel;bagunca-no-fundo,20260204,4080,3060,3.5,,,S054
+20260204_160827.jpg,foto,outro,4,retrato,galeria,Detalhe de lanterna traseira e paralama de SUV preto customizado,reflexo-forte,20260204,4080,3060,3.1,,,S054
+20260204_160912(1).jpg,foto,outro,4,retrato,galeria,SUV preto customizado de frente com caixas da 3M ao fundo na loja,placa-visivel;bagunca-no-fundo;sequencia-parecida,20260204,4080,3060,3.5,,,S054
+20260204_160912.jpg,foto,outro,4,retrato,descartar,SUV preto customizado de frente com caixas da 3M ao fundo (duplicata),placa-visivel;bagunca-no-fundo;sequencia-parecida,20260204,4080,3060,3.5,,,S054
+20260214_121844.jpg,foto,som-acessorios,4,retrato,pagina-som,Central multimídia instalada em painel; vitrine de produtos de som ao fundo,bagunca-no-fundo,20260214,4080,3060,3.2,,,S106
+20260214_121857.jpg,foto,som-acessorios,4,retrato,galeria,Central multimídia mostrando tela de pareamento com Android Auto,bagunca-no-fundo;sequencia-parecida,20260214,4080,3060,3.1,,,S106
+20260214_121918.jpg,foto,som-acessorios,3,retrato,pagina-som,Painel de carro com central multimídia e vitrine da loja ao fundo,bagunca-no-fundo,20260214,4080,3060,3.3,,,S106
+20260214_121928.jpg,foto,som-acessorios,3,retrato,pagina-som,Painel de carro com central multimídia e GPS; placa decorativa ao fundo,bagunca-no-fundo;sequencia-parecida,20260214,4080,3060,2.8,,,S106
+20260214_121942.jpg,foto,som-acessorios,3,retrato,pagina-som,Interior de carro com central multimídia e decoração retrô ao fundo,bagunca-no-fundo;sequencia-parecida,20260214,4080,3060,2.9,,,S106
+20260214_195020.jpg,foto,outro,4,retrato,galeria,Sedã azul antigo exposto na loja; mural com furgões ao fundo; placa visível,placa-visivel,20260214,4080,3060,3.3,,,S055
+20260214_195447.jpg,foto,outro,3,retrato,galeria,Capo de fusca antigo azul refletindo luzes da oficina,nenhum,20260214,3264,2448,2.0,,,S055
+20260214_195505.jpg,foto,outro,4,retrato,galeria,Fusca antigo azul visto de tras dentro da oficina com bicicletas na parede,placa-visivel,20260214,3264,2448,2.0,,,S055
+20260214_195543.jpg,foto,loja-fachada,4,paisagem,hero,Interior da oficina com fusca azul kombi branca e jipe antigo expostos,placa-visivel,20260214,3264,2448,2.2,,,S015
+20260320_112807.jpg,foto,som-acessorios,2,retrato,descartar,Central multimidia escura instalada em painel de carro compacto,escura,20260320,3264,2448,2.3,,,S107
+20260320_112828(1).jpg,foto,som-acessorios,3,retrato,pagina-som,Painel de carro Fiat com central multimidia instalada e barra vermelha no teto,nenhum,20260320,3264,2448,2.2,,,S107
+20260320_112828.jpg,foto,som-acessorios,3,retrato,descartar,Repeticao do painel de Fiat com central multimidia instalada,sequencia-parecida,20260320,3264,2448,2.2,,,S107
+20260320_112836.jpg,foto,som-acessorios,3,paisagem,pagina-som,Painel de SUV com central multimidia instalada exibindo radio FM,nenhum,20260320,3264,2448,2.2,,,S107
+20260323_123440.jpg,foto,som-acessorios,4,retrato,pagina-som,Central multimidia grande instalada em painel de veiculo exibindo radio FM,nenhum,20260323,4080,3060,3.1,,,S108
+20260323_123920(1).jpg,foto,som-acessorios,4,retrato,descartar,Repeticao da central multimidia instalada no veiculo,sequencia-parecida,20260323,4080,3060,2.7,,,S108
+20260323_123920.jpg,foto,som-acessorios,4,retrato,descartar,Repeticao da central multimidia instalada no veiculo,sequencia-parecida,20260323,4080,3060,2.7,,,S108
+20260323_133931.mp4,video,som-acessorios,4,retrato,bloco-servico,Tela multimidia mostrando camera 360 do carro no piso xadrez da loja,vertical,20260323,1280,720,23.0,15,-90,S109
+20260402_003044.jpg,foto,outro,4,retrato,galeria,Land Rover Defender azul exposto na oficina com mural de kombis ao fundo,nenhum,20260402,4080,3060,3.5,,,S056
+20260402_003234.jpg,foto,outro,4,retrato,galeria,Land Rover Defender visto de tras dentro da oficina,sequencia-parecida,20260402,3264,2448,2.4,,,S056
+20260402_003855.mp4,video,outro,4,retrato,galeria,Land Rover Defender azul na frente com placa The Dark Film video curto,muito-curto;vertical,20260402,1280,720,3.2,2,-90,S056
+20260402_004111.jpg,foto,outro,5,retrato,hero,Land Rover Defender visto de tras com lanterna acesa e estepe grande,sequencia-parecida,20260402,4080,3060,3.4,,,S056
+20260402_012820.mp4,video,outro,3,retrato,descartar,Vidro traseiro de Defender visto de dentro sem acao parado,vertical,20260402,1280,720,12.9,8,-90,S057
+20260418_014422.mp4,video,pelicula-automotiva,3,retrato,bloco-servico,Dodge Challenger preto farol e para-brisa escurecido reflexos da loja,vertical,20260418,1280,720,8.7,5,-90,S092
+20260418_014434.mp4,video,envelopamento,3,retrato,galeria,Camaro/Challenger preto com friso branco e vermelho DOMLUC e placa visivel,placa-visivel;vertical,20260418,1280,720,18.6,12,-90,S004
+20260418_014703.jpg,foto,outro,4,retrato,galeria,Chevrolet Camaro preto exposto na oficina com friso branco e vermelho no capo,placa-visivel,20260418,4080,3060,3.5,,,S058
+20260418_014734.jpg,foto,outro,4,retrato,galeria,Chevrolet Camaro preto em outro angulo dentro da oficina,placa-visivel;sequencia-parecida,20260418,4080,3060,3.1,,,S058
+20260418_020303.jpg,foto,outro,3,paisagem,galeria,Chevrolet Camaro preto estacionado ao lado de kombi branca na oficina,placa-visivel,20260418,3264,2448,2.1,,,S059
+20260429_121713.jpg,foto,outro,4,retrato,galeria,Jeep Renegade cinza exposto na oficina com mural de kombis ao fundo,placa-visivel,20260429,4080,3060,3.6,,,S060
+20260429_121756.jpg,foto,outro,3,retrato,galeria,Jeep Renegade cinza visto de tras dentro da oficina,placa-visivel;sequencia-parecida,20260429,4080,3060,3.1,,,S060
+20260429_121806.jpg,foto,outro,4,paisagem,galeria,Jeep Renegade cinza exposto na oficina em luz natural,placa-visivel;sequencia-parecida,20260429,3264,2448,2.4,,,S060
+20260512_161748.jpg,foto,outro,3,paisagem,descartar,Painel de BMW original com volante multifuncional e tela multimidia de fabrica,nenhum,20260512,3264,2448,2.1,,,S061
+20260512_161759.jpg,foto,pelicula-automotiva,5,retrato,pagina-pelicula,Adesivo do The Dark Film no vidro avisando para nao abrir janelas por 24 horas,nenhum,20260512,4080,3060,2.7,,,S093
+20260512_161817.jpg,foto,pelicula-automotiva,4,retrato,antes-depois,BMW preto com porta aberta mostrando interior vermelho apos aplicacao de pelicula,nenhum,20260512,3264,2448,2.0,,,S093
+20260512_161856.jpg,foto,pelicula-automotiva,4,retrato,antes-depois,BMW preto visto de tras com vidros escurecidos na oficina,placa-visivel,20260512,3264,2448,2.1,,,S093
+20260523_142335(1).mp4,video,pelicula-arquitetonica,3,retrato,bloco-servico,Instalador medindo e fixando painel de vidro em fachada escada ao lado,vertical,20260523,1280,720,13.5,9,-90,S074
+20260523_142335.mp4,video,pelicula-arquitetonica,3,retrato,bloco-servico,Mesma cena de instalacao de vidro em fachada duplicado,vertical,20260523,1280,720,13.5,9,-90,S074
+20260523_142434.mp4,video,pelicula-arquitetonica,4,retrato,bloco-servico,Painel grande de vidro com marcacoes de aplicacao em deposito/oficina,vertical,20260523,1280,720,7.0,4,-90,S074
+20260523_163854.jpg,foto,pelicula-arquitetonica,4,retrato,pagina-pelicula,Fachada de vidro de loja em obra para aplicacao de pelicula arquitetonica,bagunca-no-fundo,20260523,4080,3060,3.1,,,S075
+20260523_163908.mp4,video,pelicula-arquitetonica,4,retrato,hero-video,Equipe instalando pelicula grande em vidro de guarda-corpo de praca de alimentacao,rosto-visivel;vertical,20260523,1280,720,13.4,9,-90,S075
+20260523_163948.mp4,video,pelicula-arquitetonica,4,retrato,bloco-servico,Dois instaladores manuseando painel de vidro grande com pelicula praca de alimentacao,rosto-visivel;vertical,20260523,1280,720,8.6,5,-90,S075
+20260523_163957.mp4,video,pelicula-arquitetonica,4,retrato,bloco-servico,Close do painel de vidro com adesivos de protecao piso de madeira ao fundo,vertical,20260523,1280,720,13.2,8,-90,S075
+20260523_164130(1).mp4,video,pelicula-arquitetonica,5,retrato,bloco-servico,Mao passando espatula azul em painel de vidro molhado durante instalacao,vertical,20260523,1280,720,18.3,12,-90,S075
+20260523_164130.mp4,video,pelicula-arquitetonica,5,retrato,bloco-servico,Mesma cena de espatula no vidro duplicado,vertical,20260523,1280,720,18.3,12,-90,S075
+20260523_221458.jpg,foto,pelicula-arquitetonica,3,paisagem,pagina-pelicula,Paineis de vidro com pelicula arquitetonica aplicada prontos para instalacao,bagunca-no-fundo,20260523,4080,3060,2.8,,,S076
+20260526_175550(1).mp4,video,pelicula-automotiva,3,retrato,galeria,Lanterna traseira com filme decorativo Mister Film iluminada a noite,escuro;vertical,20260526,1280,720,23.9,16,-90,S094
+20260526_175550.mp4,video,pelicula-automotiva,3,retrato,galeria,Mesma lanterna traseira iluminada a noite duplicado,escuro;vertical,20260526,1280,720,23.9,16,-90,S094
+20260531_165718.jpg,foto,outro,3,retrato,galeria,Kombi branca The Dark Film exposta em evento automotivo ao ar livre,rosto-visivel;bagunca-no-fundo,20260531,4080,3060,2.8,,,S063
+20260531_165908.jpg,foto,outro,3,retrato,galeria,Kombi branca The Dark Film vista de frente em evento automotivo,rosto-visivel;sequencia-parecida,20260531,4080,3060,2.7,,,S063
+20260605_113110.jpg,foto,outro,4,retrato,galeria,SUV preto com vidros escuros exposto na oficina com mural de fuscas ao fundo,placa-visivel,20260605,3264,2448,2.6,,,S064
+20260605_182635.jpg,foto,outro,5,retrato,hero,Volvo XC60 preto com farol aceso exposto na oficina The Dark Film,placa-visivel,20260605,4080,3060,3.3,,,S065
+20260605_182728(1).jpg,foto,som-acessorios,4,paisagem,pagina-som,Tablet instalado no painel de Volvo exibindo cameras de 360 graus,nenhum,20260605,4080,3060,3.3,,,S110
+20260605_182728.jpg,foto,som-acessorios,4,paisagem,descartar,Repeticao do tablet instalado no painel de Volvo,sequencia-parecida,20260605,4080,3060,3.3,,,S110
+20260702_140758.jpg,foto,som-acessorios,3,retrato,pagina-som,Central multimidia instalada em painel de Toyota exibindo radio FM,nenhum,20260702,4080,3060,3.0,,,S111
+20260702_140802.jpg,foto,som-acessorios,3,retrato,descartar,Central multimidia de Toyota em angulo aproximado exibindo radio FM,sequencia-parecida,20260702,4080,3060,2.9,,,S111
+20260702_140809(1).jpg,foto,som-acessorios,4,paisagem,pagina-som,Painel completo de Toyota com central multimidia instalada e fachada da loja ao fundo,nenhum,20260702,3264,2448,2.4,,,S111
+20260702_140809.jpg,foto,som-acessorios,4,paisagem,descartar,Repeticao do painel de Toyota com central multimidia instalada,sequencia-parecida,20260702,3264,2448,2.4,,,S111
+20260711_203154.jpg,foto,outro,3,retrato,galeria,SUV eletrico cinza exposto na oficina com adesivo da bandeira do Brasil no capo,placa-visivel,20260711,3264,2448,2.0,,,S066
+20260714_121053.jpg,foto,outro,4,retrato,galeria,Hatchback eletrico cinza exposto na oficina com faixa The Dark Film no para-brisa,nenhum,20260714,4080,3060,3.3,,,S067
+20260714_121237.jpg,foto,outro,4,retrato,galeria,Traseira de hatchback eletrico cinza com luzes acesas na oficina,sequencia-parecida,20260714,4080,3060,3.3,,,S067
+20260716_172321(1).jpg,foto,outro,5,retrato,hero,Volkswagen Quantum vinho em piso xadrez sob letreiro The Dark Film,placa-visivel,20260716,3264,2448,2.2,,,S068
+20260716_172321.jpg,foto,outro,5,retrato,descartar,Repeticao do Volkswagen Quantum vinho no piso xadrez,placa-visivel;sequencia-parecida,20260716,3264,2448,2.2,,,S068
+20260723_124648.mp4,video,pelicula-automotiva,4,retrato,hero-video,Reflexo no para-brisa mostrando maos passando espatula na aplicacao da pelicula,vertical,20260723,1280,720,13.3,8,-90,S095
+20260723_142648.mp4,video,pelicula-automotiva,5,retrato,hero-video,Instalador de bone passando espatula no vidro lateral do carro por fora,vertical,20260723,1280,720,11.1,7,-90,S096
+20260827_205327.jpg,foto,outro,3,paisagem,descartar,Painel digital original de Volkswagen Golf GTI com velocimetro e tela multimidia,nenhum,20260827,4080,3060,2.7,,,S069
+20260827_205504.jpg,foto,outro,4,retrato,galeria,Volkswagen Golf GTI cinza exposto na oficina vista frontal,nenhum,20260827,4080,3060,2.7,,,S069
+20260827_205602.mp4,video,outro,4,retrato,galeria,Grade dianteira de VW Golf GTI com placa The Dark Film,vertical,20260827,1280,720,8.5,5,-90,S069
+20260827_205619.mp4,video,pelicula-automotiva,3,retrato,galeria,Farol de GTI com detalhe vermelho capo e para-brisa escurecido,vertical,20260827,1280,720,13.9,9,-90,S097
+20260827_205647(1).mp4,video,outro,4,retrato,galeria,Emblema GTI na grade com placa parcial The Dark,vertical,20260827,1280,720,10.7,7,-90,S069
+20260827_205647.mp4,video,outro,4,retrato,galeria,Mesmo emblema GTI na grade duplicado,vertical,20260827,1280,720,10.7,7,-90,S069
+20260827_205845.mp4,video,outro,3,retrato,descartar,Painel do carro a noite mostrando computador de bordo sem acao clara,escuro;vertical,20260827,1280,720,24.6,16,-90,S069
+20260827_210009.mp4,video,pelicula-automotiva,4,retrato,bloco-servico,Traseira de VW Golf com placa da empresa e vidro traseiro visivelmente escurecido,vertical,20260827,1280,720,13.8,9,-90,S097
+20260827_210032.mp4,video,outro,4,retrato,galeria,Close da lanterna traseira com emblema GTI,vertical,20260827,1280,720,8.2,5,-90,S069
+20260827_210111.mp4,video,pelicula-automotiva,5,retrato,hero-video,Perfil lateral completo do Golf mostrando todos os vidros escurecidos,vertical,20260827,1280,720,17.2,11,-90,S097
+20260827_210135.mp4,video,pelicula-automotiva,4,retrato,bloco-servico,Close da porta traseira do Golf com vidro escurecido,vertical,20260827,1280,720,12.1,8,-90,S097
+20260827_210150.mp4,video,pelicula-automotiva,5,retrato,galeria,Golf visto de tras e lado com vidros escurecidos e letreiro The Dark Film ao fundo,vertical,20260827,1280,720,9.5,6,-90,S097
+20260827_210316.mp4,video,outro,2,retrato,descartar,Painel e volante a noite imagem escura e com leve tremor,escuro;tremido;vertical,20260827,1280,720,15.7,10,-90,S069
+20260827_210338.mp4,video,outro,2,retrato,descartar,Painel e volante a noite mais desfocado que o anterior,escuro;tremido;vertical,20260827,1280,720,13.9,9,-90,S069
+20260827_210451.mp4,video,outro,4,retrato,galeria,Traseira do Golf GTI com emblema VW placa The Dark Film e lanterna acesa,vertical,20260827,1280,720,10.4,7,-90,S069
+IMG-20240119-WA0248.jpg,foto,som-acessorios,4,retrato,card-servico,Expositor de racks de teto e transbike na loja de acessorios,nenhum,20240119,3840,2160,1.9,,,S099
+IMG-20240201-WA0074.jpg,foto,som-acessorios,5,paisagem,card-servico,Expositor de racks de teto Farad com sinalizacao de marca na loja,nenhum,20240201,3840,2160,2.0,,,S100
+IMG-20250718-WA0128.jpg,foto,outro,3,retrato,galeria,Minimotos e scooters expostos na entrada da loja em piso xadrez,bagunca-no-fundo,20250718,3840,2160,1.5,,,S039
+IMG-20250917-WA0249.jpg,foto,outro,2,retrato,descartar,Bicicletas estilo antigo expostas em ambiente de bar com pessoas ao fundo,rosto-visivel,20250917,3840,2160,1.4,,,S041
+IMG-20260115-WA0030.jpg,foto,outro,4,paisagem,galeria,Mitsubishi Pajero branca estacionada na oficina,placa-visivel,20260115,3840,2160,1.5,,,S053
+IMG-20260115-WA0032.jpg,foto,outro,3,retrato,galeria,Mitsubishi Pajero branca dentro da oficina com bicicletas na parede,sequencia-parecida;placa-visivel,20260115,3840,2160,1.5,,,S053
+IMG-20260115-WA0034.jpg,foto,outro,4,retrato,galeria,Mitsubishi Pajero branca vista de tras com adesivo da bandeira do Brasil,placa-visivel;sequencia-parecida,20260115,3840,2160,1.8,,,S053
+IMG-20260115-WA0036.jpg,foto,outro,4,retrato,galeria,Mitsubishi Pajero branca vista de frente com mural de kombis ao fundo,placa-visivel;sequencia-parecida,20260115,3840,2160,1.6,,,S053
+IMG-20260522-WA0218.jpg,foto,outro,4,retrato,galeria,Geladeira personalizada The Dark Beer com bebidas na decoracao da loja,nenhum,20260522,3840,2160,1.2,,,S062
+VID-20260822-WA0013.mp4,video,envelopamento,4,retrato,bloco-servico,Mao segurando canto de manta/vinil branco opaco sobre mesa video curto,muito-curto;vertical,20260822,478,850,.4,1,0,S005
+VID-20260822-WA0014.mp4,video,envelopamento,5,retrato,bloco-servico,Mao com espatula azul aplicando vinil branco opaco sobre mesa video curto,muito-curto;vertical,20260822,478,850,.7,3,0,S005
+VID-20260822-WA0015.mp4,video,envelopamento,4,retrato,bloco-servico,Instalador descolando o papel de protecao de manta branca video curto,muito-curto;vertical,20260822,478,850,.6,3,0,S005
+VID-20260822-WA0016.mp4,video,pelicula-arquitetonica,4,retrato,bloco-servico,Painel de vidro com solucao de aplicacao borrifada cena ao ar livre,vertical,20260822,478,850,.9,4,0,S077
+VID-20260822-WA0017.mp4,video,envelopamento,4,retrato,bloco-servico,Mao descolando papel de manta branca sobre mesa dobravel ao ar livre,vertical,20260822,478,850,1.2,6,0,S005
+VID-20260822-WA0018.mp4,video,envelopamento,5,retrato,bloco-servico,Instalador levantando pelicula/PPF transparente molhada de um painel,vertical,20260822,478,850,1.0,5,0,S005
+VID-20260822-WA0019.mp4,video,envelopamento,5,retrato,bloco-servico,Mao com espatula rosa fazendo acabamento na borda de painel branco,vertical,20260822,478,850,.9,5,0,S005
+VID-20260827-WA0078.mp4,video,pelicula-arquitetonica,5,retrato,galeria,Corredor interno com porta de vidro fosco decorativo e parede de metro preto,vertical,20260827,478,850,5.0,21,0,S078
+VID-20260828-WA0010.mp4,video,outro,1,retrato,descartar,Imagem muito tremula de porta de madeira mao segurando ferramenta,tremido;vertical,20260828,478,850,2.1,12,0,S070
+VID-20260828-WA0012.mp4,video,pelicula-arquitetonica,5,retrato,galeria,Corredor com porta de madeira e divisoria de vidro fosco com friso laranja,vertical,20260828,478,850,1.0,6,0,S079

@@ -1,0 +1,66 @@
+arquivo,categoria,qualidade,orientacao_real,uso,descricao,flags
+20240327_144630.mp4,pelicula-automotiva,4,retrato,bloco-servico,Acabamento com politriz na borda do para-brisa apos instalacao de pelicula,rosto-visivel;vertical
+20240327_152441.mp4,pelicula-automotiva,1,retrato,descartar,Maos mexendo no vidro traseiro em cena escura e tremula dificil de identificar,escuro;tremido;vertical
+20240327_152515.mp4,pelicula-automotiva,1,retrato,descartar,Reflexo desfocado no para-brisa traseiro em imagem escura e ilegivel,escuro;tremido;vertical
+20240327_153501.mp4,pelicula-automotiva,2,retrato,descartar,Braco com pulseira da marca mexendo no vidro com logo Dark & Sound ao fundo,escuro;tremido;vertical
+20240524_143429.mp4,outro,4,retrato,galeria,Interior limpo de Audi com tapete e pedaleira sem pessoas,vertical
+20240524_143638.mp4,outro,4,retrato,galeria,Grade dianteira de Volvo com placa The Dark Film carro pronto,vertical
+20240524_143654.mp4,outro,4,retrato,galeria,Grade dianteira de VW Golf azul com placa da empresa,vertical
+20241127_131651.mp4,outro,2,retrato,descartar,Interior de Kombi camper com bandeira do Brasil na janela imagem tremula,tremido;vertical
+20241212_143853.mp4,outro,4,retrato,galeria,Kombi azul clara com placa The Dark Film na frente,vertical
+20241212_144439.mp4,outro,4,retrato,galeria,Kombi vista de outro angulo emblema VW e placa da empresa,vertical
+20250515_222420.mp4,som-acessorios,5,retrato,demo-som,Central multimidia instalada em Land Rover Defender tela com radio e CarPlay,vertical
+20250515_222558.mp4,som-acessorios,4,retrato,demo-som,Vista ampla do painel do Defender com central multimidia instalada,vertical
+20250531_122824(1).mp4,outro,5,retrato,galeria,Audi TT azul na frente com logo The Dark na parede da loja,vertical
+20250531_122824.mp4,outro,5,retrato,galeria,Audi TT azul na frente com logo The Dark na parede da loja duplicado,vertical
+20250531_122945.mp4,outro,5,retrato,galeria,Audi TT azul na traseira com placa The Dark Film e bandeira do Brasil,vertical
+20251113_124703(1).mp4,pelicula-automotiva,5,retrato,hero-video,Maos aplicando pelicula com espatula no vidro traseiro lateral por dentro do carro,vertical
+20251113_124703.mp4,pelicula-automotiva,5,retrato,bloco-servico,Mesma aplicacao de pelicula no vidro por dentro do carro duplicado,vertical
+20251113_124812(1).mp4,outro,4,retrato,bloco-servico,Funcionario de costas com camisa The Dark Film trabalhando em conversivel branco,vertical
+20251113_124812.mp4,outro,4,retrato,bloco-servico,Mesma cena do funcionario com o conversivel branco duplicado,vertical
+20251204_163359.mp4,loja-fachada,4,retrato,galeria,Replica de carro de F1 decorativa na loja paredes com placas antigas,vertical
+20251204_163421.mp4,loja-fachada,4,retrato,galeria,Replica de F1 outro angulo letreiro A1000m ao fundo,vertical
+20251204_163441.mp4,loja-fachada,4,retrato,galeria,Replica de F1 com letreiro The Dark film & sound ao fundo,vertical
+20251219_190818.mp4,som-acessorios,4,retrato,bloco-servico,Homem descendo de picape usando estribo eletrico retratil,rosto-visivel;vertical
+20251219_191023.mp4,outro,3,retrato,galeria,SUV Mitsubishi Triton na frente com placa The Dark Film em ambiente noturno,vertical
+20260130_111550.mp4,pelicula-arquitetonica,5,retrato,hero-video,Instalador aplicando pelicula em janela residencial com vista para morro,rosto-visivel;vertical
+20260323_133931.mp4,som-acessorios,4,retrato,bloco-servico,Tela multimidia mostrando camera 360 do carro no piso xadrez da loja,vertical
+20260402_003855.mp4,outro,4,retrato,galeria,Land Rover Defender azul na frente com placa The Dark Film video curto,muito-curto;vertical
+20260402_012820.mp4,outro,3,retrato,descartar,Vidro traseiro de Defender visto de dentro sem acao parado,vertical
+20260418_014422.mp4,pelicula-automotiva,3,retrato,bloco-servico,Dodge Challenger preto farol e para-brisa escurecido reflexos da loja,vertical
+20260418_014434.mp4,envelopamento,3,retrato,galeria,Camaro/Challenger preto com friso branco e vermelho DOMLUC e placa visivel,placa-visivel;vertical
+20260523_142335(1).mp4,pelicula-arquitetonica,3,retrato,bloco-servico,Instalador medindo e fixando painel de vidro em fachada escada ao lado,vertical
+20260523_142335.mp4,pelicula-arquitetonica,3,retrato,bloco-servico,Mesma cena de instalacao de vidro em fachada duplicado,vertical
+20260523_142434.mp4,pelicula-arquitetonica,4,retrato,bloco-servico,Painel grande de vidro com marcacoes de aplicacao em deposito/oficina,vertical
+20260523_163908.mp4,pelicula-arquitetonica,4,retrato,hero-video,Equipe instalando pelicula grande em vidro de guarda-corpo de praca de alimentacao,rosto-visivel;vertical
+20260523_163948.mp4,pelicula-arquitetonica,4,retrato,bloco-servico,Dois instaladores manuseando painel de vidro grande com pelicula praca de alimentacao,rosto-visivel;vertical
+20260523_163957.mp4,pelicula-arquitetonica,4,retrato,bloco-servico,Close do painel de vidro com adesivos de protecao piso de madeira ao fundo,vertical
+20260523_164130(1).mp4,pelicula-arquitetonica,5,retrato,bloco-servico,Mao passando espatula azul em painel de vidro molhado durante instalacao,vertical
+20260523_164130.mp4,pelicula-arquitetonica,5,retrato,bloco-servico,Mesma cena de espatula no vidro duplicado,vertical
+20260526_175550(1).mp4,pelicula-automotiva,3,retrato,galeria,Lanterna traseira com filme decorativo Mister Film iluminada a noite,escuro;vertical
+20260526_175550.mp4,pelicula-automotiva,3,retrato,galeria,Mesma lanterna traseira iluminada a noite duplicado,escuro;vertical
+20260723_124648.mp4,pelicula-automotiva,4,retrato,hero-video,Reflexo no para-brisa mostrando maos passando espatula na aplicacao da pelicula,vertical
+20260723_142648.mp4,pelicula-automotiva,5,retrato,hero-video,Instalador de bone passando espatula no vidro lateral do carro por fora,vertical
+20260827_205602.mp4,outro,4,retrato,galeria,Grade dianteira de VW Golf GTI com placa The Dark Film,vertical
+20260827_205619.mp4,pelicula-automotiva,3,retrato,galeria,Farol de GTI com detalhe vermelho capo e para-brisa escurecido,vertical
+20260827_205647(1).mp4,outro,4,retrato,galeria,Emblema GTI na grade com placa parcial The Dark,vertical
+20260827_205647.mp4,outro,4,retrato,galeria,Mesmo emblema GTI na grade duplicado,vertical
+20260827_205845.mp4,outro,3,retrato,descartar,Painel do carro a noite mostrando computador de bordo sem acao clara,escuro;vertical
+20260827_210009.mp4,pelicula-automotiva,4,retrato,bloco-servico,Traseira de VW Golf com placa da empresa e vidro traseiro visivelmente escurecido,vertical
+20260827_210032.mp4,outro,4,retrato,galeria,Close da lanterna traseira com emblema GTI,vertical
+20260827_210111.mp4,pelicula-automotiva,5,retrato,hero-video,Perfil lateral completo do Golf mostrando todos os vidros escurecidos,vertical
+20260827_210135.mp4,pelicula-automotiva,4,retrato,bloco-servico,Close da porta traseira do Golf com vidro escurecido,vertical
+20260827_210150.mp4,pelicula-automotiva,5,retrato,galeria,Golf visto de tras e lado com vidros escurecidos e letreiro The Dark Film ao fundo,vertical
+20260827_210316.mp4,outro,2,retrato,descartar,Painel e volante a noite imagem escura e com leve tremor,escuro;tremido;vertical
+20260827_210338.mp4,outro,2,retrato,descartar,Painel e volante a noite mais desfocado que o anterior,escuro;tremido;vertical
+20260827_210451.mp4,outro,4,retrato,galeria,Traseira do Golf GTI com emblema VW placa The Dark Film e lanterna acesa,vertical
+VID-20260822-WA0013.mp4,envelopamento,4,retrato,bloco-servico,Mao segurando canto de manta/vinil branco opaco sobre mesa video curto,muito-curto;vertical
+VID-20260822-WA0014.mp4,envelopamento,5,retrato,bloco-servico,Mao com espatula azul aplicando vinil branco opaco sobre mesa video curto,muito-curto;vertical
+VID-20260822-WA0015.mp4,envelopamento,4,retrato,bloco-servico,Instalador descolando o papel de protecao de manta branca video curto,muito-curto;vertical
+VID-20260822-WA0016.mp4,pelicula-arquitetonica,4,retrato,bloco-servico,Painel de vidro com solucao de aplicacao borrifada cena ao ar livre,vertical
+VID-20260822-WA0017.mp4,envelopamento,4,retrato,bloco-servico,Mao descolando papel de manta branca sobre mesa dobravel ao ar livre,vertical
+VID-20260822-WA0018.mp4,envelopamento,5,retrato,bloco-servico,Instalador levantando pelicula/PPF transparente molhada de um painel,vertical
+VID-20260822-WA0019.mp4,envelopamento,5,retrato,bloco-servico,Mao com espatula rosa fazendo acabamento na borda de painel branco,vertical
+VID-20260827-WA0078.mp4,pelicula-arquitetonica,5,retrato,galeria,Corredor interno com porta de vidro fosco decorativo e parede de metro preto,vertical
+VID-20260828-WA0010.mp4,outro,1,retrato,descartar,Imagem muito tremula de porta de madeira mao segurando ferramenta,tremido;vertical
+VID-20260828-WA0012.mp4,pelicula-arquitetonica,5,retrato,galeria,Corredor com porta de madeira e divisoria de vidro fosco com friso laranja,vertical

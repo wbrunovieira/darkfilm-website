@@ -1,0 +1,57 @@
+area,arquivo,tipo,categoria,qualidade,orientacao,alt,data,largura,altura,mb,sequencia
+aplicacao-filme-carros,20180120_152925.jpg,foto,envelopamento,5,retrato,Capo de Mustang preto e branco listrado com logo The Dark Film na frente,20180120,3096,4128,1.3,S001
+aplicacao-filme-carros,20240607_173054.jpg,foto,pelicula-automotiva,5,paisagem,Porsche Cayenne branco visto de tras com pelicula escura nos vidros,20240607,4080,3060,3.9,S083
+aplicacao-filme-carros,20240704_140557.jpg,foto,pelicula-automotiva,5,retrato,Porsche Panamera cinza visto de frente dentro da oficina,20240704,4080,3060,3.5,S084
+aplicacao-filme-carros,20240705_174919.jpg,foto,pelicula-automotiva,5,retrato,BYD preto visto de tras com vidros escurecidos e porta-placa The Dark Film,20240705,4080,3060,3.2,S085
+aplicacao-filme-carros,20240712_165418.jpg,foto,pelicula-automotiva,5,retrato,Peugeot 2008 azul visto de frente com faixa solar e vidros escurecidos,20240712,4080,3060,3.3,S086
+aplicacao-filme-carros,20250531_123256.jpg,foto,pelicula-automotiva,5,retrato,Audi TT azul estacionado na oficina com vidros escurecidos,20250531,4080,3060,3.7,S088
+aplicacao-filme-carros,20250913_130618.jpg,foto,pelicula-automotiva,5,retrato,Hatch elétrico cinza com vidros escurecidos por película na oficina,20250913,4080,3060,3.2,S090
+aplicacao-filme-carros,20251113_124703.mp4,video,pelicula-automotiva,5,retrato,Mesma aplicacao de pelicula no vidro por dentro do carro duplicado,20251113,1280,720,8.5,S091
+aplicacao-filme-carros,20260512_161759.jpg,foto,pelicula-automotiva,5,retrato,Adesivo do The Dark Film no vidro avisando para nao abrir janelas por 24 horas,20260512,4080,3060,2.7,S093
+aplicacao-filme-carros,20260723_142648.mp4,video,pelicula-automotiva,5,retrato,Instalador de bone passando espatula no vidro lateral do carro por fora,20260723,1280,720,11.1,S096
+aplicacao-filme-carros,20260827_210111.mp4,video,pelicula-automotiva,5,retrato,Perfil lateral completo do Golf mostrando todos os vidros escurecidos,20260827,1280,720,17.2,S097
+aplicacao-filme-carros,VID-20260822-WA0018.mp4,video,envelopamento,5,retrato,Instalador levantando pelicula/PPF transparente molhada de um painel,20260822,478,850,1.0,S005
+aplicacao-filme-carros,20260723_124648.mp4,video,pelicula-automotiva,4,retrato,Reflexo no para-brisa mostrando maos passando espatula na aplicacao da pelicula,20260723,1280,720,13.3,S095
+institucional,20240705_142317.jpg,foto,loja-fachada,5,paisagem,Fachada da loja The Dark Film em dia claro com placas 3M e Thule,20240705,4080,3060,4.8,S009
+institucional,20250718_122616.jpg,foto,loja-fachada,5,retrato,Fachada da loja The Dark Film com picape antiga estacionada na rua,20250718,4080,3060,4.7,S012
+institucional,20221018_172440.jpg,foto,loja-fachada,4,paisagem,Fachada com placa 3M Aplicador Autorizado e letreiro The Dark Film,20221018,4000,3000,2.4,S008
+institucional,20250924_173421.jpg,foto,loja-fachada,4,retrato,Bicicleta Harley-Davidson decorativa na entrada da loja em dia de chuva,20250924,4080,3060,3.3,S013
+institucional,20251204_163359.mp4,video,loja-fachada,4,retrato,Replica de carro de F1 decorativa na loja paredes com placas antigas,20251204,1280,720,19.0,S014
+vitrine,20230706_174852.jpg,foto,outro,5,retrato,Porsche 356 vermelho de corrida estacionado em frente a loja ao entardecer,20230706,4000,3000,3.5,S019
+vitrine,20231220_151831.jpg,foto,outro,5,retrato,Interior do Land Rover Defender com bancos e painel em couro caramelo,20231220,4080,3060,3.8,S021
+vitrine,20240327_143847.jpg,foto,outro,5,retrato,Detalhe de roda e pinca de freio vermelha em Porsche preto,20240327,4080,3060,3.6,S022
+vitrine,20240607_173126.jpg,foto,outro,5,paisagem,Interior do Porsche Cayenne com volante e painel em couro,20240607,4080,3060,4.5,S024
+vitrine,20240607_174233.jpg,foto,outro,5,retrato,Detalhe de roda e pinca de freio verde neon em Porsche Cayenne,20240607,4080,3060,3.9,S025
+vitrine,20240704_140528.jpg,foto,outro,5,retrato,Detalhe de roda Michelin e pinca de freio no Porsche Panamera,20240704,4080,3060,3.1,S026
+vitrine,20240705_174447.jpg,foto,outro,5,retrato,Sedan eletrico preto dentro da oficina com porta-placa The Dark Film,20240705,4080,3060,3.1,S027
+vitrine,20240712_164940.jpg,foto,outro,5,paisagem,Interior de Peugeot azul com volante e central multimidia,20240712,4080,3060,2.9,S028
+vitrine,20241213_204806.jpg,foto,outro,5,retrato,Adesivo decorativo em vidro lateral de carro esportivo clássico laranja,20241213,4080,3060,2.7,S032
+vitrine,20250508_141047.jpg,foto,outro,5,retrato,Chevrolet Opala vermelho customizado com portas abertas na oficina,20250508,4080,3060,3.7,S033
+vitrine,20250531_122824.mp4,video,outro,5,retrato,Audi TT azul na frente com logo The Dark na parede da loja duplicado,20250531,1920,1080,23.1,S036
+vitrine,20250617_124853.jpg,foto,outro,5,retrato,Interior de BMW com bancos de couro vermelho e painel digital,20250617,4080,3060,3.3,S037
+vitrine,20251107_194842.jpg,foto,outro,5,retrato,Picape azul customizada com rodas esportivas em frente a mural da loja,20251107,4080,3060,3.5,S047
+vitrine,20260402_004111.jpg,foto,outro,5,retrato,Land Rover Defender visto de tras com lanterna acesa e estepe grande,20260402,4080,3060,3.4,S056
+vitrine,20230130_162455.jpg,foto,outro,4,retrato,Parede de rodas e carros de clientes estacionados dentro da oficina,20230130,4000,3000,2.5,S018
+vitrine,20240524_143429.mp4,video,outro,4,retrato,Interior limpo de Audi com tapete e pedaleira sem pessoas,20240524,1920,1080,20.5,S023
+vitrine,20241003_110458.jpg,foto,outro,4,retrato,Decoracao da loja com TV antiga capacete stormtrooper e mascara Deadpool,20241003,4080,3060,3.2,S029
+vitrine,20241212_143853.mp4,video,outro,4,retrato,Kombi azul clara com placa The Dark Film na frente,20241212,1920,1080,28.8,S031
+vitrine,20250913_130723.jpg,foto,outro,4,retrato,Traseira de carro customizado com porta-placa The Dark Film e difusor vermelho,20250913,4080,3060,3.3,S040
+vitrine,20251008_100459.jpg,foto,outro,4,retrato,Scooter Lambretta 150 LD azul e creme na calçada em close-up,20251008,4080,3060,4.4,S045
+vitrine,20251113_124812.mp4,video,outro,4,retrato,Mesma cena do funcionario com o conversivel branco duplicado,20251113,1280,720,19.2,S048
+vitrine,20251204_163216.jpg,foto,outro,4,retrato,Réplica de carro de Fórmula 1 com pintura Marlboro exposta na loja,20251204,4080,3060,3.7,S051
+vitrine,20260204_160827.jpg,foto,outro,4,retrato,Detalhe de lanterna traseira e paralama de SUV preto customizado,20260204,4080,3060,3.1,S054
+vitrine,20260714_121053.jpg,foto,outro,4,retrato,Hatchback eletrico cinza exposto na oficina com faixa The Dark Film no para-brisa,20260714,4080,3060,3.3,S067
+vitrine,20260827_205647.mp4,video,outro,4,retrato,Mesmo emblema GTI na grade duplicado,20260827,1280,720,10.7,S069
+vitrine,IMG-20260522-WA0218.jpg,foto,outro,4,retrato,Geladeira personalizada The Dark Beer com bebidas na decoracao da loja,20260522,3840,2160,1.2,S062
+servico-multimidia,20250508_134152.jpg,foto,som-acessorios,5,retrato,Picape Toyota Hilux branca com capota marítima e santo-antônio instalados,20250508,4080,3060,3.2,S101
+servico-multimidia,20250515_222420.mp4,video,som-acessorios,5,retrato,Central multimidia instalada em Land Rover Defender tela com radio e CarPlay,20250515,1920,1080,119.7,S102
+servico-multimidia,IMG-20240201-WA0074.jpg,foto,som-acessorios,5,paisagem,Expositor de racks de teto Farad com sinalizacao de marca na loja,20240201,3840,2160,2.0,S100
+servico-multimidia,20260214_121844.jpg,foto,som-acessorios,4,retrato,Central multimídia instalada em painel; vitrine de produtos de som ao fundo,20260214,4080,3060,3.2,S106
+servico-multimidia,20260323_123440.jpg,foto,som-acessorios,4,retrato,Central multimidia grande instalada em painel de veiculo exibindo radio FM,20260323,4080,3060,3.1,S108
+servico-multimidia,20260323_133931.mp4,video,som-acessorios,4,retrato,Tela multimidia mostrando camera 360 do carro no piso xadrez da loja,20260323,1280,720,23.0,S109
+servico-multimidia,IMG-20240119-WA0248.jpg,foto,som-acessorios,4,retrato,Expositor de racks de teto e transbike na loja de acessorios,20240119,3840,2160,1.9,S099
+servico-arquitetura,20260523_164130.mp4,video,pelicula-arquitetonica,5,retrato,Mesma cena de espatula no vidro duplicado,20260523,1280,720,18.3,S075
+servico-arquitetura,VID-20260827-WA0078.mp4,video,pelicula-arquitetonica,5,retrato,Corredor interno com porta de vidro fosco decorativo e parede de metro preto,20260827,478,850,5.0,S078
+servico-arquitetura,VID-20260828-WA0012.mp4,video,pelicula-arquitetonica,5,retrato,Corredor com porta de madeira e divisoria de vidro fosco com friso laranja,20260828,478,850,1.0,S079
+servico-arquitetura,20260523_142434.mp4,video,pelicula-arquitetonica,4,retrato,Painel grande de vidro com marcacoes de aplicacao em deposito/oficina,20260523,1280,720,7.0,S074
+servico-arquitetura,VID-20260822-WA0016.mp4,video,pelicula-arquitetonica,4,retrato,Painel de vidro com solucao de aplicacao borrifada cena ao ar livre,20260822,478,850,.9,S077

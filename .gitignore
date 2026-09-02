@@ -4,3 +4,11 @@ app/.next
 app/out
 app/.env*
 app/.vercel
+
+# Mídia bruta enviada pelo cliente (1,5 GB) — só os derivados otimizados vão para app/public
+midia-cliente/originais
+midia-cliente/thumbs
+midia-cliente/frames
+
+# backups pontuais de correcao dos CSVs de catalogo
+midia-cliente/**/*.bak
