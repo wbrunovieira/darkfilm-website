@@ -52,7 +52,10 @@ export function Section({
             </div>
             {aside && <div className="mt-8">{aside}</div>}
           </Reveal>
-          <Reveal delay={0.1} className="prose-dark">
+          {/* Centralizado no eixo vertical: quando o texto é mais curto que a coluna
+              da esquerda (título + foto), alinhar pelo topo deixava um vão grande
+              embaixo. Centralizado, a sobra se divide e a composição fecha. */}
+          <Reveal delay={0.1} className="prose-dark md:self-center">
             {children}
           </Reveal>
         </div>

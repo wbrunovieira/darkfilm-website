@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
+import { CardVideo } from "@/components/CardVideo";
 import { IconList, Section, Stat, Tiles } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -32,11 +33,28 @@ const related = [
 ];
 
 /** Foto de apoio com moldura, legenda e leve zoom no hover. */
-function Photo({ src, alt, caption, w, h }: { src: string; alt: string; caption: string; w: number; h: number }) {
+function Photo({ src, alt, caption, w, h, pos = "center" }: { src: string; alt: string; caption: string; w: number; h: number; pos?: string }) {
   return (
     <figure className="group overflow-hidden border border-line bg-bg-2">
-      <div className="overflow-hidden">
-        <Image src={src} alt={alt} width={w} height={h} className="photo w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
+      {/* Proporção fixa de propósito: o texto ao lado tem ~250px e as fotos verticais
+          do material novo renderizavam a 800px, deixando um vão enorme na coluna da
+          direita. 4/3 devolve a altura que as imagens antigas tinham (~330px). */}
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <Image src={src} alt={alt} width={w} height={h} className="photo absolute inset-0 size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" style={{ objectPosition: pos }} />
+      </div>
+      <figcaption className="border-t border-line px-4 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">{caption}</figcaption>
+    </figure>
+  );
+}
+
+/** Mesma moldura do Photo, com vídeo mudo no lugar da imagem. Os vídeos de
+    arquitetura do cliente são todos verticais, e a coluna estreita da Section é
+    justamente onde esse formato funciona bem. */
+function VideoFigure({ src, poster, caption }: { src: string; poster: string; caption: string }) {
+  return (
+    <figure className="group overflow-hidden border border-line bg-bg-2">
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <CardVideo src={src} poster={poster} className="absolute inset-0 size-full object-cover" />
       </div>
       <figcaption className="border-t border-line px-4 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">{caption}</figcaption>
     </figure>
@@ -57,7 +75,11 @@ export default function LinhaArquitetonicaPage() {
           </>
         }
         intro="A utilização de film em vidros residenciais, comerciais e industriais produz solução atrativa e eficiente: segurança, privacidade, economia e decoração."
-        image="/img/hero/arquitetonica.jpg"
+        image="/img/novo/arquitetonica--paineis-vidro-obra.jpg"
+        /* O quadro é vertical (720x1280) e o hero é uma faixa larga: 22% da altura
+           é onde entram o andaime e a estrutura do prédio, que dão a leitura de obra.
+           Mais abaixo só aparece o vidro isolado, que fica abstrato. */
+        imagePosition="center 22%"
       />
 
       {/* Os quatro pilares do texto de abertura + números do corpo, num só bloco de atmosfera. */}
@@ -115,7 +137,7 @@ export default function LinhaArquitetonicaPage() {
         eyebrow="Privacidade"
         title="Ver sem ser visto."
         tone="atmo-cool"
-        aside={<Photo src="/img/peliculas/privacidade.jpg" alt="Guarita com vidros com película reflexiva" caption="Guarita com film reflexivo" w={319} h={250} />}
+        aside={<Photo src="/img/novo/arquitetonica--vidro-jateado-corredor.jpg" alt="Porta de vidro jateado separando um corredor revestido de pastilha preta" caption="Vidro jateado em corredor" w={478} h={850} pos="center 38%" />}
       >
         <p>
           Alguns films são altamente reflexivos, permitindo a visão de dentro para fora, mas não
@@ -137,6 +159,13 @@ export default function LinhaArquitetonicaPage() {
         index="03"
         eyebrow="Economia"
         title="Redução dos custos de refrigeração."
+        aside={
+          <VideoFigure
+            src="/video/arquitetonica-espatula.mp4"
+            poster="/video/arquitetonica-espatula.jpg"
+            caption="Aplicação em painel de vidro"
+          />
+        }
         after={
           <RevealGroup className="grid gap-3 md:grid-cols-2" stagger={0.1}>
             <RevealItem className="pel-tile">
@@ -179,7 +208,7 @@ export default function LinhaArquitetonicaPage() {
         eyebrow="Estética"
         title="Aparência adequada e decoração de interiores."
         tone="atmo"
-        aside={<Photo src="/img/peliculas/decorativa.jpg" alt="Vidro com película decorativa jateada" caption="Film decorativo jateado" w={317} h={173} />}
+        aside={<Photo src="/img/novo/arquitetonica--divisoria-faixa-laranja.jpg" alt="Divisórias de vidro de escritório com faixa decorativa laranja aplicada" caption="Divisória de escritório com faixa" w={478} h={850} pos="center 45%" />}
         after={
           <Tiles
             columns={3}
