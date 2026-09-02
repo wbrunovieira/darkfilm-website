@@ -77,45 +77,45 @@ export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
 /* ---------- Diagrama do carro (vista lateral, frente à esquerda) ---------- */
 // Áreas de vidro em coordenadas do viewBox 0 0 400 150. Só apresentação: os controles
 // reais são os radios; o SVG é aria-hidden e apenas atalho de clique.
+/* Pictograma, não ilustração realista.
+   Tentar imitar um carro de verdade em SVG à mão cai no meio-termo: nem foto, nem
+   diagrama — e meio-termo lê como amador. Aqui a linguagem é a de um desenho
+   técnico: traço único, sem gradiente, sem falso cromado, sem detalhe supérfluo.
+   O que precisa ficar evidente é QUAL vidro está selecionado, não a marca do carro. */
 const CAR_GLASS: { id: VidroId; points: string }[] = [
-  { id: "parabrisa", points: "136,34 160,34 116,84 90,84" },
-  { id: "dianteiras", points: "166,34 212,34 212,84 122,84" },
-  { id: "traseiras", points: "218,34 266,34 266,84 218,84" },
-  { id: "traseiras", points: "272,34 290,34 322,84 300,84" },
+  { id: "parabrisa", points: "108,46 134,24 151,23 129,46" },
+  { id: "dianteiras", points: "157,23 194,22 194,46 135,46" },
+  { id: "traseiras", points: "200,22 236,21 236,46 200,46" },
+  { id: "traseiras", points: "242,21 251,22 265,45 242,46" },
 ];
 
 function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) => void }) {
+  const traco = "rgba(255,255,255,0.55)";
   return (
     <svg
       aria-hidden
-      viewBox="0 0 400 150"
+      viewBox="0 0 360 130"
       className="block w-full select-none"
-      style={{ maxHeight: 220 }}
+      style={{ maxHeight: 200 }}
     >
-      {/* sombra no chão */}
-      <ellipse cx="200" cy="134" rx="190" ry="6" fill="rgba(0,0,0,0.5)" />
-      {/* carroceria */}
+      {/* Carroceria: um só contorno, espessura constante. */}
       <path
-        d="M14 120 L14 96 Q16 86 40 82 L82 78 L130 30 Q138 24 160 24 L268 24 Q286 24 300 36 L338 78 L376 84 Q388 88 388 100 L388 120 Z"
-        fill="#1d1f24"
-        stroke="rgba(255,255,255,0.3)"
-        strokeWidth="1.5"
+        d="M16,88 C16,80 19,74 27,72 L48,66 C68,58 86,52 104,48 L134,26 C140,22 148,20 158,20 L224,19 C236,19 242,21 246,26 L266,48 C288,52 312,56 330,60 C340,63 344,70 344,78 L344,90 C344,95 341,98 336,98 L286,98 A18,18 0 0,0 250,98 L104,98 A18,18 0 0,0 68,98 L24,98 C19,98 16,94 16,88 Z"
+        fill="rgba(255,255,255,0.045)"
+        stroke={traco}
+        strokeWidth="1.6"
         strokeLinejoin="round"
       />
-      {/* linha de cintura + portas */}
-      <path d="M82 84 L338 84" stroke="rgba(255,255,255,0.14)" strokeWidth="1" />
-      <path d="M215 30 L215 116 M269 30 L269 116" stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
-      {/* faróis */}
-      <rect x="16" y="92" width="14" height="8" rx="2" fill="rgba(255,255,255,0.5)" />
-      <rect x="370" y="92" width="14" height="8" rx="2" fill="rgba(226,32,40,0.7)" />
-      {/* rodas */}
-      {[92, 310].map((cx) => (
+      {/* Cintura: separa a estufa da lataria. */}
+      <path d="M104,48 L266,48" stroke={traco} strokeWidth="1.6" />
+      {/* Rodas: círculo e cubo, sem raios — a esse tamanho, raio vira ruído. */}
+      {[86, 268].map((cx) => (
         <g key={cx}>
-          <circle cx={cx} cy="120" r="22" fill="#0b0b0d" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" />
-          <circle cx={cx} cy="120" r="9" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" />
+          <circle cx={cx} cy="98" r="18" fill="var(--color-bg-2, #121316)" stroke={traco} strokeWidth="1.6" />
+          <circle cx={cx} cy="98" r="6" fill="none" stroke={traco} strokeWidth="1.4" />
         </g>
       ))}
-      {/* vidros clicáveis */}
+      {/* Vidros */}
       {CAR_GLASS.map((g, i) => {
         const on = g.id === vidro;
         return (
@@ -124,15 +124,14 @@ function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) =>
             points={g.points}
             onClick={() => onPick(g.id)}
             className="cursor-pointer transition-[fill,stroke] duration-200"
-            fill={on ? "rgba(226,32,40,0.55)" : "rgba(140,170,200,0.18)"}
-            stroke={on ? "#ff4d55" : "rgba(255,255,255,0.35)"}
-            strokeWidth={on ? 2 : 1}
+            fill={on ? "rgba(226,32,40,0.5)" : "rgba(255,255,255,0.1)"}
+            stroke={on ? "#ff4d55" : traco}
+            strokeWidth={on ? 2.2 : 1.6}
             strokeLinejoin="round"
           />
         );
       })}
-      {/* seta "frente" */}
-      <text x="18" y="142" fill="rgba(255,255,255,0.45)" fontSize="9" letterSpacing="1.5" fontFamily="inherit">
+      <text x="16" y="122" fill="rgba(255,255,255,0.4)" fontSize="8" letterSpacing="1.8" fontFamily="inherit">
         ◀ FRENTE
       </text>
     </svg>
