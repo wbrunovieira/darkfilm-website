@@ -6,8 +6,8 @@
   "photos": [
    {
     "src": "/img/novo/vitrine--porsche-356-fachada-noite.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Porsche 356 vermelho em frente à loja The Dark Film ao anoitecer",
     "novo": true
    },
@@ -20,8 +20,8 @@
    },
    {
     "src": "/img/novo/vitrine--land-rover-defender-interior.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Interior do Land Rover Defender com acabamento caramelo",
     "novo": true
    }
@@ -48,8 +48,8 @@
    },
    {
     "src": "/img/novo/aplicacao-carros--porsche-panamera-frente-pelicula.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Porsche Panamera cinza com película aplicada, de frente",
     "novo": true
    },
@@ -62,8 +62,8 @@
    },
    {
     "src": "/img/novo/aplicacao-carros--audi-tt-frente-pelicula.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Audi TT azul com película aplicada, de frente na oficina",
     "novo": true
    },
@@ -545,15 +545,15 @@
   "photos": [
    {
     "src": "/img/novo/multimidia--central-multimidia-android-tela.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Central multimídia com tela Android instalada e ligada no painel",
     "novo": true
    },
    {
     "src": "/img/novo/multimidia--defender-central-multimidia.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Central multimídia instalada no painel de um Land Rover Defender",
     "novo": true
    },
@@ -727,8 +727,8 @@
    },
    {
     "src": "/img/novo/institucional--fachada-pickup-antiga.jpg",
-    "w": 2000,
-    "h": 1500,
+    "w": 1500,
+    "h": 2000,
     "alt": "Fachada da loja com picape Ford antiga estacionada em frente",
     "novo": true
    }

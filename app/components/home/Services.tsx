@@ -21,13 +21,14 @@ const featured: { href: string; title: string; text: string; img: string; icon: 
     href: "/linha-automotiva",
     title: "Linha Automotiva",
     text: "Film de linha profissional com proteção anti-risco e encolhimento térmico: aplicação perfeita, sem emendas em vidros boleados.",
-    img: "/img/galeria/09.jpg",
+    img: "/img/novo/aplicacao-carros--audi-tt-frente-pelicula.jpg",
     icon: FilmAutoIcon,
   },
   {
     href: "/linha-arquitetonica",
     title: "Linha Arquitetônica",
     text: "Segurança e proteção, privacidade, redução da descoloração, decoração de interiores e redução dos custos de refrigeração.",
+    // pendente: nenhuma foto nova de linha arquitetônica veio no material do cliente
     img: "/img/hero/arquitetonica.jpg",
     icon: FilmArchIcon,
   },
@@ -35,14 +36,14 @@ const featured: { href: string; title: string; text: string; img: string; icon: 
     href: "/som-e-acessorios",
     title: "Som & Acessórios",
     text: "As melhores soluções no mercado de som e acessórios você encontra aqui. Venha nos fazer uma visita.",
-    img: "/img/hero/som.jpg",
+    img: "/img/novo/multimidia--peugeot-208-painel-multimidia.jpg",
     icon: SoundIcon,
   },
 ];
 
 const more: { href: string; title: string; img: string; icon: Icon }[] = [
   { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos/parabrisa.jpg", icon: WindshieldIcon },
-  { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/servicos/envelopamento.jpg", icon: WrapIcon },
+  { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/novo/aplicacao-carros--mustang-envelopamento-listras.jpg", icon: WrapIcon },
   { href: "/produtos/lavagem-a-seco", title: "Lavagem a seco", img: "/img/servicos/lavagem.jpg", icon: DryWashIcon },
   { href: "/produtos/polimento-dos-farois", title: "Polimento dos faróis", img: "/img/servicos/farois.jpg", icon: HeadlightIcon },
 ];

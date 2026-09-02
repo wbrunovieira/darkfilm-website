@@ -4,7 +4,31 @@ import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
 
 // 1 foto grande (2 colunas) + 4 = duas linhas fechadas no grid de 3 colunas.
-const photos = ["08", "10", "11", "12", "09"];
+// A primeira é 16/9 e as outras 4/3, então todas aqui precisam ser paisagem.
+// Material novo do cliente (2024-2026); o `alt` descreve cada foto, em vez do
+// texto genérico que valia para todas.
+const photos = [
+  {
+    src: "/img/novo/vitrine--land-rover-defender-perfil.jpg",
+    alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--byd-sedan-frente-pelicula.jpg",
+    alt: "Sedã BYD preto com película aplicada, de frente, na oficina",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--porsche-cayenne-traseira-pelicula.jpg",
+    alt: "Porsche Cayenne branco com película nos vidros, visto de trás",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-pelicula.jpg",
+    alt: "Peugeot 2008 azul com película nos vidros, visto de trás",
+  },
+  {
+    src: "/img/novo/multimidia--racks-de-teto-transbike.jpg",
+    alt: "Racks de teto e suporte transbike expostos na loja",
+  },
+];
 
 export function GalleryPreview() {
   return (
@@ -29,15 +53,15 @@ export function GalleryPreview() {
         <RevealGroup stagger={0.1} className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {photos.map((p, i) => (
             <RevealItem
-              key={p}
+              key={p.src}
               className={`photo-tile relative overflow-hidden rounded-md border border-line ${
                 i === 0 ? "col-span-2 aspect-[16/9] md:col-span-2" : "aspect-[4/3]"
               }`}
             >
               <Link href="/galeria" className="absolute inset-0 block focus-visible:outline-2 focus-visible:outline-fg">
                 <Image
-                  src={`/img/galeria/${p}.jpg`}
-                  alt="Trabalho realizado pela The Dark Film"
+                  src={p.src}
+                  alt={p.alt}
                   fill
                   sizes={i === 0 ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 50vw"}
                   className="photo object-cover"

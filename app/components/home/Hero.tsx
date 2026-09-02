@@ -55,17 +55,17 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden grain">
-      {/* Foto de fundo: Kombi da The Dark Film dentro da oficina (álbum de eventos, 2014).
-          Reposicionada à direita para que o texto assente sobre a parte mais escura da
-          oficina, e não sobre o mosaico. */}
+      {/* Foto de fundo: fachada da loja na Rua Cel. Veiga, com os selos 3M e Thule visíveis
+          (material novo do cliente, 2024). Enquadrada em 62% da altura para que o letreiro
+          e a vitrine fiquem visíveis: acima disso entra o barranco, abaixo entra o asfalto. */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/img/hero/oficina-kombi.jpg"
+          src="/img/novo/institucional--fachada-loja-dia.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="photo-hero object-cover object-[78%_60%] animate-slow-zoom"
+          className="photo-hero object-cover object-[50%_62%] animate-slow-zoom"
         />
         <div className="tint-overlay-hero" />
       </div>
