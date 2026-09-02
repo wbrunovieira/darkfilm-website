@@ -82,8 +82,8 @@ export default function AEmpresaPage() {
           </>
         }
         intro="Fundada em 1992, em Petrópolis-RJ, a The Dark Film vem prestando serviços de alto nível para seus clientes, tornando-se a mais experiente e reconhecida no mercado."
-        image="/img/marca/loja.jpg"
-        imagePosition="center 40%"
+        image="/img/novo/institucional--fachada-3m-entardecer.jpg"
+        imagePosition="center 38%"
       />
 
       {/* ---------- Números ---------- */}
@@ -266,8 +266,8 @@ export default function AEmpresaPage() {
           transition={{ duration: 1.4, ease }}
         >
           <Image
-            src="/img/marca/loja.jpg"
-            alt="Fachada e interior da loja da The Dark Film, na Rua Cel. Veiga, em Petrópolis"
+            src="/img/novo/institucional--fachada-3m-entardecer.jpg"
+            alt="Fachada da The Dark Film ao entardecer, com o selo de aplicador autorizado 3M"
             fill
             sizes="100vw"
             className="duotone object-cover"
