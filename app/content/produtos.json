@@ -227,6 +227,11 @@
   "description": "<p> Linha completa de bagageiros de teto, racks, simples e esportivos,  e  transbikes....</p> <p> As melhores marcas Motobul, Eqmax, Projecar....</p> <p> Venha conferir....</p>",
   "photos": [
    {
+    "src": "/img/novo/produtos--racks-teto-farad.jpg",
+    "w": 1400,
+    "h": 788
+   },
+   {
     "src": "/img/produtos/bagageiros-e-racks-1.jpg",
     "w": 1000,
     "h": 1000
@@ -388,6 +393,11 @@
   "category": 3,
   "description": "<p> Capotas Marítimas Flash Cover</p> <p> Com características únicas, projetada seguindo os padrões automotivos da atualidade, onde as formas quadradas dão lugar as curvas. O novo designer dá um ar mais sutil à capota.</p>",
   "photos": [
+   {
+    "src": "/img/novo/produtos--hilux-capota-maritima.jpg",
+    "w": 1400,
+    "h": 1866
+   },
    {
     "src": "/img/produtos/capotas-maritimas-1.jpg",
     "w": 1000,
@@ -563,6 +573,11 @@
   "category": 3,
   "description": "<p> Variada linha de kits multimídia, para veículos nacionais e importados...</p>",
   "photos": [
+   {
+    "src": "/img/novo/produtos--central-multimidia-instalada.jpg",
+    "w": 1400,
+    "h": 1866
+   },
    {
     "src": "/img/produtos/kits-multimidia-1.jpg",
     "w": 400,

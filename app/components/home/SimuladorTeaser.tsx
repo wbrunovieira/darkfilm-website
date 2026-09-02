@@ -68,7 +68,7 @@ export function SimuladorTeaser() {
                 <div className="absolute inset-0" style={{ clipPath: `polygon(${WINDOW_POLY})` }}>
                   <Image
                     src="/img/simulador/cena.jpg"
-                    alt="Rua vista através do vidro lateral de um carro"
+                    alt="Rua Cel. Veiga vista através do vidro, com a simulação de tonalidade aplicada"
                     fill
                     sizes="(min-width: 1024px) 55vw, 100vw"
                     className="object-cover object-[center_28%]"

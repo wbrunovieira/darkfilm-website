@@ -151,7 +151,11 @@ function StepBadge({ n }: { n: number }) {
 }
 
 export function TintSimulator({
-  image = "/img/simulador/cena.jpg",
+  /* A cena anterior era um Lamborghini numa rua dos Estados Unidos ("7 Street",
+     palmeiras, semáforo americano), com marca d'água carimbada, pessoas
+     identificáveis e placas legíveis — e quase certamente não era foto do cliente.
+     Trocada pela Rua Cel. Veiga em dia claro, foto dele, sem placa nem rosto. */
+  image = "/img/novo/simulador--rua-cel-veiga.jpg",
   showHeading = true,
 }: {
   image?: string;

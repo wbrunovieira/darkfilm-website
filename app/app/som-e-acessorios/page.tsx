@@ -25,7 +25,11 @@ export default function SomEAcessoriosPage() {
           </>
         }
         intro="Trabalhamos com toda linha de equipamentos nacionais e importados, kits multimídia, alarmes, sensores de ré, xenon, amplificadores, subwoofers, engates e acessórios em geral. Faça-nos uma visita!"
-        image="/img/hero/som.jpg"
+        /* Painel de Volvo com a central instalada e a câmera de ré na tela, com a parede
+           da oficina aparecendo pelo para-brisa: liga o equipamento ao lugar onde ele é
+           instalado. Enquadrado a 38% para cortar as pernas de quem fotografou, no rodapé. */
+        image="/img/novo/multimidia--volvo-camera-re.jpg"
+        imagePosition="center 38%"
       />
 
       <section className="relative isolate overflow-hidden border-t border-line py-14 md:py-20">

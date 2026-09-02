@@ -65,7 +65,12 @@ export default function CaracteristicasPage() {
             espessura. É adesivado, aplicável em qualquer tipo de vidro.
           </p>
         }
-        image="/img/peliculas/insulfim2.jpg"
+        /* Quadro de vídeo do cliente: a mão com a espátula assentando o filme no
+           para-brisa, vista através do próprio vidro. Substitui uma foto de 450x300
+           que era esticada como banner. O quadro é vertical (720x1280) e o hero é
+           faixa larga, então o enquadramento pega a altura da mão. */
+        image="/img/novo/caracteristicas--espatula-parabrisa.jpg"
+        imagePosition="center 45%"
       />
 
       {/* Anatomia do film, em três palavras do próprio texto: cor, metalização, espessura. */}

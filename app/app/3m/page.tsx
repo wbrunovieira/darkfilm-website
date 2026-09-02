@@ -171,7 +171,11 @@ export default function TresMPage() {
           </>
         }
         intro="Melhoria do conforto e proteção do interior do veículo e dos seus ocupantes é uma marca registrada das Películas para Vidros da 3M da Linha Automotiva. A 3M inventou as películas para vidros em 1966 e seus produtos vêm fornecendo proteção contra os raios solares há mais de 40 anos."
-        image="/img/peliculas/imgMostruarioFilm.jpg"
+        /* Antes o hero era o mostruário de tonalidades, de 400x266, esticado como banner.
+           Agora é o próprio selo na fachada da loja: "3M · Aplicador Autorizado Automotivo
+           · Películas para Vidros", com o número 1767 e o letreiro da casa. */
+        image="/img/novo/institucional--selo-3m-fachada.jpg"
+        imagePosition="center 40%"
       />
 
       <section className="pel-atmo relative overflow-hidden border-t border-line">

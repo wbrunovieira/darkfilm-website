@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { GoogleBadge } from "@/components/GoogleBadge";
@@ -183,6 +184,24 @@ export default function ContatoPage() {
             </div>
           </Reveal>
 
+          {/* Foto ao lado do mapa: o mapa diz onde é, a foto diz como o lugar se
+              parece. Quem chega de carro reconhece a fachada antes do número. */}
+          <div className="grid gap-4 md:grid-cols-[1fr_1.6fr]">
+          <Reveal
+            delay={0.05}
+            className="relative overflow-hidden rounded-lg border border-line"
+          >
+            <Image
+              src="/img/novo/institucional--fachada-picape-antiga.jpg"
+              alt="Fachada da The Dark Film na Rua Cel. Veiga, com uma picape Ford antiga estacionada em frente"
+              width={1400}
+              height={1867}
+              sizes="(min-width: 768px) 33vw, 100vw"
+              className="photo h-[400px] w-full object-cover md:h-[500px]"
+            />
+            <div aria-hidden className="tint-overlay" />
+          </Reveal>
+
           <Reveal
             delay={0.1}
             className="map-wrap relative overflow-hidden rounded-lg border border-line"
@@ -203,6 +222,7 @@ export default function ContatoPage() {
               The Dark Film &amp; Sound
             </div>
           </Reveal>
+          </div>
         </div>
       </section>
     </>
