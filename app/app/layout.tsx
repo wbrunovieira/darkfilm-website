@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { ChromeDoSite } from "@/components/ChromeDoSite";
 import { MotionProvider } from "@/components/MotionProvider";
 import { site, siteUrl, telefonePrincipal } from "@/lib/site";
 
@@ -72,10 +70,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="pt-BR" className={`${display.variable} ${body.variable} h-full`}>
       <body className="min-h-full flex flex-col">
         <MotionProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
+          <ChromeDoSite>
+            <main className="flex-1">{children}</main>
+          </ChromeDoSite>
         </MotionProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
