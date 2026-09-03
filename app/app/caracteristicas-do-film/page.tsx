@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Section, Stat } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ProximoPasso } from "@/components/ProximoPasso";
 import {
   BuildingIcon,
   ColorIcon,
@@ -181,6 +182,15 @@ export default function CaracteristicasPage() {
           raios ultravioleta, protegendo o ambiente dos danos causados pela ação solar.
         </p>
       </Section>
+
+      <ProximoPasso
+        titulo="Onde aplicar"
+        itens={[
+          { href: "/peliculas-automotivas", label: "Películas Automotivas", texto: "Controle solar e segurança para o seu carro." },
+          { href: "/peliculas-arquitetonicas", label: "Películas Arquitetônicas", texto: "Vidros de casa, escritório e fachada." },
+          { href: "/3m", label: "Credenciada 3M", texto: "Por que a credencial importa na hora de escolher." },
+        ]}
+      />
 
       <ContactCTA />
     </>

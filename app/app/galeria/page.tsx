@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { GalleryArea } from "@/components/GalleryArea";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ProximoPasso } from "@/components/ProximoPasso";
 import areas from "@/content/galeria-areas.json";
 
 export const metadata: Metadata = {
@@ -44,6 +45,15 @@ export default function GaleriaPage() {
       {areas.map((a, i) => (
         <GalleryArea key={a.id} area={a} index={i} />
       ))}
+
+      <ProximoPasso
+        titulo="O que fazemos"
+        itens={[
+          { href: "/peliculas-automotivas", label: "Películas Automotivas", texto: "Película de controle solar e segurança, e envelopamento." },
+          { href: "/som-e-acessorios", label: "Som e Acessórios", texto: "Multimídia, alarmes, sensores e acessórios." },
+          { href: "/a-empresa", label: "A Empresa", texto: "Quem faz esses trabalhos, em Petrópolis desde 1992." },
+        ]}
+      />
 
       <ContactCTA />
     </>

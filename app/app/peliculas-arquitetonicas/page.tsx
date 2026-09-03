@@ -6,6 +6,7 @@ import { CardVideo } from "@/components/CardVideo";
 import { IconList, Section, Stat, Tiles } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ProximoPasso } from "@/components/ProximoPasso";
 import { ArrowIcon } from "@/components/icons";
 import {
   BuildingIcon,
@@ -257,6 +258,15 @@ export default function LinhaArquitetonicaPage() {
           ))}
         </RevealGroup>
       </section>
+
+      <ProximoPasso
+        titulo="Continue por aqui"
+        itens={[
+          { href: "/3m", label: "Credenciada 3M", texto: "As linhas 3M e por que a credencial importa." },
+          { href: "/caracteristicas-do-film", label: "Características do Film", texto: "O que a película faz com o calor, o brilho e o UV." },
+          { href: "/galeria", label: "Galeria de trabalhos", texto: "Aplicações reais em vidro residencial e comercial." },
+        ]}
+      />
 
       <ContactCTA />
     </>

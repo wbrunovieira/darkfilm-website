@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Suspense } from "react";
 import { Catalogo } from "@/components/Catalogo";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Reveal } from "@/components/Reveal";
@@ -50,11 +49,7 @@ export default function SomEAcessoriosPage() {
               Cada item abre uma página com fotos e descrição. Disponibilidade e valores sob consulta pelo WhatsApp.
             </p>
           </Reveal>
-          {/* useSearchParams precisa de limite de Suspense numa página estática: o filtro e a
-              busca agora vivem na URL para que o Voltar devolva a lista que a pessoa deixou. */}
-          <Suspense fallback={null}>
-            <Catalogo items={catalogoSom} />
-          </Suspense>
+          <Catalogo items={catalogoSom} />
         </div>
       </section>
 

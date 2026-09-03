@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { grupos, grupoDe, type Produto } from "@/lib/produtos";
 import { whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
@@ -18,35 +18,59 @@ function normalize(s: string) {
 
 export function Catalogo({ items }: { items: Produto[] }) {
   /**
-   * Filtro e busca vivem na URL, não em `useState`.
+   * Filtro e busca ficam refletidos na URL, mas o ESTADO é local.
    *
-   * Com estado local acontecia isto, medido: filtrar "Iluminação" (5 itens), abrir um produto e
-   * voltar devolvia a lista em "Todos" (41 itens) — com o scroll restaurado na mesma altura, ou
-   * seja, a tela apontando para produtos completamente diferentes. Era o momento literal do
-   * "cada hora clico num link e não sei onde estou" que o cliente relatou.
+   * O problema original: com estado só local, filtrar "Iluminação" (5 itens), abrir um produto
+   * e voltar devolvia a lista em "Todos" (41 itens) — com o scroll restaurado na mesma altura,
+   * a tela apontando para produtos completamente diferentes. Era o momento literal do "cada
+   * hora clico num link e não sei onde estou" que o cliente relatou.
    *
-   * De quebra, o link vira compartilhável e o breadcrumb das páginas de produto passa a ter para
-   * onde apontar quando cita o grupo.
+   * A primeira tentativa foi ler direto de `useSearchParams`. Funcionou para o Voltar e quebrou
+   * outra coisa: isso tira o componente da pré-renderização estática, e os 41 links de produto
+   * sumiram do HTML publicado — justamente a página que é a porta de entrada para as 45 páginas
+   * de produto. Conferido no build: 41 links no HTML servido em dev, 0 no estático.
+   *
+   * Por isso o desenho é este: o servidor renderiza a lista inteira (crawlable), e a URL é
+   * espelho do estado, lida uma vez na montagem. Voltar remonta o componente e o filtro volta.
    */
   const router = useRouter();
-  const params = useSearchParams();
-  const grupo = params.get("grupo") ?? "todos";
-  const q = params.get("q") ?? "";
+  const [grupo, setGrupoState] = useState<string>("todos");
+  const [q, setQState] = useState("");
 
-  const setParam = useCallback(
-    (chave: string, valor: string, padrao: string) => {
-      const next = new URLSearchParams(params.toString());
-      if (valor === padrao) next.delete(chave);
-      else next.set(chave, valor);
-      const qs = next.toString();
-      // `replace` para não encher o histórico: o Voltar deve sair do catálogo,
-      // não desfazer letra por letra o que foi digitado na busca.
-      router.replace(qs ? `?${qs}` : "?", { scroll: false });
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    setGrupoState(p.get("grupo") ?? "todos");
+    setQState(p.get("q") ?? "");
+  }, []);
+
+  const espelhar = useCallback(
+    (proxGrupo: string, proxQ: string) => {
+      const p = new URLSearchParams(window.location.search);
+      if (proxGrupo === "todos") p.delete("grupo");
+      else p.set("grupo", proxGrupo);
+      if (!proxQ) p.delete("q");
+      else p.set("q", proxQ);
+      const qs = p.toString();
+      // `replace` para o Voltar sair do catálogo, e não desfazer letra por letra a busca
+      router.replace(qs ? `?${qs}` : window.location.pathname, { scroll: false });
     },
-    [params, router],
+    [router],
   );
-  const setGrupo = useCallback((v: string) => setParam("grupo", v, "todos"), [setParam]);
-  const setQ = useCallback((v: string) => setParam("q", v, ""), [setParam]);
+
+  const setGrupo = useCallback(
+    (v: string) => {
+      setGrupoState(v);
+      espelhar(v, q);
+    },
+    [espelhar, q],
+  );
+  const setQ = useCallback(
+    (v: string) => {
+      setQState(v);
+      espelhar(grupo, v);
+    },
+    [espelhar, grupo],
+  );
 
   const counts = useMemo(() => {
     const m: Record<string, number> = { todos: items.length };

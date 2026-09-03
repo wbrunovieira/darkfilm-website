@@ -4,6 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Callout, IconList, Stat } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
+import { ProximoPasso } from "@/components/ProximoPasso";
 import {
   AlertIcon,
   ColorIcon,
@@ -295,6 +296,15 @@ export default function TresMPage() {
           </div>
         </div>
       </section>
+
+      <ProximoPasso
+        titulo="Veja a 3M aplicada"
+        itens={[
+          { href: "/peliculas-automotivas", label: "Películas Automotivas", texto: "Como aplicamos no seu carro, e o que a lei permite em cada vidro." },
+          { href: "/galeria", label: "Galeria de trabalhos", texto: "Fotos reais de aplicação saídas da nossa oficina." },
+          { href: "/simulador", label: "O que a lei permite", texto: "O mínimo de transmissão luminosa exigido em cada vidro." },
+        ]}
+      />
 
       <ContactCTA />
     </>
