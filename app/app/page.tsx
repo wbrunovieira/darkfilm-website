@@ -5,7 +5,6 @@ import { Seal3M } from "@/components/home/Seal3M";
 import { SimuladorTeaser } from "@/components/home/SimuladorTeaser";
 import { Clients } from "@/components/home/Clients";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
-import { Novidade } from "@/components/home/Novidade";
 import { Playlist } from "@/components/home/Playlist";
 import { ContactCTA } from "@/components/ContactCTA";
 
@@ -29,7 +28,6 @@ export default function Home() {
       <Seal3M />
       <Clients />
       <GalleryPreview />
-      <Novidade />
       <Playlist />
       <ContactCTA />
     </>

@@ -132,18 +132,6 @@ export function ShieldCheckIcon(p: P) {
   );
 }
 
-/** Medidor de transmissão luminosa (novidade). */
-export function MeterIcon(p: P) {
-  return (
-    <Base {...p}>
-      <rect x="3" y="7" width="18" height="11" rx="2" />
-      <path d="M7 14.5a5 5 0 0 1 10 0" />
-      <path d="m12 14.5 2.5-2.5" />
-      <circle cx="12" cy="14.5" r="0.7" fill="currentColor" stroke="none" />
-      <path d="M8 4.5h8" strokeOpacity="0.5" />
-    </Base>
-  );
-}
 
 /** Sol filtrado: usado como marcador em atributos da película. */
 export function SunFilterIcon(p: P) {
