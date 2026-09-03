@@ -9,7 +9,7 @@ import areas from "@/content/galeria-areas.json";
 export const metadata: Metadata = {
   title: "Galeria de Fotos",
   description:
-    "Trabalhos da The Dark Film: película arquitetônica e automotiva, envelopamento, multimídia e acessórios em Petrópolis/RJ.",
+    "Trabalhos da The Dark Film: película automotiva e arquitetônica, multimídia e acessórios, em Petrópolis/RJ.",
 };
 
 const total = areas.reduce((n, a) => n + a.photos.length, 0);
@@ -25,7 +25,7 @@ export default function GaleriaPage() {
             Trabalhos <span className="text-red-2">de verdade.</span>
           </>
         }
-        intro={`Cada área com o que sai da oficina: aplicação de película, envelopamento, multimídia e os carros que passam por aqui. São ${total} fotos em ${areas.length} áreas.`}
+        intro={`Cada área com o que sai da oficina: aplicação de película, multimídia e os carros que passam por aqui. São ${total} fotos em ${areas.length} áreas.`}
       />
 
       {/* Índice das áreas: o cliente pediu áreas separadas, então elas precisam ser

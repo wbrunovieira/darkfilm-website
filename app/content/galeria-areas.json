@@ -5,73 +5,97 @@
     "intro": "Clássicos, projetos e carros de rua que param na oficina.",
     "photos": [
       {
-        "src": "/img/novo/aplicacao-carros--audi-tt-perfil-oficina.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Audi TT azul com os vidros escurecidos por película, na oficina"
+        "src": "/video/gal-golf-perfil.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: Volkswagen Golf cinza de perfil, com todos os vidros aplicados",
+        "video": "/video/gal-golf-perfil.mp4"
       },
       {
-        "src": "/img/novo/aplicacao-carros--audi-tt-estacionado.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Audi TT azul estacionado na oficina com os vidros escurecidos"
+        "src": "/video/gal-audi-tt-traseira.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: Audi TT azul de trás, com os vidros escurecidos",
+        "video": "/video/gal-audi-tt-traseira.mp4"
       },
       {
-        "src": "/img/novo/aplicacao-carros--audi-tt-tres-quartos.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Audi TT azul em ângulo frontal, com os vidros escurecidos"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--peugeot-2008-traseira-vidros.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "Peugeot 2008 azul visto de trás, com os vidros traseiros escurecidos"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--hatch-eletrico-cinza.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Hatch elétrico cinza com os vidros escurecidos por película"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--bmw-porta-aberta.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "BMW preto com a porta aberta, mostrando o interior depois da aplicação"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--mustang-capo-listras.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Capô de Mustang preto com listras brancas e o logo da The Dark Film"
-      },
-      {
-        "src": "/img/novo/vitrine--byd-traseira-vidros-escuros.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "BYD preto visto de trás, com os vidros escurecidos"
+        "src": "/video/gal-audi-tt-frente.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: Audi TT azul de frente na oficina, com os vidros escurecidos",
+        "video": "/video/gal-audi-tt-frente.mp4"
       },
       {
         "src": "/img/novo/vitrine--porsche-356-fachada-noite.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Porsche 356 vermelho em frente à loja The Dark Film ao anoitecer",
-        "novo": true
+        "alt": "Porsche 356 vermelho de corrida estacionado em frente à loja, à noite"
       },
       {
-        "src": "/img/novo/vitrine--land-rover-defender-perfil.jpg",
+        "src": "/img/novo/vitrine--byd-sedan-oficina.jpg",
         "w": 2000,
         "h": 1500,
-        "alt": "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
-        "novo": true
+        "alt": "Sedã elétrico BYD preto dentro da oficina, com vidros escurecidos"
       },
       {
-        "src": "/img/novo/vitrine--land-rover-defender-interior.jpg",
+        "src": "/img/novo/vitrine--peugeot-2008-interior.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Interior do Peugeot 2008 azul, com volante e central multimídia"
+      },
+      {
+        "src": "/img/novo/vitrine--datsun-240z-adesivo-vidro.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Interior do Land Rover Defender com acabamento caramelo",
-        "novo": true
+        "alt": "Adesivo no vidro lateral do Datsun 240Z laranja"
+      },
+      {
+        "src": "/img/novo/vitrine--datsun-emblema-fairlady.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Emblema Datsun Fairlady Z 260 em detalhe"
+      },
+      {
+        "src": "/img/novo/vitrine--datsun-240z-frente.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Frente do Datsun 240Z laranja, com faróis redondos"
+      },
+      {
+        "src": "/img/novo/vitrine--datsun-240z-perfil.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Perfil do Datsun 240Z laranja clássico"
+      },
+      {
+        "src": "/img/novo/vitrine--opala-vermelho-portas-abertas.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Chevrolet Opala vermelho customizado, com as portas abertas na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--defender-traseira.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Land Rover Defender preto de trás, na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--defender-frente.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Land Rover Defender preto de frente, na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--bmw-interior-couro-vermelho.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Interior de BMW com bancos de couro vermelho e painel digital"
+      },
+      {
+        "src": "/img/novo/vitrine--chevette-prata-perfil.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Chevrolet Chevette prata rebaixado, de perfil na oficina"
       }
     ]
   },
@@ -81,526 +105,47 @@
     "intro": "Controle solar e segurança na linha automotiva.",
     "photos": [
       {
-        "src": "/img/novo/aplicacao-carros--audi-tt-traseira-teto-solar.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Audi TT azul visto de trás, com vidros e teto solar escurecidos"
+        "src": "/video/gal-aplicacao-espatula.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: aplicação da película no vidro traseiro, com espátula",
+        "video": "/video/gal-aplicacao-espatula.mp4"
       },
       {
-        "src": "/img/novo/aplicacao-carros--audi-tt-detalhe-lanterna.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Detalhe da lanterna e do vidro traseiro escurecido de um Audi TT"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--adesivo-nao-abrir-vidro.jpg",
-        "w": 1500,
-        "h": 2000,
-        "alt": "Adesivo da The Dark Film avisando para não abrir o vidro após a aplicação"
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--byd-sedan-frente-pelicula.jpg",
+        "src": "/img/novo/aplicacao--peugeot-2008-traseira.jpg",
         "w": 2000,
         "h": 1500,
-        "alt": "Sedã BYD preto com película aplicada, de frente, na oficina",
-        "novo": true
+        "alt": "Peugeot 2008 azul de trás, com os vidros traseiros escurecidos"
       },
       {
-        "src": "/img/novo/aplicacao-carros--porsche-cayenne-traseira-pelicula.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "Porsche Cayenne branco com película nos vidros, visto de trás",
-        "novo": true
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--porsche-panamera-frente-pelicula.jpg",
+        "src": "/img/novo/aplicacao--audi-tt-perfil.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Porsche Panamera cinza com película aplicada, de frente",
-        "novo": true
+        "alt": "Audi TT azul de perfil, com os vidros escurecidos"
       },
       {
-        "src": "/img/novo/aplicacao-carros--peugeot-2008-traseira-pelicula.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "Peugeot 2008 azul com película nos vidros, visto de trás",
-        "novo": true
-      },
-      {
-        "src": "/img/novo/aplicacao-carros--audi-tt-frente-pelicula.jpg",
+        "src": "/img/novo/aplicacao--audi-tt-traseira.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Audi TT azul com película aplicada, de frente na oficina",
-        "novo": true
+        "alt": "Audi TT azul de trás, com vidros e teto solar escurecidos"
       },
       {
-        "src": "/img/galeria-full/film-linha-automotiva-01.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-02.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-03.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-04.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-05.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-06.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-07.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-08.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-09.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-10.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-11.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-12.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-13.jpg",
-        "w": 480,
-        "h": 640,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-14.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-15.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-16.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-17.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-18.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-19.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-20.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-21.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-22.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-23.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-24.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-25.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-26.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-27.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-28.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-29.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-30.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-31.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-32.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-33.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-34.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-35.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-36.jpg",
-        "w": 379,
-        "h": 254,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-37.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-38.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-39.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-40.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-41.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-automotiva-42.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Películas Automotivas — The Dark Film",
-        "novo": false
-      }
-    ]
-  },
-  {
-    "id": "envelopamento",
-    "title": "Envelopamento",
-    "intro": "Mudança de cor e acabamento em vinil.",
-    "photos": [
-      {
-        "src": "/img/novo/aplicacao-carros--mustang-envelopamento-listras.jpg",
+        "src": "/img/novo/aplicacao--audi-tt-estacionado.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Mustang com envelopamento em listras preto e branco",
-        "novo": true
+        "alt": "Audi TT azul estacionado na oficina, com os vidros escurecidos"
       },
       {
-        "src": "/img/galeria-full/envelopamento-01.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
+        "src": "/img/novo/aplicacao--audi-tt-detalhe-lanterna.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Detalhe da lanterna e do vidro traseiro escurecido do Audi TT"
       },
       {
-        "src": "/img/galeria-full/envelopamento-02.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-03.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-04.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-05.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-06.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-07.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-08.jpg",
-        "w": 480,
-        "h": 640,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-09.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-10.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-11.jpg",
-        "w": 750,
-        "h": 1000,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-12.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-13.jpg",
-        "w": 750,
-        "h": 1000,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-14.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-15.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-16.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-17.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-18.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-19.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-20.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-21.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-22.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/envelopamento-23.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Envelopamento — The Dark Film",
-        "novo": false
+        "src": "/img/novo/aplicacao--audi-tt-tres-quartos.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Audi TT azul em ângulo frontal, com os vidros escurecidos"
       }
     ]
   },
@@ -610,102 +155,41 @@
     "intro": "Som, centrais multimídia e acessórios instalados na loja.",
     "photos": [
       {
-        "src": "/img/novo/multimidia--central-multimidia-android-tela.jpg",
+        "src": "/video/gal-defender-multimidia.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: central multimídia instalada no Land Rover Defender",
+        "video": "/video/gal-defender-multimidia.mp4"
+      },
+      {
+        "src": "/img/novo/multimidia--hilux-capota-maritima.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Central multimídia com tela Android instalada e ligada no painel",
-        "novo": true
+        "alt": "Toyota Hilux branca com capota marítima e santo-antônio instalados"
       },
       {
-        "src": "/img/novo/multimidia--defender-central-multimidia.jpg",
+        "src": "/img/novo/multimidia--defender-central-pioneer.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Central multimídia instalada no painel de um Land Rover Defender",
-        "novo": true
+        "alt": "Central multimídia Pioneer instalada no painel do Land Rover Defender"
       },
       {
-        "src": "/img/novo/multimidia--peugeot-208-painel-multimidia.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "Painel do Peugeot 208 com central multimídia tocando",
-        "novo": true
-      },
-      {
-        "src": "/img/novo/multimidia--racks-de-teto-transbike.jpg",
+        "src": "/img/novo/multimidia--racks-farad-expositor.jpg",
         "w": 2000,
         "h": 1125,
-        "alt": "Racks de teto e suporte transbike expostos na loja",
-        "novo": true
+        "alt": "Expositor de racks de teto e transbike Farad na loja"
       },
       {
-        "src": "/img/galeria-full/acess-rios-automotivos-01.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
+        "src": "/img/novo/multimidia--hilux-santo-antonio.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Santo-antônio instalado na caçamba da Hilux"
       },
       {
-        "src": "/img/galeria-full/acess-rios-automotivos-02.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-03.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-04.jpg",
-        "w": 480,
-        "h": 640,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-05.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-06.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-07.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-08.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-09.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/acess-rios-automotivos-10.jpg",
-        "w": 640,
-        "h": 480,
-        "alt": "Acessórios Automotivos — The Dark Film",
-        "novo": false
+        "src": "/img/novo/multimidia--hilux-santo-antonio-detalhe.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Detalhe do santo-antônio sobre a caçamba da picape"
       }
     ]
   },
@@ -715,67 +199,48 @@
     "intro": "Vidro residencial e comercial.",
     "photos": [
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-01.jpg",
-        "w": 449,
-        "h": 300,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/video/gal-espatula-painel-vidro.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: espátula alisando a película sobre um painel de vidro",
+        "video": "/video/gal-espatula-painel-vidro.mp4"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-02.jpg",
-        "w": 449,
-        "h": 300,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/video/gal-porta-vidro-fosco.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: corredor com porta de vidro fosco por película",
+        "video": "/video/gal-porta-vidro-fosco.mp4"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-03.jpg",
-        "w": 449,
-        "h": 300,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/img/novo/arquitetonica--janela-fume-residencial.jpg",
+        "w": 1124,
+        "h": 2000,
+        "alt": "Janela residencial com película fumê aplicada, ao lado de porta de vidro sem película"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-04.jpg",
-        "w": 449,
-        "h": 300,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/img/novo/arquitetonica--divisoria-escritorio.jpg",
+        "w": 899,
+        "h": 1600,
+        "alt": "Divisória de vidro com película, ao lado de porta de madeira"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-05.jpg",
-        "w": 291,
-        "h": 462,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/img/novo/arquitetonica--vidro-jateado-corredor.jpg",
+        "w": 478,
+        "h": 850,
+        "alt": "Vidro com efeito jateado por película, em corredor interno"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-06.jpg",
-        "w": 449,
-        "h": 300,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/img/novo/arquitetonica--divisoria-faixa-laranja.jpg",
+        "w": 478,
+        "h": 850,
+        "alt": "Divisória de vidro com faixa laranja aplicada em película"
       },
       {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-07.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-08.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
-      },
-      {
-        "src": "/img/galeria-full/film-linha-arquitet-nica-09.jpg",
-        "w": 1000,
-        "h": 749,
-        "alt": "Películas Arquitetônicas — The Dark Film",
-        "novo": false
+        "src": "/img/novo/arquitetonica--fachada-vidro-obra.jpg",
+        "w": 900,
+        "h": 1600,
+        "alt": "Fachada de vidro em obra, preparada para receber película"
       }
     ]
   },
@@ -785,18 +250,35 @@
     "intro": "Rua Cel. Veiga, Petrópolis.",
     "photos": [
       {
-        "src": "/img/novo/institucional--fachada-loja-dia.jpg",
-        "w": 2000,
-        "h": 1500,
-        "alt": "Fachada da The Dark Film em Petrópolis, com selos 3M e Thule",
-        "novo": true
+        "src": "/video/gal-replica-f1.jpg",
+        "w": 720,
+        "h": 1280,
+        "alt": "Vídeo: réplica de carro de Fórmula 1 exposta na loja",
+        "video": "/video/gal-replica-f1.mp4"
       },
       {
-        "src": "/img/novo/institucional--fachada-pickup-antiga.jpg",
+        "src": "/img/novo/institucional--fachada-dia.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Fachada da loja The Dark Film em dia claro"
+      },
+      {
+        "src": "/img/novo/institucional--fachada-picape-antiga.jpg",
         "w": 1500,
         "h": 2000,
-        "alt": "Fachada da loja com picape Ford antiga estacionada em frente",
-        "novo": true
+        "alt": "Fachada da loja com a picape Ford antiga estacionada em frente"
+      },
+      {
+        "src": "/img/novo/institucional--picape-antiga-vitrine.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Picape antiga de faróis amarelos em frente à vitrine da loja"
+      },
+      {
+        "src": "/img/novo/institucional--picape-antiga-rua.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Picape antiga estacionada na Rua Cel. Veiga, em frente à loja"
       }
     ]
   }

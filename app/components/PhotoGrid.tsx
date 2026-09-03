@@ -5,7 +5,22 @@ import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon, ExpandIcon } from "./icons/catalogo";
 
-export type Photo = { src: string; w: number; h: number; alt?: string; album?: string };
+/**
+ * `src` é sempre uma imagem — quando o item é um vídeo, ela é o pôster.
+ *
+ * Assim a grade não muda de comportamento: continua uma malha de imagens, rápida e sem player
+ * nenhum carregado. O vídeo só entra em cena quando a pessoa abre o item. O acervo do cliente
+ * tem 65 vídeos contra 204 fotos, e em película arquitetônica são 12 vídeos para 4 fotos —
+ * deixar vídeo de fora era jogar fora metade do material dele.
+ */
+export type Photo = {
+  src: string;
+  w: number;
+  h: number;
+  alt?: string;
+  album?: string;
+  video?: string;
+};
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -121,16 +136,31 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
                 onClick={(e) => e.stopPropagation()}
                 className="grain grid place-items-center overflow-hidden rounded-md"
               >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt ?? ""}
-                  width={photo.w}
-                  height={photo.h}
-                  sizes="92vw"
-                  className="lb__img photo object-contain"
-                  priority
-                  draggable={false}
-                />
+                {photo.video ? (
+                  <video
+                    key={photo.video}
+                    src={photo.video}
+                    poster={photo.src}
+                    controls
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="lb__img object-contain"
+                    aria-label={photo.alt ?? "Vídeo do trabalho"}
+                  />
+                ) : (
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt ?? ""}
+                    width={photo.w}
+                    height={photo.h}
+                    sizes="92vw"
+                    className="lb__img photo object-contain"
+                    priority
+                    draggable={false}
+                  />
+                )}
               </motion.div>
             </AnimatePresence>
 
@@ -284,7 +314,7 @@ export function PhotoGrid({ photos, limit, variant = "uniform", label, animateLa
                 type="button"
                 onClick={() => setOpen(i)}
                 className="gal-tile"
-                aria-label={`Ampliar foto ${i + 1}${p.album ? ` — ${p.album}` : ""}`}
+                aria-label={`${p.video ? "Assistir ao vídeo" : "Ampliar foto"} ${i + 1}${p.album ? ` — ${p.album}` : ""}`}
               >
                 <Image
                   src={p.src}
@@ -293,6 +323,13 @@ export function PhotoGrid({ photos, limit, variant = "uniform", label, animateLa
                   sizes="(min-width: 1024px) 50vw, (min-width: 640px) 66vw, 100vw"
                   className="photo object-cover"
                 />
+                {p.video && (
+                  <span className="gal-tile__play" aria-hidden>
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
+                      <path d="M8 5.14v13.72L19 12 8 5.14Z" />
+                    </svg>
+                  </span>
+                )}
                 <span className="gal-tile__cap" aria-hidden>
                   <span>
                     {p.album && <span className="gal-tile__cap-title">{p.album}</span>}

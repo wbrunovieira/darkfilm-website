@@ -917,3 +917,21 @@
   background: color-mix(in srgb, var(--red) 14%, transparent);
   color: var(--fg);
 }
+
+/* Selo de play sobre o pôster do vídeo, na grade da galeria. A grade continua sendo de
+   imagens: o player só é criado quando a pessoa abre o item. */
+.gal-tile__play {
+  position: absolute;
+  inset: auto auto 0.75rem 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.72);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  z-index: 2;
+}
