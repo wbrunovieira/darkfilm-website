@@ -148,7 +148,13 @@ export async function lerEventos(): Promise<Evento[]> {
 }
 
 export type Situacao =
-  /** Amarelo: a bola está com o cliente. */
+  /**
+   * Cinza: ninguém tocou neste item ainda. É o padrão, e por isso precisa ser SILENCIOSO —
+   * quando "não olhei" e "estão esperando você responder" tinham a mesma cor, a cor deixava
+   * de significar qualquer coisa e a tela virava 55 cartões iguais.
+   */
+  | "novo"
+  /** Amarelo: há conversa aberta e a bola está com o cliente. */
   | "com-cliente"
   /** Vermelho: a bola está com a agência. */
   | "com-agencia"

@@ -1,11 +1,15 @@
 /**
- * Importa para o registro de revisão pedidos que foram feitos FORA do painel — hoje, no WhatsApp.
+ * Registra no painel os pedidos que chegam FORA dele — na prática, pelo WhatsApp.
+ *
+ * **Isto não é uma migração de uma vez só; é o caminho normal.** Não dá para obrigar o cliente a
+ * documentar tudo na página: o WhatsApp é o canal dele, e exigir outro seria trocar um atrito por
+ * outro. O combinado é que ele mande por onde preferir, a gente transcreva aqui com a data e a
+ * origem corretas, implemente, registre o "já ajustei" — e ele só aprove.
  *
  * Existe por dois motivos:
  *
- * 1. **O cliente não pode ser obrigado a reescrever o que já escreveu.** Ele mandou tudo por
- *    WhatsApp; fazer ele digitar de novo na ferramenta seria pedir trabalho para consertar um
- *    problema nosso.
+ * 1. **O cliente não pode ser obrigado a reescrever o que já escreveu.** Fazer ele digitar de
+ *    novo na ferramenta seria pedir trabalho para consertar um problema nosso.
  * 2. **Isso não pode passar pela API pública da página.** A API carimba sempre o agora e o IP de
  *    quem clicou — de propósito. Se ela aceitasse data e origem arbitrárias, qualquer pessoa com
  *    a URL poderia forjar histórico, e o registro deixaria de provar qualquer coisa. Importação é

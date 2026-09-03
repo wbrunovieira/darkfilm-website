@@ -15,6 +15,30 @@
   --wb-fundo: #faf9fc;
   --wb-linha: #e7e1ee;
   --wb-gradiente: linear-gradient(90deg, #350545 0%, #792990 50%, #350545 100%);
+
+  /*
+   * Escala de texto secundário. A auditoria reprovou datas e legendas em 2,5:1 — eram
+   * cinzas do Tailwind escolhidos "porque ficam discretos". Discrição aqui se faz com
+   * tamanho e peso, não apagando o contraste: estes dois tons ficam em 9,1:1 e 6,0:1 sobre
+   * o fundo, então passam em AA com folga mesmo dentro dos cartões coloridos.
+   */
+  --wb-tinta-2: #4a4257;
+  --wb-tinta-3: #635b70;
+
+  /* Âmbar de fundo e âmbar de borda: o mesmo destaque em duas intensidades. */
+  --wb-ambar-leve: #fff6e3;
+  --wb-ambar-borda: #e8a02b;
+  --wb-ambar-tinta: #4a2c00;
+
+  /* Verde da aprovação. O emerald-600 do Tailwind dá 3,8:1 com texto branco e reprova; este
+     tom escurece o suficiente para 5,5:1 sem virar outro verde. */
+  --wb-verde: #047857;
+  --wb-verde-leve: #ecfdf5;
+  --wb-verde-tinta: #04543d;
+
+  /* Roxo diluído, para o que está com o outro lado: presente na varredura, sem gritar. */
+  --wb-roxo-leve: #f4eefa;
+  --wb-roxo-borda: #d9c8e6;
 }
 
 /* Brilho roxo no topo, como na home da WB. */
@@ -49,13 +73,13 @@
 
 /* Entrada dos cartões, escalonada por --i. */
 .wb-entra {
-  animation: wb-sobe 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  animation-delay: calc(var(--i, 0) * 35ms);
+  animation: wb-sobe 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 30ms);
 }
 @keyframes wb-sobe {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
 }
 
@@ -63,7 +87,7 @@
 .wb-sanfona {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .wb-sanfona[data-aberta="true"] {
   grid-template-rows: 1fr;
@@ -74,32 +98,66 @@
 
 .wb-cartao {
   transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease,
-    transform 0.25s ease;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
-.wb-cartao:hover {
-  border-color: var(--wb-lilas);
-  box-shadow: 0 12px 30px -18px rgba(53, 5, 69, 0.45);
+@media (hover: hover) {
+  .wb-cartao:hover {
+    border-color: var(--wb-lilas);
+    box-shadow: 0 14px 34px -22px rgba(53, 5, 69, 0.5);
+  }
 }
 
-/* O verde do "resolvido" pulsa uma vez quando o estado muda. */
-@keyframes wb-pisca {
-  0% { transform: scale(1); }
-  40% { transform: scale(1.35); }
-  100% { transform: scale(1); }
+/*
+ * O cartão que espera por quem está lendo ganha uma faixa âmbar na lateral. É o único
+ * elemento estrutural com cor na lista, para que a varredura de 55 cartões no polegar
+ * encontre o que é dele sem ler nada.
+ */
+.wb-trilho {
+  position: relative;
 }
-.wb-ponto {
-  animation: wb-pisca 0.5s ease;
+.wb-trilho::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  border-radius: 999px 0 0 999px;
+  background: var(--wb-cor-trilho, transparent);
+}
+
+/* Confirmação de que o clique valeu: o cartão pisca uma vez na cor nova. */
+@keyframes wb-confirma {
+  0% { box-shadow: 0 0 0 0 var(--wb-cor-flash, rgba(4, 120, 87, 0.5)); }
+  100% { box-shadow: 0 0 0 12px rgba(0, 0, 0, 0); }
+}
+.wb-flash {
+  animation: wb-confirma 0.6s ease-out;
+}
+
+/* Foco visível de verdade, e igual em todo lugar. */
+.wb-foco:focus-visible {
+  outline: 2px solid var(--wb-roxo-vivo);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/*
+ * Compensa a barra fixa ao rolar até um cartão, e o teclado do celular ao focar o campo de
+ * texto: sem isto o botão Enviar nasce atrás do teclado do iPhone.
+ */
+.wb-alvo {
+  scroll-margin-top: 84px;
+  scroll-margin-bottom: 96px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .wb-entra,
-  .wb-ponto,
+  .wb-flash,
   .wb-progresso {
     animation: none;
   }
-  .wb-sanfona {
+  .wb-sanfona,
+  .wb-cartao {
     transition: none;
   }
 }
