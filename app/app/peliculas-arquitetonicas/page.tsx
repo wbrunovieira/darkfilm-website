@@ -22,7 +22,7 @@ import {
 } from "@/components/icons/peliculas";
 
 export const metadata: Metadata = {
-  title: "Linha Arquitetônica",
+  title: "Películas Arquitetônicas",
   description:
     "Película para vidros residenciais, comerciais e industriais: segurança, privacidade, redução de custos de refrigeração, proteção UV e decoração de interiores.",
 };
@@ -61,12 +61,12 @@ function VideoFigure({ src, poster, caption }: { src: string; poster: string; ca
   );
 }
 
-// Texto copiado da página "Linha Arquitetônica" do site original.
+// Texto copiado da página "Películas Arquitetônicas" do site original.
 export default function LinhaArquitetonicaPage() {
   return (
     <>
       <PageHero
-        eyebrow="Películas · Linha Arquitetônica"
+        eyebrow="Películas · Películas Arquitetônicas"
         title={
           <>
             Solução atrativa
@@ -239,7 +239,7 @@ export default function LinhaArquitetonicaPage() {
       <section className="container-x border-t border-line py-16 md:py-24">
         <Reveal className="mb-10">
           <p className="eyebrow mb-3">Confira nossos produtos</p>
-          <h2 className="display text-3xl md:text-5xl">Linha arquitetônica</h2>
+          <h2 className="display text-3xl md:text-5xl">Películas arquitetônicas</h2>
         </Reveal>
         <RevealGroup className="grid gap-3 sm:grid-cols-2">
           {related.map((s) => (

@@ -21,7 +21,7 @@ import {
 } from "@/components/icons/peliculas";
 
 export const metadata: Metadata = {
-  title: "Linha Automotiva",
+  title: "Películas Automotivas",
   description:
     "Película automotiva profissional com proteção anti-risco e encolhimento térmico. Única em Petrópolis com chancela ABRAWF. Película de proteção e segurança.",
 };
@@ -32,12 +32,12 @@ const related = [
   { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/servicos/envelopamento.jpg" },
 ];
 
-// Texto copiado da página "Linha Automotiva" do site original.
+// Texto copiado da página "Películas Automotivas" do site original.
 export default function LinhaAutomotivaPage() {
   return (
     <>
       <PageHero
-        eyebrow="Películas · Linha Automotiva"
+        eyebrow="Películas · Películas Automotivas"
         title={
           <>
             Aplicação perfeita,

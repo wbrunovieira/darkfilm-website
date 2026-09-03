@@ -5,8 +5,8 @@ import { siteUrl } from "@/lib/site";
 const paginas = [
   "",
   "/a-empresa",
-  "/linha-automotiva",
-  "/linha-arquitetonica",
+  "/peliculas-automotivas",
+  "/peliculas-arquitetonicas",
   "/caracteristicas-do-film",
   "/3m",
   "/simulador",

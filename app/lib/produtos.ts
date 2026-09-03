@@ -14,8 +14,8 @@ export type Produto = {
 export const produtos: Produto[] = data as Produto[];
 
 export const categorias: Record<number, { nome: string; href: string }> = {
-  1: { nome: "Serviços automotivos", href: "/linha-automotiva" },
-  2: { nome: "Linha arquitetônica", href: "/linha-arquitetonica" },
+  1: { nome: "Serviços automotivos", href: "/peliculas-automotivas" },
+  2: { nome: "Películas arquitetônicas", href: "/peliculas-arquitetonicas" },
   3: { nome: "Som e acessórios", href: "/som-e-acessorios" },
 };
 

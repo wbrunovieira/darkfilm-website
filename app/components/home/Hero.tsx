@@ -110,7 +110,7 @@ export function Hero() {
             Pedir orçamento
           </a>
           <Link
-            href="/linha-automotiva"
+            href="/peliculas-automotivas"
             className="group inline-flex items-center gap-3 px-2 py-4 font-display text-lg font-medium uppercase tracking-[0.14em] text-fg-2 transition-colors hover:text-fg"
           >
             Conhecer as películas

@@ -35,7 +35,7 @@ const services = [
   { icon: WindshieldIcon, label: "Recuperação de para-brisas" },
 ];
 
-// Marcos reais, tirados do conteúdo do site (A Empresa, Linha Automotiva, Home, 3M).
+// Marcos reais, tirados do conteúdo do site (A Empresa, Películas Automotivas, Home, 3M).
 // Só 1992 e "hoje" têm data confirmada; os demais são apresentados sem ano.
 const timeline: { when: string; title: string; text: string; hot?: boolean }[] = [
   {

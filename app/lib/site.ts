@@ -73,8 +73,8 @@ export const nav: NavItem[] = [
   {
     label: "Películas",
     children: [
-      { href: "/linha-automotiva", label: "Linha Automotiva" },
-      { href: "/linha-arquitetonica", label: "Linha Arquitetônica" },
+      { href: "/peliculas-automotivas", label: "Películas Automotivas" },
+      { href: "/peliculas-arquitetonicas", label: "Películas Arquitetônicas" },
       { href: "/caracteristicas-do-film", label: "Características do Film" },
       { href: "/3m", label: "Credenciada 3M" },
     ],
