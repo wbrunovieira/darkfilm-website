@@ -76,10 +76,12 @@ export function Header() {
           />
         </Link>
 
-        {/* Liga em xl: (1280px), não em lg:. Em 1024px o logo encostava na nav com zero folga e
-            "A Empresa", "Som e Acessórios" e o telefone quebravam em duas linhas — largura de iPad
-            em paisagem e de notebook pequeno. Com o item "Início" seriam sete a disputar espaço. */}
-        <nav aria-label="Principal" className="hidden items-center gap-0.5 xl:flex">
+        {/* Volta a ligar em lg: (1024px). A quebra original acontecia com SETE itens de topo; ao
+            mover "Simulador" para dentro de "Películas" sobraram seis, e aí cabe — medido a 1024px:
+            45px de folga de cada lado, barra em 80px, nada quebra. Subir para xl: escondia a
+            navegação em iPad em paisagem e notebook de 13", que é hambúrguer no desktop: o
+            problema, não a solução. A pílula de WhatsApp é que sai antes, entre 1024 e 1280. */}
+        <nav aria-label="Principal" className="hidden items-center gap-0.5 lg:flex">
           {nav.map((item) =>
             "children" in item ? (
               <div
@@ -165,7 +167,6 @@ export function Header() {
                   isActive(item.href) ? "text-fg" : "text-fg-2"
                 }`}
               >
-                {item.highlight && <span aria-hidden className="nav-novo" />}
                 {item.label}
                 {isActive(item.href) && (
                   <motion.span
@@ -184,7 +185,7 @@ export function Header() {
             href={whatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden items-center gap-2 rounded-full border border-line-strong px-4 py-2 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-colors hover:border-red hover:bg-red hover:text-white md:inline-flex"
+            className="hidden items-center gap-2 rounded-full border border-line-strong px-4 py-2 font-display text-sm font-semibold uppercase tracking-[0.14em] transition-colors hover:border-red hover:bg-red hover:text-white md:inline-flex lg:hidden xl:inline-flex"
           >
             <WhatsAppIcon className="size-4" />
             {site.whatsapp.label}
@@ -196,7 +197,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
-            className="relative z-50 grid size-11 place-items-center xl:hidden"
+            className="relative z-50 grid size-11 place-items-center lg:hidden"
           >
             <span className="relative block h-4 w-6">
               <span
@@ -228,7 +229,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-bg xl:hidden"
+            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-bg lg:hidden"
           >
             <nav aria-label="Menu" className="container-x py-8">
               <ul className="space-y-1">
@@ -258,11 +259,6 @@ export function Header() {
                           } ${isActive(c.href) ? "text-red-2" : "text-fg"}`}
                         >
                           {c.label}
-                          {c.highlight && (
-                            <span className="ml-3 rounded-full bg-red px-2 py-0.5 align-middle font-display text-xs font-semibold tracking-[0.18em] text-white">
-                              Novo
-                            </span>
-                          )}
                         </Link>
                       ))}
                     </motion.li>

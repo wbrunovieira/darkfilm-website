@@ -41,7 +41,10 @@ export function Footer() {
     <footer className="relative mt-24 bg-bg-2">
       {/* régua de ripas: a parede da loja fechando a página */}
       <div aria-hidden className="ripas grain h-10 border-y border-line md:h-12" />
-      <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      {/* Cinco blocos: marca+contato, Navegação, Películas, Catálogo. O contato mora dentro da
+          coluna da marca — numa grade de quatro ele caía sozinho numa segunda linha, com o bloco
+          de maior valor comercial do rodapé cercado de vazio. */}
+      <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <Image src="/img/marca/logo.png" alt={site.name} width={200} height={66} className="h-14 w-auto" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-2">
@@ -58,6 +61,27 @@ export function Footer() {
           </div>
           <div className="mt-5">
             <GoogleBadge />
+          </div>
+
+          <div className="mt-10">
+            <p className="eyebrow">Contato</p>
+            <address className="mt-4 space-y-3 text-sm not-italic text-fg-2">
+              <p>
+                {site.address.street}
+                <br />
+                {site.address.district} — {site.address.city}/{site.address.state}
+              </p>
+              <p className="flex flex-col gap-1">
+                {site.phones.map((p) => (
+                  <a key={p.href} href={p.href} className="transition-colors hover:text-fg">
+                    {p.label}
+                  </a>
+                ))}
+              </p>
+              <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-fg transition-colors hover:text-[#25D366]">
+                <WhatsAppIcon className="size-4" /> {site.whatsapp.label}
+              </a>
+            </address>
           </div>
         </div>
 
@@ -76,26 +100,6 @@ export function Footer() {
           </nav>
         ))}
 
-        <div>
-          <p className="eyebrow">Contato</p>
-          <address className="mt-4 space-y-3 text-sm not-italic text-fg-2">
-            <p>
-              {site.address.street}
-              <br />
-              {site.address.district} — {site.address.city}/{site.address.state}
-            </p>
-            <p className="flex flex-col gap-1">
-              {site.phones.map((p) => (
-                <a key={p.href} href={p.href} className="transition-colors hover:text-fg">
-                  {p.label}
-                </a>
-              ))}
-            </p>
-            <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-fg transition-colors hover:text-[#25D366]">
-              <WhatsAppIcon className="size-4" /> {site.whatsapp.label}
-            </a>
-          </address>
-        </div>
       </div>
 
       <div className="border-t border-line">

@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { site } from "@/lib/site";
+import { ArrowIcon } from "../icons";
 import { CountUp } from "../CountUp";
 import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { StarIcon } from "../icons/home";
@@ -14,6 +16,15 @@ export function Clients() {
             <h2 className="display text-4xl md:text-6xl">
               Nossa qualidade é atestada pelo serviço prestado aos clientes.
             </h2>
+            {/* Única porta para A Empresa no corpo do site: a página que carrega os anos de
+                mercado e esses mesmos clientes não tinha nenhum link entrando. */}
+            <Link
+              href="/a-empresa"
+              className="group mt-6 inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.16em] text-fg-2 transition-colors hover:text-fg"
+            >
+              Conheça a empresa
+              <ArrowIcon className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </div>
 
           <a

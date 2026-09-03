@@ -34,7 +34,13 @@ export function AreasGaleria({ areas }: { areas: { id: string; title: string; n:
   }, [areas]);
 
   return (
-    <nav aria-label="Áreas da galeria" className="container-x pb-10">
+    /* Grudado no topo: sem isto, depois do pulo para uma área a barra fica 5.000px acima e o
+       marcador de "onde estou" existe só antes de ser usado. */
+    <nav
+      aria-label="Áreas da galeria"
+      className="sticky top-16 z-20 -mx-4 mb-2 bg-bg/90 px-4 py-3 backdrop-blur md:top-20"
+    >
+      <div className="container-x">
       <ul className="flex flex-wrap gap-2">
         {areas.map((a) => (
           <li key={a.id}>
@@ -48,7 +54,8 @@ export function AreasGaleria({ areas }: { areas: { id: string; title: string; n:
             </a>
           </li>
         ))}
-      </ul>
+        </ul>
+      </div>
     </nav>
   );
 }

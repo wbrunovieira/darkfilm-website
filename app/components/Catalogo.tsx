@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { grupos, grupoDe, type Produto } from "@/lib/produtos";
 import { whatsappUrl } from "@/lib/site";
@@ -33,7 +32,6 @@ export function Catalogo({ items }: { items: Produto[] }) {
    * Por isso o desenho é este: o servidor renderiza a lista inteira (crawlable), e a URL é
    * espelho do estado, lida uma vez na montagem. Voltar remonta o componente e o filtro volta.
    */
-  const router = useRouter();
   const [grupo, setGrupoState] = useState<string>("todos");
   const [q, setQState] = useState("");
 
@@ -43,33 +41,37 @@ export function Catalogo({ items }: { items: Produto[] }) {
     setQState(p.get("q") ?? "");
   }, []);
 
-  const espelhar = useCallback(
-    (proxGrupo: string, proxQ: string) => {
-      const p = new URLSearchParams(window.location.search);
-      if (proxGrupo === "todos") p.delete("grupo");
-      else p.set("grupo", proxGrupo);
-      if (!proxQ) p.delete("q");
-      else p.set("q", proxQ);
-      const qs = p.toString();
-      // `replace` para o Voltar sair do catálogo, e não desfazer letra por letra a busca
-      router.replace(qs ? `?${qs}` : window.location.pathname, { scroll: false });
-    },
-    [router],
-  );
+  /**
+   * Espelha na URL sem passar pelo roteador.
+   *
+   * Com `router.replace` cada tecla digitada na busca disparava uma requisição do payload
+   * inteiro da página — e sem propósito, já que o componente lê a URL só na montagem. Num
+   * celular em rede lenta eram cinco downloads de 41 produtos enquanto a pessoa escrevia
+   * "xenon". `history.replaceState` faz o mesmo espelho com zero rede.
+   */
+  const espelhar = useCallback((proxGrupo: string, proxQ: string) => {
+    const p = new URLSearchParams(window.location.search);
+    if (proxGrupo === "todos") p.delete("grupo");
+    else p.set("grupo", proxGrupo);
+    if (!proxQ) p.delete("q");
+    else p.set("q", proxQ);
+    const qs = p.toString();
+    window.history.replaceState(null, "", qs ? `?${qs}` : window.location.pathname);
+  }, []);
 
-  const setGrupo = useCallback(
-    (v: string) => {
-      setGrupoState(v);
-      espelhar(v, q);
+  /**
+   * Um aplicador só, com os DOIS valores. Antes eram `setGrupo` e `setQ` separados, cada um
+   * fechando sobre o outro valor: "Limpar filtros" chamava os dois em sequência e o segundo
+   * espelhava o `q` antigo, deixando a URL com uma busca que a tela não mostrava mais — e o
+   * F5 ressuscitava o filtro fantasma.
+   */
+  const aplicar = useCallback(
+    (proxGrupo: string, proxQ: string) => {
+      setGrupoState(proxGrupo);
+      setQState(proxQ);
+      espelhar(proxGrupo, proxQ);
     },
-    [espelhar, q],
-  );
-  const setQ = useCallback(
-    (v: string) => {
-      setQState(v);
-      espelhar(grupo, v);
-    },
-    [espelhar, grupo],
+    [espelhar],
   );
 
   const counts = useMemo(() => {
@@ -104,7 +106,7 @@ export function Catalogo({ items }: { items: Produto[] }) {
               type="button"
               aria-selected={selected}
               aria-controls="catalogo-lista"
-              onClick={() => setGrupo(g.id)}
+              onClick={() => aplicar(g.id, q)}
               className="cat-group"
             >
               {selected && (
@@ -145,12 +147,12 @@ export function Catalogo({ items }: { items: Produto[] }) {
           <input
             type="search"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => aplicar(grupo, e.target.value)}
             placeholder="Buscar: alarme, xenon, engate…"
             autoComplete="off"
           />
           {q && (
-            <button type="button" onClick={() => setQ("")} aria-label="Limpar busca" className="cat-search__clear">
+            <button type="button" onClick={() => aplicar(grupo, "")} aria-label="Limpar busca" className="cat-search__clear">
               <CloseIcon className="size-4" />
             </button>
           )}
@@ -243,8 +245,7 @@ export function Catalogo({ items }: { items: Produto[] }) {
             <button
               type="button"
               onClick={() => {
-                setQ("");
-                setGrupo("todos");
+                aplicar("todos", "");
               }}
               className="inline-flex min-h-12 items-center rounded-full border border-line-strong px-5 font-display text-sm font-semibold uppercase tracking-[0.16em] text-fg-2 transition-colors hover:border-fg-3 hover:text-fg"
             >

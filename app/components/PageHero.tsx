@@ -86,22 +86,31 @@ export function PageHero({ crumbs, title, intro, image, imagePosition = "center"
             transition={{ duration: 1.1, delay: 0.05, ease }}
           />
           <motion.nav
-            aria-label="Você está em"
+            aria-label="Trilha de navegação"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease }}
             className="hero-crumbs mb-5"
           >
-            {crumbs.map((c, i) => (
-              <span key={c.label} className="contents">
-                {i > 0 && <span aria-hidden>/</span>}
-                {c.href ? (
-                  <Link href={c.href}>{c.label}</Link>
-                ) : (
-                  <span aria-current="page">{c.label}</span>
-                )}
-              </span>
-            ))}
+            <ol>
+              {crumbs.map((c, i) => {
+                const ultimo = i === crumbs.length - 1;
+                return (
+                  <li key={c.label}>
+                    {i > 0 && <span aria-hidden>/</span>}
+                    {c.href ? (
+                      <Link href={c.href}>{c.label}</Link>
+                    ) : (
+                      /* `aria-current` só no último. Antes ia em todo crumb sem href, e nas
+                         páginas de três níveis o leitor de tela anunciava duas "página atual". */
+                      <span aria-current={ultimo ? "page" : undefined} data-pai={!ultimo || undefined}>
+                        {c.label}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
           </motion.nav>
           <motion.h1
             {...rise(0.25)}

@@ -438,11 +438,21 @@
    Herda a forma do `.crumbs` das páginas de produto, mas maior e mais claro: aqui ele é o
    único elemento que confirma "cheguei onde cliquei", então não pode ser um detalhe de 12px
    em vermelho sobre foto. O último item é a página atual e não é link. */
-.hero-crumbs {
+.hero-crumbs ol {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.25rem 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hero-crumbs li {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem 0.6rem;
+}
+.hero-crumbs {
   font-family: var(--font-display);
   font-size: 0.9375rem;
   font-weight: 600;
@@ -452,6 +462,11 @@
 }
 .hero-crumbs [aria-current] {
   color: var(--fg);
+}
+/* O nível intermediário não é o rótulo da página: se ficar do mesmo branco, o rastro lê como
+   três coisas de igual peso e vira decoração. */
+.hero-crumbs [data-pai] {
+  color: var(--fg-3);
 }
 .hero-crumbs a {
   position: relative;

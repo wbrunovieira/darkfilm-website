@@ -108,7 +108,7 @@ export default function LinhaAutomotivaPage() {
                 Mínimo do conjunto vidro + película. Os vidros de trás não têm mínimo desde que o
                 veículo tenha retrovisores externos dos dois lados. {REFERENCIA}.{" "}
                 <Link href="/simulador" className="underline underline-offset-4 hover:text-fg">
-                  Ver por vidro no simulador
+                  Ver o que a lei permite em cada vidro
                 </Link>
               </p>
             </RevealItem>
@@ -171,8 +171,9 @@ export default function LinhaAutomotivaPage() {
           >
             portal do CONTRAN
           </a>
-          . Os mínimos por vidro estão logo acima, e você pode conferir vidro a vidro no{" "}
-          <Link href="/simulador">simulador</Link>.
+          . Os mínimos por vidro estão logo acima, e há o detalhe de cada um na página de{" "}
+          <Link href="/simulador">legislação</Link>. Para ver como fica a tonalidade,{" "}
+          <Link href="#simulador">simule aqui mesmo</Link>.
         </p>
       </Section>
 
@@ -281,8 +282,10 @@ export default function LinhaAutomotivaPage() {
         <div className="mt-8">
           <Callout icon={<AlertIcon />}>
             Consulte a legislação vigente para a transparência mínima de cada vidro. Na loja
-            medimos o valor final com equipamento próprio — ver também o{" "}
-            <Link href="/simulador" className="text-fg underline underline-offset-4 hover:text-red-2">simulador de tonalidade</Link>.
+            medimos o valor final com equipamento próprio — veja também{" "}
+            <Link href="/simulador" className="text-fg underline underline-offset-4 hover:text-red-2">o que a lei permite em cada vidro</Link>{" "}
+            e as{" "}
+            <Link href="/caracteristicas-do-film" className="text-fg underline underline-offset-4 hover:text-red-2">características do film</Link>.
           </Callout>
         </div>
       </section>

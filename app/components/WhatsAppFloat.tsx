@@ -49,6 +49,9 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Falar no WhatsApp ${site.whatsapp.label}`}
+      /* `inert` porque `pointer-events:none` não tira da ordem de foco: escondido, ele
+         continuava tabulável, invisível e fora da viewport — e o Enter ainda o ativava. */
+      {...(visivel ? {} : { inert: true })}
       className={`group fixed bottom-5 right-5 z-30 flex items-center gap-3 rounded-full bg-[#25D366] p-3.5 text-[#062b16] shadow-[0_12px_40px_-8px_rgba(37,211,102,0.6)] transition-[transform,opacity] duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-reduce:transition-none md:bottom-7 md:right-7 md:py-3 md:pl-4 md:pr-5 ${
         visivel ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0"
       }`}

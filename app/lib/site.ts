@@ -74,7 +74,7 @@ export function decadasEmAtividade(now = new Date()) {
   return `${DECADAS[d] ?? d} década${d === 1 ? "" : "s"}`;
 }
 
-export type NavLink = { href: string; label: string; highlight?: boolean };
+export type NavLink = { href: string; label: string };
 export type NavItem = NavLink | { label: string; children: NavLink[] };
 
 export const nav: NavItem[] = [

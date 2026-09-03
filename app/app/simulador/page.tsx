@@ -48,6 +48,10 @@ export default function SimuladorPage() {
           <Link href="/peliculas-automotivas#simulador" className="text-fg underline underline-offset-4 hover:text-red-2">
             Simule em Películas Automotivas
           </Link>
+          . Para entender o que a película faz com o calor e o brilho, veja as{" "}
+          <Link href="/caracteristicas-do-film" className="text-fg underline underline-offset-4 hover:text-red-2">
+            características do film
+          </Link>
           .
         </p>
       </div>
