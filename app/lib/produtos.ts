@@ -1,4 +1,5 @@
 import data from "@/content/produtos.json";
+import { PRODUTO_FORA_DO_SOM } from "./navegacao";
 
 export type Produto = {
   slug: string;
@@ -23,6 +24,28 @@ export type Produto = {
 const DESCONTINUADOS = new Set(["lavagem-a-seco", "polimento-dos-farois"]);
 
 export const produtos: Produto[] = (data as Produto[]).filter((p) => !DESCONTINUADOS.has(p.slug));
+
+/**
+ * O Header precisa saber a que seção do menu cada produto pertence, mas é componente de
+ * cliente e não pode importar este arquivo sem levar os 29 KB do catálogo junto. Por isso
+ * `lib/navegacao.ts` lista à mão os poucos produtos que não são de som. Esta checagem existe
+ * para que essa lista nunca minta: se um produto entrar, sair ou mudar de categoria, o build
+ * quebra aqui em vez de o menu apagar silenciosamente numa página.
+ */
+{
+  const esperado = produtos
+    .filter((p) => p.category !== 3)
+    .map((p) => p.slug)
+    .sort();
+  const declarado = Object.keys(PRODUTO_FORA_DO_SOM).sort();
+  if (esperado.join("|") !== declarado.join("|")) {
+    throw new Error(
+      `lib/navegacao.ts está fora de sincronia com o catálogo.\n` +
+        `  esperado: ${esperado.join(", ")}\n` +
+        `  declarado: ${declarado.join(", ")}`,
+    );
+  }
+}
 
 export const categorias: Record<number, { nome: string; href: string }> = {
   1: { nome: "Serviços automotivos", href: "/peliculas-automotivas" },

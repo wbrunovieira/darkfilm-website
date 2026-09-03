@@ -78,6 +78,9 @@ export type NavLink = { href: string; label: string; highlight?: boolean };
 export type NavItem = NavLink | { label: string; children: NavLink[] };
 
 export const nav: NavItem[] = [
+  /* "Início" existe porque muita gente não descobre que o logo leva para a home — o
+     `aria-label` dele é texto invisível para quem enxerga. Manter as duas rotas de volta. */
+  { href: "/", label: "Início" },
   { href: "/a-empresa", label: "A Empresa" },
   {
     label: "Películas",

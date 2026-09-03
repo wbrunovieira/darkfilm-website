@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { nav, site, whatsappUrl } from "@/lib/site";
+import { secaoDaRota } from "@/lib/navegacao";
 import { WhatsAppIcon } from "./icons";
 
 export function Header() {
@@ -41,7 +42,14 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [submenu]);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
+  /**
+   * "Atual" pela SEÇÃO, não pela URL. Antes era `pathname.startsWith(href + "/")`, que não
+   * cobria as 45 páginas de produto: em `/produtos/subwoofer` nenhum item acendia. E a home,
+   * que agora tem item próprio, precisa casar só por igualdade — com `href="/"` o startsWith
+   * casaria com o site inteiro.
+   */
+  const secao = secaoDaRota(pathname);
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : secao === href);
   /** O item com submenu conta como atual quando a página é um dos filhos. */
   const grupoAtivo = (filhos: { href: string }[]) => filhos.some((c) => isActive(c.href));
 
@@ -68,7 +76,10 @@ export function Header() {
           />
         </Link>
 
-        <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
+        {/* Liga em xl: (1280px), não em lg:. Em 1024px o logo encostava na nav com zero folga e
+            "A Empresa", "Som e Acessórios" e o telefone quebravam em duas linhas — largura de iPad
+            em paisagem e de notebook pequeno. Com o item "Início" seriam sete a disputar espaço. */}
+        <nav aria-label="Principal" className="hidden items-center gap-0.5 xl:flex">
           {nav.map((item) =>
             "children" in item ? (
               <div
@@ -83,13 +94,12 @@ export function Header() {
               >
                 <button
                   type="button"
-                  onClick={() => setSubmenu((v) => (v === item.label ? null : item.label))}
+                  onClick={() => setSubmenu(item.label)}
                   onFocus={() => setSubmenu(item.label)}
-                  aria-haspopup="true"
                   aria-expanded={submenu === item.label}
                   aria-controls={`submenu-${item.label}`}
                   data-atual={grupoAtivo(item.children)}
-                  className={`nav-link flex items-center gap-1 px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] hover:text-fg ${
+                  className={`nav-link flex items-center gap-1 px-2.5 py-2 font-display text-sm font-medium uppercase tracking-[0.1em] hover:text-fg ${
                     submenu === item.label || grupoAtivo(item.children) ? "text-fg" : "text-fg-2"
                   }`}
                 >
@@ -106,7 +116,7 @@ export function Header() {
                   {grupoAtivo(item.children) && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-x-3 -bottom-0.5 h-0.5 bg-red"
+                      className="absolute inset-x-2.5 -bottom-0.5 h-0.5 bg-red"
                       transition={{ type: "spring", stiffness: 400, damping: 35 }}
                     />
                   )}
@@ -151,7 +161,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 data-atual={isActive(item.href)}
-                className={`nav-link px-3 py-2 font-display text-[15px] font-medium uppercase tracking-[0.12em] hover:text-fg ${
+                className={`nav-link px-2.5 py-2 font-display text-sm font-medium uppercase tracking-[0.1em] hover:text-fg ${
                   isActive(item.href) ? "text-fg" : "text-fg-2"
                 }`}
               >
@@ -160,7 +170,7 @@ export function Header() {
                 {isActive(item.href) && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-x-3 -bottom-0.5 h-0.5 bg-red"
+                    className="absolute inset-x-2.5 -bottom-0.5 h-0.5 bg-red"
                     transition={{ type: "spring", stiffness: 400, damping: 35 }}
                   />
                 )}
@@ -186,7 +196,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
-            className="relative z-50 grid size-11 place-items-center lg:hidden"
+            className="relative z-50 grid size-11 place-items-center xl:hidden"
           >
             <span className="relative block h-4 w-6">
               <span
@@ -218,7 +228,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-bg lg:hidden"
+            className="fixed inset-0 top-16 z-40 overflow-y-auto bg-bg xl:hidden"
           >
             <nav aria-label="Menu" className="container-x py-8">
               <ul className="space-y-1">
