@@ -5,10 +5,8 @@ import type { ComponentType, SVGProps } from "react";
 import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
 import {
-  DryWashIcon,
   FilmArchIcon,
   FilmAutoIcon,
-  HeadlightIcon,
   SoundIcon,
   WindshieldIcon,
   WrapIcon,
@@ -50,16 +48,13 @@ const featured: { href: string; title: string; text: string; img: string; video?
   },
 ];
 
-// Capas reprocessadas a partir do catálogo do site antigo — não há material novo do
-// cliente para estes quatro serviços. Faróis usa o antes/depois lado a lado (534x245,
-// o dobro da largura da capa anterior) centralizado sobre o fundo do site; para-brisa
-// foi recortado para tirar o logo "SALVA VIDROS", de marca de terceiro. Ver a issue
-// "Home — capas dos 4 cards pequenos".
+// Lavagem a seco e polimento de faróis saíram em 03/09/2026: o cliente informou que
+// não faz mais esses serviços. Restaram para-brisa e envelopamento.
+// A capa do para-brisa foi recortada para tirar o logo "SALVA VIDROS", de marca de
+// terceiro. Ver a issue "Home — capas dos 4 cards pequenos".
 const more: { href: string; title: string; img: string; icon: Icon }[] = [
   { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos-v2/parabrisa.jpg", icon: WindshieldIcon },
   { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/novo/aplicacao-carros--mustang-envelopamento-listras.jpg", icon: WrapIcon },
-  { href: "/produtos/lavagem-a-seco", title: "Lavagem a seco", img: "/img/servicos-v2/lavagem.jpg", icon: DryWashIcon },
-  { href: "/produtos/polimento-dos-farois", title: "Polimento dos faróis", img: "/img/servicos-v2/farois.jpg", icon: HeadlightIcon },
 ];
 
 export function Services() {
@@ -138,7 +133,7 @@ export function Services() {
         </RevealGroup>
 
         {/* Quatro serviços complementares: cards baixos, ícone em evidência. */}
-        <RevealGroup stagger={0.08} className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <RevealGroup stagger={0.08} className="mt-4 grid gap-4 sm:grid-cols-2">
           {more.map((s) => {
             const Icon = s.icon;
             return (

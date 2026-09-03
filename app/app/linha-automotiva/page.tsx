@@ -26,11 +26,10 @@ export const metadata: Metadata = {
     "Película automotiva profissional com proteção anti-risco e encolhimento térmico. Única em Petrópolis com chancela ABRAWF. Película de proteção e segurança.",
 };
 
+// Sem lavagem a seco e polimento de faróis: o cliente não faz mais (03/09/2026).
 const related = [
   { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos/parabrisa.jpg" },
-  { href: "/produtos/polimento-dos-farois", title: "Polimento dos faróis", img: "/img/servicos/farois.jpg" },
   { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/servicos/envelopamento.jpg" },
-  { href: "/produtos/lavagem-a-seco", title: "Lavagem a seco", img: "/img/servicos/lavagem.jpg" },
 ];
 
 // Texto copiado da página "Linha Automotiva" do site original.
