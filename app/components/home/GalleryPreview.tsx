@@ -5,19 +5,24 @@ import { ArrowIcon } from "../icons";
 import { CardVideo } from "../CardVideo";
 
 // O cliente pediu "bastante foto" nesta seção em 02/09/2026, e a Michele completou:
-// "carros novos". Passou de 4 para 8, todas do acervo dele (2024–2026) e todas paisagem,
-// que é o que a grade exige. A grade fecha em 1 grande (2 colunas) + as demais.
+// "carros novos". Passou de 4 para 11, todas do acervo dele.
+//
+// 11 não é número solto: o primeiro tile ocupa 2 colunas, então a grade usa 12 células —
+// que fecham tanto em 2 colunas (celular) quanto em 3 (desktop). Com 8 sobrava uma célula
+// órfã no celular. As quatro últimas são retrato e sofrem corte na caixa 4/3; ficam no fim
+// justamente por isso.
 // A primeira é 16/9 e as outras 4/3, então todas aqui precisam ser paisagem.
 // Material novo do cliente (2024-2026); o `alt` descreve cada foto, em vez do
 // texto genérico que valia para todas.
 const photos: { src: string; alt: string; video?: string }[] = [
   {
-    src: "/img/novo/vitrine--land-rover-defender-perfil.jpg",
-    alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
+    src: "/video/oficina-golf-mural.jpg",
+    video: "/video/oficina-golf-mural.mp4",
+    alt: "Golf preto na oficina, diante do mural de placas",
   },
   {
-    src: "/img/novo/aplicacao-carros--audi-tt-tres-quartos.jpg",
-    alt: "Audi TT azul em ângulo frontal, com os vidros escurecidos",
+    src: "/img/novo/vitrine--land-rover-defender-perfil.jpg",
+    alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
   },
   {
     src: "/img/novo/aplicacao-carros--byd-sedan-frente-pelicula.jpg",
@@ -32,16 +37,28 @@ const photos: { src: string; alt: string; video?: string }[] = [
     alt: "Peugeot 2008 azul visto de trás, com os vidros traseiros escurecidos",
   },
   {
+    src: "/img/novo/vitrine--byd-traseira-vidros-escuros.jpg",
+    alt: "BYD preto visto de trás, com os vidros escurecidos",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--peugeot-2008-frente-faixa-solar.jpg",
+    alt: "Peugeot 2008 azul de frente, com faixa solar no para-brisa",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-pelicula.jpg",
+    alt: "Peugeot 2008 azul de trás, com película nos vidros",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--audi-tt-tres-quartos.jpg",
+    alt: "Audi TT azul em ângulo frontal, com os vidros escurecidos",
+  },
+  {
     src: "/img/novo/aplicacao-carros--bmw-porta-aberta.jpg",
     alt: "BMW preto com a porta aberta, mostrando o interior depois da aplicação",
   },
   {
     src: "/img/novo/aplicacao-carros--hatch-eletrico-cinza.jpg",
     alt: "Hatch elétrico cinza com os vidros escurecidos por película",
-  },
-  {
-    src: "/img/novo/aplicacao-carros--audi-tt-estacionado.jpg",
-    alt: "Audi TT azul estacionado na oficina com os vidros escurecidos",
   },
 ];
 

@@ -130,8 +130,8 @@ export default function SimuladorPage() {
         </ol>
         <p className="mt-8">
           Referência: Resolução CONTRAN 960/2022, alterada pela 989/2022. Trabalhamos com
-          diferentes marcas e tecnologias de película — detalhes sobre a chancela ABRAWF e a
-          película de segurança na página{" "}
+          diferentes marcas e tecnologias de película — veja as opções e a película de segurança
+          na página{" "}
           <Link href="/peliculas-automotivas">Películas Automotivas</Link>.
         </p>
       </Section>

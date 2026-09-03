@@ -12,7 +12,6 @@ import {
   ColorIcon,
   GlareIcon,
   HeatIcon,
-  MirrorIcon,
   PrivacyIcon,
   ShatterIcon,
   SignalIcon,
@@ -24,7 +23,7 @@ import {
 export const metadata: Metadata = {
   title: "Credenciada 3M",
   description:
-    "Aplicadora credenciada 3M em Petrópolis. Películas para vidros 3M da Linha Automotiva: Crystalline, CS Premium, FX Pro, EX e Black Chrome. Menos calor, mais proteção.",
+    "Aplicadora credenciada 3M em Petrópolis. Linhas automotivas Crystalline, Ceramic IR, Color Stable IR, FX e SAS Segurança, com boletim técnico oficial de cada uma.",
 };
 
 type Item = { icon: ReactNode; text: string };
@@ -69,16 +68,20 @@ const linhas: Linha[] = [
     garantia: "15 anos",
     boletim: { url: "https://multimedia.3m.com/mws/media/2111861O/3m-technical-data-sheet-automotive-window-film-serie-crystalline-portuguese-version.pdf" },
     specs: [
-      { icon: <HeatIcon />, value: "60%", label: "calor rejeitado" },
+      { icon: <HeatIcon />, value: "97%", label: "infravermelho rejeitado" },
       { icon: <UvIcon />, value: "99,9%", label: "UV bloqueado" },
       { icon: <WarrantyIcon />, value: "15 anos", label: "garantia" },
     ],
     itens: [
-      { icon: <GlareIcon />, text: "Mantém a aparência original do veículo: tonalidade levemente colorida permite que 40% a 90% da luz solar entre pelo vidro." },
-      { icon: <HeatIcon />, text: "Melhora o conforto: rejeita até 97% dos raios infravermelhos e até 60% do calor solar." },
+      { icon: <GlareIcon />, text: "Mantém a aparência original do veículo: a tonalidade levemente colorida preserva a visibilidade." },
+      { icon: <HeatIcon />, text: "Melhora o conforto: rejeita até 97% dos raios infravermelhos e boa parte do calor solar." },
       { icon: <SignalIcon />, text: "Nenhuma interferência de sinal de GPS e celular: não é metalizada." },
       { icon: <UvIcon />, text: "Proteção do interior: bloqueia até 99,9% dos raios UV, retardando o desbotamento." },
-      { icon: <SkinIcon />, text: "Proteção da pele: FPS superior a 1.700 — recomendada pela Skin Cancer Foundation." },
+            /* O texto legado do site de 2013 dizia "FPS superior a 1.700". O boletim oficial e o
+         catálogo impresso do cliente dizem 1.000+ — e a própria página exibe "FPS 1.000+" mais
+         abaixo. Três números para a mesma coisa, num bloco cuja tese é "o dado oficial está no
+         boletim". Fica o número do boletim. */
+      { icon: <SkinIcon />, text: "Proteção da pele: FPS de até 1.000 — recomendada pela Skin Cancer Foundation." },
       { icon: <ColorIcon />, text: "Nunca muda de cor: garantia de 15 anos." },
     ],
   },
@@ -111,9 +114,12 @@ const linhas: Linha[] = [
     resumo: "Tecnologia enriquecida com nanopartículas cerâmicas, que asseguram que o filme não ficará roxo com o tempo.",
     tonalidades: ["CS IR5", "CS IR15", "CS IR35", "CS IR50", "CS IR70"],
     garantia: "10 anos",
+    /* Os 10 anos são os do catálogo brasileiro da 3M, que é o material sob o qual a loja vende.
+       O boletim linkado é a versão internacional, em inglês, e fala em "limited lifetime
+       warranty" — por isso a nota avisa, para quem clicar não achar que um dos dois está errado. */
     boletim: {
       url: "https://multimedia.3m.com/mws/media/2414956O/3m-automotive-window-film-color-stable-cs-ir-series-product-bulletin-rev-c.pdf",
-      nota: "em inglês",
+      nota: "versão internacional, em inglês",
     },
     specs: [
       { icon: <ColorIcon />, value: "Não", label: "fica roxa" },
@@ -244,7 +250,8 @@ export default function TresMPage() {
           <p className="eyebrow mb-3">Linha automotiva 3M</p>
           <h2 className="display text-3xl md:text-5xl">Cinco películas, cinco propósitos.</h2>
           <p className="mt-5 max-w-2xl text-fg-2">
-            A barra em cada card mostra a faixa de luz visível que a película deixa passar — quanto mais à esquerda, mais escura.
+            Cada card traz as tonalidades que trabalhamos naquela linha e o link para o boletim
+            técnico oficial da 3M, com os números completos.
           </p>
         </Reveal>
 
@@ -259,11 +266,11 @@ export default function TresMPage() {
                 fill
                 aria-hidden
                 sizes="(min-width: 768px) 60vw, 100vw"
-                className="-z-10 object-cover opacity-[0.14]"
+                className="-z-10 object-cover opacity-[0.3]"
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(105deg,var(--bg)_18%,rgba(11,11,13,0.86)_58%,rgba(11,11,13,0.72)_100%)]"
+                className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(105deg,var(--bg)_10%,rgba(11,11,13,0.92)_44%,rgba(11,11,13,0.55)_100%)]"
               />
               <span aria-hidden className="pel-card__ghost">0{i + 1}</span>
               <div className="relative grid gap-8 p-6 md:grid-cols-[260px_1fr] md:gap-12 md:p-10">
@@ -380,7 +387,6 @@ export default function TresMPage() {
               </tbody>
             </table>
           </Reveal>
-          <p className="mt-3 text-xs text-fg-3">&ldquo;—&rdquo; = não informado no catálogo. Valores &ldquo;até&rdquo; conforme a 3M.</p>
           <div className="mt-8">
             <Callout icon={<AlertIcon />}>
               <strong className="text-fg">Nota:</strong> a legislação sobre a transparência de películas

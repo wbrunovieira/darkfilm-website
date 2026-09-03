@@ -59,8 +59,7 @@ export const paginasRevisao: PaginaRevisao[] = [
     href: "/peliculas-automotivas",
     grupo: "Páginas do site",
     secoes: [
-      { id: "aplicacao-perfeita-sem-emendas", titulo: "Aplicação perfeita, sem emendas." },
-      { id: "os-unicos-em-petropolis-com-chancela-abrawf", titulo: "Os únicos em Petrópolis com chancela ABRAWF." },
+      { id: "aplicacao-perfeita-sem-emendas", titulo: "Aplicação perfeita, do material ao acabamento." },
       { id: "simule-a-sua-pelicula", titulo: "Simule a sua película." },
       { id: "pelicula-automotiva-de-protecao-e-seguranca", titulo: "Película automotiva de proteção e segurança." },
       { id: "mais-para-o-seu-carro", titulo: "Mais para o seu carro" },

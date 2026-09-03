@@ -22,7 +22,7 @@ import {
 export const metadata: Metadata = {
   title: "Películas Automotivas",
   description:
-    "Película automotiva profissional com proteção anti-risco e encolhimento térmico. Única em Petrópolis com chancela ABRAWF. Película de proteção e segurança.",
+    "Películas automotivas profissionais em Petrópolis: 3M, Garware, Llumar, Ultra IR Pro e Window Blue. Conforto térmico, proteção UV e aplicação com acabamento.",
 };
 
 // Sem lavagem a seco e polimento de faróis: o cliente não faz mais (03/09/2026).
@@ -89,7 +89,7 @@ export default function LinhaAutomotivaPage() {
       <TintSimulator />
 
       <Section
-        index="02"
+        index="01"
         eyebrow="Proteção e segurança"
         title="Película automotiva de proteção e segurança."
         tone="atmo-cool"
