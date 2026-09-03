@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 
 // Mínimos de transmissão luminosa por vidro (Resolução CONTRAN 960/2022, alterada pela 989/2022).
 const limites = [
-  { vidro: "Para-brisa", valor: "75%", nota: "mínimo de transmissão luminosa (vidro incolor)" },
-  { vidro: "Laterais dianteiras", valor: "70%", nota: "mínimo de transmissão luminosa" },
+  { vidro: "Para-brisa", valor: "70%", nota: "mínimo de transmissão luminosa do conjunto vidro + película" },
+  { vidro: "Laterais dianteiras", valor: "70%", nota: "mínimo de transmissão luminosa do conjunto vidro + película" },
   { vidro: "Traseiros e vidro de trás", valor: "Livre", nota: "sem mínimo, desde que o veículo tenha retrovisores externos dos dois lados" },
 ];
 

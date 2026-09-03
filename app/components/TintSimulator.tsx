@@ -19,11 +19,15 @@ import { whatsappUrl } from "@/lib/site";
  *   apenas apelidos de UI para esses cinco códigos; o código continua visível.
  * - Faixas 3M: página `3m.html` do site original (Crystalline 40–90, CS Premium 5–50,
  *   FX Pro 5–70, EX 5–35, Black Chrome 10–40).
- * - Limites legais (verificados em 25/08/2026): Resolução CONTRAN 960/2022, alterada pela
- *   989/2022. Para-brisa: 75% (vidro incolor) / laterais dianteiras: 70%. Vidros traseiros e
- *   vigia: sem mínimo desde que o veículo tenha retrovisores externos dos dois lados.
- *   O site antigo citava a Res. 254/2007 (revogada), que exigia 28% nos traseiros.
- *   PENDÊNCIA: cliente confirmar a leitura da resolução antes de publicar.
+ * - Limites legais conferidos no texto oficial da resolução em 03/09/2026 (PDF do gov.br),
+ *   não em fonte secundária: Resolução CONTRAN 960/2022, art. 4º, com a redação dada pela
+ *   Resolução 989/2022. Para-brisa E laterais dianteiras: 70% — o §1º define as duas como
+ *   "áreas indispensáveis à dirigibilidade". Traseiros e vigia: sem mínimo, desde que o
+ *   veículo tenha retrovisores externos dos dois lados; películas refletivas são vedadas
+ *   em qualquer área (art. 10, I).
+ *   Correções feitas nessa conferência: o site trazia 75% no para-brisa, valor da resolução
+ *   anterior já revogada; e o mínimo de 28% dos demais vidros deixou de existir quando a
+ *   989/2022 reescreveu o inciso II.
  * - A lei mede a transmitância do conjunto vidro + película; o número da película sozinha
  *   não é o valor final. Por isso o rótulo é cauteloso e aponta para a medição na loja.
  */
@@ -49,10 +53,19 @@ export function rotuloFor(vlt: number) {
 
 type VidroId = "parabrisa" | "dianteiras" | "traseiras";
 /** `em` = frase com preposição ("nos vidros da frente"); `para` = "para os vidros da frente". */
+/* Mínimos conferidos no texto oficial em 03/09/2026 — Resolução CONTRAN 960/2022,
+   art. 4º, com a redação dada pela Resolução 989/2022:
+   - inciso I: não pode ser inferior a 70% para o para-brisa E para as demais áreas
+     indispensáveis à dirigibilidade, que o §1º define como o para-brisa e as laterais
+     DIANTEIRAS;
+   - inciso II (redação da 989/2022): pode ser inferior a isso nos vidros que não
+     interferem nessas áreas, desde que o veículo tenha retrovisores externos dos dois
+     lados. O mínimo de 28% que constava na redação original deixou de existir.
+   O site trazia 75% no para-brisa, que era o valor da resolução antiga, revogada. */
 const VIDROS: { id: VidroId; nome: string; em: string; para: string; min: number | null }[] = [
   { id: "dianteiras", nome: "Vidros da frente (motorista e carona)", em: "nos vidros da frente", para: "para os vidros da frente", min: 70 },
   { id: "traseiras", nome: "Vidros de trás (portas traseiras e vidro traseiro)", em: "nos vidros de trás", para: "para os vidros de trás", min: null },
-  { id: "parabrisa", nome: "Para-brisa", em: "no para-brisa", para: "para o para-brisa", min: 75 },
+  { id: "parabrisa", nome: "Para-brisa", em: "no para-brisa", para: "para o para-brisa", min: 70 },
 ];
 
 const LINHAS_3M = [
