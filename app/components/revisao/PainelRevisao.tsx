@@ -21,7 +21,7 @@ export const NOME_AGENCIA = "WB Digital Solutions";
 const ROTULO: Record<Situacao, string> = {
   "com-cliente": `Com a ${NOME_CLIENTE}`,
   "com-agencia": `Com a ${NOME_AGENCIA}`,
-  aprovado: "Aprovado, falta confirmar",
+  aprovado: "Aprovado — aguardando a WB",
   fechado: "Fechado",
 };
 const COR: Record<Situacao, string> = {
@@ -159,7 +159,9 @@ export function PainelRevisao({
     (b: Bloco): Situacao => {
       const itens = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
       if (itens.includes("com-agencia")) return "com-agencia";
-      if (b.itens.some((i) => sit(b.id, i.id) === "com-cliente")) return "com-cliente";
+      // `itens` e não `b.itens`: um pedido sobre a página inteira também deixa a página pendente.
+      // Sem isto o cartão ficava verde com uma pergunta aberta dentro, e ninguém a via.
+      if (itens.includes("com-cliente")) return "com-cliente";
       return b.itens.every((i) => sit(b.id, i.id) === "fechado") ? "fechado" : "aprovado";
     },
     [sit],
@@ -417,7 +419,7 @@ export function PainelRevisao({
                     </span>
 
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-semibold text-slate-900">{b.titulo}</p>
+                      <p className="font-semibold text-[var(--wb-tinta)] [text-wrap:balance]">{b.titulo}</p>
                       {b.href && (
                         <a href={b.href} target="_blank" rel="noopener noreferrer" className="text-sm text-red-700 underline underline-offset-4 hover:text-red-900">
                           Abrir a página ↗
@@ -612,7 +614,12 @@ function Linha({
               <span className="font-medium text-slate-700">{m.autor}</span>{" "}
               <span className="text-slate-500">{VERBO[m.acao] ?? m.acao}</span>
               <span className="text-slate-400"> · {quando(m.em)}</span>
-              {m.texto && <p className="text-slate-700">{m.texto}</p>}
+              {m.origem && (
+                <span className="ml-1 rounded-full bg-slate-200 px-2 py-0.5 text-[11px] font-medium text-slate-600">
+                  {m.origem === "whatsapp" ? "via WhatsApp" : "registro interno"}
+                </span>
+              )}
+              {m.texto && <p className="whitespace-pre-line text-slate-700">{m.texto}</p>}
             </li>
           ))}
         </ol>

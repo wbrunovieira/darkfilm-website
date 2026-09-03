@@ -83,6 +83,13 @@ export type Evento = {
   em: string;
   ip: string;
   userAgent: string;
+  /**
+   * De onde veio o registro. Ausente = digitado no painel, com IP de verdade.
+   * `whatsapp` = pedido que o cliente mandou por lá antes de a ferramenta existir, transcrito
+   * daqui para ele não ter de reescrever tudo. `interno` = a nossa resposta, registrada por nós
+   * para o assunto ficar fechado no mesmo lugar. Nenhum dos dois finge ter passado pelo painel.
+   */
+  origem?: "whatsapp" | "interno";
 };
 
 const PASTA = "revisao/eventos/";
