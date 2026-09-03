@@ -6,20 +6,17 @@ import { Callout, IconList, Section, Stat, Tiles } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { TintSimulator } from "@/components/TintSimulator";
-import { LIMITES, REFERENCIA, valorLimite } from "@/lib/legislacao";
-import { TONALIDADES, shadeFor } from "@/lib/tonalidades";
 import { ArrowIcon } from "@/components/icons";
 import {
   AlertIcon,
   CurveIcon,
+  HeatIcon,
   LayersIcon,
   LockIcon,
   NoiseIcon,
-  ScratchIcon,
   ShatterIcon,
   ShieldIcon,
   TimerIcon,
-  WarrantyIcon,
 } from "@/components/icons/peliculas";
 
 export const metadata: Metadata = {
@@ -44,138 +41,50 @@ export default function LinhaAutomotivaPage() {
           <>
             Aplicação perfeita,
             <br />
-            <span className="text-red-2">sem emendas.</span>
+            <span className="text-red-2">do material ao acabamento.</span>
           </>
         }
-        intro="Utilizamos somente film de linha profissional, com proteção antirrisco e técnica avançada de encolhimento térmico, evitando emendas em vidros mais boleados, resultando perfeita aplicação."
+        intro="Trabalhamos com películas profissionais e de alta performance, com tecnologias que proporcionam maior conforto térmico, proteção UV, privacidade e excelente visibilidade. Tudo aliado a uma aplicação profissional, com cuidado no acabamento e mínima contaminação."
         image="/img/novo/aplicacao-carros--peugeot-2008-frente-faixa-solar.jpg"
         imagePosition="center 55%"
       />
 
-      {/* Os três argumentos do texto de abertura, em tiles — o que diferencia a aplicação. */}
+      {/* Os três argumentos do texto de abertura, em tiles. Os nomes das marcas são os que o
+          cliente listou em 02/09/2026 — a loja é multimarca, e foi por isso que ele também
+          mandou tirar a exclusividade 3M do simulador. */}
       <section className="pel-atmo border-t border-line">
         <div className="container-x py-14 md:py-20">
           <Tiles
             columns={3}
             items={[
-              { icon: <LayersIcon />, title: "Film de linha profissional", text: "Utilizamos somente film de linha profissional." },
-              { icon: <ScratchIcon />, title: "Proteção antirrisco", text: "Película com proteção antirrisco." },
-              { icon: <CurveIcon />, title: "Encolhimento térmico", text: "Técnica avançada que evita emendas em vidros mais boleados: aplicação perfeita." },
+              {
+                icon: <LayersIcon />,
+                title: "Películas profissionais",
+                text: "Marcas reconhecidas — 3M, Garware, Llumar, Ultra IR Pro e Window Blue — de linhas tradicionais a películas de alta performance.",
+              },
+              {
+                icon: <HeatIcon />,
+                title: "Tecnologia e conforto térmico",
+                text: "Opções com nanotecnologia e tecnologias avançadas para maior redução de calor e proteção UV.",
+              },
+              {
+                icon: <CurveIcon />,
+                title: "Aplicação e acabamento",
+                text: "Instalação profissional, com técnica, cuidado nos detalhes e mínima contaminação.",
+              },
             ]}
           />
         </div>
       </section>
 
-      <Section
-        index="01"
-        eyebrow="Chancela"
-        title="Os únicos em Petrópolis com chancela ABRAWF."
-        aside={
-          <Reveal className="relative overflow-hidden border border-line bg-bg-2 p-6">
-            <span aria-hidden className="pel-card__ghost">ABRAWF</span>
-            <span className="pel-icon pel-icon--accent">
-              <WarrantyIcon />
-            </span>
-            <p className="display mt-5 text-3xl">Chancela registrada</p>
-            <p className="mt-2 text-sm leading-relaxed text-fg-2">
-              Associação Brasileira de Representantes e Aplicadores de Window Film — a entidade que
-              chancela aplicadores de película no país.
-            </p>
-          </Reveal>
-        }
-        after={
-          <RevealGroup className="grid gap-4 md:grid-cols-[1.5fr_1fr]">
-            {/* Aqui havia um JPG de 2013 com um sedã genérico estampando 75% / 70% / 28% / 28%
-                — os limites da resolução anterior, já revogada. Ficou contradizendo o texto
-                correto na mesma página, e nenhuma busca por texto pega número dentro de imagem.
-                Agora os valores vêm de lib/legislacao e não têm como divergir de novo. */}
-            <RevealItem className="relative overflow-hidden border border-line bg-bg-2 p-6">
-              <p className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-fg-2">
-                Transmissão luminosa permitida por vidro
-              </p>
-              <dl className="mt-5 grid gap-4 sm:grid-cols-3">
-                {["parabrisa", "dianteiras", "traseiras"].map((id) => {
-                  const l = LIMITES.find((v) => v.id === id)!;
-                  return (
-                    <div key={l.id} className="border-t border-line-strong pt-3">
-                      <dt className="text-sm leading-snug text-fg-2">{l.curto}</dt>
-                      <dd className="display mt-1 text-4xl">{valorLimite(l)}</dd>
-                    </div>
-                  );
-                })}
-              </dl>
-              <p className="mt-5 text-xs leading-relaxed text-fg-3">
-                Mínimo do conjunto vidro + película. Os vidros de trás não têm mínimo desde que o
-                veículo tenha retrovisores externos dos dois lados. {REFERENCIA}.{" "}
-                <Link href="/simulador" className="underline underline-offset-4 hover:text-fg">
-                  Ver o que a lei permite em cada vidro
-                </Link>
-              </p>
-            </RevealItem>
-            {/* O mostruário era um JPG de 2013 rotulado "G5 G20 G35 G50 G70": a nomenclatura que
-                o cliente mandou trocar por porcentagem, numa escala que parava no 70 enquanto o
-                texto ao lado diz que a loja vai até 90%. Imagem não acompanha mudança de conteúdo
-                e não aparece em busca por texto — foi assim que o erro sobreviveu. Agora as faixas
-                saem de lib/tonalidades, a mesma fonte do simulador. */}
-            <RevealItem className="relative overflow-hidden border border-line bg-bg-2">
-              <div className="relative aspect-[3/2]">
-                <Image
-                  src="/img/novo/simulador--rua-cel-veiga.jpg"
-                  alt={`Mesma cena vista através das ${TONALIDADES.length} tonalidades do mostruário, da mais escura à quase incolor`}
-                  fill
-                  sizes="(min-width: 768px) 30vw, 100vw"
-                  className="object-cover object-[center_35%]"
-                />
-                <div aria-hidden className="absolute inset-0 flex">
-                  {TONALIDADES.map((t) => (
-                    <div key={t} className="relative flex-1 border-l border-white/10 first:border-l-0">
-                      <div className="absolute inset-0 bg-black" style={{ opacity: shadeFor(t) }} />
-                      <span className="absolute inset-x-0 bottom-2 text-center font-display text-[11px] font-semibold tabular-nums tracking-[0.1em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">
-                        {t}%
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <p className="border-t border-line px-5 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">
-                Mostruário de tonalidades
-              </p>
-            </RevealItem>
-          </RevealGroup>
-        }
-      >
-        <p>
-          Em Petrópolis, somos os únicos com chancela registrada na <strong>ABRAWF</strong>{" "}
-          (Associação Brasileira de Representantes e Aplicadores de Window Film), a entidade que
-          chancela aplicadores de película no país.
-        </p>
-        {/* Este bloco citava a Resolução 254/2007 como se fosse a norma vigente e linkava um PDF
-            do DENATRAN — órgão extinto, link morto (redireciona para a home do SENATRAN). A 254
-            foi revogada; quem vale hoje é a 960/2022 com a redação da 989/2022, a mesma que
-            corrigimos no simulador. Fonte conferida no texto oficial em 03/09/2026. */}
-        <h3>Conselho Nacional de Trânsito — Resolução n.º 960, de 3 de novembro de 2022</h3>
-        <p>
-          É a norma em vigor. Estabelece os requisitos para os vidros de segurança e os critérios
-          para aplicação de inscrições, pictogramas e películas nas áreas envidraçadas dos veículos
-          automotores, conforme o inciso III do artigo 111 do Código de Trânsito Brasileiro. Foi
-          alterada pela Resolução n.º 989, de 15 de dezembro de 2022, que é o texto que vale para o
-          mínimo de transmissão luminosa de cada vidro. Ela substituiu a Resolução 254/2007, que
-          ainda circula em muito material antigo sobre película.
-        </p>
-        <p>
-          O texto oficial de todas as resoluções está no{" "}
-          <a
-            href="https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-contran/resolucoes"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            portal do CONTRAN
-          </a>
-          . Os mínimos por vidro estão logo acima, e há o detalhe de cada um na página de{" "}
-          <Link href="/simulador">legislação</Link>. Para ver como fica a tonalidade,{" "}
-          <Link href="#simulador">simule aqui mesmo</Link>.
-        </p>
-      </Section>
+      {/* Aqui ficava a seção da chancela ABRAWF, com o texto das resoluções, a tabela de
+          limites por vidro e o mostruário de tonalidades. Saiu a pedido do cliente em
+          02/09/2026: legislação passa a ser tratada só na página específica, e desta página
+          os três quadros vão direto ao simulador, sem repetir informação.
+
+          A chancela ABRAWF é diferencial real — a loja é a única de Petrópolis com ela — e
+          está registrada como pergunta em aberto no painel de revisão: confirmar com ele se
+          era a chancela que incomodava ou só o texto legal antigo que a acompanhava. */}
 
       <TintSimulator />
 

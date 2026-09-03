@@ -4,7 +4,9 @@ import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
 import { CardVideo } from "../CardVideo";
 
-// 1 foto grande (2 colunas) + 4 = duas linhas fechadas no grid de 3 colunas.
+// O cliente pediu "bastante foto" nesta seção em 02/09/2026, e a Michele completou:
+// "carros novos". Passou de 4 para 8, todas do acervo dele (2024–2026) e todas paisagem,
+// que é o que a grade exige. A grade fecha em 1 grande (2 colunas) + as demais.
 // A primeira é 16/9 e as outras 4/3, então todas aqui precisam ser paisagem.
 // Material novo do cliente (2024-2026); o `alt` descreve cada foto, em vez do
 // texto genérico que valia para todas.
@@ -14,24 +16,32 @@ const photos: { src: string; alt: string; video?: string }[] = [
     alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
   },
   {
+    src: "/img/novo/aplicacao-carros--audi-tt-tres-quartos.jpg",
+    alt: "Audi TT azul em ângulo frontal, com os vidros escurecidos",
+  },
+  {
     src: "/img/novo/aplicacao-carros--byd-sedan-frente-pelicula.jpg",
     alt: "Sedã BYD preto com película aplicada, de frente, na oficina",
   },
   {
     src: "/img/novo/aplicacao-carros--porsche-cayenne-traseira-pelicula.jpg",
-    alt: "Porsche Cayenne branco com película nos vidros, visto de trás",
+    alt: "Porsche Cayenne branco com película nos vidros traseiros",
   },
   {
-    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-pelicula.jpg",
-    alt: "Peugeot 2008 azul com película nos vidros, visto de trás",
+    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-vidros.jpg",
+    alt: "Peugeot 2008 azul visto de trás, com os vidros traseiros escurecidos",
   },
   {
-    // Vídeo no lugar de foto: o bloco promete "trabalhos na oficina" e cinco carros
-    // parados liam como catálogo. O movimento é o que diferencia. Mudo e sob demanda,
-    // como nos cards de serviço.
-    src: "/video/oficina-golf-mural.jpg",
-    video: "/video/oficina-golf-mural.mp4",
-    alt: "Golf com os vidros escurecidos na oficina, sob o mural da The Dark Film",
+    src: "/img/novo/aplicacao-carros--bmw-porta-aberta.jpg",
+    alt: "BMW preto com a porta aberta, mostrando o interior depois da aplicação",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--hatch-eletrico-cinza.jpg",
+    alt: "Hatch elétrico cinza com os vidros escurecidos por película",
+  },
+  {
+    src: "/img/novo/aplicacao-carros--audi-tt-estacionado.jpg",
+    alt: "Audi TT azul estacionado na oficina com os vidros escurecidos",
   },
 ];
 

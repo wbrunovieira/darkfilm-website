@@ -3,8 +3,10 @@ import { Reveal, RevealGroup, RevealItem } from "../Reveal";
 import { ArrowIcon } from "../icons";
 import { ShieldCheckIcon } from "../icons/home";
 
-// Linhas citadas no texto original da página 3M.
-const linhas = ["Crystalline", "CS Premium", "FX Pro", "EX", "Black Chrome"];
+/* As linhas automotivas que a loja trabalha, conforme a lista do cliente em 02/09/2026.
+   CS Premium e FX Pro eram o nome antigo de Color Stable IR e FX; EX e Black Chrome saíram
+   porque não fazem parte das linhas automotivas da loja. */
+const linhas = ["Crystalline", "Ceramic IR", "Color Stable IR", "FX", "SAS Segurança"];
 
 export function Seal3M() {
   return (
@@ -36,9 +38,12 @@ export function Seal3M() {
           <h2 className="display text-4xl md:text-6xl">
             Aplicadora credenciada 3M<span className="text-red-2">.</span>
           </h2>
+          {/* Texto do cliente, palavra por palavra (02/09/2026). */}
           <p className="mt-5 max-w-xl text-fg-2">
-            Menos calor, mais proteção. Películas 3M das linhas Crystalline, CS Premium, FX Pro,
-            EX e Black Chrome: até 99% dos raios UV bloqueados, sem interferência em GPS e celular.
+            <strong className="text-fg">Proteção com atitude. Películas Automotivas 3M.</strong>{" "}
+            Tecnologia, conforto, proteção e desempenho para o seu veículo. Trabalhamos com as
+            principais linhas automotivas 3M, com opções para diferentes necessidades de proteção
+            solar, privacidade e segurança.
           </p>
           <RevealGroup stagger={0.06} className="mt-6 flex flex-wrap gap-2">
             {linhas.map((l) => (

@@ -5,12 +5,18 @@ import { Reveal } from "../Reveal";
 import { ArrowIcon } from "../icons";
 import { SoundIcon } from "../icons/home";
 
-const PLAYLIST_URL = "https://open.spotify.com/playlist/1xbsAORgR5zbPkLWtB1wzg";
+/* Playlist da conta do próprio cliente, enviada por ele em 02/09/2026. A anterior era uma
+   playlist da WB, usada só como exemplo enquanto ele não escolhia a dele.
+
+   O "código de incorporação" do Spotify não precisa ser copiado do site deles: é o mesmo
+   endereço da playlist com `/embed/` no meio. E ela precisa continuar PÚBLICA — se virar
+   privada, o quadro aparece vazio para quem não segue, sem erro nenhum na tela. */
+const PLAYLIST_URL = "https://open.spotify.com/playlist/6ivosCzSh5uFib5WHsxqLq";
 const EMBED_SRC =
-  "https://open.spotify.com/embed/playlist/1xbsAORgR5zbPkLWtB1wzg?utm_source=generator";
+  "https://open.spotify.com/embed/playlist/6ivosCzSh5uFib5WHsxqLq?utm_source=generator";
 
 /** Nome real da playlist na conta do cliente (via oEmbed da Spotify). */
-const PLAYLIST_NAME = "Nice";
+const PLAYLIST_NAME = "Rolé";
 
 /** Altura do embed da Spotify; a fachada usa a mesma para não haver salto no layout. */
 const PLAYER_HEIGHT = 352;
