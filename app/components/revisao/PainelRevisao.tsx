@@ -283,10 +283,25 @@ export function PainelRevisao({
     return c;
   }, [blocos, sitBloco, souAgencia]);
 
-  const praVoce = useMemo(
-    () => blocos.filter((b) => tom(sitBloco(b), souAgencia) === "voce"),
-    [blocos, sitBloco, souAgencia],
+  /**
+   * As duas filas, nomeadas.
+   *
+   * Antes era uma caixa só, "N itens esperam por você" — e "você" depende de quem abriu a tela.
+   * O painel é dos dois lados: quem lê pode ser a The Dark Film ou a WB, e a mesma frase queria
+   * dizer coisas diferentes. Agora cada fila leva o nome de quem a segura, e ninguém precisa
+   * lembrar em nome de quem entrou.
+   */
+  // "novo" fica fora das filas de propósito: é o silêncio do padrão, não uma dívida de ninguém.
+  const comCliente = useMemo(
+    () => blocos.filter((b) => sitBloco(b) === "com-cliente"),
+    [blocos, sitBloco],
   );
+  // "aprovado" entra na fila da WB: o cliente já falou, falta a gente confirmar e fechar.
+  const comAgencia = useMemo(
+    () => blocos.filter((b) => ["com-agencia", "aprovado"].includes(sitBloco(b))),
+    [blocos, sitBloco],
+  );
+  const praVoce = souAgencia ? comAgencia : comCliente;
 
   const combina = useCallback(
     (b: Bloco) => {
@@ -351,8 +366,25 @@ export function PainelRevisao({
           souAgencia={souAgencia}
         />
 
-        {praVoce.length > 0 && filtro === "tudo" && (
-          <ChamadaPraVoce blocos={praVoce} souAgencia={souAgencia} irPara={irPara} />
+        {filtro === "tudo" && (comCliente.length > 0 || comAgencia.length > 0) && (
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <Fila
+              titulo={`Esperando a ${NOME_CLIENTE}`}
+              nota="Precisa de aprovação ou resposta de vocês."
+              blocos={comCliente}
+              lado="cliente"
+              souAgencia={souAgencia}
+              irPara={irPara}
+            />
+            <Fila
+              titulo={`Esperando a ${NOME_AGENCIA}`}
+              nota="Estamos resolvendo por aqui."
+              blocos={comAgencia}
+              lado="agencia"
+              souAgencia={souAgencia}
+              irPara={irPara}
+            />
+          </div>
         )}
 
         {grupos.map(([grupo, itens]) => (
@@ -581,50 +613,81 @@ function TituloDeGrupo({
 
 /* ------------------------------------------------------------------ chamada */
 
-/** O que espera por quem abriu a tela, antes de qualquer lista. */
-function ChamadaPraVoce({
+/**
+ * Uma das duas filas do topo, sempre nomeada.
+ *
+ * A fila de quem está lendo fica destacada; a do outro lado fica sóbria — não é dívida dele, é
+ * informação de que a bola está do outro lado. Nenhuma das duas diz "você": o painel é dos dois,
+ * e "você" só faz sentido para quem escreveu a frase.
+ */
+function Fila({
+  titulo,
+  nota,
   blocos,
+  lado,
   souAgencia,
   irPara,
 }: {
+  titulo: string;
+  nota: string;
   blocos: Bloco[];
+  lado: "cliente" | "agencia";
   souAgencia: boolean;
   irPara: (id: string) => void;
 }) {
   const n = blocos.length;
+  const minha = souAgencia === (lado === "agencia");
+  const vazia = n === 0;
+
   return (
-    <section className="wb-entra mt-6 overflow-hidden rounded-2xl bg-[var(--wb-ambar-leve)] ring-1 ring-[var(--wb-ambar-borda)]">
-      <h2 className="px-4 pb-1 pt-3.5 text-[15px] font-extrabold text-[var(--wb-ambar-tinta)]">
-        {n === 1 ? "1 item espera por você" : `${n} itens esperam por você`}
-      </h2>
-      <p className="px-4 text-[13px] text-[var(--wb-ambar-tinta)]/80">
-        {souAgencia
-          ? `O que a ${NOME_CLIENTE} devolveu e está com a gente.`
-          : "Toque para ir direto ao ponto."}
-      </p>
-      <ul className="mt-2 px-1.5 pb-1.5">
-        {blocos.slice(0, 8).map((b) => (
-          <li key={b.id}>
-            <button
-              type="button"
-              onClick={() => irPara(b.id)}
-              className="wb-foco flex min-h-11 w-full items-center gap-2 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-white/70"
-            >
-              <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--wb-ambar-tinta)]">
-                {b.titulo}
-              </span>
-              <svg viewBox="0 0 12 12" aria-hidden className="size-3.5 shrink-0 opacity-60">
-                <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </li>
-        ))}
-        {n > 8 && (
-          <li className="px-2.5 py-2 text-[13px] font-medium text-[var(--wb-ambar-tinta)]/80">
-            e mais {n - 8} abaixo
-          </li>
-        )}
-      </ul>
+    <section
+      className={`wb-entra overflow-hidden rounded-2xl ring-1 ${
+        vazia
+          ? "bg-white/60 ring-[var(--wb-linha)]"
+          : minha
+            ? "bg-[var(--wb-ambar-leve)] ring-[var(--wb-ambar-borda)]"
+            : "bg-white ring-[var(--wb-linha)]"
+      }`}
+    >
+      <div className="px-4 pb-1 pt-3.5">
+        <h2 className="flex items-baseline gap-2 text-[15px] font-extrabold text-[var(--wb-tinta)]">
+          <span
+            aria-hidden
+            className={`size-2.5 shrink-0 rounded-full ${
+              vazia ? "bg-[var(--wb-linha)]" : lado === "cliente" ? "bg-[var(--wb-ambar)]" : "bg-[var(--wb-roxo-vivo)]"
+            }`}
+          />
+          {titulo}
+          <span className="ml-auto text-[13px] font-bold tabular-nums text-[var(--wb-tinta-3)]">{n}</span>
+        </h2>
+        <p className="mt-0.5 text-[13px] text-[var(--wb-tinta-3)]">{vazia ? "Nada por aqui." : nota}</p>
+      </div>
+
+      {!vazia && (
+        <ul className="mt-1 px-1.5 pb-1.5">
+          {blocos.slice(0, 6).map((b) => (
+            <li key={b.id}>
+              <button
+                type="button"
+                onClick={() => irPara(b.id)}
+                className="wb-foco flex min-h-11 w-full items-center gap-2 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-white/70"
+              >
+                <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--wb-tinta)]">
+                  {b.titulo}
+                </span>
+                <svg viewBox="0 0 12 12" aria-hidden className="size-3.5 shrink-0 opacity-50">
+                  <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </li>
+          ))}
+          {n > 6 && (
+            <li className="px-2.5 py-2 text-[13px] font-medium text-[var(--wb-tinta-3)]">
+              e mais {n - 6} abaixo
+            </li>
+          )}
+        </ul>
+      )}
     </section>
   );
 }
