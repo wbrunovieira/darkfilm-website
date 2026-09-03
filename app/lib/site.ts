@@ -57,6 +57,14 @@ export function yearsInBusiness(now = new Date()) {
   return now.getFullYear() - site.founded;
 }
 
+const DECADAS = ["", "uma", "duas", "três", "quatro", "cinco", "seis"];
+
+/** "três décadas" hoje; vira "quatro décadas" sozinho em 2032. */
+export function decadasEmAtividade(now = new Date()) {
+  const d = Math.floor(yearsInBusiness(now) / 10);
+  return `${DECADAS[d] ?? d} década${d === 1 ? "" : "s"}`;
+}
+
 export type NavLink = { href: string; label: string; highlight?: boolean };
 export type NavItem = NavLink | { label: string; children: NavLink[] };
 

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { site, whatsappUrl, yearsInBusiness } from "@/lib/site";
+import { decadasEmAtividade, site, whatsappUrl, yearsInBusiness } from "@/lib/site";
 import { ArrowIcon, WhatsAppIcon } from "../icons";
 import { GoogleBadge } from "../GoogleBadge";
 
@@ -93,8 +93,9 @@ export function Hero() {
           {...fade(0.75)}
           className="mt-6 max-w-lg text-base leading-relaxed text-fg-2 md:mt-8 md:text-lg short:mt-4 short:max-w-xl short:text-base"
         >
-          Somente film de linha profissional, com proteção anti-risco e encolhimento térmico
-          sem emendas — mesmo em vidros boleados. Aplicadora credenciada{" "}
+          Há mais de {decadasEmAtividade()}, a The Dark Film é referência em películas
+          automotivas e arquitetônicas, som e acessórios em {site.city}. Produtos de
+          qualidade, instalação profissional e a confiança de uma aplicadora credenciada{" "}
           <strong className="text-fg">3M</strong>.
         </motion.p>
 
