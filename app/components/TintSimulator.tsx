@@ -31,15 +31,16 @@ import { whatsappUrl } from "@/lib/site";
  * - A lei mede a transmitância do conjunto vidro + película; o número da película sozinha
  *   não é o valor final. Por isso o rótulo é cauteloso e aponta para a medição na loja.
  */
-export const TONALIDADES = [5, 20, 35, 50, 70] as const;
+export const TONALIDADES = [5, 20, 35, 50, 70, 90] as const;
 
-/** Apelidos em linguagem simples para os cinco códigos do mostruário. */
+/** Apelidos em linguagem simples para os códigos do mostruário. */
 export const ROTULOS: Record<(typeof TONALIDADES)[number], string> = {
   5: "Bem escura",
   20: "Escura",
   35: "Média",
   50: "Clara",
   70: "Bem clara",
+  90: "Quase incolor",
 };
 
 /** Rótulo humano para qualquer valor do slider (faixas entre os presets). */
@@ -48,7 +49,8 @@ export function rotuloFor(vlt: number) {
   if (vlt <= 27) return ROTULOS[20];
   if (vlt <= 42) return ROTULOS[35];
   if (vlt <= 60) return ROTULOS[50];
-  return ROTULOS[70];
+  if (vlt <= 80) return ROTULOS[70];
+  return ROTULOS[90];
 }
 
 type VidroId = "parabrisa" | "dianteiras" | "traseiras";
@@ -79,9 +81,37 @@ const LINHAS_3M = [
 const MIN = 5;
 const MAX = 90;
 
-/** Curva perceptual: o escurecimento linear em sRGB fica "sujo" demais nos tons claros. */
+/**
+ * Quanto a simulação escurece a cena, de 0 (nada) a 1 (opaco).
+ *
+ * Não é a transmitância física: é a PERCEPÇÃO de quem olha de dentro do carro para
+ * fora, que é sempre mais clara do que o número sugere — o olho se adapta e o cérebro
+ * compensa. A curva anterior (1 - (vlt/100)^0,6) era fiel ao número e por isso parecia
+ * escura demais na tela; o cliente comparou com a aparência real e pediu o ajuste.
+ *
+ * A referência veio dele, em 03/09/2026: "5% deve parecer o que hoje está no 20%,
+ * 20% como o 35%, 35% como o 50%, 50% como o 70%, e o 70% ainda mais claro que isso".
+ * Os âncoras abaixo são exatamente essa tradução, com interpolação linear entre eles.
+ */
+const PERCEPCAO: [number, number][] = [
+  [5, 0.62],
+  [20, 0.46],
+  [35, 0.34],
+  [50, 0.19],
+  [70, 0.1],
+  [90, 0.04],
+];
+
 export function shadeFor(vlt: number) {
-  return 1 - Math.pow(vlt / 100, 0.6);
+  const p = PERCEPCAO;
+  if (vlt <= p[0][0]) return p[0][1];
+  if (vlt >= p[p.length - 1][0]) return p[p.length - 1][1];
+  for (let i = 0; i < p.length - 1; i++) {
+    const [x1, y1] = p[i];
+    const [x2, y2] = p[i + 1];
+    if (vlt <= x2) return y1 + ((vlt - x1) / (x2 - x1)) * (y2 - y1);
+  }
+  return p[p.length - 1][1];
 }
 
 // Janela lateral traseira, em % do quadro (polígono compartilhado pela moldura e pela película).
