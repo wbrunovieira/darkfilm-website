@@ -147,7 +147,10 @@ export function TintSimulator({
 
   return (
     <section
-      className="container-x border-t border-line py-16 md:py-24"
+      /* Âncora estável: a página de legislação manda quem quer ver a tonalidade para cá,
+         já que a simulação visual saiu de lá a pedido do cliente. */
+      id={showHeading ? "simulador" : undefined}
+      className="container-x scroll-mt-24 border-t border-line py-16 md:py-24"
       aria-labelledby={showHeading ? `${id}-title` : undefined}
       aria-label={showHeading ? undefined : "Simulador de tonalidade de película"}
     >

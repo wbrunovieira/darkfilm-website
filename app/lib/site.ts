@@ -88,10 +88,17 @@ export const nav: NavItem[] = [
       { href: "/peliculas-automotivas", label: "Películas Automotivas" },
       { href: "/peliculas-arquitetonicas", label: "Películas Arquitetônicas" },
       { href: "/caracteristicas-do-film", label: "Características do Film" },
+      /* "Legislação", não "Simulador": em 03/09/2026 o cliente simplificou a página para
+         mostrar só o que a lei exige em cada vidro — sem escolha de tonalidade e sem a cena
+         pelo vidro, que ficaram na home e em Películas Automotivas. Um item de menu chamado
+         "Simulador", com selo "Novo", levava à única página onde não se simula nada.
+         O nome é dele: a mensagem em que pediu a mudança se chama "PÁGINA DO SIMULADOR /
+         LEGISLAÇÃO". Passa a filho de "Películas" porque o próprio topo da página já se
+         anunciava como "Películas · Simulador" enquanto o menu o tratava como irmão. */
+      { href: "/simulador", label: "Legislação" },
       { href: "/3m", label: "Credenciada 3M" },
     ],
   },
-  { href: "/simulador", label: "Simulador", highlight: true },
   { href: "/som-e-acessorios", label: "Som e Acessórios" },
   { href: "/galeria", label: "Galeria" },
   { href: "/contato", label: "Contato" },

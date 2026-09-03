@@ -9,7 +9,7 @@ import { CarIcon, WindowIcon } from "@/components/icons/peliculas";
 import { LIMITES, NOTA_CONJUNTO, NOTA_SEM_MINIMO, valorLimite } from "@/lib/legislacao";
 
 export const metadata: Metadata = {
-  title: "Simulador de Película",
+  title: "Legislação de Película Automotiva",
   description:
     "Veja o mínimo de transmissão luminosa que a lei exige em cada vidro do carro — para-brisa, laterais dianteiras e traseiros. The Dark Film, Petrópolis/RJ.",
 };
@@ -29,7 +29,7 @@ export default function SimuladorPage() {
     <>
       <PageHero
         compact
-        eyebrow="Películas · Simulador"
+        eyebrow="Películas · Legislação"
         title={
           <>
             Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>
@@ -39,6 +39,18 @@ export default function SimuladorPage() {
       />
 
       <TintSimulator showHeading={false} variant="legislacao" />
+
+      {/* A simulação visual saiu daqui a pedido do cliente. Dizer onde ela ficou evita que a
+          pessoa que veio "ver a tonalidade" saia sem encontrar. */}
+      <div className="container-x pb-4">
+        <p className="text-sm text-fg-2">
+          Quer ver como cada tonalidade fica olhando de dentro do carro?{" "}
+          <Link href="/peliculas-automotivas#simulador" className="text-fg underline underline-offset-4 hover:text-red-2">
+            Simule em Películas Automotivas
+          </Link>
+          .
+        </p>
+      </div>
 
       <Section
         eyebrow="Como funciona"

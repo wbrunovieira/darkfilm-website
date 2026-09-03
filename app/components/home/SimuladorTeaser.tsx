@@ -28,7 +28,7 @@ export function SimuladorTeaser() {
             </h2>
             <p className="mt-6 max-w-md text-fg-2">
               Escolha uma tonalidade do nosso mostruário e veja como fica a visão pelo vidro. Na
-              página do simulador você confere o mínimo de transmissão luminosa que a lei exige
+              página de legislação você confere o mínimo de transmissão luminosa que a lei exige
               em cada vidro do carro.
             </p>
 
@@ -53,7 +53,7 @@ export function SimuladorTeaser() {
               href="/simulador"
               className="group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full border border-line-strong px-6 py-3.5 font-display text-base font-semibold uppercase tracking-[0.14em] transition-[border-color,background-color,color,transform] duration-300 hover:-translate-y-0.5 hover:border-red hover:bg-red hover:text-white"
             >
-              Abrir o simulador
+              Ver o que a lei permite
               <ArrowIcon className="size-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </Reveal>
@@ -116,12 +116,6 @@ export function SimuladorTeaser() {
                     </button>
                   ))}
                 </div>
-                <Link
-                  href="/simulador"
-                  className="link-grow inline-flex min-h-11 items-center font-display text-xs font-semibold uppercase tracking-[0.2em] text-fg-3 transition-colors hover:text-fg"
-                >
-                  Ver o que a lei permite em cada vidro →
-                </Link>
               </div>
             </div>
           </Reveal>
