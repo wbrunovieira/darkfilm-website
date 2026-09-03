@@ -5,60 +5,61 @@ import { ArrowIcon } from "../icons";
 import { CardVideo } from "../CardVideo";
 
 // O cliente pediu "bastante foto" nesta seção em 02/09/2026, e a Michele completou:
-// "carros novos". Passou de 4 para 11, todas do acervo dele.
+// "carros novos". São 11 itens, todos do acervo dele — e agora os MESMOS arquivos da
+// galeria, para onde esta seção leva. Antes a home apontava para cópias com outro nome:
+// dois arquivos por foto no build, e o risco de a home mostrar uma seleção e a galeria outra.
 //
 // 11 não é número solto: o primeiro tile ocupa 2 colunas, então a grade usa 12 células —
-// que fecham tanto em 2 colunas (celular) quanto em 3 (desktop). Com 8 sobrava uma célula
-// órfã no celular. As quatro últimas são retrato e sofrem corte na caixa 4/3; ficam no fim
-// justamente por isso.
+// que fecham tanto em 2 colunas (celular) quanto em 3 (desktop).
 // A primeira é 16/9 e as outras 4/3, então todas aqui precisam ser paisagem.
 // Material novo do cliente (2024-2026); o `alt` descreve cada foto, em vez do
 // texto genérico que valia para todas.
 const photos: { src: string; alt: string; video?: string }[] = [
   {
-    src: "/video/oficina-golf-mural.jpg",
-    video: "/video/oficina-golf-mural.mp4",
-    alt: "Golf preto na oficina, diante do mural de placas",
+    src: "/video/gal-golf-perfil.jpg",
+    video: "/video/gal-golf-perfil.mp4",
+    alt: "Volkswagen Golf cinza de perfil, com todos os vidros aplicados",
   },
   {
-    src: "/img/novo/vitrine--land-rover-defender-perfil.jpg",
-    alt: "Land Rover Defender preto de perfil na oficina, com vidros escurecidos",
+    src: "/img/novo/vitrine--byd-sedan-oficina.jpg",
+    alt: "Sedã elétrico BYD preto dentro da oficina, com os vidros escurecidos",
   },
   {
-    src: "/img/novo/aplicacao-carros--byd-sedan-frente-pelicula.jpg",
-    alt: "Sedã BYD preto com película aplicada, de frente, na oficina",
+    src: "/img/novo/aplicacao--peugeot-2008-traseira.jpg",
+    alt: "Peugeot 2008 azul de trás, com os vidros traseiros escurecidos",
   },
   {
-    src: "/img/novo/aplicacao-carros--porsche-cayenne-traseira-pelicula.jpg",
-    alt: "Porsche Cayenne branco com película nos vidros traseiros",
+    src: "/img/novo/vitrine--datsun-240z-frente.jpg",
+    alt: "Frente do Datsun 240Z laranja, com faróis redondos",
   },
   {
-    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-vidros.jpg",
-    alt: "Peugeot 2008 azul visto de trás, com os vidros traseiros escurecidos",
+    src: "/img/novo/vitrine--peugeot-2008-interior.jpg",
+    alt: "Interior do Peugeot 2008 azul, com volante e central multimídia",
   },
   {
-    src: "/img/novo/vitrine--byd-traseira-vidros-escuros.jpg",
-    alt: "BYD preto visto de trás, com os vidros escurecidos",
+    src: "/img/novo/vitrine--datsun-240z-perfil.jpg",
+    alt: "Perfil do Datsun 240Z laranja clássico",
   },
   {
-    src: "/img/novo/aplicacao-carros--peugeot-2008-frente-faixa-solar.jpg",
-    alt: "Peugeot 2008 azul de frente, com faixa solar no para-brisa",
+    src: "/video/gal-audi-tt-frente.jpg",
+    video: "/video/gal-audi-tt-frente.mp4",
+    alt: "Audi TT azul de frente na oficina, com os vidros escurecidos",
   },
   {
-    src: "/img/novo/aplicacao-carros--peugeot-2008-traseira-pelicula.jpg",
-    alt: "Peugeot 2008 azul de trás, com película nos vidros",
+    src: "/img/novo/vitrine--defender-frente.jpg",
+    alt: "Land Rover Defender preto de frente, na oficina",
   },
   {
-    src: "/img/novo/aplicacao-carros--audi-tt-tres-quartos.jpg",
-    alt: "Audi TT azul em ângulo frontal, com os vidros escurecidos",
+    src: "/img/novo/vitrine--opala-vermelho-portas-abertas.jpg",
+    alt: "Chevrolet Opala vermelho customizado, com as portas abertas na oficina",
   },
   {
-    src: "/img/novo/aplicacao-carros--bmw-porta-aberta.jpg",
-    alt: "BMW preto com a porta aberta, mostrando o interior depois da aplicação",
+    src: "/img/novo/vitrine--bmw-interior-couro-vermelho.jpg",
+    alt: "Interior de BMW com bancos de couro vermelho e painel digital",
   },
   {
-    src: "/img/novo/aplicacao-carros--hatch-eletrico-cinza.jpg",
-    alt: "Hatch elétrico cinza com os vidros escurecidos por película",
+    src: "/img/novo/vitrine--chevette-prata-perfil.jpg",
+    alt: "Chevrolet Chevette prata rebaixado, de perfil na oficina",
   },
 ];
 

@@ -918,20 +918,66 @@
   color: var(--fg);
 }
 
-/* Selo de play sobre o pôster do vídeo, na grade da galeria. A grade continua sendo de
-   imagens: o player só é criado quando a pessoa abre o item. */
-.gal-tile__play {
+/* Controles do ladrilho de vídeo.
+   O play fica grande e centralizado porque é a ação principal — o cliente quer que a pessoa
+   veja o trabalho sem precisar abrir nada. O ampliar fica pequeno num canto: é a saída para
+   quem quiser tela cheia, não o caminho padrão. */
+.gal-tile--video {
+  position: relative;
+  cursor: default;
+}
+.gal-tile__playbtn {
   position: absolute;
-  inset: auto auto 0.75rem 0.75rem;
+  inset: 0;
   display: grid;
   place-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 999px;
-  background: rgba(11, 11, 13, 0.72);
-  color: #fff;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.9);
-  pointer-events: none;
   z-index: 2;
+  color: #fff;
+  background: linear-gradient(to top, rgba(11, 11, 13, 0.5), transparent 55%);
+  transition: background-color 0.25s ease;
+}
+.gal-tile__playbtn::before {
+  content: "";
+  position: absolute;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.66);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+}
+.gal-tile__playbtn svg {
+  position: relative;
+  translate: 3px 0; /* o triângulo parece descentrado quando alinhado ao pixel */
+}
+.gal-tile__playbtn:hover::before {
+  transform: scale(1.08);
+  background: var(--red);
+}
+.gal-tile__expandir {
+  position: absolute;
+  inset: 0.75rem 0.75rem auto auto;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  background: rgba(11, 11, 13, 0.6);
+  backdrop-filter: blur(4px);
+  transition: background-color 0.2s ease;
+}
+.gal-tile__expandir:hover {
+  background: var(--red);
+}
+.gal-tile__cap--video {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gal-tile__playbtn::before {
+    transition: none;
+  }
 }

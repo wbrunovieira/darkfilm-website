@@ -281,6 +281,8 @@ type Props = {
   photos: Photo[];
   /** Limita quantidade exibida (com botão "ver todas"). */
   limit?: number;
+  /** Marca a primeira imagem como prioritária: é a que decide o LCP da página. */
+  prioridade?: boolean;
   /** `editorial`: fotos-herói 2×2 em ritmo, legenda no hover. `uniform`: grade simples. */
   variant?: "editorial" | "uniform";
   /** Rótulo do conjunto para o lightbox. */
@@ -289,7 +291,116 @@ type Props = {
   animateLayout?: boolean;
 };
 
-export function PhotoGrid({ photos, limit, variant = "uniform", label, animateLayout }: Props) {
+/**
+ * Um item da grade.
+ *
+ * Vídeo toca NO PRÓPRIO CARD, não só ao abrir: o cliente quer que a pessoa veja o trabalho sem
+ * precisar de dois toques. Mas o arquivo só é baixado quando ela dá play — antes disso o que
+ * existe é o pôster, uma imagem. Assim a página abre leve mesmo com oito vídeos, e quem quiser
+ * ver em tela cheia usa o ícone de ampliar, que continua levando ao lightbox.
+ */
+function Ladrilho({
+  foto,
+  indice,
+  total,
+  prioritaria,
+  onAmpliar,
+}: {
+  foto: Photo;
+  indice: number;
+  total: number;
+  prioritaria?: boolean;
+  onAmpliar: () => void;
+}) {
+  const [tocando, setTocando] = useState(false);
+  const n = `${String(indice + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+
+  if (!foto.video) {
+    return (
+      <button
+        type="button"
+        onClick={onAmpliar}
+        className="gal-tile"
+        aria-label={`Ampliar foto ${indice + 1}${foto.album ? ` — ${foto.album}` : ""}`}
+      >
+        <Image
+          src={foto.src}
+          alt={foto.alt ?? ""}
+          fill
+          priority={prioritaria}
+          sizes="(min-width: 1024px) 50vw, (min-width: 640px) 66vw, 100vw"
+          className="photo object-cover"
+        />
+        <span className="gal-tile__cap" aria-hidden>
+          <span>
+            {foto.album && <span className="gal-tile__cap-title">{foto.album}</span>}
+            <span className="gal-tile__cap-n">{n}</span>
+          </span>
+          <span className="gal-tile__cap-ico">
+            <ExpandIcon className="size-4" />
+          </span>
+        </span>
+      </button>
+    );
+  }
+
+  return (
+    <div className="gal-tile gal-tile--video">
+      {tocando ? (
+        <video
+          src={foto.video}
+          poster={foto.src}
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls
+          className="absolute inset-0 size-full object-cover"
+          aria-label={foto.alt ?? "Vídeo do trabalho"}
+        />
+      ) : (
+        <>
+          <Image
+            src={foto.src}
+            alt={foto.alt ?? ""}
+            fill
+            priority={prioritaria}
+            sizes="(min-width: 1024px) 50vw, (min-width: 640px) 66vw, 100vw"
+            className="photo object-cover"
+          />
+          <button
+            type="button"
+            onClick={() => setTocando(true)}
+            className="gal-tile__playbtn"
+            aria-label={`Reproduzir vídeo: ${foto.alt ?? `item ${indice + 1}`}`}
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" className="size-7">
+              <path d="M8 5.14v13.72L19 12 8 5.14Z" />
+            </svg>
+          </button>
+        </>
+      )}
+
+      <button
+        type="button"
+        onClick={onAmpliar}
+        className="gal-tile__expandir"
+        aria-label={`Ver em tela cheia: ${foto.alt ?? `item ${indice + 1}`}`}
+      >
+        <ExpandIcon className="size-4" />
+      </button>
+
+      <span className="gal-tile__cap gal-tile__cap--video" aria-hidden>
+        <span>
+          {foto.album && <span className="gal-tile__cap-title">{foto.album}</span>}
+          <span className="gal-tile__cap-n">{n}</span>
+        </span>
+      </span>
+    </div>
+  );
+}
+
+export function PhotoGrid({ photos, limit, variant = "uniform", label, animateLayout, prioridade }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
   const visible = limit && !showAll ? photos.slice(0, limit) : photos;
@@ -310,38 +421,13 @@ export function PhotoGrid({ photos, limit, variant = "uniform", label, animateLa
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.45, ease, delay: animateLayout ? Math.min(i, 12) * 0.02 : 0 }}
             >
-              <button
-                type="button"
-                onClick={() => setOpen(i)}
-                className="gal-tile"
-                aria-label={`${p.video ? "Assistir ao vídeo" : "Ampliar foto"} ${i + 1}${p.album ? ` — ${p.album}` : ""}`}
-              >
-                <Image
-                  src={p.src}
-                  alt={p.alt ?? ""}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, (min-width: 640px) 66vw, 100vw"
-                  className="photo object-cover"
-                />
-                {p.video && (
-                  <span className="gal-tile__play" aria-hidden>
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                      <path d="M8 5.14v13.72L19 12 8 5.14Z" />
-                    </svg>
-                  </span>
-                )}
-                <span className="gal-tile__cap" aria-hidden>
-                  <span>
-                    {p.album && <span className="gal-tile__cap-title">{p.album}</span>}
-                    <span className="gal-tile__cap-n">
-                      {String(i + 1).padStart(2, "0")} / {String(visible.length).padStart(2, "0")}
-                    </span>
-                  </span>
-                  <span className="gal-tile__cap-ico">
-                    <ExpandIcon className="size-4" />
-                  </span>
-                </span>
-              </button>
+              <Ladrilho
+                foto={p}
+                indice={i}
+                total={visible.length}
+                prioritaria={prioridade && i === 0}
+                onAmpliar={() => setOpen(i)}
+              />
             </motion.li>
           ))}
         </AnimatePresence>

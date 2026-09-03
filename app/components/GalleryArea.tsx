@@ -39,7 +39,14 @@ export function GalleryArea({ area, index }: { area: Area; index: number }) {
           </p>
         </Reveal>
 
-        <PhotoGrid photos={area.photos} variant="editorial" label={area.title} />
+        {/* Só a primeira área carrega a primeira imagem com prioridade: é ela que o navegador
+            mede como LCP. As outras seguem lazy, que é o padrão do next/image. */}
+        <PhotoGrid
+          photos={area.photos}
+          variant="editorial"
+          label={area.title}
+          prioridade={index === 0}
+        />
       </div>
     </section>
   );
