@@ -18,7 +18,7 @@ type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 const featured: { href: string; title: string; text: string; img: string; video?: string; icon: Icon }[] = [
   {
     href: "/linha-automotiva",
-    title: "Linha Automotiva",
+    title: "Películas Automotivas",
     text: "Film de linha profissional com proteção anti-risco e encolhimento térmico: aplicação perfeita, sem emendas em vidros boleados.",
     // Aplicação da película no vidro traseiro, filmada por dentro do carro.
     img: "/video/automotiva-aplicacao.jpg",
@@ -27,7 +27,7 @@ const featured: { href: string; title: string; text: string; img: string; video?
   },
   {
     href: "/linha-arquitetonica",
-    title: "Linha Arquitetônica",
+    title: "Películas Arquitetônicas",
     text: "Segurança e proteção, privacidade, redução da descoloração, decoração de interiores e redução dos custos de refrigeração.",
     // Não veio nenhuma FOTO de linha arquitetônica no material do cliente, mas
     // vieram 12 vídeos. Em quadro parado a cena não se lia como arquitetura;
@@ -38,7 +38,7 @@ const featured: { href: string; title: string; text: string; img: string; video?
   },
   {
     href: "/som-e-acessorios",
-    title: "Som & Acessórios",
+    title: "Som e Acessórios",
     text: "As melhores soluções no mercado de som e acessórios você encontra aqui. Venha nos fazer uma visita.",
     // Câmera 360 funcionando na central multimídia; o piso xadrez que aparece na
     // tela é o da própria loja.
@@ -61,19 +61,15 @@ export function Services() {
   return (
     <section className="atmo grid-lines overflow-hidden py-24 md:py-32">
       <div className="container-x">
-        <Reveal className="mb-14 grid gap-6 md:grid-cols-[1fr_auto] md:items-end md:gap-12">
-          <div>
-            <p className="eyebrow mb-4">O que fazemos</p>
-            <h2 className="display text-5xl md:text-7xl">
-              Três especialidades,
-              <br />
-              <span className="text-fg-3">uma oficina.</span>
-            </h2>
-          </div>
-          <p className="max-w-sm border-l border-line-strong pl-5 text-fg-2 md:pb-2">
-            Aplicação de película de controle solar e segurança, envelopamento, instalação de som,
-            alarmes, acessórios e recuperação de para-brisas.
-          </p>
+        {/* Só o título: a grade de duas colunas existia para acomodar o parágrafo
+            explicativo, retirado a pedido do cliente em 03/09/2026. */}
+        <Reveal className="mb-14">
+          <p className="eyebrow mb-4">O que fazemos</p>
+          <h2 className="display text-5xl md:text-7xl">
+            Três especialidades,
+            <br />
+            <span className="text-fg-3">uma oficina.</span>
+          </h2>
         </Reveal>
 
         {/* Três grandes: a primeira ocupa duas linhas (peso à esquerda). */}
