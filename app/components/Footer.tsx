@@ -17,7 +17,11 @@ import { WBSignature } from "./WBSignature";
 const colunas = [
   {
     titulo: "Navegação",
-    links: nav.filter((n) => !("children" in n)) as { href: string; label: string }[],
+    /* Som e Acessórios sai daqui porque encabeça a coluna "Catálogo": num mapa do site o
+       mesmo destino em duas colunas é o ruído que o mapa deveria resolver. */
+    links: nav.filter(
+      (n) => !("children" in n) && n.href !== "/som-e-acessorios",
+    ) as { href: string; label: string }[],
   },
   {
     titulo: "Películas",
