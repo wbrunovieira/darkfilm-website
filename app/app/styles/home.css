@@ -296,12 +296,22 @@
   height: auto;
   max-height: 240px;
 }
+/* As áreas de vidro precisam se anunciar como clicáveis mesmo com o mouse longe:
+   o carro é um desenho realista e, sem essa dica, parece só ilustração. O contorno
+   tracejado é a dica; o preenchimento continua o gradiente de vidro do próprio SVG,
+   para não estragar o desenho. */
 .carro-diagrama [data-vidro] {
   cursor: pointer;
-  transition: fill 0.22s ease, stroke 0.22s ease;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1.6;
+  stroke-dasharray: 6 5;
+  transition: fill 0.22s ease, stroke 0.22s ease, stroke-width 0.22s ease, filter 0.22s ease;
 }
 .carro-diagrama [data-vidro]:hover {
-  stroke: rgba(255, 255, 255, 0.85);
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-dasharray: none;
+  filter: brightness(1.4);
 }
 /* Vidro escolhido em vermelho. "traseiras" acende porta de trás e vigia juntas,
    porque a lei trata os dois como o mesmo grupo. */
@@ -312,6 +322,7 @@
   fill: rgba(226, 32, 40, 0.5);
   stroke: #ff4d55;
   stroke-width: 2;
+  stroke-dasharray: none;
 }
 @media (prefers-reduced-motion: reduce) {
   .carro-diagrama [data-vidro] { transition: none; }
