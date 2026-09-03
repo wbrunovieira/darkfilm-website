@@ -19,7 +19,9 @@ const featured: { href: string; title: string; text: string; img: string; video?
   {
     href: "/peliculas-automotivas",
     title: "Películas Automotivas",
-    text: "Film de linha profissional com proteção anti-risco e encolhimento térmico: aplicação perfeita, sem emendas em vidros boleados.",
+    /* O cliente pediu para tirar da home o argumento técnico (anti-risco, encolhimento
+       térmico, vidros boleados) e deixá-lo na página de películas — onde ele continua. */
+    text: "Controle solar e segurança para o seu carro, com aplicação de quem faz isso em Petrópolis desde 1992.",
     // Aplicação da película no vidro traseiro, filmada por dentro do carro.
     img: "/video/automotiva-aplicacao.jpg",
     video: "/video/automotiva-aplicacao.mp4",
@@ -129,7 +131,7 @@ export function Services() {
           })}
         </RevealGroup>
 
-        {/* Quatro serviços complementares: cards baixos, ícone em evidência. */}
+        {/* Serviços complementares: cards baixos, ícone em evidência. */}
         <RevealGroup stagger={0.08} className="mt-4 grid gap-4 sm:grid-cols-2">
           {more.map((s) => {
             const Icon = s.icon;

@@ -6,6 +6,7 @@ import { Callout, IconList, Section, Stat, Tiles } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { TintSimulator } from "@/components/TintSimulator";
+import { LIMITES, REFERENCIA, valorLimite } from "@/lib/legislacao";
 import { ArrowIcon } from "@/components/icons";
 import {
   AlertIcon,
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 // Sem lavagem a seco e polimento de faróis: o cliente não faz mais (03/09/2026).
 const related = [
-  { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos/parabrisa.jpg" },
+  { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos-v2/parabrisa.jpg" },
   { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/servicos/envelopamento.jpg" },
 ];
 
@@ -82,16 +83,31 @@ export default function LinhaAutomotivaPage() {
         }
         after={
           <RevealGroup className="grid gap-4 md:grid-cols-[1.5fr_1fr]">
-            <RevealItem className="group relative overflow-hidden border border-line bg-bg-2">
-              <Image
-                src="/img/peliculas/imgExemploResolucao.jpg"
-                alt="Percentuais de transmissão luminosa permitidos por vidro"
-                width={590}
-                height={293}
-                className="w-full object-cover mix-blend-screen transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-              <p className="border-t border-line px-5 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">
+            {/* Aqui havia um JPG de 2013 com um sedã genérico estampando 75% / 70% / 28% / 28%
+                — os limites da resolução anterior, já revogada. Ficou contradizendo o texto
+                correto na mesma página, e nenhuma busca por texto pega número dentro de imagem.
+                Agora os valores vêm de lib/legislacao e não têm como divergir de novo. */}
+            <RevealItem className="relative overflow-hidden border border-line bg-bg-2 p-6">
+              <p className="font-display text-sm font-semibold uppercase tracking-[0.16em] text-fg-2">
                 Transmissão luminosa permitida por vidro
+              </p>
+              <dl className="mt-5 grid gap-4 sm:grid-cols-3">
+                {["parabrisa", "dianteiras", "traseiras"].map((id) => {
+                  const l = LIMITES.find((v) => v.id === id)!;
+                  return (
+                    <div key={l.id} className="border-t border-line-strong pt-3">
+                      <dt className="text-sm leading-snug text-fg-2">{l.curto}</dt>
+                      <dd className="display mt-1 text-4xl">{valorLimite(l)}</dd>
+                    </div>
+                  );
+                })}
+              </dl>
+              <p className="mt-5 text-xs leading-relaxed text-fg-3">
+                Mínimo do conjunto vidro + película. Os vidros de trás não têm mínimo desde que o
+                veículo tenha retrovisores externos dos dois lados. {REFERENCIA}.{" "}
+                <Link href="/simulador" className="underline underline-offset-4 hover:text-fg">
+                  Ver por vidro no simulador
+                </Link>
               </p>
             </RevealItem>
             <RevealItem className="group relative overflow-hidden border border-line bg-bg-2">
@@ -114,18 +130,30 @@ export default function LinhaAutomotivaPage() {
           (Associação Brasileira de Representantes e Aplicadores de Window Film), de acordo com
           o que estabelece a Resolução 73/98 do CONTRAN.
         </p>
-        <h3>Conselho Nacional de Trânsito — Resolução n.º 254, de 26 de outubro de 2007</h3>
+        {/* Este bloco citava a Resolução 254/2007 como se fosse a norma vigente e linkava um PDF
+            do DENATRAN — órgão extinto, link morto (redireciona para a home do SENATRAN). A 254
+            foi revogada; quem vale hoje é a 960/2022 com a redação da 989/2022, a mesma que
+            corrigimos no simulador. Fonte conferida no texto oficial em 03/09/2026. */}
+        <h3>Conselho Nacional de Trânsito — Resolução n.º 960, de 3 de novembro de 2022</h3>
         <p>
-          Estabelece requisitos para os vidros de segurança e critérios para aplicação de
-          inscrições, pictogramas e películas nas áreas envidraçadas dos veículos automotores,
-          de acordo com o inciso III, do artigo 111 do Código de Trânsito Brasileiro — CTB.
+          É a norma em vigor. Estabelece os requisitos para os vidros de segurança e os critérios
+          para aplicação de inscrições, pictogramas e películas nas áreas envidraçadas dos veículos
+          automotores, conforme o inciso III do artigo 111 do Código de Trânsito Brasileiro. Foi
+          alterada pela Resolução n.º 989, de 15 de dezembro de 2022, que é o texto que vale para o
+          mínimo de transmissão luminosa de cada vidro. Ela substituiu a Resolução 254/2007, que
+          ainda circula em muito material antigo sobre película.
         </p>
         <p>
-          Para maiores informações acesse:{" "}
-          <a href="http://www.denatran.gov.br/download/Resolucoes/RESOLUCAO_CONTRAN_254.pdf" target="_blank" rel="noopener noreferrer">
-            Resolução CONTRAN 254 (PDF)
+          O texto oficial de todas as resoluções está no{" "}
+          <a
+            href="https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-contran/resolucoes"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            portal do CONTRAN
           </a>
-          .
+          . Os mínimos por vidro estão logo acima, e você pode conferir vidro a vidro no{" "}
+          <Link href="/simulador">simulador</Link>.
         </p>
       </Section>
 

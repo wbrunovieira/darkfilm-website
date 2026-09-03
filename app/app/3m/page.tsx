@@ -170,7 +170,7 @@ export default function TresMPage() {
             <span className="text-red-2">Mais proteção.</span>
           </>
         }
-        intro="Melhoria do conforto e proteção do interior do veículo e dos seus ocupantes é uma marca registrada das Películas para Vidros da 3M da Películas Automotivas. A 3M inventou as películas para vidros em 1966 e seus produtos vêm fornecendo proteção contra os raios solares há mais de 40 anos."
+        intro="Melhoria do conforto e proteção do interior do veículo e dos seus ocupantes é uma marca registrada das Películas para Vidros da 3M linha automotiva. A 3M inventou as películas para vidros em 1966 e seus produtos vêm fornecendo proteção contra os raios solares há mais de 40 anos."
         /* Antes o hero era o mostruário de tonalidades, de 400x266, esticado como banner.
            Agora é o próprio selo na fachada da loja: "3M · Aplicador Autorizado Automotivo
            · Películas para Vidros", com o número 1767 e o letreiro da casa. */
@@ -187,7 +187,7 @@ export default function TresMPage() {
             <p className="eyebrow mb-4">Por que 3M</p>
             <p>
               Se você procura alta tecnologia para a redução do calor ou para minimizar os efeitos
-              prejudiciais do sol, as Películas para Vidros da 3M da Películas Automotivas são a escolha
+              prejudiciais do sol, as Películas para Vidros da 3M linha automotiva são a escolha
               ideal. Ainda que estilo e conforto sejam fundamentais, as opções de películas não
               metalizadas ajudam você a permanecer conectado e protegido com um fator de proteção
               solar (FPS) superior a 1.000. Coloque a inovação da 3M para trabalhar para você.

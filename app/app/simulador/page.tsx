@@ -6,6 +6,7 @@ import { Section } from "@/components/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { CarIcon, WindowIcon } from "@/components/icons/peliculas";
+import { LIMITES, NOTA_CONJUNTO, NOTA_SEM_MINIMO, valorLimite } from "@/lib/legislacao";
 
 export const metadata: Metadata = {
   title: "Simulador de Película",
@@ -13,12 +14,15 @@ export const metadata: Metadata = {
     "Veja o mínimo de transmissão luminosa que a lei exige em cada vidro do carro — para-brisa, laterais dianteiras e traseiros. The Dark Film, Petrópolis/RJ.",
 };
 
-// Mínimos de transmissão luminosa por vidro (Resolução CONTRAN 960/2022, alterada pela 989/2022).
-const limites = [
-  { vidro: "Para-brisa", valor: "70%", nota: "mínimo de transmissão luminosa do conjunto vidro + película" },
-  { vidro: "Laterais dianteiras", valor: "70%", nota: "mínimo de transmissão luminosa do conjunto vidro + película" },
-  { vidro: "Traseiros e vidro de trás", valor: "Livre", nota: "sem mínimo, desde que o veículo tenha retrovisores externos dos dois lados" },
-];
+// Ordem de leitura da tabela: da frente para trás, que não é a ordem do seletor.
+const limites = ["parabrisa", "dianteiras", "traseiras"].map((id) => {
+  const l = LIMITES.find((v) => v.id === id)!;
+  return {
+    vidro: l.curto,
+    valor: valorLimite(l),
+    nota: l.min === null ? NOTA_SEM_MINIMO : NOTA_CONJUNTO,
+  };
+});
 
 export default function SimuladorPage() {
   return (

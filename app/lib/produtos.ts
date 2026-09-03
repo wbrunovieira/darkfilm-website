@@ -11,7 +11,18 @@ export type Produto = {
   photos: { src: string; w: number; h: number }[];
 };
 
-export const produtos: Produto[] = data as Produto[];
+/**
+ * Serviços que a loja não faz mais. O cliente informou em 03/09/2026 ao pedir que saíssem
+ * da home; só que eles não estavam só na home — tinham página própria, entravam no
+ * sitemap.xml e apareciam como "veja também" em toda página de produto automotivo. Sair da
+ * vitrine e continuar à venda numa URL interna é pior do que nunca ter saído.
+ *
+ * É filtro de dados, não exclusão: o conteúdo original continua em content/produtos.json.
+ * Se voltarem a oferecer o serviço, basta tirar o slug daqui.
+ */
+const DESCONTINUADOS = new Set(["lavagem-a-seco", "polimento-dos-farois"]);
+
+export const produtos: Produto[] = (data as Produto[]).filter((p) => !DESCONTINUADOS.has(p.slug));
 
 export const categorias: Record<number, { nome: string; href: string }> = {
   1: { nome: "Serviços automotivos", href: "/peliculas-automotivas" },

@@ -8,6 +8,7 @@ import { useId, useState } from "react";
 import { Reveal } from "./Reveal";
 import { WhatsAppIcon } from "./icons";
 import { whatsappUrl } from "@/lib/site";
+import { LIMITES, rotuloLimite, type VidroId } from "@/lib/legislacao";
 
 /**
  * Simulador de transparência de película — pensado para quem nunca comprou película.
@@ -21,15 +22,7 @@ import { whatsappUrl } from "@/lib/site";
  * - A loja trabalha com várias marcas e tecnologias. O simulador é neutro de marca: a
  *   credencial 3M tem página própria (`/3m`) e não é apresentada aqui como se fosse a
  *   única opção disponível.
- * - Limites legais conferidos no texto oficial da resolução em 03/09/2026 (PDF do gov.br),
- *   não em fonte secundária: Resolução CONTRAN 960/2022, art. 4º, com a redação dada pela
- *   Resolução 989/2022. Para-brisa E laterais dianteiras: 70% — o §1º define as duas como
- *   "áreas indispensáveis à dirigibilidade". Traseiros e vigia: sem mínimo, desde que o
- *   veículo tenha retrovisores externos dos dois lados; películas refletivas são vedadas
- *   em qualquer área (art. 10, I).
- *   Correções feitas nessa conferência: o site trazia 75% no para-brisa, valor da resolução
- *   anterior já revogada; e o mínimo de 28% dos demais vidros deixou de existir quando a
- *   989/2022 reescreveu o inciso II.
+ * - Limites legais: `lib/legislacao.ts`, fonte única do site.
  * - A lei mede a transmitância do conjunto vidro + película; o número da película sozinha
  *   não é o valor final. Por isso o rótulo é cauteloso e aponta para a medição na loja.
  */
@@ -54,23 +47,6 @@ export function rotuloFor(vlt: number) {
   if (vlt <= 80) return ROTULOS[70];
   return ROTULOS[90];
 }
-
-type VidroId = "parabrisa" | "dianteiras" | "traseiras";
-/** `em` = frase com preposição ("nos vidros da frente"); `para` = "para os vidros da frente". */
-/* Mínimos conferidos no texto oficial em 03/09/2026 — Resolução CONTRAN 960/2022,
-   art. 4º, com a redação dada pela Resolução 989/2022:
-   - inciso I: não pode ser inferior a 70% para o para-brisa E para as demais áreas
-     indispensáveis à dirigibilidade, que o §1º define como o para-brisa e as laterais
-     DIANTEIRAS;
-   - inciso II (redação da 989/2022): pode ser inferior a isso nos vidros que não
-     interferem nessas áreas, desde que o veículo tenha retrovisores externos dos dois
-     lados. O mínimo de 28% que constava na redação original deixou de existir.
-   O site trazia 75% no para-brisa, que era o valor da resolução antiga, revogada. */
-const VIDROS: { id: VidroId; nome: string; em: string; para: string; min: number | null }[] = [
-  { id: "dianteiras", nome: "Vidros da frente (motorista e carona)", em: "nos vidros da frente", para: "para os vidros da frente", min: 70 },
-  { id: "traseiras", nome: "Vidros de trás (portas traseiras e vidro traseiro)", em: "nos vidros de trás", para: "para os vidros de trás", min: null },
-  { id: "parabrisa", nome: "Para-brisa", em: "no para-brisa", para: "para o para-brisa", min: 70 },
-];
 
 const MIN = 5;
 const MAX = 90;
@@ -199,7 +175,7 @@ export function TintSimulator({
   const id = useId();
 
   const completo = variant === "completo";
-  const limite = VIDROS.find((v) => v.id === vidro) ?? VIDROS[1];
+  const limite = LIMITES.find((v) => v.id === vidro) ?? LIMITES[1];
   const rotulo = rotuloFor(vlt);
 
   const status =
@@ -283,7 +259,7 @@ export function TintSimulator({
             </div>
 
             <div className="mt-3 grid gap-2">
-              {VIDROS.map((v) => {
+              {LIMITES.map((v) => {
                 const active = vidro === v.id;
                 return (
                   <label
@@ -307,9 +283,7 @@ export function TintSimulator({
                     <span className="min-w-0 leading-snug">
                       {v.nome}
                       <span className="mt-0.5 block text-xs text-fg-3">
-                        {v.min === null
-                          ? "Sem mínimo obrigatório"
-                          : `Mínimo de ${v.min}% de transmissão luminosa`}
+                        {rotuloLimite(v)}
                       </span>
                     </span>
                   </label>
@@ -430,7 +404,7 @@ export function TintSimulator({
             <div className="absolute inset-0" style={{ clipPath: `polygon(${WINDOW_POLY})` }}>
               <Image
                 src={image}
-                alt="Rua com palmeiras e prédios vista através do vidro lateral de um carro"
+                alt="Rua Cel. Veiga vista através do vidro lateral de um carro, com a simulação de tonalidade aplicada"
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-cover object-[center_28%]"

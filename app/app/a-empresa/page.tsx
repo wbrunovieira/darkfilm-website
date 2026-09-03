@@ -6,7 +6,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { GoogleBadge } from "@/components/GoogleBadge";
 import { ContactCTA } from "@/components/ContactCTA";
-import { site, yearsInBusiness } from "@/lib/site";
+import { decadasEmAtividade, site, yearsInBusiness } from "@/lib/site";
 import {
   AlarmIcon,
   FilmIcon,
@@ -141,7 +141,7 @@ export default function AEmpresaPage() {
                 até <span className="text-red-2">hoje.</span>
               </h2>
               <p className="mt-6 max-w-sm text-fg-2">
-                Mais de três décadas prestando serviços de alto nível em Petrópolis: película,
+                Mais de {decadasEmAtividade()} prestando serviços de alto nível em Petrópolis: película,
                 envelopamento, som, alarmes, acessórios e recuperação de para-brisas.
               </p>
               <LongArrowIcon className="mt-8 hidden size-8 text-fg-3 md:block" />
