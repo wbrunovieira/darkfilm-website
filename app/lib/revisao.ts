@@ -26,24 +26,50 @@ export const AUTORES = [
 ] as const;
 export type Autor = (typeof AUTORES)[number];
 
+/** De que lado da mesa cada pessoa senta. Decide de quem é a bola a cada evento. */
+export type Lado = "cliente" | "agencia";
+export const LADO: Record<Autor, Lado> = {
+  "Bruno The Dark Film": "cliente",
+  "Michele The Dark Film": "cliente",
+  "Bruno WB Digital Solutions": "agencia",
+};
+
 /**
- * O ciclo de um item:
+ * Cada item é uma conversa, e os dois lados falam.
  *
- *   pendente ──aprovado──▶ aprovado ──confirmado──▶ confirmado
- *      ▲            │           │                        │
- *      └─desfeito───┘           └────alteracao───────────┘
- *                                          │
- *                                     ajustado ──▶ (volta a pendente para o cliente)
+ * O pedido vem de qualquer direção: o cliente pede uma mudança, ou a agência pede material
+ * ("preciso de uma foto melhor nesta seção") e o cliente responde ("foto tal, no Drive").
+ * Por isso a situação de um item não é sobre aprovação — é sobre **de quem é a bola**:
  *
- * `desfeito` existe porque, enquanto ninguém agradeceu, a aprovação é afirmação de um lado só:
- * o cliente clica errado ou muda de ideia depois de ver outra página, e desfazer tem que ser
- * sem atrito. Depois do `confirmado` o assunto foi fechado por acordo — o desfazer some, mas
- * `alteracao` continua disponível, e reabrir fica registrado como reabertura.
+ *   amarelo = com o cliente · vermelho = com a agência · verde = fechado
  *
- * Nada disso apaga nada: desfazer é um evento novo por cima. O histórico guarda a sequência
- * inteira, que é justamente o que se perde no WhatsApp.
+ * Uma regra só, que vale nos dois sentidos e deixa a lista legível para os dois.
+ *
+ * Duas travas continuam:
+ * - **A aprovação do conteúdo é sempre do cliente.** Mesmo quando foi a agência que abriu o
+ *   pedido e entregou, o item volta para ele dizer se ficou bom.
+ * - **O agradecimento é da agência**, e é o que fecha. Enquanto ele não vem, a aprovação é
+ *   afirmação de um lado só e o cliente desfaz sem atrito — na revisão se clica errado e se
+ *   muda de ideia depois de ver outra página.
+ *
+ * Nada apaga nada: desfazer e reabrir são eventos novos por cima. O histórico guarda a
+ * sequência inteira, que é justamente o que se perde no WhatsApp.
  */
-export type Acao = "aprovado" | "desfeito" | "confirmado" | "alteracao" | "ajustado";
+export type Acao =
+  /** Abre um item avulso, fora das páginas do site (o `texto` é o título). */
+  | "criado"
+  /** Pede alguma coisa — de qualquer um dos lados. */
+  | "alteracao"
+  /** Responde sem mudar de fase; a bola passa para o outro lado. */
+  | "resposta"
+  /** A agência diz que fez; volta para o cliente conferir. */
+  | "ajustado"
+  /** O cliente aprova o conteúdo. */
+  | "aprovado"
+  /** O cliente desfaz a própria aprovação, enquanto ninguém agradeceu. */
+  | "desfeito"
+  /** A agência agradece e fecha. */
+  | "confirmado";
 
 export type Evento = {
   id: string;
@@ -114,19 +140,55 @@ export async function lerEventos(): Promise<Evento[]> {
   return eventos.sort(porData);
 }
 
-export type Situacao = "pendente" | "aprovado" | "confirmado" | "alteracao" | "ajustado";
+export type Situacao =
+  /** Amarelo: a bola está com o cliente. */
+  | "com-cliente"
+  /** Vermelho: a bola está com a agência. */
+  | "com-agencia"
+  /** Verde claro: o cliente aprovou, falta a agência agradecer. */
+  | "aprovado"
+  /** Verde cheio: fechado por acordo. */
+  | "fechado";
+
+/** De quem fica a bola depois de um evento. Vale sempre a última palavra. */
+export function situacaoApos(e: Evento): Situacao {
+  const outroLado = LADO[e.autor] === "cliente" ? "com-agencia" : "com-cliente";
+  switch (e.acao) {
+    case "confirmado":
+      return "fechado";
+    case "aprovado":
+      return "aprovado";
+    case "ajustado":
+      return "com-cliente";
+    case "desfeito":
+      return "com-cliente";
+    // pedir, responder e criar sempre passam a bola para quem não falou
+    default:
+      return outroLado;
+  }
+}
 
 /**
- * Situação de cada item, no formato `paginaId/secaoId`. Vale sempre a última palavra — inclusive
- * quando ela reabre algo já confirmado.
+ * Situação de cada item, no formato `paginaId/secaoId`. Itens nunca tocados ficam com o
+ * cliente: é ele quem tem de revisar.
  */
 export function reduzir(eventos: Evento[]): Record<string, Situacao> {
   const mapa: Record<string, Situacao> = {};
   for (const e of eventos) {
     if (!e.secaoId) continue;
-    mapa[`${e.paginaId}/${e.secaoId}`] = e.acao === "desfeito" ? "pendente" : e.acao;
+    mapa[`${e.paginaId}/${e.secaoId}`] = situacaoApos(e);
   }
   return mapa;
+}
+
+/** Página sintética dos itens que não pertencem a nenhuma página do site. */
+export const PAGINA_PENDENCIAS = "pendencias-gerais";
+
+/** Itens avulsos abertos pela ferramenta, na ordem em que foram criados. */
+export function pendenciasGerais(eventos: Evento[]) {
+  return eventos
+    .filter((e) => e.paginaId === PAGINA_PENDENCIAS && e.acao === "criado" && e.secaoId)
+    .map((e) => ({ id: e.secaoId as string, titulo: e.texto ?? "(sem título)", em: e.em, autor: e.autor }));
 }
 
 /** Quem pode agradecer. Trava contra clique errado — não é autenticação. */

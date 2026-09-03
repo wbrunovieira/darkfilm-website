@@ -3,6 +3,7 @@ import { paginasRevisao } from "@/content/revisao";
 import {
   AUTORES,
   ITEM_PAGINA,
+  PAGINA_PENDENCIAS,
   gravarEventos,
   lerEventos,
   reduzir,
@@ -23,7 +24,7 @@ export async function GET() {
   }
 }
 
-const ACOES: Acao[] = ["aprovado", "desfeito", "confirmado", "alteracao", "ajustado"];
+const ACOES: Acao[] = ["criado", "alteracao", "resposta", "ajustado", "aprovado", "desfeito", "confirmado"];
 
 /**
  * O IP vem do cabeçalho que o Vercel escreve na borda. `x-forwarded-for` pode trazer uma cadeia
@@ -58,13 +59,20 @@ export async function POST(req: Request) {
   if (typeof autor !== "string" || !AUTORES.includes(autor as Autor)) {
     return NextResponse.json({ erro: "autor inválido" }, { status: 400 });
   }
-  // só o pedido de alteração exige texto; aprovar, desfazer, agradecer e ajustar não
-  if (acao === "alteracao" && (typeof texto !== "string" || !texto.trim())) {
-    return NextResponse.json({ erro: "descreva a alteração" }, { status: 400 });
+  // pedir, responder e criar exigem texto; aprovar, desfazer, agradecer e ajustar não
+  if (
+    (acao === "alteracao" || acao === "resposta" || acao === "criado") &&
+    (typeof texto !== "string" || !texto.trim())
+  ) {
+    return NextResponse.json({ erro: "escreva o que precisa" }, { status: 400 });
   }
 
-  const pagina = paginasRevisao.find((p) => p.id === paginaId);
-  if (!pagina) return NextResponse.json({ erro: "página desconhecida" }, { status: 400 });
+  // As pendências gerais não vêm do arquivo de conteúdo: nascem aqui, pela própria ferramenta.
+  const pagina =
+    paginaId === PAGINA_PENDENCIAS ? null : paginasRevisao.find((p) => p.id === paginaId);
+  if (!pagina && paginaId !== PAGINA_PENDENCIAS) {
+    return NextResponse.json({ erro: "página desconhecida" }, { status: 400 });
+  }
 
   /**
    * Aprovar (ou agradecer) uma página grava um evento POR SEÇÃO, não um evento coletivo. Custa
@@ -72,8 +80,10 @@ export async function POST(req: Request) {
    * e o mesmo autor. Um evento coletivo obrigaria a interpretar depois o que ele cobria — e o
    * que ele cobria mudaria sozinho se a lista de seções mudasse.
    */
-  const emLote = secaoId === null && (acao === "aprovado" || acao === "confirmado");
-  const alvos = emLote ? pagina.secoes.map((s) => s.id) : [(secaoId as string | null) ?? ITEM_PAGINA];
+  const emLote = !!pagina && secaoId === null && (acao === "aprovado" || acao === "confirmado");
+  const alvos = emLote
+    ? pagina!.secoes.map((s) => s.id)
+    : [(secaoId as string | null) ?? ITEM_PAGINA];
 
   const comum = {
     paginaId,
