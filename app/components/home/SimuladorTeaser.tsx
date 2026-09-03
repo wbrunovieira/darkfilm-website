@@ -27,9 +27,9 @@ export function SimuladorTeaser() {
               Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>
             </h2>
             <p className="mt-6 max-w-md text-fg-2">
-              Escolha uma tonalidade do nosso mostruário e veja como fica a visão pelo vidro. No
-              simulador completo você confere o que a lei permite em cada vidro e quais películas
-              3M atendem a faixa.
+              Escolha uma tonalidade do nosso mostruário e veja como fica a visão pelo vidro. Na
+              página do simulador você confere o mínimo de transmissão luminosa que a lei exige
+              em cada vidro do carro.
             </p>
 
             {/* Leitura instantânea: número grande acompanha o preset escolhido. */}
@@ -44,7 +44,8 @@ export function SimuladorTeaser() {
                 {vlt}%
               </motion.span>
               <span className="max-w-[12rem] text-sm leading-tight text-fg-3">
-                da luz visível passa pelo vidro com {ROTULOS[vlt as (typeof TONALIDADES)[number]]}
+                da luz visível atravessa o vidro com a tonalidade{" "}
+                {ROTULOS[vlt as (typeof TONALIDADES)[number]].toLowerCase()}
               </span>
             </p>
 
@@ -66,8 +67,12 @@ export function SimuladorTeaser() {
             <div className="overflow-hidden rounded-lg border border-line bg-bg-2 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.9)]">
               <div className="relative aspect-[16/10] bg-[radial-gradient(120%_90%_at_30%_0%,#2a2c31_0%,#141518_55%,#0b0b0d_100%)]">
                 <div className="absolute inset-0" style={{ clipPath: `polygon(${WINDOW_POLY})` }}>
+                  {/* Antes aqui estava a mesma cena estrangeira que já saiu do simulador
+                      principal (Lamborghini amarelo numa rua dos EUA, "7 Street", pessoas
+                      identificáveis, sem licença e sem relação com a loja). Agora é a Rua
+                      Cel. Veiga, foto do próprio cliente. */}
                   <Image
-                    src="/img/simulador/cena.jpg"
+                    src="/img/novo/simulador--rua-cel-veiga.jpg"
                     alt="Rua Cel. Veiga vista através do vidro, com a simulação de tonalidade aplicada"
                     fill
                     sizes="(min-width: 1024px) 55vw, 100vw"
@@ -87,7 +92,7 @@ export function SimuladorTeaser() {
                 </svg>
                 <p className="absolute left-3 top-3 rounded-md border border-white/15 bg-bg/80 px-3 py-2 backdrop-blur md:left-4 md:top-4">
                   <span className="block font-display text-base font-semibold uppercase leading-none text-fg md:text-lg">
-                    {ROTULOS[vlt as (typeof TONALIDADES)[number]]} <span className="text-fg-3">· G{vlt}</span>
+                    {ROTULOS[vlt as (typeof TONALIDADES)[number]]} <span className="text-fg-3">· {vlt}%</span>
                   </span>
                   <span className="mt-1 block text-xs text-fg-2">
                     deixa passar <strong className="tabular-nums text-fg">{vlt}%</strong> da luz
@@ -102,12 +107,12 @@ export function SimuladorTeaser() {
                       type="button"
                       onClick={() => setVlt(t)}
                       aria-pressed={vlt === t}
-                      aria-label={`${ROTULOS[t]}, código G${t}`}
+                      aria-label={`${ROTULOS[t]}, deixa passar ${t}% da luz`}
                       className={`min-h-11 rounded-full border px-4 text-sm font-semibold transition-[border-color,background-color,color,transform] duration-200 active:scale-95 ${
                         vlt === t ? "border-red bg-red text-white" : "border-line-strong text-fg-2 hover:border-fg-3 hover:text-fg"
                       }`}
                     >
-                      {ROTULOS[t]} <span className={`font-display text-xs tracking-[0.15em] ${vlt === t ? "text-white/70" : "text-fg-3"}`}>G{t}</span>
+                      {ROTULOS[t]} <span className={`font-display text-xs tabular-nums tracking-[0.15em] ${vlt === t ? "text-white/70" : "text-fg-3"}`}>{t}%</span>
                     </button>
                   ))}
                 </div>

@@ -97,13 +97,13 @@ export default function LinhaAutomotivaPage() {
             <RevealItem className="group relative overflow-hidden border border-line bg-bg-2">
               <Image
                 src="/img/peliculas/imgMostruarioFilm.jpg"
-                alt="Mostruário de tonalidades G5 a G70"
+                alt="Mostruário de tonalidades de película, das mais escuras às mais claras"
                 width={400}
                 height={266}
                 className="photo w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               />
               <p className="border-t border-line px-5 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">
-                Mostruário G5 a G70
+                Mostruário de tonalidades
               </p>
             </RevealItem>
           </RevealGroup>

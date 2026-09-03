@@ -10,7 +10,7 @@ import { CarIcon, WindowIcon } from "@/components/icons/peliculas";
 export const metadata: Metadata = {
   title: "Simulador de Película",
   description:
-    "Simule a tonalidade da película automotiva (G5 a G70), veja o que a lei permite em cada vidro e quais películas 3M atendem a faixa. The Dark Film, Petrópolis/RJ.",
+    "Veja o mínimo de transmissão luminosa que a lei exige em cada vidro do carro — para-brisa, laterais dianteiras e traseiros. The Dark Film, Petrópolis/RJ.",
 };
 
 // Mínimos de transmissão luminosa por vidro (Resolução CONTRAN 960/2022, alterada pela 989/2022).
@@ -31,31 +31,33 @@ export default function SimuladorPage() {
             Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>
           </>
         }
-        intro="Em três passos: escolha o vidro do carro, escolha quão escura quer a película e veja como fica — e se a lei permite naquele vidro. Na loja medimos o valor final com equipamento próprio."
+        intro="Escolha o vidro do carro e confira o índice mínimo de transmissão luminosa permitido pela legislação. A transmissão final considera o conjunto vidro + película e pode ser medida na loja com equipamento próprio."
       />
 
-      <TintSimulator showHeading={false} />
+      <TintSimulator showHeading={false} variant="legislacao" />
 
       <Section
         eyebrow="Como funciona"
         title="O que o número da película significa."
         tone="atmo-cool"
         aside={
-          /* Escala G5 → G70: a mesma leitura do mostruário da loja. */
+          /* Escala em % de transmissão luminosa: o cliente entende luz, não código de produto. */
           <Reveal className="border border-line bg-bg-2/60 p-5">
             <div className="mb-3 flex items-end justify-between">
               <div>
                 <p className="font-display text-xs tracking-[0.2em] text-fg-3">Mais escura</p>
-                <p className="display text-3xl">G5</p>
+                <p className="display text-3xl">5%</p>
               </div>
               <div className="text-right">
                 <p className="font-display text-xs tracking-[0.2em] text-fg-3">Mais clara</p>
-                <p className="display text-3xl">G70</p>
+                <p className="display text-3xl">90%</p>
               </div>
             </div>
-            <div className="pel-scale" role="img" aria-label="Escala de tonalidade do mostruário, de G5, mais escura, a G70, mais clara" />
-            <p className="mt-3 text-xs leading-relaxed text-fg-3">
-              O número é a porcentagem de luz visível que atravessa a película sozinha.
+            <div className="pel-scale" role="img" aria-label="Escala de transmissão luminosa, de 5%, mais escura, a 90%, mais clara" />
+            <p className="mt-3 flex flex-wrap justify-between gap-x-2 font-display text-xs tabular-nums tracking-[0.15em] text-fg-3" aria-hidden>
+              {["5%", "20%", "35%", "50%", "70%", "90%"].map((n) => (
+                <span key={n}>{n}</span>
+              ))}
             </p>
           </Reveal>
         }
@@ -84,16 +86,18 @@ export default function SimuladorPage() {
         }
       >
         <p>
-          O mostruário da loja vai de <strong>G5</strong> (mais escura) a <strong>G70</strong>{" "}
-          (mais clara). O número é a porcentagem de luz visível que atravessa a película sozinha.
-          Como todo vidro de carro já bloqueia parte da luz, o valor final medido no veículo é
-          menor que o da película — e é esse valor final que a fiscalização mede.
+          Quanto menor o número, mais escura é a película. Quanto maior, mais clara. O número
+          indica a transmissão de luz visível da película — trabalhamos de <strong>5%</strong>{" "}
+          até <strong>90%</strong>, das mais escuras às praticamente transparentes. O resultado
+          final pode variar conforme o vidro original do veículo: como todo vidro de carro já
+          bloqueia parte da luz, o valor medido no veículo é menor que o da película — e é esse
+          valor final, do conjunto vidro + película, que a fiscalização mede.
         </p>
         <ol className="not-prose mt-8 grid">
           {[
             ["Escolha o vidro", "Para-brisa, laterais dianteiras ou traseiros — cada um tem sua regra."],
-            ["Escolha a tonalidade", "Do G5 ao G70, como no mostruário da loja."],
-            ["Veja o resultado", "Como fica e se a lei permite naquele vidro."],
+            ["Veja o mínimo da lei", "A transmissão luminosa que aquele vidro precisa manter."],
+            ["Confirme na loja", "Medimos o conjunto vidro + película com equipamento próprio."],
           ].map(([t, d], i) => (
             <li key={t} className="pel-step grid gap-1 md:grid-cols-[6rem_1fr] md:gap-6">
               <span className="pel-step__n">Passo 0{i + 1}</span>
@@ -105,10 +109,10 @@ export default function SimuladorPage() {
           ))}
         </ol>
         <p className="mt-8">
-          Referência: Resolução CONTRAN 960/2022, alterada pela 989/2022. Detalhes sobre a
-          chancela ABRAWF e a película de segurança na página{" "}
-          <Link href="/peliculas-automotivas">Películas Automotivas</Link>; as linhas 3M em{" "}
-          <Link href="/3m">Credenciada 3M</Link>.
+          Referência: Resolução CONTRAN 960/2022, alterada pela 989/2022. Trabalhamos com
+          diferentes marcas e tecnologias de película — detalhes sobre a chancela ABRAWF e a
+          película de segurança na página{" "}
+          <Link href="/peliculas-automotivas">Películas Automotivas</Link>.
         </p>
       </Section>
 

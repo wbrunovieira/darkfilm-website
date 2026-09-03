@@ -13,12 +13,14 @@ import { whatsappUrl } from "@/lib/site";
  * Simulador de transparência de película — pensado para quem nunca comprou película.
  *
  * Fontes dos dados:
- * - Tonalidades G5, G20, G35, G50, G70: foto do mostruário do site original
- *   (`arquivos_ckfinder/images/imgMostruarioFilm.jpg`). "G" = % de luz visível transmitida
- *   pela película (convenção do mercado). Os rótulos humanos ("Bem escura"… "Bem clara") são
- *   apenas apelidos de UI para esses cinco códigos; o código continua visível.
- * - Faixas 3M: página `3m.html` do site original (Crystalline 40–90, CS Premium 5–50,
- *   FX Pro 5–70, EX 5–35, Black Chrome 10–40).
+ * - Tonalidades 5, 20, 35, 50, 70 e 90%: mostruário do site original
+ *   (`arquivos_ckfinder/images/imgMostruarioFilm.jpg`), mais o 90% que a loja também
+ *   trabalha. O número é a % de luz visível que a película deixa passar. O mercado escreve
+ *   "G35"; aqui o número aparece como "35%", a pedido do cliente em 03/09/2026, porque o
+ *   cliente final entende porcentagem de luz e não decora código de produto.
+ * - A loja trabalha com várias marcas e tecnologias. O simulador é neutro de marca: a
+ *   credencial 3M tem página própria (`/3m`) e não é apresentada aqui como se fosse a
+ *   única opção disponível.
  * - Limites legais conferidos no texto oficial da resolução em 03/09/2026 (PDF do gov.br),
  *   não em fonte secundária: Resolução CONTRAN 960/2022, art. 4º, com a redação dada pela
  *   Resolução 989/2022. Para-brisa E laterais dianteiras: 70% — o §1º define as duas como
@@ -70,14 +72,6 @@ const VIDROS: { id: VidroId; nome: string; em: string; para: string; min: number
   { id: "parabrisa", nome: "Para-brisa", em: "no para-brisa", para: "para o para-brisa", min: 70 },
 ];
 
-const LINHAS_3M = [
-  { nome: "Crystalline", min: 40, max: 90, metalizada: false },
-  { nome: "CS Premium", min: 5, max: 50, metalizada: false },
-  { nome: "FX Pro", min: 5, max: 70, metalizada: false },
-  { nome: "EX", min: 5, max: 35, metalizada: false },
-  { nome: "Black Chrome", min: 10, max: 40, metalizada: true },
-];
-
 const MIN = 5;
 const MAX = 90;
 
@@ -101,6 +95,24 @@ const PERCEPCAO: [number, number][] = [
   [70, 0.1],
   [90, 0.04],
 ];
+
+/**
+ * Cor da bolinha de cada tonalidade no mostruário da UI.
+ *
+ * NÃO usa shadeFor: aquela curva é a percepção de uma cena vista pela janela, onde o 5%
+ * ainda deixa enxergar. Aplicada a um disco de 20px ela achata tudo em cinza médio e o
+ * "Bem escura" fica igual ao "Clara". Aqui a leitura precisa ser de amostra de película,
+ * então o ramp é o mesmo da barra de escala em `styles/peliculas.css` — os dois têm que
+ * combinar, porque o cliente vê a bolinha aqui e a barra na página do simulador.
+ */
+const AMOSTRA: Record<(typeof TONALIDADES)[number], string> = {
+  5: "#08080a",
+  20: "#1d1e22",
+  35: "#3a3b40",
+  50: "#6a6c72",
+  70: "#a8a9ae",
+  90: "#ddddd8",
+};
 
 export function shadeFor(vlt: number) {
   const p = PERCEPCAO;
@@ -169,20 +181,42 @@ export function TintSimulator({
      Trocada pela Rua Cel. Veiga em dia claro, foto dele, sem placa nem rosto. */
   image = "/img/novo/simulador--rua-cel-veiga.jpg",
   showHeading = true,
+  variant = "completo",
 }: {
   image?: string;
   /** false na página /simulador, que já tem PageHero. */
   showHeading?: boolean;
+  /**
+   * "completo": escolhe o vidro, escolhe a tonalidade e vê a cena pela janela.
+   * "legislacao": só o carro, os três vidros e o que a lei exige em cada um — é o
+   * papel da página /simulador, que existe para explicar a regra e não para repetir
+   * a simulação visual que já está na home.
+   */
+  variant?: "completo" | "legislacao";
 }) {
   const [vlt, setVlt] = useState<number>(35);
   const [vidro, setVidro] = useState<VidroId>("traseiras");
   const id = useId();
 
+  const completo = variant === "completo";
   const limite = VIDROS.find((v) => v.id === vidro) ?? VIDROS[1];
   const rotulo = rotuloFor(vlt);
 
   const status =
-    limite.min === null
+    !completo
+      ? limite.min === null
+        ? {
+            ok: true,
+            titulo: "Sem mínimo obrigatório",
+            detalhe:
+              "A lei não define transmissão luminosa mínima para os vidros de trás, desde que o veículo tenha retrovisores externos dos dois lados.",
+          }
+        : {
+            ok: true,
+            titulo: `Mínimo de ${limite.min}% de transmissão luminosa`,
+            detalhe: `A lei exige que o conjunto vidro + película deixe passar pelo menos ${limite.min}% da luz visível ${limite.em}.`,
+          }
+    : limite.min === null
       ? {
           ok: true,
           titulo: `Permitido ${limite.em}`,
@@ -202,9 +236,10 @@ export function TintSimulator({
 
   const shade = shadeFor(vlt);
   const pct = ((vlt - MIN) / (MAX - MIN)) * 100;
-  const compativeis = LINHAS_3M.filter((l) => vlt >= l.min && vlt <= l.max);
 
-  const ctaText = `Olá! Usei o simulador do site e quero orçamento de película ${rotulo.toLowerCase()} (G${vlt}, deixa passar ${vlt}% da luz) ${limite.para}.`;
+  const ctaText = completo
+    ? `Olá! Usei o simulador do site e quero orçamento de película ${rotulo.toLowerCase()} (${vlt}% de transmissão luminosa) ${limite.para}.`
+    : `Olá! Vi a página de legislação do site e quero saber quais películas vocês têm disponíveis ${limite.para}.`;
 
   return (
     <section
@@ -227,16 +262,18 @@ export function TintSimulator({
         </Reveal>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.35fr] lg:items-start">
-        {/* ---------- Passos 1 e 2 ---------- */}
+      <div className={`grid gap-6 lg:items-start ${completo ? "lg:grid-cols-[1fr_1.35fr]" : "lg:grid-cols-2"}`}>
+        {/* ---------- Escolha do vidro (e, no modo completo, da tonalidade) ---------- */}
         <Reveal className="flex flex-col gap-6">
           {/* Passo 1: vidro */}
           <fieldset className="min-w-0 rounded-lg border border-line bg-bg-2 p-5 md:p-6">
-            <legend className="sr-only">Passo 1: qual vidro você quer escurecer?</legend>
+            <legend className="sr-only">
+              {completo ? "Passo 1: qual vidro você quer escurecer?" : "Qual vidro você quer consultar?"}
+            </legend>
             <div className="mb-4 flex items-center gap-3" aria-hidden>
-              <StepBadge n={1} />
+              {completo && <StepBadge n={1} />}
               <p className="font-display text-lg font-semibold uppercase leading-tight">
-                Qual vidro você quer escurecer?
+                {completo ? "Qual vidro você quer escurecer?" : "Qual vidro você quer consultar?"}
               </p>
             </div>
             <p className="mb-3 text-sm text-fg-2">Toque no vidro do carro ou escolha na lista.</p>
@@ -267,9 +304,13 @@ export function TintSimulator({
                       aria-hidden
                       className={`size-3.5 shrink-0 rounded-full border-2 ${active ? "border-red bg-red" : "border-fg-3"}`}
                     />
-                    <span className="leading-snug">{v.nome}</span>
-                    <span className="ml-auto shrink-0 text-xs tabular-nums text-fg-3">
-                      {v.min === null ? "sem mínimo" : `mín. ${v.min}% de luz`}
+                    <span className="min-w-0 leading-snug">
+                      {v.nome}
+                      <span className="mt-0.5 block text-xs text-fg-3">
+                        {v.min === null
+                          ? "Sem mínimo obrigatório"
+                          : `Mínimo de ${v.min}% de transmissão luminosa`}
+                      </span>
                     </span>
                   </label>
                 );
@@ -277,7 +318,8 @@ export function TintSimulator({
             </div>
           </fieldset>
 
-          {/* Passo 2: tonalidade */}
+          {/* Passo 2: tonalidade — não existe na página de legislação */}
+          {completo && (
           <div className="rounded-lg border border-line bg-bg-2 p-5 md:p-6">
             <div className="mb-4 flex items-center gap-3">
               <StepBadge n={2} />
@@ -286,7 +328,7 @@ export function TintSimulator({
               </p>
             </div>
 
-            <div className="grid grid-cols-5 gap-1.5 sm:gap-2" role="group" aria-labelledby={`${id}-p2`}>
+            <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6 sm:gap-2" role="group" aria-labelledby={`${id}-p2`}>
               {TONALIDADES.map((t) => {
                 const on = vlt === t;
                 return (
@@ -295,7 +337,7 @@ export function TintSimulator({
                     type="button"
                     onClick={() => setVlt(t)}
                     aria-pressed={on}
-                    aria-label={`${ROTULOS[t]}, código G${t}, deixa passar ${t}% da luz`}
+                    aria-label={`${ROTULOS[t]}, deixa passar ${t}% da luz`}
                     className={`flex min-h-16 flex-col items-center justify-center gap-1 rounded-md border px-1 py-2 text-center transition-colors ${
                       on ? "border-red bg-red/10 text-fg" : "border-line text-fg-2 hover:border-line-strong hover:text-fg"
                     }`}
@@ -303,10 +345,10 @@ export function TintSimulator({
                     <span
                       aria-hidden
                       className="size-5 rounded-full border border-white/25"
-                      style={{ backgroundColor: `rgb(${Math.round(210 * (1 - shadeFor(t)))},${Math.round(215 * (1 - shadeFor(t)))},${Math.round(225 * (1 - shadeFor(t)))})` }}
+                      style={{ backgroundColor: AMOSTRA[t] }}
                     />
                     <span className="text-[11px] font-semibold leading-tight sm:text-xs">{ROTULOS[t]}</span>
-                    <span className="font-display text-[10px] tabular-nums tracking-[0.15em] text-fg-3">G{t}</span>
+                    <span className="font-display text-[10px] tabular-nums tracking-[0.15em] text-fg-3">{t}%</span>
                   </button>
                 );
               })}
@@ -352,24 +394,37 @@ export function TintSimulator({
 
             <details className="mt-4 text-sm text-fg-2">
               <summary className="cursor-pointer list-none text-fg-3 underline underline-offset-4 hover:text-fg [&::-webkit-details-marker]:hidden">
-                O que é o código G?
+                O que o número da película significa?
               </summary>
               <p className="mt-2 leading-relaxed">
-                É a numeração do mostruário: o número diz quanto da luz atravessa a película. G5
-                deixa passar 5% da luz (quase não se vê para dentro); G70 deixa passar 70% (bem
-                clara). É só um jeito de nomear a tonalidade — não é preço nem qualidade.
+                Quanto menor o número, mais escura é a película. Quanto maior, mais clara. O
+                número indica a transmissão de luz visível da película — trabalhamos de 5% até
+                90%, das mais escuras às praticamente transparentes. O resultado final pode
+                variar conforme o vidro original do veículo.
               </p>
             </details>
           </div>
+          )}
         </Reveal>
 
-        {/* ---------- Passo 3: resultado ---------- */}
+        {/* ---------- Resultado ---------- */}
         <Reveal delay={0.1} className="flex flex-col overflow-hidden rounded-lg border border-line bg-bg-2 lg:sticky lg:top-24">
+          {!completo && (
+            <div className="border-b border-line p-5 md:p-6">
+              <p className="font-display text-lg font-semibold uppercase leading-tight">
+                O que a lei permite
+              </p>
+            </div>
+          )}
+
+          {completo && (
           <div className="flex items-center gap-3 border-b border-line p-5 md:p-6">
             <StepBadge n={3} />
             <p className="font-display text-lg font-semibold uppercase leading-tight">Como fica</p>
           </div>
+          )}
 
+          {completo && (
           <div className="relative aspect-[16/10] bg-[radial-gradient(120%_90%_at_30%_0%,#2a2c31_0%,#141518_55%,#0b0b0d_100%)]">
             {/* cena externa, recortada pela janela */}
             <div className="absolute inset-0" style={{ clipPath: `polygon(${WINDOW_POLY})` }}>
@@ -401,13 +456,14 @@ export function TintSimulator({
               className="absolute left-3 top-3 rounded-md border border-white/15 bg-bg/80 px-3 py-2 backdrop-blur md:left-4 md:top-4"
             >
               <span className="block font-display text-base font-semibold uppercase leading-none text-fg md:text-lg">
-                {rotulo} <span className="text-fg-3">· G{vlt}</span>
+                {rotulo} <span className="text-fg-3">· {vlt}%</span>
               </span>
               <span className="mt-1 block text-xs text-fg-2">
                 deixa passar <strong className="tabular-nums text-fg">{vlt}%</strong> da luz
               </span>
             </output>
           </div>
+          )}
 
           <div className="space-y-5 p-5 md:p-6">
             {/* Veredito legal */}
@@ -432,45 +488,6 @@ export function TintSimulator({
               </p>
             </div>
 
-            {/* 3M: escondido por padrão */}
-            <details className="group rounded-md border border-line">
-              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 text-sm text-fg-2 hover:text-fg [&::-webkit-details-marker]:hidden">
-                <span>
-                  Ver películas 3M que atendem{" "}
-                  <span className="text-fg-3">({compativeis.length} de {LINHAS_3M.length})</span>
-                </span>
-                <span aria-hidden className="text-fg-3 transition-transform group-open:rotate-180">▾</span>
-              </summary>
-              <div className="border-t border-line px-4 py-4">
-                <p className="mb-3 text-xs leading-relaxed text-fg-3">
-                  Somos credenciados 3M. Cada linha abaixo é uma família de películas, fabricada
-                  em várias tonalidades. As destacadas existem na tonalidade que você escolheu.
-                </p>
-                <ul className="grid gap-2">
-                  {LINHAS_3M.map((l) => {
-                    const ok = compativeis.includes(l);
-                    return (
-                      <li
-                        key={l.nome}
-                        className={`flex items-center justify-between gap-3 text-sm transition-opacity ${ok ? "opacity-100" : "opacity-40"}`}
-                      >
-                        <span className="font-display text-base font-semibold uppercase">
-                          <span className={`mr-2 inline-block size-1.5 rounded-full align-middle ${ok ? "bg-[#25D366]" : "bg-fg-3"}`} aria-hidden />
-                          3M {l.nome}
-                          {l.metalizada && <span className="ml-2 text-xs font-medium tracking-[0.15em] text-fg-3">metalizada</span>}
-                          <span className="sr-only">{ok ? ", atende" : ", não existe nessa tonalidade"}</span>
-                        </span>
-                        <span className="text-xs tabular-nums text-fg-3">{l.min}–{l.max}% de luz</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <Link href="/3m" className="mt-3 inline-block text-xs text-fg-2 underline underline-offset-4 hover:text-fg">
-                  Saber mais sobre as películas 3M
-                </Link>
-              </div>
-            </details>
-
             {/* CTA */}
             <div className="flex flex-col gap-3">
               <a
@@ -480,10 +497,12 @@ export function TintSimulator({
                 className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-red px-6 py-4 font-display text-lg font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-red-2"
               >
                 <WhatsAppIcon className="size-5" />
-                Quero essa tonalidade
+                {completo ? "Quero essa tonalidade" : "Consulte as películas disponíveis"}
               </a>
               <p className="text-center text-xs text-fg-3">
-                Abre o WhatsApp com a tonalidade e o vidro já preenchidos.{" "}
+                {completo
+                  ? "Abre o WhatsApp com a tonalidade e o vidro já preenchidos. "
+                  : "Trabalhamos com várias marcas e tecnologias de película. Abre o WhatsApp com o vidro já preenchido. "}
                 <Link href="/contato" className="underline underline-offset-4 hover:text-fg">
                   Prefiro outro contato
                 </Link>
@@ -491,9 +510,10 @@ export function TintSimulator({
             </div>
 
             <p className="text-xs leading-relaxed text-fg-3">
-              Simulação ilustrativa: a tonalidade real depende do vidro do veículo, da iluminação
-              e do seu monitor. Limites conforme Resolução CONTRAN 960/2022 (alterada pela
-              989/2022).
+              {completo
+                ? "Simulação ilustrativa: a tonalidade real depende do vidro do veículo, da iluminação e do seu monitor. "
+                : "A transmissão final considera o conjunto vidro + película e é medida na loja com equipamento próprio. "}
+              Limites conforme Resolução CONTRAN 960/2022 (alterada pela 989/2022).
             </p>
           </div>
         </Reveal>

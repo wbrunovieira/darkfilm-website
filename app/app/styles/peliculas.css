@@ -108,12 +108,22 @@
   user-select: none;
 }
 
-/* Escala de tonalidade (G5 → G70): do escuro ao claro, com "vidro" em cima */
+/* Escala de transmissão luminosa (5% → 90%): do escuro ao claro.
+   As paradas caem exatamente onde ficam os rótulos 5/20/35/50/70/90 impressos embaixo,
+   em passos de 20%, para o olho ligar cada número ao seu tom. */
 .pel-scale {
   position: relative;
   height: 0.75rem;
   border-radius: 999px;
-  background: linear-gradient(to right, #050506 0%, #2a2b2f 35%, #7d7f85 70%, #d9d8d3 100%);
+  background: linear-gradient(
+    to right,
+    #08080a 0%,
+    #1d1e22 20%,
+    #3a3b40 40%,
+    #6a6c72 60%,
+    #a8a9ae 80%,
+    #ddddd8 100%
+  );
   box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 
