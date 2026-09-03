@@ -47,10 +47,16 @@ export const produtos: Produto[] = (data as Produto[]).filter((p) => !DESCONTINU
   }
 }
 
+/**
+ * Os nomes têm que ser IGUAIS aos do menu, do rodapé e do topo das páginas. Antes a categoria 1
+ * se chamava "Serviços automotivos" aqui e "Películas Automotivas" em todo o resto do site: o
+ * breadcrumb do produto inventava um nome que não existia em lugar nenhum, e a pessoa clicava
+ * nele para cair numa página com outro título. Três nomes para o mesmo lugar em um clique.
+ */
 export const categorias: Record<number, { nome: string; href: string }> = {
-  1: { nome: "Serviços automotivos", href: "/peliculas-automotivas" },
-  2: { nome: "Películas arquitetônicas", href: "/peliculas-arquitetonicas" },
-  3: { nome: "Som e acessórios", href: "/som-e-acessorios" },
+  1: { nome: "Películas Automotivas", href: "/peliculas-automotivas" },
+  2: { nome: "Películas Arquitetônicas", href: "/peliculas-arquitetonicas" },
+  3: { nome: "Som e Acessórios", href: "/som-e-acessorios" },
 };
 
 /** Agrupamento do catálogo de som e acessórios (classificação editorial para filtro). */

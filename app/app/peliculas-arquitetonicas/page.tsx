@@ -66,7 +66,7 @@ export default function LinhaArquitetonicaPage() {
   return (
     <>
       <PageHero
-        eyebrow="Películas · Películas Arquitetônicas"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Películas" }, { label: "Arquitetônicas" }]}
         title={
           <>
             Solução atrativa

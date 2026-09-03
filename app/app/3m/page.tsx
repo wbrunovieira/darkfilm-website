@@ -162,7 +162,7 @@ export default function TresMPage() {
   return (
     <>
       <PageHero
-        eyebrow="Aplicadora credenciada 3M"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Películas" }, { label: "Credenciada 3M" }]}
         title={
           <>
             Menos calor.

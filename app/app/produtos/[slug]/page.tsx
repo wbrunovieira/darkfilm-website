@@ -70,7 +70,10 @@ export default async function ProdutoPage({
             {grupo && (
               <>
                 <ChevronSmallIcon aria-hidden />
-                <Link href={cat.href}>{grupo.nome}</Link>
+                {/* Antes este link ia para `cat.href`, a MESMA URL do crumb anterior: clicava-se
+                    no grupo esperando os itens dele e caía na lista completa com o filtro em
+                    "Todos". Agora leva ao catálogo já filtrado por este grupo. */}
+                <Link href={`${cat.href}?grupo=${grupo.id}`}>{grupo.nome}</Link>
               </>
             )}
             <ChevronSmallIcon aria-hidden />

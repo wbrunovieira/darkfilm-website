@@ -1,13 +1,27 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+export type Crumb = { label: string; href?: string };
+
 type Props = {
-  eyebrow: string;
+  /**
+   * Identidade da página: o mesmo rótulo do menu, e o pai quando existir.
+   *
+   * Existe porque nenhuma das páginas internas tinha H1 igual ao item de menu clicado —
+   * clicava-se em "A Empresa" e o título dizia "A mais experiente e reconhecida da região".
+   * O elo entre o clique e a chegada era um texto de 12px, vermelho sobre foto escura, que
+   * ninguém lia. Num site todo escuro com foto sangrada e H1 enorme, isso fazia cada página
+   * parecer a mesma página com outra frase — a causa nº 1 medida do "me perco navegando".
+   *
+   * O slogan continua sendo o H1: é ele que dá o tom do site. Quem mudou de peso foi o rótulo.
+   */
+  crumbs: Crumb[];
   title: ReactNode;
   intro?: ReactNode;
   image?: string;
@@ -23,7 +37,7 @@ type Props = {
  * uma película saindo do foco. `initial` é estático (sem useReducedMotion):
  * o MotionConfig global cuida do prefers-reduced-motion.
  */
-export function PageHero({ eyebrow, title, intro, image, imagePosition = "center", compact }: Props) {
+export function PageHero({ crumbs, title, intro, image, imagePosition = "center", compact }: Props) {
   const rise = (delay: number) => ({
     initial: { opacity: 0, y: 28, filter: "blur(10px)" },
     animate: { opacity: 1, y: 0, filter: "blur(0px)" },
@@ -71,14 +85,24 @@ export function PageHero({ eyebrow, title, intro, image, imagePosition = "center
             animate={{ scaleY: 1 }}
             transition={{ duration: 1.1, delay: 0.05, ease }}
           />
-          <motion.p
+          <motion.nav
+            aria-label="Você está em"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.15, ease }}
-            className="eyebrow mb-5"
+            className="hero-crumbs mb-5"
           >
-            {eyebrow}
-          </motion.p>
+            {crumbs.map((c, i) => (
+              <span key={c.label} className="contents">
+                {i > 0 && <span aria-hidden>/</span>}
+                {c.href ? (
+                  <Link href={c.href}>{c.label}</Link>
+                ) : (
+                  <span aria-current="page">{c.label}</span>
+                )}
+              </span>
+            ))}
+          </motion.nav>
           <motion.h1
             {...rise(0.25)}
             className="display max-w-4xl text-[clamp(2.75rem,8vw,6.5rem)] [text-wrap:balance]"

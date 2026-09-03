@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useMemo } from "react";
 import { grupos, grupoDe, type Produto } from "@/lib/produtos";
 import { whatsappUrl } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
@@ -16,8 +17,36 @@ function normalize(s: string) {
 }
 
 export function Catalogo({ items }: { items: Produto[] }) {
-  const [grupo, setGrupo] = useState<string>("todos");
-  const [q, setQ] = useState("");
+  /**
+   * Filtro e busca vivem na URL, não em `useState`.
+   *
+   * Com estado local acontecia isto, medido: filtrar "Iluminação" (5 itens), abrir um produto e
+   * voltar devolvia a lista em "Todos" (41 itens) — com o scroll restaurado na mesma altura, ou
+   * seja, a tela apontando para produtos completamente diferentes. Era o momento literal do
+   * "cada hora clico num link e não sei onde estou" que o cliente relatou.
+   *
+   * De quebra, o link vira compartilhável e o breadcrumb das páginas de produto passa a ter para
+   * onde apontar quando cita o grupo.
+   */
+  const router = useRouter();
+  const params = useSearchParams();
+  const grupo = params.get("grupo") ?? "todos";
+  const q = params.get("q") ?? "";
+
+  const setParam = useCallback(
+    (chave: string, valor: string, padrao: string) => {
+      const next = new URLSearchParams(params.toString());
+      if (valor === padrao) next.delete(chave);
+      else next.set(chave, valor);
+      const qs = next.toString();
+      // `replace` para não encher o histórico: o Voltar deve sair do catálogo,
+      // não desfazer letra por letra o que foi digitado na busca.
+      router.replace(qs ? `?${qs}` : "?", { scroll: false });
+    },
+    [params, router],
+  );
+  const setGrupo = useCallback((v: string) => setParam("grupo", v, "todos"), [setParam]);
+  const setQ = useCallback((v: string) => setParam("q", v, ""), [setParam]);
 
   const counts = useMemo(() => {
     const m: Record<string, number> = { todos: items.length };

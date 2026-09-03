@@ -29,7 +29,7 @@ export default function SimuladorPage() {
     <>
       <PageHero
         compact
-        eyebrow="Películas · Legislação"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Películas" }, { label: "Legislação" }]}
         title={
           <>
             Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>

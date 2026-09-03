@@ -39,7 +39,7 @@ export default function LinhaAutomotivaPage() {
   return (
     <>
       <PageHero
-        eyebrow="Películas · Películas Automotivas"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Películas" }, { label: "Automotivas" }]}
         title={
           <>
             Aplicação perfeita,

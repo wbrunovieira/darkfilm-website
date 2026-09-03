@@ -17,13 +17,13 @@ export default function GaleriaPage() {
     <>
       <PageHero
         compact
-        eyebrow={`Galeria · ${total} fotos · ${areas.length} áreas`}
+        crumbs={[{ label: "Início", href: "/" }, { label: "Galeria" }]}
         title={
           <>
             Trabalhos <span className="text-red-2">de verdade.</span>
           </>
         }
-        intro="Cada área com o que sai da oficina: aplicação de película, envelopamento, multimídia e os carros que passam por aqui."
+        intro={`Cada área com o que sai da oficina: aplicação de película, envelopamento, multimídia e os carros que passam por aqui. São ${total} fotos em ${areas.length} áreas.`}
       />
 
       {/* Índice das áreas: o cliente pediu áreas separadas, então elas precisam ser

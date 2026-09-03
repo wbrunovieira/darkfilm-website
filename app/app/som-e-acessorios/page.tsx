@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
+import { Suspense } from "react";
 import { Catalogo } from "@/components/Catalogo";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Reveal } from "@/components/Reveal";
@@ -16,7 +17,7 @@ export default function SomEAcessoriosPage() {
   return (
     <>
       <PageHero
-        eyebrow={`Som e Acessórios · ${catalogoSom.length} itens · ${grupos.length} grupos`}
+        crumbs={[{ label: "Início", href: "/" }, { label: "Som e Acessórios" }]}
         title={
           <>
             Nacionais e importados,
@@ -24,7 +25,7 @@ export default function SomEAcessoriosPage() {
             <span className="text-red-2">tudo em um lugar.</span>
           </>
         }
-        intro="Trabalhamos com toda linha de equipamentos nacionais e importados, kits multimídia, alarmes, sensores de ré, xenon, amplificadores, subwoofers, engates e acessórios em geral. Faça-nos uma visita!"
+        intro={`Trabalhamos com toda linha de equipamentos nacionais e importados, kits multimídia, alarmes, sensores de ré, xenon, amplificadores, subwoofers, engates e acessórios em geral. Faça-nos uma visita! São ${catalogoSom.length} itens em ${grupos.length} grupos.`}
         /* Painel de Volvo com a central instalada e a câmera de ré na tela, com a parede
            da oficina aparecendo pelo para-brisa: liga o equipamento ao lugar onde ele é
            instalado. Enquadrado a 38% para cortar as pernas de quem fotografou, no rodapé. */
@@ -49,7 +50,11 @@ export default function SomEAcessoriosPage() {
               Cada item abre uma página com fotos e descrição. Disponibilidade e valores sob consulta pelo WhatsApp.
             </p>
           </Reveal>
-          <Catalogo items={catalogoSom} />
+          {/* useSearchParams precisa de limite de Suspense numa página estática: o filtro e a
+              busca agora vivem na URL para que o Voltar devolva a lista que a pessoa deixou. */}
+          <Suspense fallback={null}>
+            <Catalogo items={catalogoSom} />
+          </Suspense>
         </div>
       </section>
 

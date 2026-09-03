@@ -53,7 +53,7 @@ export default function CaracteristicasPage() {
   return (
     <>
       <PageHero
-        eyebrow="Películas · Características do Film"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Películas" }, { label: "Características do Film" }]}
         title={
           <>
             O que é <span className="text-red-2">film</span>, afinal?

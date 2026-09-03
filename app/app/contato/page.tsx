@@ -35,7 +35,7 @@ export default function ContatoPage() {
     <>
       <PageHero
         compact
-        eyebrow="Contato"
+        crumbs={[{ label: "Início", href: "/" }, { label: "Contato" }]}
         title={
           <>
             Fale com <span className="text-red-2">a gente.</span>

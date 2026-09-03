@@ -82,7 +82,7 @@ export default function AEmpresaPage() {
   return (
     <>
       <PageHero
-        eyebrow="A Empresa"
+        crumbs={[{ label: "Início", href: "/" }, { label: "A Empresa" }]}
         title={
           <>
             A mais experiente
