@@ -15,9 +15,12 @@ import {
 } from "@/lib/revisao";
 
 /** amarelo = com o cliente · vermelho = com a agência · verde = fechado */
+export const NOME_CLIENTE = "The Dark Film";
+export const NOME_AGENCIA = "WB Digital Solutions";
+
 const ROTULO: Record<Situacao, string> = {
-  "com-cliente": "Com o cliente",
-  "com-agencia": "Com a agência",
+  "com-cliente": `Com a ${NOME_CLIENTE}`,
+  "com-agencia": `Com a ${NOME_AGENCIA}`,
   aprovado: "Aprovado, falta confirmar",
   fechado: "Fechado",
 };
@@ -162,24 +165,44 @@ export function PainelRevisao({
     [sit],
   );
 
-  const total = useMemo(() => blocos.reduce((n, b) => n + b.itens.length, 0), [blocos]);
-  const fechados = useMemo(
-    () =>
-      blocos.reduce(
-        (n, b) =>
-          n +
-          b.itens.filter((i) => {
-            const x = sit(b.id, i.id);
-            return x === "aprovado" || x === "fechado";
-          }).length,
-        0,
-      ),
-    [blocos, sit],
+  /**
+   * A conta é de PÁGINAS, não de itens. "0 de 105 itens" desanima antes de começar — parece uma
+   * montanha. São 55 páginas, e a maioria (as de produto) se resolve num clique cada.
+   */
+  /**
+   * `paginas` são só as páginas do site. A caixa de pendências avulsas é um bloco na mesma
+   * lista, mas contá-la como página faria o total oscilar — "55 páginas" viraria 56 assim que
+   * alguém abrisse uma pendência, e ninguém entende um total que muda sozinho.
+   */
+  const paginas = useMemo(() => blocos.filter((b) => !!b.href), [blocos]);
+  const total = paginas.length;
+  /** Contadas à parte: não são páginas do site e não podem mexer no total. */
+  const avulsas = useMemo(
+    () => blocos.find((b) => b.id === PAGINA_PENDENCIAS)?.itens.length ?? 0,
+    [blocos],
   );
+  const resolvidos = useMemo(
+    () => paginas.filter((b) => ["aprovado", "fechado"].includes(sitBloco(b))).length,
+    [paginas, sitBloco],
+  );
+  const meuLado: Situacao = souAgencia ? "com-agencia" : "com-cliente";
   const comAgencia = useMemo(
     () => blocos.filter((b) => sitBloco(b) === "com-agencia").length,
     [blocos, sitBloco],
   );
+  /** O que está do lado de quem abriu a página — vale para o Bruno e para a Michele igual. */
+  const doMeuLado = useMemo(
+    () => blocos.filter((b) => sitBloco(b) === meuLado),
+    [blocos, sitBloco, meuLado],
+  );
+  const comigo = doMeuLado.length;
+  // páginas e pendências contadas à parte também aqui: misturar as duas foi o que gerou o "56"
+  const minhasPags = useMemo(() => doMeuLado.filter((b) => !!b.href).length, [doMeuLado]);
+  const minhasPend = useMemo(
+    () => doMeuLado.find((b) => b.id === PAGINA_PENDENCIAS)?.itens.length ?? 0,
+    [doMeuLado],
+  );
+  const minhasPaginas = useMemo(() => doMeuLado.slice(0, 8), [doMeuLado]);
 
   const visiveis = useMemo(
     () => blocos.filter((b) => filtro === "tudo" || sitBloco(b) === filtro),
@@ -192,15 +215,15 @@ export function PainelRevisao({
     return [...m.entries()];
   }, [visiveis]);
 
-  const pct = total ? Math.round((fechados / total) * 100) : 0;
+  const pct = total ? Math.round((resolvidos / total) * 100) : 0;
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-24 sm:px-6">
       <header className="pt-10 sm:pt-14">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-red-700">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--wb-roxo-vivo)]">
           The Dark Film &amp; Sound
         </p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-[var(--wb-roxo)] sm:text-4xl">
           Revisão do site novo
         </h1>
         <p className="mt-3 max-w-2xl text-slate-600">
@@ -210,10 +233,10 @@ export function PainelRevisao({
         </p>
         <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-500">
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2.5 rounded-full bg-amber-400" aria-hidden /> com o cliente
+            <span className="size-2.5 rounded-full bg-amber-400" aria-hidden /> esperando a {NOME_CLIENTE}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="size-2.5 rounded-full bg-red-500" aria-hidden /> com a agência
+            <span className="size-2.5 rounded-full bg-red-500" aria-hidden /> esperando a {NOME_AGENCIA}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="size-2.5 rounded-full bg-emerald-600" aria-hidden /> fechado
@@ -221,23 +244,29 @@ export function PainelRevisao({
         </p>
       </header>
 
-      <section aria-label="Progresso" className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <section aria-label="Progresso" className="wb-entra mt-8 rounded-2xl border border-[var(--wb-linha)] bg-white p-5 shadow-[0_10px_30px_-24px_rgba(53,5,69,0.5)]">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <p className="text-lg font-semibold text-slate-900">
-            {fechados} de {total} itens resolvidos
+            {resolvidos} de {total} páginas resolvidas
+            {avulsas > 0 && (
+              <span className="font-normal text-slate-500">
+                {" "}
+                + {avulsas} {avulsas === 1 ? "pendência" : "pendências"}
+              </span>
+            )}
           </p>
           <p className="text-sm text-slate-500">
             {comAgencia > 0
-              ? `${comAgencia} ${comAgencia === 1 ? "item está" : "itens estão"} esperando a agência`
-              : "Nada esperando a agência"}
+              ? `${comAgencia} ${comAgencia === 1 ? "item está" : "itens estão"} com a ${NOME_AGENCIA}`
+              : `Nada esperando a ${NOME_AGENCIA}`}
           </p>
         </div>
         <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-200">
-          <div className="h-full rounded-full bg-emerald-500 transition-[width] duration-500" style={{ width: `${pct}%` }} />
+          <div className="wb-progresso h-full rounded-full transition-[width] duration-700" style={{ width: `${pct}%` }} />
         </div>
       </section>
 
-      <section className="sticky top-0 z-20 -mx-4 mt-6 border-b border-slate-200 bg-slate-50/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+      <section className="sticky top-0 z-20 -mx-4 mt-6 border-b border-[var(--wb-linha)] bg-[var(--wb-fundo)]/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
           <label className="flex items-center gap-2 text-sm">
             <span className="font-medium text-slate-700">Quem está escrevendo:</span>
@@ -255,9 +284,9 @@ export function PainelRevisao({
           <div role="group" aria-label="Filtrar" className="flex flex-wrap gap-1.5">
             {(
               [
-                ["tudo", `Tudo (${blocos.length})`],
-                ["com-cliente", "Falta revisar"],
-                ["com-agencia", `Esperando a agência${comAgencia ? ` (${comAgencia})` : ""}`],
+                ["tudo", "Tudo"],
+                ["com-cliente", `Com a ${NOME_CLIENTE}`],
+                ["com-agencia", `Com a WB${comAgencia ? ` (${comAgencia})` : ""}`],
                 ["aprovado", "Aprovadas"],
                 ["fechado", "Fechadas"],
               ] as [Filtro, string][]
@@ -268,7 +297,9 @@ export function PainelRevisao({
                 onClick={() => setFiltro(id)}
                 aria-pressed={filtro === id}
                 className={`min-h-9 rounded-full px-3.5 text-sm font-medium transition-colors ${
-                  filtro === id ? "bg-slate-900 text-white" : "bg-white text-slate-600 ring-1 ring-slate-300 hover:text-slate-900"
+                  filtro === id
+                    ? "bg-[var(--wb-roxo)] text-white shadow-[0_6px_16px_-8px_rgba(53,5,69,0.8)]"
+                    : "bg-white text-slate-600 ring-1 ring-[var(--wb-linha)] hover:text-[var(--wb-roxo)] hover:ring-[var(--wb-lilas)]"
                 }`}
               >
                 {rot}
@@ -316,6 +347,40 @@ export function PainelRevisao({
         )}
       </section>
 
+      {/* O que está com quem abriu a página, logo no topo: sem isto ele rolaria 55 cartões para
+          descobrir o que é dele. Some quando não há nada — não vale ocupar espaço com "nada". */}
+      {minhasPaginas.length > 0 && (
+        <section className="mt-6 rounded-xl border border-amber-300 bg-amber-50 p-5">
+          <p className="font-semibold text-amber-900">
+            Esperando a {souAgencia ? NOME_AGENCIA : NOME_CLIENTE}:{" "}
+            {minhasPags > 0 && `${minhasPags} ${minhasPags === 1 ? "página" : "páginas"}`}
+            {minhasPags > 0 && minhasPend > 0 && " e "}
+            {minhasPend > 0 && `${minhasPend} ${minhasPend === 1 ? "pendência" : "pendências"}`}
+          </p>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {minhasPaginas.map((b) => (
+              <li key={b.id}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAberta(b.id);
+                    document.getElementById(`bloco-${b.id}`)?.scrollIntoView({ block: "center" });
+                  }}
+                  className="min-h-9 rounded-full bg-white px-3.5 text-sm font-medium text-amber-900 ring-1 ring-amber-300 transition-colors hover:bg-amber-100"
+                >
+                  {b.titulo}
+                </button>
+              </li>
+            ))}
+            {comigo > minhasPaginas.length && (
+              <li className="self-center text-sm text-amber-800">
+                e mais {comigo - minhasPaginas.length}
+              </li>
+            )}
+          </ul>
+        </section>
+      )}
+
       {erro && (
         <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-800 ring-1 ring-red-200">
           {erro}
@@ -325,16 +390,26 @@ export function PainelRevisao({
       {grupos.map(([grupo, itens]) => (
         <section key={grupo} className="mt-10">
           <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-slate-500">
-            {grupo} <span className="font-normal text-slate-400">({itens.length})</span>
+            {grupo}{" "}
+            <span className="font-normal normal-case tracking-normal text-slate-400">
+              {grupo === "Pendências gerais"
+                ? `— ${itens.length} ${itens.length === 1 ? "pendência" : "pendências"}`
+                : `— ${itens.length} de ${total} páginas do site`}
+            </span>
           </h2>
 
           <ul className="mt-3 space-y-3">
-            {itens.map((b) => {
+            {itens.map((b, i) => {
               const s = sitBloco(b);
               const abertoAgora = aberta === b.id || b.itens.length === 1 || b.id === PAGINA_PENDENCIAS;
               const chavePagina = `${b.id}/pagina`;
               return (
-                <li key={b.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                <li
+                  key={b.id}
+                  id={`bloco-${b.id}`}
+                  style={{ "--i": i } as React.CSSProperties}
+                  className="wb-entra wb-cartao scroll-mt-28 overflow-hidden rounded-2xl border border-[var(--wb-linha)] bg-white shadow-[0_6px_18px_-16px_rgba(53,5,69,0.5)]"
+                >
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-3 p-4 sm:p-5">
                     <span className={`inline-flex shrink-0 items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold ring-1 ${COR[s]}`}>
                       <span className={`size-2 rounded-full ${PONTO[s]}`} aria-hidden />
@@ -356,7 +431,7 @@ export function PainelRevisao({
                           type="button"
                           onClick={() => registrar(b.id, null, "aprovado")}
                           disabled={ocupado === `${b.id}/pagina/aprovado`}
-                          className="min-h-10 rounded-lg bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-emerald-700 disabled:opacity-60"
+                          className="min-h-10 rounded-lg bg-emerald-600 px-4 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(5,150,105,0.9)] transition-[background-color,transform] hover:bg-emerald-700 active:scale-[0.98] disabled:opacity-60"
                         >
                           {ocupado === `${b.id}/pagina/aprovado` ? "Registrando…" : b.itens.length === 1 ? "Está tudo certo, aprovar" : "Está tudo certo, aprovar página"}
                         </button>
@@ -366,7 +441,7 @@ export function PainelRevisao({
                           type="button"
                           onClick={() => registrar(b.id, null, "confirmado")}
                           disabled={ocupado === `${b.id}/pagina/confirmado`}
-                          className="min-h-10 rounded-lg bg-slate-900 px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-800 disabled:opacity-60"
+                          className="min-h-10 rounded-lg bg-[var(--wb-roxo)] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(53,5,69,0.9)] transition-[background-color,transform] hover:bg-[var(--wb-roxo-vivo)] active:scale-[0.98] disabled:opacity-60"
                         >
                           Agradecer e fechar a página
                         </button>
@@ -383,9 +458,17 @@ export function PainelRevisao({
                           type="button"
                           onClick={() => setAberta(abertoAgora ? null : b.id)}
                           aria-expanded={abertoAgora}
-                          className="min-h-10 rounded-lg px-3 text-sm text-slate-500 transition-colors hover:text-slate-900"
+                          aria-controls={`secoes-${b.id}`}
+                          className="group inline-flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
                         >
-                          {abertoAgora ? "Fechar seções" : `Ver as ${b.itens.length} seções`}
+                          {b.itens.length} seções
+                          <svg
+                            viewBox="0 0 12 12"
+                            aria-hidden
+                            className={`size-3.5 transition-transform duration-300 ${abertoAgora ? "rotate-180" : ""}`}
+                          >
+                            <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                          </svg>
                         </button>
                       )}
                     </div>
@@ -402,8 +485,9 @@ export function PainelRevisao({
                     />
                   )}
 
-                  {abertoAgora && (
-                    <ul className="divide-y divide-slate-100 border-t border-slate-100 bg-slate-50/60">
+                  <div className="wb-sanfona" data-aberta={abertoAgora}>
+                    <div>
+                    <ul id={`secoes-${b.id}`} className="divide-y divide-[var(--wb-linha)] border-t border-[var(--wb-linha)] bg-[var(--wb-fundo)]">
                       {[...b.itens, { id: ITEM_PAGINA, titulo: "Sobre a página inteira" }]
                         .filter((i) => i.id !== ITEM_PAGINA || historico(b.id, ITEM_PAGINA).length > 0)
                         .map((item) => (
@@ -424,7 +508,8 @@ export function PainelRevisao({
                           />
                         ))}
                     </ul>
-                  )}
+                    </div>
+                  </div>
                 </li>
               );
             })}
@@ -480,7 +565,7 @@ function Linha({
   return (
     <li className="px-4 py-3 sm:px-5">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span className={`size-2.5 shrink-0 rounded-full ${PONTO[situacao]}`} aria-label={ROTULO[situacao]} />
+        <span key={situacao} className={`wb-ponto size-2.5 shrink-0 rounded-full ${PONTO[situacao]}`} aria-label={ROTULO[situacao]} />
         <p className="min-w-0 flex-1 text-sm text-slate-800">{item.titulo}</p>
         <div className="flex flex-wrap gap-1.5">
           {/* A aprovação do conteúdo é sempre do cliente, mesmo quando quem pediu foi a agência. */}
@@ -501,7 +586,7 @@ function Linha({
           {podeConfirmar && (
             <button type="button" onClick={() => registrar(blocoId, item.id, "confirmado")}
               disabled={ocupado === `${chave}/confirmado`}
-              className={`${btn} bg-slate-900 text-white hover:bg-slate-800`}>
+              className={`${btn} bg-[var(--wb-roxo)] text-white hover:bg-[var(--wb-roxo-vivo)] active:scale-95`}>
               {pendencia ? "Confirmar e fechar" : "Agradecer"}
             </button>
           )}
@@ -572,7 +657,7 @@ function Campo({
       />
       <div className="mt-2 flex gap-2">
         <button type="button" onClick={onEnviar} disabled={ocupado || !valor.trim()}
-          className="min-h-10 rounded-lg bg-red-700 px-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-800 disabled:opacity-50">
+          className="min-h-10 rounded-lg bg-[var(--wb-roxo)] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_-10px_rgba(53,5,69,0.9)] transition-[background-color,transform] hover:bg-[var(--wb-roxo-vivo)] active:scale-[0.98] disabled:opacity-50">
           {ocupado ? "Enviando…" : "Enviar"}
         </button>
         <button type="button" onClick={onCancelar} className="min-h-10 rounded-lg px-3 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900">

@@ -1,0 +1,105 @@
+/*
+ * Identidade da WB Digital Solutions nesta ferramenta.
+ *
+ * A página de revisão não é do site da The Dark Film — é o painel de trabalho entre as duas
+ * empresas. Por isso ela usa a marca de quem opera: o roxo do site da WB (#350545 profundo e
+ * #792990 vibrante), o âmbar de destaque e a Plus Jakarta Sans. Os tokens saem do
+ * `tailwind.config.ts` do projeto wbdigitalsolutions.
+ */
+.wb {
+  --wb-roxo: #350545;
+  --wb-roxo-vivo: #792990;
+  --wb-lilas: #aaa6c3;
+  --wb-ambar: #ffb947;
+  --wb-tinta: #1b1024;
+  --wb-fundo: #faf9fc;
+  --wb-linha: #e7e1ee;
+  --wb-gradiente: linear-gradient(90deg, #350545 0%, #792990 50%, #350545 100%);
+}
+
+/* Brilho roxo no topo, como na home da WB. */
+.wb-capa {
+  position: relative;
+  isolation: isolate;
+  background: var(--wb-gradiente);
+  color: #fff;
+  overflow: hidden;
+}
+.wb-capa::after {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 180%;
+  background: radial-gradient(circle at top center, rgba(255, 185, 71, 0.22) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Barra de progresso com o gradiente da marca. */
+.wb-progresso {
+  background: var(--wb-gradiente);
+  background-size: 200% 100%;
+  animation: wb-desliza 6s linear infinite;
+}
+@keyframes wb-desliza {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+/* Entrada dos cartões, escalonada por --i. */
+.wb-entra {
+  animation: wb-sobe 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+@keyframes wb-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Abertura das seções sem salto: grid 0fr → 1fr anima altura de conteúdo desconhecido. */
+.wb-sanfona {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.wb-sanfona[data-aberta="true"] {
+  grid-template-rows: 1fr;
+}
+.wb-sanfona > div {
+  overflow: hidden;
+}
+
+.wb-cartao {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+.wb-cartao:hover {
+  border-color: var(--wb-lilas);
+  box-shadow: 0 12px 30px -18px rgba(53, 5, 69, 0.45);
+}
+
+/* O verde do "resolvido" pulsa uma vez quando o estado muda. */
+@keyframes wb-pisca {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.wb-ponto {
+  animation: wb-pisca 0.5s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-entra,
+  .wb-ponto,
+  .wb-progresso {
+    animation: none;
+  }
+  .wb-sanfona {
+    transition: none;
+  }
+}
