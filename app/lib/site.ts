@@ -16,7 +16,7 @@ export const site = {
     full: "Rua Cel. Veiga, 1767 e 1771 — Cel. Veiga, Petrópolis/RJ",
   },
   phones: [
-    { label: "(24) 2246-4978", href: "tel:+552422464978" },
+    // (24) 2246-4978 saiu em 03/09/2026 a pedido do cliente: linha desativada.
     { label: "(24) 2243-3449", href: "tel:+552422433449" },
   ],
   whatsapp: {

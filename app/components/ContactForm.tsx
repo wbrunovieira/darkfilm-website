@@ -26,7 +26,7 @@ const MESSAGE_MAX = 600;
 
 const EMPTY: Values = { nome: "", telefone: "", email: "", mensagem: "" };
 
-/** Máscara leve: (24) 98816-7547 ou (24) 2246-4978. Aceita só dígitos, até 11. */
+/** Máscara leve: (24) 98816-7547 ou (24) 2243-3449. Aceita só dígitos, até 11. */
 function maskPhone(raw: string) {
   const d = raw.replace(/\D/g, "").slice(0, 11);
   if (d.length === 0) return "";

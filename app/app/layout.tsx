@@ -24,7 +24,9 @@ const jsonLd = {
   "@type": "AutoRepair",
   name: site.name,
   url: siteUrl,
-  telephone: "+55-24-2246-4978",
+  // Deriva do mesmo lugar que o rodapé e a página de contato: número escrito à mão
+  // aqui já ficou desatualizado uma vez quando o cliente desativou uma linha.
+  telephone: site.phones[0].href.replace("tel:", ""),
   foundingDate: String(site.founded),
   address: {
     "@type": "PostalAddress",
