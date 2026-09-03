@@ -9,6 +9,10 @@ import { Reveal } from "./Reveal";
 import { WhatsAppIcon } from "./icons";
 import { whatsappUrl } from "@/lib/site";
 import { LIMITES, rotuloLimite, type VidroId } from "@/lib/legislacao";
+import { AMOSTRA, MAX, MIN, ROTULOS, TONALIDADES, rotuloFor, shadeFor } from "@/lib/tonalidades";
+
+// O teaser da home importa a escala daqui desde antes de ela virar módulo próprio.
+export { ROTULOS, TONALIDADES, shadeFor };
 
 /**
  * Simulador de transparência de película — pensado para quem nunca comprou película.
@@ -26,82 +30,6 @@ import { LIMITES, rotuloLimite, type VidroId } from "@/lib/legislacao";
  * - A lei mede a transmitância do conjunto vidro + película; o número da película sozinha
  *   não é o valor final. Por isso o rótulo é cauteloso e aponta para a medição na loja.
  */
-export const TONALIDADES = [5, 20, 35, 50, 70, 90] as const;
-
-/** Apelidos em linguagem simples para os códigos do mostruário. */
-export const ROTULOS: Record<(typeof TONALIDADES)[number], string> = {
-  5: "Bem escura",
-  20: "Escura",
-  35: "Média",
-  50: "Clara",
-  70: "Bem clara",
-  90: "Quase incolor",
-};
-
-/** Rótulo humano para qualquer valor do slider (faixas entre os presets). */
-export function rotuloFor(vlt: number) {
-  if (vlt <= 12) return ROTULOS[5];
-  if (vlt <= 27) return ROTULOS[20];
-  if (vlt <= 42) return ROTULOS[35];
-  if (vlt <= 60) return ROTULOS[50];
-  if (vlt <= 80) return ROTULOS[70];
-  return ROTULOS[90];
-}
-
-const MIN = 5;
-const MAX = 90;
-
-/**
- * Quanto a simulação escurece a cena, de 0 (nada) a 1 (opaco).
- *
- * Não é a transmitância física: é a PERCEPÇÃO de quem olha de dentro do carro para
- * fora, que é sempre mais clara do que o número sugere — o olho se adapta e o cérebro
- * compensa. A curva anterior (1 - (vlt/100)^0,6) era fiel ao número e por isso parecia
- * escura demais na tela; o cliente comparou com a aparência real e pediu o ajuste.
- *
- * A referência veio dele, em 03/09/2026: "5% deve parecer o que hoje está no 20%,
- * 20% como o 35%, 35% como o 50%, 50% como o 70%, e o 70% ainda mais claro que isso".
- * Os âncoras abaixo são exatamente essa tradução, com interpolação linear entre eles.
- */
-const PERCEPCAO: [number, number][] = [
-  [5, 0.62],
-  [20, 0.46],
-  [35, 0.34],
-  [50, 0.19],
-  [70, 0.1],
-  [90, 0.04],
-];
-
-/**
- * Cor da bolinha de cada tonalidade no mostruário da UI.
- *
- * NÃO usa shadeFor: aquela curva é a percepção de uma cena vista pela janela, onde o 5%
- * ainda deixa enxergar. Aplicada a um disco de 20px ela achata tudo em cinza médio e o
- * "Bem escura" fica igual ao "Clara". Aqui a leitura precisa ser de amostra de película,
- * então o ramp é o mesmo da barra de escala em `styles/peliculas.css` — os dois têm que
- * combinar, porque o cliente vê a bolinha aqui e a barra na página do simulador.
- */
-const AMOSTRA: Record<(typeof TONALIDADES)[number], string> = {
-  5: "#08080a",
-  20: "#1d1e22",
-  35: "#3a3b40",
-  50: "#6a6c72",
-  70: "#a8a9ae",
-  90: "#ddddd8",
-};
-
-export function shadeFor(vlt: number) {
-  const p = PERCEPCAO;
-  if (vlt <= p[0][0]) return p[0][1];
-  if (vlt >= p[p.length - 1][0]) return p[p.length - 1][1];
-  for (let i = 0; i < p.length - 1; i++) {
-    const [x1, y1] = p[i];
-    const [x2, y2] = p[i + 1];
-    if (vlt <= x2) return y1 + ((vlt - x1) / (x2 - x1)) * (y2 - y1);
-  }
-  return p[p.length - 1][1];
-}
-
 // Janela lateral traseira, em % do quadro (polígono compartilhado pela moldura e pela película).
 export const WINDOW_POLY = "5% 16%, 56% 5%, 95% 9%, 96% 84%, 5% 89%";
 export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
@@ -227,8 +155,11 @@ export function TintSimulator({
         <Reveal className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow mb-3">Simulador</p>
+            {/* O cliente pediu para manter "Veja a tonalidade antes de aplicar" na home e em
+                /simulador. Aqui o mesmo H2 seria a terceira repetição — confunde a navegação e
+                divide a página entre si mesma na busca. */}
             <h2 id={`${id}-title`} className="display text-3xl md:text-5xl">
-              Veja a tonalidade <span className="text-red-2">antes de aplicar.</span>
+              Simule <span className="text-red-2">a sua película.</span>
             </h2>
           </div>
           <p className="max-w-sm text-sm text-fg-2">

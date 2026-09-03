@@ -7,6 +7,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { TintSimulator } from "@/components/TintSimulator";
 import { LIMITES, REFERENCIA, valorLimite } from "@/lib/legislacao";
+import { TONALIDADES, shadeFor } from "@/lib/tonalidades";
 import { ArrowIcon } from "@/components/icons";
 import {
   AlertIcon,
@@ -77,7 +78,8 @@ export default function LinhaAutomotivaPage() {
             </span>
             <p className="display mt-5 text-3xl">Chancela registrada</p>
             <p className="mt-2 text-sm leading-relaxed text-fg-2">
-              Associação Brasileira de Representantes e Aplicadores de Window Film, conforme a Resolução 73/98 do CONTRAN.
+              Associação Brasileira de Representantes e Aplicadores de Window Film — a entidade que
+              chancela aplicadores de película no país.
             </p>
           </Reveal>
         }
@@ -110,14 +112,31 @@ export default function LinhaAutomotivaPage() {
                 </Link>
               </p>
             </RevealItem>
-            <RevealItem className="group relative overflow-hidden border border-line bg-bg-2">
-              <Image
-                src="/img/peliculas/imgMostruarioFilm.jpg"
-                alt="Mostruário de tonalidades de película, das mais escuras às mais claras"
-                width={400}
-                height={266}
-                className="photo w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
+            {/* O mostruário era um JPG de 2013 rotulado "G5 G20 G35 G50 G70": a nomenclatura que
+                o cliente mandou trocar por porcentagem, numa escala que parava no 70 enquanto o
+                texto ao lado diz que a loja vai até 90%. Imagem não acompanha mudança de conteúdo
+                e não aparece em busca por texto — foi assim que o erro sobreviveu. Agora as faixas
+                saem de lib/tonalidades, a mesma fonte do simulador. */}
+            <RevealItem className="relative overflow-hidden border border-line bg-bg-2">
+              <div className="relative aspect-[3/2]">
+                <Image
+                  src="/img/novo/simulador--rua-cel-veiga.jpg"
+                  alt={`Mesma cena vista através das ${TONALIDADES.length} tonalidades do mostruário, da mais escura à quase incolor`}
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover object-[center_35%]"
+                />
+                <div aria-hidden className="absolute inset-0 flex">
+                  {TONALIDADES.map((t) => (
+                    <div key={t} className="relative flex-1 border-l border-white/10 first:border-l-0">
+                      <div className="absolute inset-0 bg-black" style={{ opacity: shadeFor(t) }} />
+                      <span className="absolute inset-x-0 bottom-2 text-center font-display text-[11px] font-semibold tabular-nums tracking-[0.1em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.9)]">
+                        {t}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <p className="border-t border-line px-5 py-3 text-xs uppercase tracking-[0.16em] text-fg-3">
                 Mostruário de tonalidades
               </p>
@@ -127,8 +146,8 @@ export default function LinhaAutomotivaPage() {
       >
         <p>
           Em Petrópolis, somos os únicos com chancela registrada na <strong>ABRAWF</strong>{" "}
-          (Associação Brasileira de Representantes e Aplicadores de Window Film), de acordo com
-          o que estabelece a Resolução 73/98 do CONTRAN.
+          (Associação Brasileira de Representantes e Aplicadores de Window Film), a entidade que
+          chancela aplicadores de película no país.
         </p>
         {/* Este bloco citava a Resolução 254/2007 como se fosse a norma vigente e linkava um PDF
             do DENATRAN — órgão extinto, link morto (redireciona para a home do SENATRAN). A 254

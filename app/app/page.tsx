@@ -8,6 +8,15 @@ import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { Playlist } from "@/components/home/Playlist";
 import { ContactCTA } from "@/components/ContactCTA";
 
+/**
+ * Esta página mostra o tempo de casa calculado da data atual ("34 anos", "três décadas").
+ * Sendo estática, esse número é carimbado no build e ficaria errado na virada do ano até
+ * o próximo deploy — e, no Hero, que é componente de cliente, o navegador recalcularia e
+ * daria divergência de hidratação. Um dia de revalidação resolve os dois.
+ */
+export const revalidate = 86400;
+
+
 /** Separador entre seções de mesmo fundo (hairline com ponto). */
 function Sep() {
   return (

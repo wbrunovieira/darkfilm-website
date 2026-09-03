@@ -53,6 +53,15 @@ export function whatsappUrl(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
+/**
+ * Telefone para dados estruturados e links. Existe porque `site.phones[0]` era lido direto:
+ * quando o cliente desativou uma das duas linhas em 03/09/2026 a lista ficou com um item só,
+ * e desativar a última quebraria o build por índice inexistente.
+ */
+export function telefonePrincipal() {
+  return site.phones[0]?.href.replace("tel:", "") ?? `+${site.whatsapp.number}`;
+}
+
 export function yearsInBusiness(now = new Date()) {
   return now.getFullYear() - site.founded;
 }

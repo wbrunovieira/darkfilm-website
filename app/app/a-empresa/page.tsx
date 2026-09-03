@@ -23,6 +23,15 @@ export const metadata: Metadata = {
     "Fundada em 1992 em Petrópolis/RJ, a The Dark Film é a mais experiente e reconhecida em película, envelopamento, som, alarmes e recuperação de para-brisas da região.",
 };
 
+/**
+ * Esta página mostra o tempo de casa calculado da data atual ("34 anos", "três décadas").
+ * Sendo estática, esse número é carimbado no build e ficaria errado na virada do ano até
+ * o próximo deploy — e, no Hero, que é componente de cliente, o navegador recalcularia e
+ * daria divergência de hidratação. Um dia de revalidação resolve os dois.
+ */
+export const revalidate = 86400;
+
+
 const ease = [0.16, 1, 0.3, 1] as const;
 
 // Serviços conforme a página "A Empresa" do site original.
@@ -47,7 +56,7 @@ const timeline: { when: string; title: string; text: string; hot?: boolean }[] =
   {
     when: "Marco",
     title: "Chancela ABRAWF",
-    text: "Em Petrópolis, a única com chancela registrada na Associação Brasileira de Representantes e Aplicadores de Window Film, conforme a Resolução 73/98 do CONTRAN.",
+    text: "Em Petrópolis, a única com chancela registrada na Associação Brasileira de Representantes e Aplicadores de Window Film, a entidade que chancela aplicadores de película no país.",
   },
   {
     when: "Marco",

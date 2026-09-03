@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MotionProvider } from "@/components/MotionProvider";
-import { site, siteUrl } from "@/lib/site";
+import { site, siteUrl, telefonePrincipal } from "@/lib/site";
 
 const display = Barlow_Condensed({
   variable: "--font-display",
@@ -26,7 +26,7 @@ const jsonLd = {
   url: siteUrl,
   // Deriva do mesmo lugar que o rodapé e a página de contato: número escrito à mão
   // aqui já ficou desatualizado uma vez quando o cliente desativou uma linha.
-  telephone: site.phones[0].href.replace("tel:", ""),
+  telephone: telefonePrincipal(),
   foundingDate: String(site.founded),
   address: {
     "@type": "PostalAddress",
