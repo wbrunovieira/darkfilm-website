@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
     return [
       { source: "/linha-automotiva", destination: "/peliculas-automotivas", permanent: true },
       { source: "/linha-arquitetonica", destination: "/peliculas-arquitetonicas", permanent: true },
+      /* /produtos respondia 404 embora o breadcrumb das 45 páginas de produto sugira que esse
+         nível existe. Quem edita a URL na barra, ou segue a lógica do rastro, caía num erro.
+         O catálogo mora em /som-e-acessorios. */
+      { source: "/produtos", destination: "/som-e-acessorios", permanent: true },
     ];
   },
 };

@@ -249,9 +249,13 @@ export function Header() {
                           key={c.href}
                           href={c.href}
                           onClick={() => setOpen(false)}
-                          className={`block border-b border-line py-4 font-display text-3xl font-semibold uppercase ${
-                            isActive(c.href) ? "text-red-2" : "text-fg"
-                          }`}
+                          /* Filhos recuados e menores: o painel era uma lista plana de nove
+                             itens do mesmo tamanho, separados só por um rótulo de 12px. A
+                             hierarquia que o dropdown ensina no desktop sumia no celular —
+                             que é onde a maioria acessa. */
+                          className={`block border-b border-line font-display font-semibold uppercase ${
+                            "children" in item ? "py-3 pl-4 text-2xl" : "py-4 text-3xl"
+                          } ${isActive(c.href) ? "text-red-2" : "text-fg"}`}
                         >
                           {c.label}
                           {c.highlight && (

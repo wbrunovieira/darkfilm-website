@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
+import { AreasGaleria } from "@/components/AreasGaleria";
 import { GalleryArea } from "@/components/GalleryArea";
 import { ContactCTA } from "@/components/ContactCTA";
 import { ProximoPasso } from "@/components/ProximoPasso";
@@ -29,18 +30,7 @@ export default function GaleriaPage() {
 
       {/* Índice das áreas: o cliente pediu áreas separadas, então elas precisam ser
           alcançáveis sem rolar a galeria inteira. */}
-      <nav aria-label="Áreas da galeria" className="container-x pb-10">
-        <ul className="flex flex-wrap gap-2">
-          {areas.map((a) => (
-            <li key={a.id}>
-              <a href={`#${a.id}`} className="pill-tab">
-                {a.title}
-                <span className="pill-tab__count">{a.photos.length}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <AreasGaleria areas={areas.map((a) => ({ id: a.id, title: a.title, n: a.photos.length }))} />
 
       {areas.map((a, i) => (
         <GalleryArea key={a.id} area={a} index={i} />

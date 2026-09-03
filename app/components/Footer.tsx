@@ -1,18 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import { nav, site, whatsappUrl, type NavLink } from "@/lib/site";
+import { grupos } from "@/lib/produtos";
+import { nav, site, whatsappUrl } from "@/lib/site";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "./icons";
 import { GoogleBadge } from "./GoogleBadge";
 import { WBSignature } from "./WBSignature";
 
-const links: NavLink[] = nav.flatMap((n) => ("children" in n ? n.children : [n]));
+/**
+ * O rodapé fazia `nav.flatMap(...)`, que achatava o menu: os destinos viravam uma lista corrida
+ * sem os agrupamentos. Não era um mapa do site, era o menu com a hierarquia removida — e sem
+ * nenhuma entrada para o catálogo além de "Som e Acessórios".
+ *
+ * Agora preserva a estrutura do menu e acrescenta os grupos do catálogo, que são o nível mais
+ * fundo do site e não tinham nenhuma porta de entrada fora da própria página.
+ */
+const colunas = [
+  {
+    titulo: "Navegação",
+    links: nav.filter((n) => !("children" in n)) as { href: string; label: string }[],
+  },
+  {
+    titulo: "Películas",
+    links: (nav.find((n) => "children" in n) as { children: { href: string; label: string }[] }).children,
+  },
+  {
+    titulo: "Catálogo",
+    links: [
+      { href: "/som-e-acessorios", label: "Som e Acessórios" },
+      ...grupos.map((g) => ({ href: `/som-e-acessorios?grupo=${g.id}`, label: g.nome })),
+    ],
+  },
+];
 
 export function Footer() {
   return (
     <footer className="relative mt-24 bg-bg-2">
       {/* régua de ripas: a parede da loja fechando a página */}
       <div aria-hidden className="ripas grain h-10 border-y border-line md:h-12" />
-      <div className="container-x grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="container-x grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <Image src="/img/marca/logo.png" alt={site.name} width={200} height={66} className="h-14 w-auto" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-2">
@@ -32,18 +57,20 @@ export function Footer() {
           </div>
         </div>
 
-        <nav aria-label="Rodapé">
-          <p className="eyebrow">Navegação</p>
-          <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-1">
-            {links.map((l) => (
-              <li key={l.href}>
-                <Link href={l.href} className="text-fg-2 transition-colors hover:text-fg">
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {colunas.map((c) => (
+          <nav key={c.titulo} aria-label={`Rodapé — ${c.titulo}`}>
+            <p className="eyebrow">{c.titulo}</p>
+            <ul className="mt-4 grid gap-y-2 text-sm">
+              {c.links.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="text-fg-2 transition-colors hover:text-fg">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
 
         <div>
           <p className="eyebrow">Contato</p>

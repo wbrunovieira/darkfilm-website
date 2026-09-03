@@ -909,3 +909,11 @@
     transform: none;
   }
 }
+
+/* Área visível no índice da galeria. Sem isto, depois de pular por âncora não havia
+   como saber onde se estava entre 99 fotos. */
+.pill-tab[aria-current] {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 14%, transparent);
+  color: var(--fg);
+}
