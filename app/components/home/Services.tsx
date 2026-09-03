@@ -17,7 +17,7 @@ type Icon = ComponentType<SVGProps<SVGSVGElement>>;
 // Textos copiados do slider e dos cards da home original.
 const featured: { href: string; title: string; text: string; img: string; video?: string; icon: Icon }[] = [
   {
-    href: "/linha-automotiva",
+    href: "/peliculas-automotivas",
     title: "Películas Automotivas",
     text: "Film de linha profissional com proteção anti-risco e encolhimento térmico: aplicação perfeita, sem emendas em vidros boleados.",
     // Aplicação da película no vidro traseiro, filmada por dentro do carro.
@@ -26,7 +26,7 @@ const featured: { href: string; title: string; text: string; img: string; video?
     icon: FilmAutoIcon,
   },
   {
-    href: "/linha-arquitetonica",
+    href: "/peliculas-arquitetonicas",
     title: "Películas Arquitetônicas",
     text: "Segurança e proteção, privacidade, redução da descoloração, decoração de interiores e redução dos custos de refrigeração.",
     // Não veio nenhuma FOTO de linha arquitetônica no material do cliente, mas
@@ -73,16 +73,17 @@ export function Services() {
         </Reveal>
 
         {/* Três grandes: a primeira ocupa duas linhas (peso à esquerda). */}
-        <RevealGroup stagger={0.12} className="grid gap-4 md:grid-cols-3">
+        <RevealGroup stagger={0.12} className="grid gap-4 md:auto-rows-fr md:grid-cols-3">
           {featured.map((s, i) => {
             const Icon = s.icon;
+            // Os três com a mesma altura: o card estica até o fim da linha da grade, então
+            // título de duas linhas ou texto mais curto não encolhem o cartão. Antes o
+            // primeiro tinha `row-span-2`, sobra de um layout de duas linhas.
             return (
-              <RevealItem key={s.href} className={i === 0 ? "md:row-span-2" : ""}>
+              <RevealItem key={s.href} className="h-full">
                 <Link
                   href={s.href}
-                  className={`group card-lift sheen relative flex flex-col justify-between overflow-hidden rounded-lg border border-line bg-bg-2 ${
-                    i === 0 ? "min-h-[30rem] md:h-full md:min-h-0" : "min-h-[22rem] md:min-h-[24rem]"
-                  }`}
+                  className="group card-lift sheen relative flex h-full min-h-[26rem] flex-col justify-between overflow-hidden rounded-lg border border-line bg-bg-2 md:min-h-[30rem]"
                 >
                   {s.video ? (
                     <CardVideo
@@ -115,7 +116,7 @@ export function Services() {
 
                   <div className="relative p-6 pt-10 md:p-8 md:pt-12">
                     <span className="mb-3 block h-0.5 w-8 bg-red transition-all duration-500 ease-out-expo group-hover:w-16" />
-                    <h3 className={`display ${i === 0 ? "text-4xl md:text-5xl" : "text-3xl md:text-4xl"}`}>{s.title}</h3>
+                    <h3 className="display text-3xl md:text-4xl">{s.title}</h3>
                     <p className="mt-3 max-w-md text-sm leading-relaxed text-fg-2 md:text-base">{s.text}</p>
                     <span className="mt-4 inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.2em] text-fg">
                       Saiba mais
