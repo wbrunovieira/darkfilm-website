@@ -73,7 +73,7 @@ export default function Loja() {
       </div>
       <div className="loja-conteudo">
       {/* Nenhuma tela de proposta pode ser confundida com o produto pronto. */}
-      <p className="sticky top-0 z-50 bg-red px-4 py-2 text-center font-display text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white">
+      <p className="sticky top-0 z-50 text-balance bg-red px-4 py-2 text-center font-display text-[0.62rem] font-semibold uppercase leading-tight tracking-[0.12em] text-white sm:text-[0.7rem] sm:tracking-[0.18em]">
         Maquete de apresentação · a loja ainda não existe · valores de exemplo
       </p>
 
@@ -106,8 +106,8 @@ export default function Loja() {
       <Container>
         {/* 1. Slider, como no Stylos */}
         <div className="mt-4 w-full max-w-full">
-          <ImagesSlider className="h-[20rem] w-full max-w-full rounded-lg" images={BANNERS} autoplay direction="up">
-            <div className="z-50 rounded-lg bg-bg/70 p-6 backdrop-blur">
+          <ImagesSlider className="h-[15rem] w-full max-w-full rounded-lg sm:h-[20rem]" images={BANNERS} autoplay direction="up">
+            <div className="z-50 mx-4 max-w-[min(34rem,calc(100%-2rem))] rounded-lg bg-bg/70 p-5 backdrop-blur md:p-6">
               <h1 className="display pb-2 text-3xl leading-[0.95] md:text-5xl">
                 A oficina agora
                 <br />
@@ -177,9 +177,9 @@ export default function Loja() {
 
         <footer className="border-t border-line py-10 text-sm text-fg-3">
           <p className="max-w-3xl">
-            Maquete feita pela WB Digital Solutions sobre a base do projeto de loja que já temos
-            pronto. Vestuário é simulação com a marca; os acessórios são os do catálogo atual.
-            Preço, frete e formas de pagamento entram depois, com os valores da loja.
+            Maquete de apresentação feita pela WB Digital Solutions. Vestuário é simulação com a
+            marca; os acessórios são os do catálogo atual. Preço, frete e formas de pagamento
+            entram depois, com os valores da loja.
           </p>
           <p className="mt-4 flex flex-wrap gap-4">
             <a href={whatsappUrl("Olá! Vim pela loja online.")} className="underline underline-offset-4 hover:text-red-2">
