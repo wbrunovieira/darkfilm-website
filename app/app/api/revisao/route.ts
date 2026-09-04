@@ -81,8 +81,15 @@ export async function POST(req: Request) {
    * que ele cobria mudaria sozinho se a lista de seções mudasse.
    */
   const emLote = !!pagina && secaoId === null && (acao === "aprovado" || acao === "confirmado");
+  /**
+   * O lote inclui o ITEM_PAGINA junto com as seções. Sem ele, uma conversa aberta sobre a página
+   * inteira — pedido cuja seção deixou de existir, assunto que não é de nenhuma seção — ficava
+   * impossível de aprovar: "Está tudo certo" aprovava as seções nomeadas e deixava o item da
+   * página em aberto, e a única ação restante era "Responder", que devolve a bola em vez de
+   * fechar. O cartão dizia "8 de 8 aprovadas" e mesmo assim continuava marcado como pendente.
+   */
   const alvos = emLote
-    ? pagina!.secoes.map((s) => s.id)
+    ? [ITEM_PAGINA, ...pagina!.secoes.map((s) => s.id)]
     : [(secaoId as string | null) ?? ITEM_PAGINA];
 
   const comum = {
