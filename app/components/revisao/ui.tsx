@@ -45,9 +45,11 @@ export function rotulo(s: Situacao, souAgencia: boolean): string {
     case "silencio":
       return "Ainda não olhada";
     case "voce":
-      return "Precisa de você";
+      // Nomear o lado em vez de "você": o mesmo cartão é lido pelos dois, e o rótulo
+      // relativo obrigava o leitor a lembrar quem estava selecionado no topo.
+      return souAgencia ? "Esperando a WB" : `Esperando a ${NOME_CLIENTE}`;
     case "eles":
-      return souAgencia ? `Esperando a ${NOME_CLIENTE}` : "A WB está resolvendo";
+      return souAgencia ? `Esperando a ${NOME_CLIENTE}` : "Esperando a WB";
     case "aprovado":
       return souAgencia ? "Aprovado pelo cliente" : "Você aprovou";
     case "pronto":

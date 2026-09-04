@@ -542,10 +542,18 @@ function BarraFiltros({
   totalBlocos: number;
   souAgencia: boolean;
 }) {
+  // "Precisa de você" dizia coisas diferentes conforme quem estivesse selecionado no topo,
+  // e ficava logo acima de duas colunas que já nomeiam os lados. Os chips passam a nomear
+  // também, e na MESMA ordem das colunas — cliente primeiro, sempre. Sem isso os chips
+  // trocavam de lugar ao alternar o autor enquanto as colunas ficavam paradas.
+  const filtroCliente: Filtro = souAgencia ? "eles" : "voce";
+  const filtroAgencia: Filtro = souAgencia ? "voce" : "eles";
+  const nCliente = souAgencia ? contagem.eles : contagem.voce;
+  const nAgencia = souAgencia ? contagem.voce : contagem.eles;
   const chips: [Filtro, string, number][] = [
     ["tudo", "Tudo", totalBlocos],
-    ["voce", "Precisa de você", contagem.voce],
-    ["eles", souAgencia ? `Com a ${NOME_CLIENTE}` : "Com a WB", contagem.eles],
+    [filtroCliente, `Esperando a ${NOME_CLIENTE}`, nCliente],
+    [filtroAgencia, "Esperando a WB", nAgencia],
     ["novo", "Falta olhar", contagem.silencio],
     ["pronto", "Prontas", contagem.aprovado + contagem.pronto],
   ];
