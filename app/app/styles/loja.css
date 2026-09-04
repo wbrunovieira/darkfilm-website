@@ -1,0 +1,135 @@
+/*
+ * Atmosfera da maquete da loja.
+ *
+ * O fundo do site é chapado (#0b0b0d). Numa vitrine isso deixa a grade de produtos flutuando no
+ * vazio: como cada card é escuro sobre fundo escuro, nada separa o conteúdo da página. Aqui o
+ * fundo ganha profundidade — dois focos de cor que se movem devagar, grão por cima para não
+ * bandear, e um brilho fixo atrás do topo.
+ *
+ * Tudo é `position: fixed` e `pointer-events: none`: não entra no fluxo, não custa layout e não
+ * atrapalha clique. E tudo para com `prefers-reduced-motion`.
+ */
+
+.loja-fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+/* Os dois focos. O vermelho é o acento da marca; o segundo é o ouro da coroa, bem discreto,
+   para o fundo não ficar monocromático. */
+.loja-fundo::before,
+.loja-fundo::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.loja-fundo::before {
+  width: 62vw;
+  height: 62vw;
+  top: -22vw;
+  left: -12vw;
+  background: radial-gradient(circle, rgba(209, 20, 31, 0.42), transparent 68%);
+  animation: loja-deriva-a 26s ease-in-out infinite alternate;
+}
+
+.loja-fundo::after {
+  width: 52vw;
+  height: 52vw;
+  right: -16vw;
+  top: 24vh;
+  background: radial-gradient(circle, rgba(227, 179, 65, 0.2), transparent 70%);
+  animation: loja-deriva-b 34s ease-in-out infinite alternate;
+}
+
+@keyframes loja-deriva-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(8vw, 10vh, 0) scale(1.15); }
+}
+
+@keyframes loja-deriva-b {
+  from { transform: translate3d(0, 0, 0) scale(1.1); }
+  to   { transform: translate3d(-10vw, -8vh, 0) scale(1); }
+}
+
+/* Terceiro foco, na metade de baixo: sem ele a página morre depois da dobra, porque os dois
+   primeiros ficam presos ao topo. */
+.loja-fundo__foco-3 {
+  position: absolute;
+  left: 8vw;
+  bottom: -26vw;
+  width: 58vw;
+  height: 58vw;
+  border-radius: 50%;
+  filter: blur(100px);
+  background: radial-gradient(circle, rgba(209, 20, 31, 0.26), transparent 70%);
+  animation: loja-deriva-b 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Grão: sem ele o desfoque grande vira faixa de banda em tela de 8 bits. */
+.loja-fundo__grao {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Assentamento leve no topo e no rodapé. Era um véu pesado subindo até 45%, que apagava o
+   terceiro foco inteiro — virou só um degradê nas duas pontas. */
+.loja-fundo__veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 11, 13, 0.5) 0%, transparent 22%, transparent 88%, rgba(11, 11, 13, 0.55) 100%);
+}
+
+/* Conteúdo acima do fundo. */
+.loja-conteudo {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cartão com vidro: o fundo colorido aparece por trás sem lavar o texto. */
+.loja-vidro {
+  background: color-mix(in srgb, var(--bg-2) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(1.15);
+}
+
+/* Borda que acende no hover, no acento da marca. */
+.loja-borda-viva {
+  position: relative;
+}
+.loja-borda-viva::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(255, 42, 54, 0.55), transparent 45%, rgba(227, 179, 65, 0.35));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.loja-borda-viva:hover::after,
+.loja-borda-viva:focus-within::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loja-fundo::before,
+  .loja-fundo::after {
+    animation: none;
+  }
+  .loja-borda-viva::after {
+    transition: none;
+  }
+}

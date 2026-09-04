@@ -89,7 +89,7 @@ export default function SideBar({ f, setF, max }: {
 
 function Bloco({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <section className="mt-2 flex w-full flex-col rounded border border-line bg-bg-2 p-4">
+    <section className="mt-2 flex w-full flex-col rounded-xl border border-line loja-vidro p-4">
       <h2 className="mb-2 font-display text-sm uppercase tracking-[0.16em] text-fg">{titulo}</h2>
       {/* a régua degradê da sidebar do Stylos */}
       <hr className="mb-4 h-[2px] border-0 bg-gradient-to-r from-red to-transparent" />

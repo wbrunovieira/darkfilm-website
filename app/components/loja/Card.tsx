@@ -18,7 +18,7 @@ export default function Card({ p, naSacola, onAdd }: {
   const off = desconto(p);
 
   return (
-    <div className="m-1 flex h-[26rem] transform flex-col rounded-md border border-line bg-bg-2 shadow-lg transition duration-300 ease-in-out hover:scale-[1.03] hover:border-line-strong hover:shadow-2xl">
+    <div className="loja-borda-viva m-1 flex h-[26rem] transform flex-col rounded-xl border border-line loja-vidro shadow-lg transition duration-300 ease-in-out hover:scale-[1.03] hover:border-line-strong hover:shadow-2xl">
       <div className="relative h-[200px] flex-shrink-0 overflow-hidden rounded-t-md bg-bg-3">
         <Image
           src={p.img}

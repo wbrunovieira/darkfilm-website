@@ -3,6 +3,7 @@
 @import "./styles/empresa-contato.css";
 @import "./styles/peliculas.css";
 @import "./styles/galeria-catalogo.css";
+@import "./styles/loja.css";
 
 /* ---------- Design tokens ---------- */
 :root {

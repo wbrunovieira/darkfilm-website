@@ -9,6 +9,7 @@ import Card from "./Card";
 import SearchBox from "./SearchBox";
 import { ImagesSlider } from "./ui/images-slider";
 import { DESTAQUES, PRODUTOS, reais, type ProdutoLoja } from "@/content/loja-mock";
+import { Confianca } from "./Confianca";
 import { site, whatsappUrl } from "@/lib/site";
 
 /**
@@ -63,13 +64,20 @@ export default function Loja() {
   }
 
   return (
-    <div className="min-h-screen bg-bg text-fg">
+    <div className="relative min-h-screen bg-bg text-fg">
+      {/* Fundo vivo: dois focos que derivam devagar, grão por cima e véu na base. Ver loja.css. */}
+      <div aria-hidden className="loja-fundo">
+        <span className="loja-fundo__foco-3" />
+        <span className="loja-fundo__grao" />
+        <span className="loja-fundo__veu" />
+      </div>
+      <div className="loja-conteudo">
       {/* Nenhuma tela de proposta pode ser confundida com o produto pronto. */}
       <p className="sticky top-0 z-50 bg-red px-4 py-2 text-center font-display text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white">
         Maquete de apresentação · a loja ainda não existe · valores de exemplo
       </p>
 
-      <header className="sticky top-[34px] z-40 border-b border-line bg-bg/90 backdrop-blur">
+      <header className="sticky top-[34px] z-40 border-b border-line loja-vidro">
         <Container>
           <div className="flex h-20 items-center gap-4">
             <Link href="/loja" className="flex shrink-0 items-center gap-3">
@@ -120,7 +128,7 @@ export default function Loja() {
                 key={d.categoria}
                 type="button"
                 onClick={() => setF({ ...f, categorias: [d.categoria] })}
-                className="z-10 flex items-center rounded-md border border-line bg-bg-2 p-3 text-left transition duration-300 ease-in-out hover:scale-105 hover:border-line-strong hover:shadow-lg"
+                className="loja-borda-viva z-10 flex items-center rounded-xl border border-line loja-vidro p-3 text-left transition duration-300 ease-in-out hover:scale-105 hover:border-line-strong hover:shadow-lg"
               >
                 <span className="flex size-14 shrink-0 items-center justify-center rounded bg-bg-3 text-red-2">
                   <IconeCategoria nome={d.icone} />
@@ -165,19 +173,7 @@ export default function Loja() {
           </div>
         </section>
 
-        {/* Só o que é verdade hoje: prazo, frete e pagamento são dele e entram depois. */}
-        <section className="mt-10 grid gap-8 border-t border-line py-10 sm:grid-cols-3">
-          {[
-            { t: "Retirada na loja", d: site.address.street + " — Petrópolis." },
-            { t: "Instalação por quem vende", d: "Acessório comprado aqui, instalado aqui." },
-            { t: "Desde 1992", d: "A mesma oficina, há mais de 30 anos." },
-          ].map((b) => (
-            <div key={b.t}>
-              <p className="font-display text-lg font-semibold uppercase">{b.t}</p>
-              <p className="mt-1.5 text-sm text-fg-2">{b.d}</p>
-            </div>
-          ))}
-        </section>
+        <Confianca />
 
         <footer className="border-t border-line py-10 text-sm text-fg-3">
           <p className="max-w-3xl">
@@ -195,6 +191,7 @@ export default function Loja() {
           </p>
         </footer>
       </Container>
+      </div>
     </div>
   );
 }
