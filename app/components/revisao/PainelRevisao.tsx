@@ -369,7 +369,7 @@ export function PainelRevisao({
         {filtro === "tudo" && (comCliente.length > 0 || comAgencia.length > 0) && (
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Fila
-              titulo={`Esperando a ${NOME_CLIENTE}`}
+              titulo={`Esperando ${NOME_CLIENTE}`}
               nota="Precisa de aprovação ou resposta de vocês."
               blocos={comCliente}
               lado="cliente"
@@ -552,7 +552,7 @@ function BarraFiltros({
   const nAgencia = souAgencia ? contagem.voce : contagem.eles;
   const chips: [Filtro, string, number][] = [
     ["tudo", "Tudo", totalBlocos],
-    [filtroCliente, `Esperando a ${NOME_CLIENTE}`, nCliente],
+    [filtroCliente, `Esperando ${NOME_CLIENTE}`, nCliente],
     [filtroAgencia, "Esperando a WB", nAgencia],
     ["novo", "Falta olhar", contagem.silencio],
     ["pronto", "Prontas", contagem.aprovado + contagem.pronto],
