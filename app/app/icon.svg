@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Dark Film">
+  <!--
+    A coroa do logo, redesenhada em vetor.
+
+    Por que a coroa: é o único elemento da marca que sobrevive a 16px. O lettering em script
+    vira borrão. O favicon anterior era o triângulo padrão do Next.js — a logo do framework
+    na aba do navegador do cliente, numa proposta de venda.
+
+    Por que ladrilho vermelho e não preto: preto some na barra de abas escura, que hoje é o
+    padrão da maioria. Vermelho e ouro são as duas cores do logo e destacam nas duas barras.
+    As cores saíram medidas do próprio arquivo do logo (#D92C24 e #EBBC13), não escolhidas.
+
+    Cinco pontas como a coroa original. As bolinhas das pontas ficaram de fora: a 16px elas
+    fecham os vãos entre as pontas e a coroa vira um bloco. Testado nos dois tamanhos antes
+    de publicar — fidelidade perde para legibilidade no tamanho em que o ícone é visto.
+  -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8342b"/>
+      <stop offset="1" stop-color="#b3121a"/>
+    </linearGradient>
+    <linearGradient id="ouro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f9dc57"/>
+      <stop offset="1" stop-color="#dfa60a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#tile)"/>
+
+  <g stroke="#780c12" stroke-width="2.2" stroke-linejoin="round">
+    <path fill="url(#ouro)" d="M10 46 V20 l8 13 7-19 7 15 7-15 7 19 8-13 v26 z"/>
+    <rect x="9.5" y="45" width="45" height="9" rx="2.5" fill="url(#ouro)"/>
+  </g>
+</svg>
