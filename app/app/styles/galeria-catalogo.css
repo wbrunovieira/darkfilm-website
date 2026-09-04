@@ -981,3 +981,17 @@
     transition: none;
   }
 }
+
+/* Foco visível nos controles do card de vídeo.
+   O anel padrão do navegador é azul-claro de 1px: sobre foto escura ele some, e esses botões
+   ficam justamente em cima de foto. */
+.gal-tile__playbtn:focus-visible,
+.gal-tile__expandir:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -3px;
+  border-radius: 0.5rem;
+}
+.gal-tile:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
