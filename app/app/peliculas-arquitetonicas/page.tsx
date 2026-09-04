@@ -140,7 +140,30 @@ export default function LinhaArquitetonicaPage() {
         eyebrow="Privacidade"
         title="Ver sem ser visto."
         tone="atmo-cool"
-        aside={<Photo src="/img/novo/arquitetonica--vidro-jateado-corredor.jpg" alt="Porta de vidro jateado separando um corredor revestido de pastilha preta" caption="Vidro jateado em corredor" w={478} h={850} pos="center 38%" />}
+        /* O texto nomeia dois tipos de film — reflexivo e jateado — e a seção ilustrava
+           só o jateado. A foto do reflexivo é a que o cliente mandou em 03/09/2026
+           ("film arquitetura fumê"): na mesma cena aparece a janela com película ao
+           lado do vidro claro, que é o argumento inteiro em uma imagem. */
+        aside={
+          <div className="space-y-3">
+            <Photo
+              src="/img/novo/arquitetonica--janela-fume-residencial.jpg"
+              alt="Janela residencial com film fumê aplicado, ao lado de uma esquadria de vidro sem película"
+              caption="Reflexivo — janela residencial"
+              w={1124}
+              h={2000}
+              pos="center 45%"
+            />
+            <Photo
+              src="/img/novo/arquitetonica--vidro-jateado-corredor.jpg"
+              alt="Porta de vidro jateado separando um corredor revestido de pastilha preta"
+              caption="Jateado — corredor interno"
+              w={478}
+              h={850}
+              pos="center 38%"
+            />
+          </div>
+        }
       >
         <p>
           Alguns films são altamente reflexivos, permitindo a visão de dentro para fora, mas não
