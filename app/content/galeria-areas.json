@@ -150,6 +150,73 @@
     ]
   },
   {
+    "id": "envelopamento",
+    "title": "Envelopamento",
+    "intro": "Teto, capô, faixas e detalhes em vinil. Trabalhos da oficina, dos mais recentes aos do acervo.",
+    "photos": [
+      {
+        "src": "/img/novo/aplicacao-carros--mustang-envelopamento-listras.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Capô de Mustang envelopado com faixas pretas e brancas, visto de frente na oficina"
+      },
+      {
+        "src": "/img/novo/envelopamento--mustang-prata-faixas-frente.jpg",
+        "w": 1000,
+        "h": 749,
+        "alt": "Mustang prata com faixas pretas no capô e no teto, visto de frente"
+      },
+      {
+        "src": "/img/novo/envelopamento--pajero-preto-fosco-frente.jpg",
+        "w": 1000,
+        "h": 749,
+        "alt": "Mitsubishi Pajero envelopado em preto fosco, visto de frente"
+      },
+      {
+        "src": "/img/novo/envelopamento--sedan-branco-em-aplicacao.jpg",
+        "w": 1000,
+        "h": 749,
+        "alt": "Sedã branco durante o envelopamento: lateral e tampa do porta-malas já em vinil escuro"
+      },
+      {
+        "src": "/img/novo/envelopamento--sedan-branco-pronto.jpg",
+        "w": 1000,
+        "h": 749,
+        "alt": "Sedã envelopado em branco, pronto, visto de trás na oficina"
+      },
+      {
+        "src": "/img/novo/envelopamento--hatch-cinza-teto-branco.jpg",
+        "w": 1000,
+        "h": 749,
+        "alt": "Hatch cinza com teto envelopado em branco, visto de trás"
+      },
+      {
+        "src": "/img/novo/envelopamento--hatch-prata-teto-preto.jpg",
+        "w": 640,
+        "h": 480,
+        "alt": "Hatch prata com teto envelopado em preto fosco, visto de cima"
+      },
+      {
+        "src": "/img/novo/envelopamento--moto-carbono-guidao.jpg",
+        "w": 640,
+        "h": 480,
+        "alt": "Moto com carenagem e faixa do tanque envelopadas em fibra de carbono"
+      },
+      {
+        "src": "/img/novo/envelopamento--retrovisor-carbono.jpg",
+        "w": 640,
+        "h": 480,
+        "alt": "Retrovisor externo envelopado em fibra de carbono, em detalhe"
+      },
+      {
+        "src": "/img/novo/envelopamento--console-carbono.jpg",
+        "w": 480,
+        "h": 640,
+        "alt": "Console central de carro envelopado em fibra de carbono"
+      }
+    ]
+  },
+  {
     "id": "multimidia",
     "title": "Multimídia e acessórios",
     "intro": "Som, centrais multimídia e acessórios instalados na loja.",

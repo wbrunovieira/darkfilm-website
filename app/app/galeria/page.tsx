@@ -12,7 +12,10 @@ export const metadata: Metadata = {
     "Trabalhos da The Dark Film: película automotiva e arquitetônica, multimídia e acessórios, em Petrópolis/RJ.",
 };
 
-const total = areas.reduce((n, a) => n + a.photos.length, 0);
+// A galeria tem foto e vídeo: contar tudo como "fotos" no texto seria impreciso.
+const itens = areas.flatMap((a) => a.photos);
+const nVideos = itens.filter((i) => "video" in i).length;
+const nFotos = itens.length - nVideos;
 
 export default function GaleriaPage() {
   return (
@@ -25,7 +28,7 @@ export default function GaleriaPage() {
             Trabalhos <span className="text-red-2">de verdade.</span>
           </>
         }
-        intro={`Cada área com o que sai da oficina: aplicação de película, multimídia e os carros que passam por aqui. São ${total} fotos em ${areas.length} áreas.`}
+        intro={`Cada área com o que sai da oficina: aplicação de película, envelopamento, multimídia e os carros que passam por aqui. São ${nFotos} fotos e ${nVideos} vídeos em ${areas.length} áreas.`}
       />
 
       {/* Índice das áreas: o cliente pediu áreas separadas, então elas precisam ser
