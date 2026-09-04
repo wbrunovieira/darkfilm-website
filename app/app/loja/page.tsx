@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import Loja from "@/components/loja/Loja";
 
 /**
  * Maquete da loja online da The Dark Film.
  *
- * Material de apresentação para vender o projeto de e-commerce — a loja não existe. Por isso
- * a página **só responde em desenvolvimento**: mesmo que alguém publique o site, ela some.
- * Para mostrar ao cliente por link, é só remover o `notFound()` abaixo e publicar de propósito.
+ * Material de apresentação para vender o projeto de e-commerce — a loja não existe.
+ *
+ * Nasceu travada em desenvolvimento, para não vazar num deploy. A trava saiu em 04/09/2026, a
+ * pedido do Bruno, para ele mandar o link ao cliente. Continua `noindex` e sem link em lugar
+ * nenhum do site: só chega quem recebe o endereço.
  *
  * Fora do menu do site, fora do sitemap e fora do chrome (ver `ChromeDoSite`).
  */
@@ -17,6 +18,5 @@ export const metadata: Metadata = {
 };
 
 export default function LojaPage() {
-  if (process.env.NODE_ENV === "production") notFound();
   return <Loja />;
 }
