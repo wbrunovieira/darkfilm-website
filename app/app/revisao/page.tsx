@@ -59,9 +59,14 @@ export default async function RevisaoPage() {
           </p>
           <p className="mt-4 flex flex-wrap items-center gap-2 text-slate-400">
             <Image src="/img/wb/logo-wb.svg" alt="" width={207} height={36} className="h-4 w-auto opacity-60" />
+            {/* A frase anterior dizia "painel ... ainda não publicado no endereço definitivo",
+                o que não fazia sentido: o painel não vai para thedarkfilm.com.br, quem vai é o
+                site. O cliente leu e não entendeu. Agora diz o que interessa a ele: o endereço
+                que está vendo é provisório. */}
             <span>
-              Painel feito pela WB Digital Solutions · versão de proposta, ainda não publicada no
-              endereço definitivo.
+              Painel feito pela WB Digital Solutions. O site que você está revendo ainda está num
+              endereço provisório — quando estiver tudo aprovado, ele passa a responder em
+              thedarkfilm.com.br.
             </span>
           </p>
         </div>
