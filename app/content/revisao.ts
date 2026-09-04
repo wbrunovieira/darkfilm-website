@@ -142,6 +142,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "trabalhos-de-verdade", titulo: "Trabalhos de verdade." },
       { id: "carros-que-passam-por-aqui", titulo: "Carros que passam por aqui" },
       { id: "aplicacao-de-pelicula-em-carros", titulo: "Aplicação de película em carros" },
+      { id: "envelopamento", titulo: "Envelopamento" },
       { id: "multimidia-e-acessorios", titulo: "Multimídia e acessórios" },
       { id: "pelicula-arquitetonica", titulo: "Película arquitetônica" },
       { id: "a-loja", titulo: "A loja" },
