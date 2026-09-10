@@ -1,10 +1,8 @@
 /**
- * Catálogo FICTÍCIO da loja online — material de apresentação, não conteúdo do site.
+ * Catálogo FICTÍCIO da loja online. Material de apresentação, não conteúdo do site.
  *
- * A maquete é uma cópia da home do projeto Stylos (`~/projects/stylosFrontEcommerce`) adaptada
- * para a marca do cliente: é sobre aquele projeto que a loja dele será construída. Os campos
- * abaixo existem para alimentar o que a home de lá já mostra — selo de promoção, selo de
- * novidade, percentual de desconto, filtro por categoria, marca, tamanho e faixa de preço.
+ * Os campos abaixo existem para alimentar o que a vitrine mostra: selo de promoção, selo de
+ * novidade, percentual de desconto, e filtro por categoria, marca, tamanho e faixa de preço.
  *
  * **Os preços são inventados e estão marcados como exemplo na tela.** É a única exceção à regra
  * do projeto de não inventar preço, e ela só se sustenta porque a página inteira se apresenta
@@ -34,7 +32,7 @@ export type ProdutoLoja = {
 export const CATEGORIAS = ["Vestuário", "Canecas", "Acessórios"] as const;
 export type Categoria = (typeof CATEGORIAS)[number];
 
-/** Cartões de categoria da faixa superior, como os quatro do Stylos. */
+/** Cartões de categoria da faixa superior da home. */
 export const DESTAQUES: { categoria: Categoria; icone: string; chamada: string }[] = [
   { categoria: "Vestuário", icone: "camiseta", chamada: "Vestir a marca" },
   { categoria: "Canecas", icone: "caneca", chamada: "Para o café da oficina" },

@@ -13,14 +13,12 @@ import { Confianca } from "./Confianca";
 import { site, whatsappUrl } from "@/lib/site";
 
 /**
- * Home da loja: a mesma sequência da home do Stylos — slider de imagens, faixa de cartões de
- * categoria, e a seção 1/4 + 3/4 com a barra lateral de filtros e a grade de produtos.
+ * Home da loja: slider de imagens, faixa de cartões de categoria, e a seção 1/4 + 3/4 com a
+ * barra lateral de filtros e a grade de produtos.
  *
- * Os componentes vieram de lá (`ImagesSlider`, `PlaceholdersAndVanishInput`, `Container`,
- * `SideBar`, `Card`), com duas trocas: `framer-motion` virou `motion/react`, que é o sucessor e
- * tem a mesma API, e os dados vêm de arquivo em vez de `axios` — não existe backend nesta fase.
- *
- * O `Loader` de abertura do Stylos ficou: é ele que dá o "carregou" na apresentação.
+ * Os dados vêm de arquivo, não de API: não existe backend nesta fase. A abertura tem um giro de
+ * carregamento de propósito, porque é ele que dá a sensação de aplicação de verdade na
+ * apresentação.
  */
 const TETO = Math.max(...PRODUTOS.map((p) => p.preco));
 
@@ -104,7 +102,7 @@ export default function Loja() {
       </header>
 
       <Container>
-        {/* 1. Slider, como no Stylos */}
+        {/* 1. Slider de destaque */}
         <div className="mt-4 w-full max-w-full">
           <ImagesSlider className="h-[15rem] w-full max-w-full rounded-lg sm:h-[20rem]" images={BANNERS} autoplay direction="up">
             <div className="z-50 mx-4 max-w-[min(34rem,calc(100%-2rem))] rounded-lg bg-bg/70 p-5 backdrop-blur md:p-6">
@@ -147,14 +145,14 @@ export default function Loja() {
           </div>
         </div>
 
-        {/* 3. Barra lateral 1/4 + grade 3/4, como no Stylos */}
+        {/* 3. Barra lateral 1/4 e grade 3/4 */}
         <section className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
           <div className="md:col-span-1">
             <SideBar f={f} setF={setF} max={TETO} />
           </div>
 
           <div className="md:col-span-3">
-            {/* No celular a barra some, como no Stylos — então a busca precisa aparecer aqui. */}
+            {/* No celular a barra lateral some, então a busca precisa aparecer aqui. */}
             <div className="mb-4 md:hidden">
               <SearchBox onBuscar={setBusca} />
             </div>

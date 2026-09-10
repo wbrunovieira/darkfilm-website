@@ -4,8 +4,8 @@ import { useState } from "react";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 
 /**
- * Cópia do SearchBox do Stylos, com os placeholders trocados pelos termos da oficina.
- * Na maquete a busca filtra a vitrine em memória; no Stylos ela leva para /search.
+ * Busca da loja, com os termos da oficina rodando no lugar do texto de exemplo.
+ * Na maquete ela filtra a vitrine em memória; na loja real vai levar para a página de resultados.
  */
 export default function SearchBox({ onBuscar }: { onBuscar: (q: string) => void }) {
   const [query, setQuery] = useState("");

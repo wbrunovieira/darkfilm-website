@@ -13,7 +13,7 @@ import Loja from "@/components/loja/Loja";
  * Fora do menu do site, fora do sitemap e fora do chrome (ver `ChromeDoSite`).
  */
 export const metadata: Metadata = {
-  title: "Loja — maquete",
+  title: "Loja, maquete",
   robots: { index: false, follow: false },
 };
 

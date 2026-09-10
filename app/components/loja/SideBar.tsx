@@ -10,11 +10,11 @@ export type Filtros = {
 };
 
 /**
- * Cópia da SideBar do Stylos: blocos empilhados com título, régua degradê e caixas de seleção —
- * lá são Categorias, Marcas, Cores e Tamanhos, mais faixa de preço. Aqui Cores saiu (não faz
- * sentido para acessório automotivo) e o resto ficou.
+ * Filtros da vitrine: blocos empilhados com título, régua degradê e caixas de seleção.
+ * Categorias, marcas, tamanhos e faixa de preço. Filtro por cor ficou de fora, porque não diz
+ * nada para acessório automotivo.
  *
- * Escondida no celular, como no Stylos (`hidden md:flex`): lá o filtro no celular é outra tela.
+ * Escondida no celular (`hidden md:flex`), onde o filtro precisa ser outra tela.
  */
 export default function SideBar({ f, setF, max }: {
   f: Filtros;
@@ -91,7 +91,7 @@ function Bloco({ titulo, children }: { titulo: string; children: React.ReactNode
   return (
     <section className="mt-2 flex w-full flex-col rounded-xl border border-line loja-vidro p-4">
       <h2 className="mb-2 font-display text-sm uppercase tracking-[0.16em] text-fg">{titulo}</h2>
-      {/* a régua degradê da sidebar do Stylos */}
+      {/* Régua degradê: separa o título das opções sem pesar como uma borda cheia */}
       <hr className="mb-4 h-[2px] border-0 bg-gradient-to-r from-red to-transparent" />
       {children}
     </section>

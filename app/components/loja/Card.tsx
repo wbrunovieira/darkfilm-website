@@ -4,11 +4,11 @@ import Image from "next/image";
 import { desconto, reais, type ProdutoLoja } from "@/content/loja-mock";
 
 /**
- * Cópia do Card do Stylos: mesma anatomia — imagem com selos girados 45° no canto, badge de
- * desconto, categoria, título com tooltip no hover, preço riscado + preço final, botão.
+ * Cartão de produto da vitrine: imagem com fita girada no canto, selo de desconto, categoria,
+ * título com dica quando o nome não cabe, preço cheio riscado ao lado do preço final, e botão.
  *
- * O que mudou é a pele: o Stylos é claro (bg-white, borda rosa), a The Dark Film é escura.
- * A estrutura ficou igual para o projeto real ser um transplante e não uma reescrita.
+ * A anatomia é a mesma que a loja real vai usar, para a implementação ser continuação e não
+ * reescrita.
  */
 export default function Card({ p, naSacola, onAdd }: {
   p: ProdutoLoja;
@@ -28,7 +28,7 @@ export default function Card({ p, naSacola, onAdd }: {
           className="object-cover object-center"
         />
 
-        {/* Faixas girando 45° no canto, como no Stylos */}
+        {/* Fitas giradas no canto, para o selo ler de longe sem ocupar a imagem */}
         {p.precoDe && (
           <div className="absolute -left-9 top-4 w-32 -rotate-45 bg-red py-1 text-center font-display text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-white">
             Promoção
@@ -54,7 +54,7 @@ export default function Card({ p, naSacola, onAdd }: {
 
           <div className="group relative">
             <h2 className="mb-1 truncate font-display text-lg font-semibold text-fg">{p.nome}</h2>
-            {/* tooltip do Stylos: o nome inteiro quando ele não cabe */}
+            {/* Nome inteiro ao passar o mouse, para quando o título é cortado */}
             <div className="pointer-events-none absolute -top-7 left-1/2 z-10 hidden -translate-x-1/2 rounded-lg bg-bg-3 px-2 py-1 text-[10px] text-fg opacity-0 transition-opacity duration-300 group-hover:block group-hover:opacity-100">
               {p.nome}
             </div>
