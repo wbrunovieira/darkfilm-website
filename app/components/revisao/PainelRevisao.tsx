@@ -23,6 +23,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -113,8 +114,66 @@ export function PainelRevisao({
   const [escrevendo, setEscrevendo] = useState<string | null>(null);
   const [rascunho, setRascunho] = useState("");
   const [novoAssunto, setNovoAssunto] = useState(false);
+  /**
+   * Quantos eventos existem no servidor, quando é mais do que temos aqui.
+   *
+   * A tela NÃO se atualiza sozinha, de propósito: se o registro mudasse debaixo de quem está
+   * lendo ou escrevendo, o cartão aberto podia pular de fila e sumir. Só acende um aviso, e
+   * quem decide atualizar é a pessoa.
+   */
+  const [novidades, setNovidades] = useState(0);
+  const [atualizando, setAtualizando] = useState(false);
 
   const souAgencia = LADO[autor] === "agencia";
+
+  /**
+   * Pergunta de tempos em tempos se o registro cresceu, e só acende o aviso.
+   *
+   * Usa a rota que conta sem ler evento nenhum: uma operação de Blob por consulta, contra uma por
+   * evento se baixasse o registro inteiro. Só roda com a aba à vista, porque aba em segundo plano
+   * não tem ninguém olhando para o aviso.
+   */
+  useEffect(() => {
+    let vivo = true;
+    const conferir = async () => {
+      if (document.visibilityState !== "visible") return;
+      try {
+        const r = await fetch("/api/revisao/novidades", { cache: "no-store" });
+        const d = await r.json();
+        if (vivo && typeof d?.total === "number") {
+          setNovidades(d.total > eventos.length ? d.total - eventos.length : 0);
+        }
+      } catch {
+        // Sem rede a tela continua servindo para ler e escrever: o aviso apenas não acende.
+      }
+    };
+    const t = setInterval(conferir, 30000);
+    document.addEventListener("visibilitychange", conferir);
+    conferir();
+    return () => {
+      vivo = false;
+      clearInterval(t);
+      document.removeEventListener("visibilitychange", conferir);
+    };
+  }, [eventos.length]);
+
+  /** Baixa o registro e substitui o que está na tela. Só roda quando a pessoa clica. */
+  const atualizar = useCallback(async () => {
+    setAtualizando(true);
+    try {
+      const r = await fetch("/api/revisao", { cache: "no-store" });
+      const d = await r.json();
+      if (Array.isArray(d?.eventos)) {
+        setEventos(d.eventos);
+        if (d.situacoes) setSituacoes(d.situacoes);
+        setNovidades(0);
+      }
+    } catch {
+      // Mantém o aviso aceso para a pessoa tentar de novo.
+    } finally {
+      setAtualizando(false);
+    }
+  }, []);
 
   const sit = useCallback(
     (paginaId: string, itemId: string): Situacao => situacoes[`${paginaId}/${itemId}`] ?? "novo",
@@ -364,6 +423,9 @@ export function PainelRevisao({
           contagem={contagem}
           totalBlocos={blocos.length}
           souAgencia={souAgencia}
+          novidades={novidades}
+          atualizar={atualizar}
+          atualizando={atualizando}
         />
 
         {filtro === "tudo" && (comCliente.length > 0 || comAgencia.length > 0) && (
@@ -535,12 +597,18 @@ function BarraFiltros({
   contagem,
   totalBlocos,
   souAgencia,
+  novidades,
+  atualizar,
+  atualizando,
 }: {
   filtro: Filtro;
   setFiltro: (f: Filtro) => void;
   contagem: Record<Tom, number>;
   totalBlocos: number;
   souAgencia: boolean;
+  novidades: number;
+  atualizar: () => void;
+  atualizando: boolean;
 }) {
   // "Precisa de você" dizia coisas diferentes conforme quem estivesse selecionado no topo,
   // e ficava logo acima de duas colunas que já nomeiam os lados. Os chips passam a nomear
@@ -560,11 +628,11 @@ function BarraFiltros({
   return (
     // A barra fixa comia 203px de 844px. Agora é uma faixa só, e rola na horizontal em vez de
     // quebrar em três linhas.
-    <div className="sticky top-0 z-30 -mx-4 mt-6 border-y border-[var(--wb-linha)] bg-[var(--wb-fundo)]/95 backdrop-blur sm:-mx-6">
+    <div className="sticky top-0 z-30 -mx-4 mt-6 flex items-center gap-2 border-y border-[var(--wb-linha)] bg-[var(--wb-fundo)]/95 px-4 backdrop-blur sm:-mx-6 sm:px-6">
       <div
         role="group"
         aria-label="Filtrar a lista"
-        className="flex gap-2 overflow-x-auto px-4 py-2.5 sm:px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex min-w-0 flex-1 gap-2 overflow-x-auto py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {chips.map(([id, texto, n]) => {
           const ativo = filtro === id;
@@ -590,6 +658,48 @@ function BarraFiltros({
           );
         })}
       </div>
+
+      {/* Fora da faixa que rola: com muitos filtros os chips somem para o lado, e o botão
+          precisa continuar à vista. */}
+      <button
+        type="button"
+        onClick={atualizar}
+        disabled={atualizando}
+        title={novidades > 0 ? "Há registro novo desde que esta página abriu" : "Buscar o que mudou"}
+        className={`wb-foco inline-flex min-h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[14px] font-semibold transition-colors duration-150 disabled:opacity-50 ${
+          novidades > 0
+            ? "bg-[var(--wb-ambar-leve)] text-[var(--wb-ambar-tinta)] ring-1 ring-[var(--wb-ambar-borda)]"
+            : "bg-white text-[var(--wb-tinta-2)] ring-1 ring-[var(--wb-linha)] hover:ring-[var(--wb-lilas)]"
+        }`}
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className={`size-4 shrink-0 ${atualizando ? "animate-spin" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden
+        >
+          <path d="M20 11a8 8 0 1 0-.6 4" strokeLinecap="round" />
+          <path d="M20 4.5V11h-6.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <span className="hidden sm:inline" aria-hidden>
+          {atualizando ? "Buscando" : "Atualizar"}
+        </span>
+        {novidades > 0 && !atualizando && (
+          <span
+            aria-hidden
+            className="inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--wb-ambar-tinta)] px-1.5 text-[12px] font-bold text-white"
+          >
+            {novidades}
+          </span>
+        )}
+        <span className="sr-only">
+          {novidades > 0
+            ? `Atualizar a lista. Há ${novidades} ${novidades === 1 ? "registro novo" : "registros novos"}.`
+            : "Atualizar a lista"}
+        </span>
+      </button>
     </div>
   );
 }

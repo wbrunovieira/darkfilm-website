@@ -127,6 +127,31 @@ export async function gravarEventos(
   return eventos;
 }
 
+/**
+ * Quantos eventos existem, sem ler nenhum.
+ *
+ * `lerEventos` faz um `get` por evento, hoje algumas dezenas e crescendo. Para a tela só
+ * perguntar "mudou alguma coisa?" isso seria caro à toa: o `list` já devolve os nomes, e o id
+ * começa com o instante, então contar e olhar o último nome basta.
+ *
+ * Uma operação de Blob em vez de uma por evento.
+ */
+export async function contarEventos(): Promise<{ total: number; ultimo: string | null }> {
+  let total = 0;
+  let ultimo: string | null = null;
+  let cursor: string | undefined;
+  do {
+    const r = await list({ prefix: PASTA, cursor, limit: 1000 });
+    total += r.blobs.length;
+    for (const b of r.blobs) {
+      const id = b.pathname.slice(PASTA.length).replace(/\.json$/, "");
+      if (!ultimo || id > ultimo) ultimo = id;
+    }
+    cursor = r.hasMore ? r.cursor : undefined;
+  } while (cursor);
+  return { total, ultimo };
+}
+
 export async function lerEventos(): Promise<Evento[]> {
   const eventos: Evento[] = [];
   let cursor: string | undefined;
