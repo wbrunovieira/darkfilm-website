@@ -127,11 +127,17 @@ export function PainelRevisao({
   const souAgencia = LADO[autor] === "agencia";
 
   /**
-   * Pergunta de tempos em tempos se o registro cresceu, e só acende o aviso.
+   * Confere se o registro cresceu, e só acende o aviso.
    *
-   * Usa a rota que conta sem ler evento nenhum: uma operação de Blob por consulta, contra uma por
-   * evento se baixasse o registro inteiro. Só roda com a aba à vista, porque aba em segundo plano
-   * não tem ninguém olhando para o aviso.
+   * **Sem temporizador, de propósito.** A primeira versão perguntava a cada 30 segundos. Cada
+   * pergunta é uma operação avançada do Blob, e o plano gratuito dá 2.000 por mês para a conta
+   * inteira: uma aba esquecida aberta gastaria 2.880 num único dia. Mesmo a cada cinco minutos,
+   * duas abas num dia de trabalho passariam do mês. Em 16/09/2026 a cota estourou por outro
+   * motivo e suspendeu os armazenamentos de todos os clientes da conta; este relógio teria feito
+   * de novo, sozinho.
+   *
+   * Então pergunta em dois momentos: ao abrir, e quando a aba volta a ficar visível. É quando há
+   * alguém olhando. Quem quiser conferir no meio do caminho clica no botão, que sempre funciona.
    */
   useEffect(() => {
     let vivo = true;
@@ -147,12 +153,10 @@ export function PainelRevisao({
         // Sem rede a tela continua servindo para ler e escrever: o aviso apenas não acende.
       }
     };
-    const t = setInterval(conferir, 30000);
     document.addEventListener("visibilitychange", conferir);
     conferir();
     return () => {
       vivo = false;
-      clearInterval(t);
       document.removeEventListener("visibilitychange", conferir);
     };
   }, [eventos.length]);

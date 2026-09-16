@@ -18,6 +18,7 @@
  */
 
 import { get, list, put } from "@vercel/blob";
+import { r2Configurado, r2Gravar, r2Ler } from "./r2";
 
 export const AUTORES = [
   "Bruno The Dark Film",
@@ -94,6 +95,26 @@ export type Evento = {
 
 const PASTA = "revisao/eventos/";
 
+/**
+ * Consolidado: todos os eventos num arquivo só.
+ *
+ * **Por que existe.** O registro nasceu com um arquivo por evento, o que está certo para gravar
+ * (append-only de verdade, sem corrida entre quem escreve) e é péssimo para ler: `list` e `get`
+ * privado contam como operação avançada do Blob, e o plano gratuito dá 2.000 por mês **para a
+ * conta inteira**. Com 51 eventos, uma visita à página custava 52 operações. Trinta e oito visitas
+ * queimavam a cota do mês e suspendiam todos os armazenamentos da conta, inclusive os de outros
+ * clientes. Foi o que aconteceu em 16/09/2026.
+ *
+ * Com o consolidado, a leitura passa a custar duas operações, independente de haver 51 eventos ou
+ * 5.000: uma para ler este arquivo e uma para listar e conferir se sobrou algo fora dele.
+ *
+ * **Os arquivos por evento continuam existindo.** Este é um resumo, não um substituto: a escrita
+ * segue criando um arquivo por evento e depois reescrevendo este. Se o consolidado sumir, ficar
+ * velho ou vier corrompido, a leitura volta sozinha a montar tudo pelos arquivos originais. É
+ * lento e caro, mas nunca perde evento, que é o que importa num registro de auditoria.
+ */
+const CONSOLIDADO = "revisao/registro.json";
+
 /** Ordena por data; empate desempata pelo id, que carrega o instante e um sufixo aleatório. */
 function porData(a: Evento, b: Evento) {
   return a.em === b.em ? a.id.localeCompare(b.id) : a.em.localeCompare(b.em);
@@ -113,17 +134,45 @@ export async function gravarEventos(
     em,
     id: `${base}-${String(i).padStart(2, "0")}-${Math.random().toString(36).slice(2, 8)}`,
   }));
+  // Um arquivo por evento: append-only de verdade, sem corrida entre quem grava ao mesmo tempo.
   await Promise.all(
     eventos.map((evento) =>
-      put(`${PASTA}${evento.id}.json`, JSON.stringify(evento), {
-        // Privado: um registro de auditoria não pode ser lido por quem descobrir a URL.
-        access: "private",
-        contentType: "application/json",
-        // o nome já é único; sem isto o Blob acrescenta sufixo e o id do arquivo deixa de bater
-        addRandomSuffix: false,
-      }),
+      r2Configurado()
+        ? r2Gravar(`${PASTA}${evento.id}.json`, JSON.stringify(evento))
+        : put(`${PASTA}${evento.id}.json`, JSON.stringify(evento), {
+            // Privado: um registro de auditoria não pode ser lido por quem descobrir a URL.
+            access: "private",
+            contentType: "application/json",
+            // o nome já é único; sem isto o Blob acrescenta sufixo e o id deixa de bater
+            addRandomSuffix: false,
+          }),
     ),
   );
+
+  /**
+   * Atualiza o resumo depois de gravar, para a próxima leitura custar duas operações.
+   *
+   * Vai em `try` de propósito: o evento JÁ está salvo nos arquivos acima, que é o que não pode
+   * falhar. Se o resumo não puder ser reescrito — Blob suspenso, rede caindo — a leitura seguinte
+   * apenas monta tudo pelos arquivos originais, cara mas correta. Derrubar a requisição aqui seria
+   * dizer ao cliente que o pedido dele não foi registrado quando foi.
+   */
+  try {
+    /**
+     * O consolidado é reescrito com o que já havia MAIS o que acabou de ser criado.
+     *
+     * `lerEventos` devolve o consolidado antigo, que por definição ainda não conhece estes
+     * eventos. Sem juntar aqui, a regravação devolveria a lista anterior e apagaria do resumo o
+     * evento recém-gravado, que continuaria existindo só no arquivo individual. O `filter` evita
+     * duplicar caso a leitura já os enxergue por algum caminho de reserva.
+     */
+    const anteriores = await lerEventos();
+    const novosIds = new Set(eventos.map((e) => e.id));
+    await regravarConsolidado([...anteriores.filter((e) => !novosIds.has(e.id)), ...eventos]);
+  } catch (e) {
+    console.error("[revisao] evento gravado, mas o consolidado não pôde ser atualizado", e);
+  }
+
   return eventos;
 }
 
@@ -137,6 +186,18 @@ export async function gravarEventos(
  * Uma operação de Blob em vez de uma por evento.
  */
 export async function contarEventos(): Promise<{ total: number; ultimo: string | null }> {
+  // No R2, o consolidado já responde as duas perguntas numa leitura só, sem listar o diretório.
+  if (r2Configurado()) {
+    const cru = await r2Ler(CONSOLIDADO);
+    if (cru) {
+      const dados = JSON.parse(cru) as Evento[];
+      if (Array.isArray(dados)) {
+        const ids = dados.map((e) => e.id).sort();
+        return { total: dados.length, ultimo: ids[ids.length - 1] ?? null };
+      }
+    }
+  }
+
   let total = 0;
   let ultimo: string | null = null;
   let cursor: string | undefined;
@@ -152,24 +213,93 @@ export async function contarEventos(): Promise<{ total: number; ultimo: string |
   return { total, ultimo };
 }
 
-export async function lerEventos(): Promise<Evento[]> {
-  const eventos: Evento[] = [];
+/** Um evento pelo caminho do arquivo. `useCache: false` porque o CDN devolveria a versão anterior. */
+async function lerUm(pathname: string): Promise<Evento | null> {
+  const r = await get(pathname, { access: "private", useCache: false });
+  if (!r?.stream) return null;
+  return (await new Response(r.stream).json()) as Evento;
+}
+
+/** Só os nomes, sem abrir nada. Uma operação por página de 1.000. */
+async function listarCaminhos(): Promise<string[]> {
+  const nomes: string[] = [];
   let cursor: string | undefined;
   do {
     const r = await list({ prefix: PASTA, cursor, limit: 1000 });
-    const lote = await Promise.all(
-      r.blobs.map(async (b) => {
-        // `useCache: false` porque o registro acabou de mudar quando alguém clica: ler do CDN
-        // devolveria a versão anterior e a tela pareceria não ter registrado nada.
-        const r = await get(b.pathname, { access: "private", useCache: false });
-        if (!r?.stream) return null;
-        return (await new Response(r.stream).json()) as Evento;
-      }),
-    );
-    eventos.push(...lote.filter((x): x is Evento => !!x));
+    nomes.push(...r.blobs.map((b) => b.pathname));
     cursor = r.hasMore ? r.cursor : undefined;
   } while (cursor);
-  return eventos.sort(porData);
+  return nomes;
+}
+
+/** O consolidado, ou null quando ainda não existe, está corrompido ou o Blob recusa. */
+async function lerConsolidado(): Promise<Evento[] | null> {
+  try {
+    const r = await get(CONSOLIDADO, { access: "private", useCache: false });
+    if (!r?.stream) return null;
+    const dados = await new Response(r.stream).json();
+    return Array.isArray(dados) ? (dados as Evento[]) : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function lerEventos(): Promise<Evento[]> {
+  /**
+   * Caminho normal: uma leitura no R2 e acabou.
+   *
+   * O registro inteiro cabe num arquivo (51 eventos dão 47 KB). Ler um objeto no R2 é uma
+   * operação Classe B, e o plano gratuito dá 10 milhões por mês. O Vercel Blob dava 2.000
+   * operações avançadas por mês para a conta inteira, e foi por isso que suspendeu tudo em
+   * 16/09/2026.
+   */
+  if (r2Configurado()) {
+    const cru = await r2Ler(CONSOLIDADO);
+    if (cru) {
+      const dados = JSON.parse(cru);
+      if (Array.isArray(dados)) return (dados as Evento[]).sort(porData);
+    }
+  }
+
+  // Reserva: o caminho antigo, pelo Vercel Blob. Fica porque é o que garante que um R2 mal
+  // configurado não apague a história da tela; devolve vazio em vez de derrubar a página.
+  // 1ª operação: o consolidado. Cobre tudo que existia quando ele foi escrito.
+  const base = (await lerConsolidado()) ?? [];
+  const jaTenho = new Set(base.map((e) => e.id));
+
+  // 2ª operação: a lista de nomes, para descobrir o que entrou depois dele.
+  // É aqui que a segurança mora: se o consolidado estiver velho ou não existir, os arquivos
+  // originais aparecem nesta lista e são lidos normalmente. Nenhum evento se perde por
+  // depender do resumo.
+  const caminhos = await listarCaminhos();
+  const faltando = caminhos.filter(
+    (c) => !jaTenho.has(c.slice(PASTA.length).replace(/\.json$/, "")),
+  );
+
+  // Em regime normal isto é zero: a gravação reescreve o consolidado logo depois de criar os
+  // arquivos. Só há leitura extra quando uma gravação anterior não conseguiu atualizar o resumo.
+  const novos = (await Promise.all(faltando.map(lerUm))).filter((x): x is Evento => !!x);
+
+  return [...base, ...novos].sort(porData);
+}
+
+/**
+ * Reescreve o consolidado a partir da lista completa.
+ *
+ * Só ACRESCENTA um arquivo: nunca apaga nem altera os arquivos por evento. Se falhar, o registro
+ * continua íntegro e a leitura só fica cara de novo. Por isso o chamador engole o erro.
+ */
+export async function regravarConsolidado(eventos: Evento[]): Promise<void> {
+  if (r2Configurado()) {
+    await r2Gravar(CONSOLIDADO, JSON.stringify(eventos.sort(porData)));
+    return;
+  }
+  await put(CONSOLIDADO, JSON.stringify(eventos.sort(porData)), {
+    access: "private",
+    contentType: "application/json",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+  });
 }
 
 export type Situacao =
