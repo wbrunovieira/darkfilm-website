@@ -23,6 +23,10 @@ const ease = [0.16, 1, 0.3, 1] as const;
  * O selo do Thule que o cliente mandou por WhatsApp traz "REVENDA AUTORIZADA" embutido na imagem.
  * Não foi usado: aqui a credencial vai em texto, igual para as três, o que mantém o conjunto
  * alinhado e deixa a frase editável sem mexer em imagem.
+ *
+ * Os três ficam sobre um painel escuro translúcido, como no desenho que ele mandou. Serve a duas
+ * coisas: garante leitura sobre a foto do hero, que muda de claridade conforme a área, e acomoda
+ * o logo do Mercado Livre, que é o único em bitmap e traz o próprio fundo escuro.
  */
 
 type Credencial = {
@@ -41,7 +45,10 @@ const CREDENCIAIS: Credencial[] = [
   { marca: "3M", logo: "/img/marcas/3m.svg", w: 77, h: 40, papel: "Aplicador credenciado", href: "/3m" },
   // As páginas de Mercado Livre e Thule ainda não existem. Ele pediu as duas seções em 12/09 e
   // elas estão na fila; até lá o item aparece sem link, em vez de levar a lugar nenhum.
-  { marca: "Mercado Livre", logo: "/img/marcas/mercado-livre.svg", w: 102, h: 40, papel: "Agência autorizada", href: null },
+  // O único que não é vetor: o Commons só tem o logo antigo, de antes do rebranding, e o
+  // símbolo do aperto de mão não está lá. Este saiu da arte que o próprio cliente mandou. Como
+  // aparece com 28px de altura, entra reduzido e não ampliado, então o tamanho basta.
+  { marca: "Mercado Livre", logo: "/img/marcas/mercado-livre.png", w: 288, h: 72, papel: "Agência autorizada", href: null },
   { marca: "Thule", logo: "/img/marcas/thule.svg", w: 155, h: 40, papel: "Revenda autorizada", href: null },
 ];
 
@@ -59,7 +66,7 @@ export function Credenciais() {
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.55, ease }}
-      className="absolute right-4 top-24 z-10 hidden md:top-28 md:block lg:right-8 lg:top-32"
+      className="absolute right-4 top-24 z-10 hidden rounded-lg border border-line bg-bg/65 px-4 py-3 backdrop-blur md:top-28 md:block lg:right-8 lg:top-32"
       aria-label="Credenciais da loja"
     >
       <ul className="flex items-stretch">
@@ -86,7 +93,7 @@ export function CredenciaisMobile() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.9, delay: 0.45, ease }}
-      className="mb-6 flex items-stretch border-y border-line py-3 md:hidden"
+      className="mb-6 flex items-stretch rounded-lg border border-line bg-bg/65 px-3 py-3 backdrop-blur md:hidden"
       aria-label="Credenciais da loja"
     >
       {CREDENCIAIS.map((c, i) => (
