@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CARRO_FRONTAL, CARRO_PERFIL } from "./simulador/carros";
+import { CARRO_PERFIL } from "./simulador/carros";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useId, useState } from "react";
@@ -37,12 +37,14 @@ export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
 /* ---------- Diagrama do carro (vista lateral, frente à esquerda) ---------- */
 // Áreas de vidro em coordenadas do viewBox 0 0 400 150. Só apresentação: os controles
 // reais são os radios; o SVG é aria-hidden e apenas atalho de clique.
-/* Desenho do carro: dois SVGs vetoriais, injetados como HTML.
-   São dois porque o seletor tem três opções e o para-brisa NÃO aparece num perfil
-   puro — fica escondido pela coluna A. Então o perfil serve aos vidros dianteiros e
-   traseiros, e a vista 3/4 frontal serve ao para-brisa.
-   Os quatro polígonos `data-vidro` são estilizados por CSS (ver .carro-diagrama no
-   globals) e clicados por delegação, sem converter o SVG para JSX. */
+/* Desenho do carro: um SVG vetorial, injetado como HTML.
+   Era um par — perfil mais vista 3/4 frontal, esta última só para o para-brisa. O
+   cliente reclamou duas vezes que o carro estava deformado, e a 3/4 era a pior
+   parte. No perfil redesenhado o para-brisa é a faixa inclinada entre o capô e o
+   teto: aparece em escorço, mas aparece, e com área de toque suficiente. Um desenho
+   só evita ainda a troca brusca de imagem no meio da escolha.
+   Os quatro polígonos `data-vidro` são estilizados por CSS (ver .carro-diagrama em
+   app/styles/home.css) e clicados por delegação, sem converter o SVG para JSX. */
 const VIDRO_DO_POLIGONO: Record<string, VidroId> = {
   parabrisa: "parabrisa",
   dianteiro: "dianteiras",
@@ -51,7 +53,6 @@ const VIDRO_DO_POLIGONO: Record<string, VidroId> = {
 };
 
 function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) => void }) {
-  const svg = vidro === "parabrisa" ? CARRO_FRONTAL : CARRO_PERFIL;
   return (
     <div
       className="carro-diagrama"
@@ -62,7 +63,7 @@ function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) =>
         const destino = chave ? VIDRO_DO_POLIGONO[chave] : undefined;
         if (destino) onPick(destino);
       }}
-      dangerouslySetInnerHTML={{ __html: svg }}
+      dangerouslySetInnerHTML={{ __html: CARRO_PERFIL }}
     />
   );
 }
@@ -166,7 +167,7 @@ export function TintSimulator({
             </h2>
           </div>
           <p className="max-w-sm text-sm text-fg-2">
-            Três passos: escolha o vidro, escolha quão escura quer a película e veja como fica —
+            Três passos: escolha o vidro, escolha o quanto quer escurecer e veja como fica —
             e se a lei permite.
           </p>
         </Reveal>
@@ -232,7 +233,7 @@ export function TintSimulator({
             <div className="mb-4 flex items-center gap-3">
               <StepBadge n={2} />
               <p className="font-display text-lg font-semibold uppercase leading-tight" id={`${id}-p2`}>
-                Quão escura você quer?
+                Quanto você quer escurecer?
               </p>
             </div>
 
