@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { decadasEmAtividade, site, whatsappUrl, yearsInBusiness } from "@/lib/site";
 import { ArrowIcon, WhatsAppIcon } from "../icons";
 import { GoogleBadge } from "../GoogleBadge";
+import { Credenciais, CredenciaisMobile } from "./Credenciais";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -70,12 +71,20 @@ export function Hero() {
         <div className="tint-overlay-hero" />
       </div>
 
-      <Placas />
+      {/* As placas decorativas saíram daqui em 17/09/2026, a pedido do cliente: ele quis o
+          espaço para as três credenciais (3M, Mercado Livre, Thule), que é o que ele considera
+          mais importante mostrar antes de a pessoa rolar a página. O componente `Placas` continua
+          neste arquivo, sem uso, caso a decisão volte atrás. */}
+      <Credenciais />
 
       <div className="container-x relative z-10 flex min-h-[100svh] flex-col justify-end pb-28 pt-28 md:pb-20 md:pt-32 short:pb-12 short:pt-24">
         <motion.p {...fade(0.3)} className="eyebrow mb-4 md:mb-5 short:mb-3">
           {site.city}/{site.state} · desde {site.founded}
         </motion.p>
+
+        {/* No celular as credenciais entram no fluxo: a versão da direita não cabe numa tela
+            estreita, e o pedido dele é que apareçam antes de a pessoa rolar. */}
+        <CredenciaisMobile />
 
         <h1 className="display max-w-5xl text-[clamp(2.75rem,min(9.5vw,14vh),8rem)] short:text-[clamp(2.5rem,min(8.5vw,12vh),6rem)] text-fg">
           <motion.span {...fade(0.4)} className="block">
