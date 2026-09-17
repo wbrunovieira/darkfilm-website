@@ -43,12 +43,12 @@ type Credencial = {
 
 const CREDENCIAIS: Credencial[] = [
   { marca: "3M", logo: "/img/marcas/3m.svg", w: 77, h: 40, papel: "Aplicador credenciado", href: "/3m" },
-  // As páginas de Mercado Livre e Thule ainda não existem. Ele pediu as duas seções em 12/09 e
-  // elas estão na fila; até lá o item aparece sem link, em vez de levar a lugar nenhum.
+  // A do Thule ainda não existe: ele pediu as duas seções em 12/09 e essa segue na fila. Item
+  // sem destino aparece como texto, em vez de levar a lugar nenhum.
   // O único que não é vetor: o Commons só tem o logo antigo, de antes do rebranding, e o
   // símbolo do aperto de mão não está lá. Este saiu da arte que o próprio cliente mandou. Como
   // aparece com 28px de altura, entra reduzido e não ampliado, então o tamanho basta.
-  { marca: "Mercado Livre", logo: "/img/marcas/mercado-livre.png", w: 288, h: 72, papel: "Agência autorizada", href: null },
+  { marca: "Mercado Livre", logo: "/img/marcas/mercado-livre.png", w: 288, h: 72, papel: "Agência autorizada", href: "/agencia-mercado-livre" },
   { marca: "Thule", logo: "/img/marcas/thule.svg", w: 155, h: 40, papel: "Revenda autorizada", href: null },
 ];
 

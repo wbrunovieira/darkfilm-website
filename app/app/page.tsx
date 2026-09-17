@@ -2,6 +2,7 @@ import { Hero } from "@/components/home/Hero";
 import { TrustBar } from "@/components/home/TrustBar";
 import { Services } from "@/components/home/Services";
 import { Seal3M } from "@/components/home/Seal3M";
+import { AgenciaML } from "@/components/home/AgenciaML";
 import { SimuladorTeaser } from "@/components/home/SimuladorTeaser";
 import { Clients } from "@/components/home/Clients";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
@@ -35,6 +36,7 @@ export default function Home() {
       <Sep />
       <SimuladorTeaser />
       <Seal3M />
+      <AgenciaML />
       <Clients />
       <GalleryPreview />
       <Playlist />
