@@ -55,6 +55,10 @@ const CREDENCIAIS: Credencial[] = [
 
 /**
  * Versão do topo à direita, a partir de `md`. Sobe devagar com a rolagem, como as placas faziam.
+ *
+ * `z-20` e não `z-10`: o bloco de texto do hero vem depois no DOM, também é `z-10` e ocupa a tela
+ * inteira. Empatados no empilhamento, quem vem depois ganha, e ele cobria estes links: davam para
+ * ver e não davam para clicar.
  */
 export function Credenciais() {
   const { scrollY } = useScroll();
@@ -67,7 +71,7 @@ export function Credenciais() {
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.55, ease }}
-      className="absolute right-4 top-24 z-10 hidden rounded-lg border border-line bg-bg/65 px-4 py-3 backdrop-blur md:top-28 md:block lg:right-8 lg:top-32"
+      className="absolute right-4 top-24 z-20 hidden rounded-lg border border-line bg-bg/65 px-4 py-3 backdrop-blur md:top-28 md:block lg:right-8 lg:top-32"
       aria-label="Credenciais da loja"
     >
       <ul className="flex items-stretch">
