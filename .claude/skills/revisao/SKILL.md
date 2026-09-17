@@ -74,7 +74,8 @@ node --env-file=.env.local scripts/importar-revisao.mjs --lote /tmp/lote.json
 Campos: `pagina`, `secao`, `acao`, `autor`, `texto`, `data` (opcional, `AAAA-MM-DD` = meio-dia de
 Brasília), `origem` (`whatsapp` padrão, ou `interno`), `por` (quem transcreveu).
 
-`--env-file=.env.local` é obrigatório: o script escreve direto no Blob com `BLOB_READ_WRITE_TOKEN`.
+`--env-file=.env.local` é obrigatório: o script escreve direto no bucket R2 com as quatro variáveis
+`R2_*`. Até 16/09/2026 era o Vercel Blob; ver **Onde está cada coisa**.
 
 ### Por que não pela API pública
 
@@ -115,14 +116,24 @@ cliente: a página dizia "8 de 8 aprovadas" e continuava pendente, sem botão qu
 
 ## Onde está cada coisa
 
+O registro mora no **Cloudflare R2**, não mais no Vercel Blob. A migração foi em 16/09/2026,
+depois de a cota gratuita do Blob estourar e sete stores da conta ficarem suspensas por 30 dias.
+A causa não foi escrita: era **leitura**. `lerEventos` fazia um `list` mais um `get` por evento —
+52 operações por visita ao painel, e um timer de polling de 30 s teria queimado 2.880 por dia num
+teto de 2.000 por mês, válido para a conta inteira. Duas lições que valem para qualquer
+armazenamento novo aqui: **o consolidado existe para a leitura custar 1 operação, não N**, e
+**não coloque timer de polling no painel** (só monta e `visibilitychange`).
+
+
 | Arquivo | O quê |
 | --- | --- |
 | `app/content/revisao.ts` | as 55 páginas e suas seções — **é isto que adapta a ferramenta para outro projeto** |
-| `app/lib/revisao.ts` | tipos, `LADO`, `situacaoApos`, `reduzir`, leitura/escrita no Blob |
+| `app/lib/revisao.ts` | tipos, `LADO`, `situacaoApos`, `reduzir`, leitura/escrita |
+| `app/lib/r2.ts` | assinatura S3 do R2 (`aws4fetch`), `r2Ler`, `r2Gravar` |
 | `app/app/api/revisao/route.ts` | POST do painel; carimba IP e agora |
 | `app/components/revisao/` | `PainelRevisao.tsx`, `ui.tsx`, `Conversa.tsx` |
 | `app/scripts/importar-revisao.mjs` | registro de bastidor |
-| Blob privado | `revisao/eventos/<id>.json`, um arquivo por evento |
+| Bucket R2 | `revisao/eventos/<id>.json` (um por evento) + `revisao/registro.json` (consolidado) |
 
 ### Duas regras de ouro
 
@@ -135,9 +146,43 @@ você" muda de significado conforme quem está lendo — e fica ao lado de colun
 lados. Já confundiu o cliente três vezes. Nomeie sempre: `Esperando The Dark Film` (sem artigo,
 o nome já traz o "The") e `Esperando a WB`.
 
+## A armadilha do id que não existe
+
+**Antes de registrar, confira que a página e a seção existem em `content/revisao.ts`.** O script
+aceita qualquer `--pagina` e qualquer `--secao`: não valida contra o conteúdo. O painel, ao
+contrário, renderiza só as páginas declaradas ali. Registrar contra um id inexistente grava o
+evento de verdade, e ele fica **invisível para o cliente** — some sem erro nenhum.
+
+Foi o que aconteceu em 12/09/2026: o pedido dele sobre o simulador foi para `simulador/__pagina`,
+mas o id da página é `legislacao` (href `/simulador`), e o simulador completo mora em
+`peliculas-automotivas/simule-a-sua-pelicula`. O pedido ficou cinco dias sem aparecer no painel.
+
+O cheque, antes de escrever:
+
+```bash
+cd app && node --env-file=.env.local scripts/importar-revisao.mjs --listar | grep -i <assunto>
+```
+
+E depois de escrever, o detector de órfãos:
+
+```bash
+cd app && node --experimental-strip-types -e "
+import { paginasRevisao as P } from './content/revisao.ts';
+const ev = (await (await fetch('https://thedarkfilm.wbdigitalsolutions.com/api/revisao')).json()).eventos;
+const m = new Map(P.map(p => [p.id, new Set(['__pagina', ...p.secoes.map(s => s.id)])]));
+const orf = ev.filter(e => !m.has(e.paginaId) || !m.get(e.paginaId).has(e.secaoId));
+console.log('orfaos:', orf.map(e => e.paginaId + '/' + e.secaoId));"
+```
+
+Cuidado com o nome: o export é `paginasRevisao`, não `PAGINAS`.
+
+Órfão não se apaga — re-registre o pedido no lugar certo, com a **data original**, e deixe um
+`ajustado` no órfão dizendo para onde a conversa foi.
+
 ## O registro é append-only de verdade
 
-O `put` do Blob **recusa sobrescrever**. Não é só convenção do script: é o armazenamento.
+O script não sobrescreve evento já gravado. O consolidado é derivado: some os eventos e ele se
+refaz a partir dos arquivos individuais.
 
 Não existe caminho oficial para corrigir uma mensagem já publicada. Em 04/09/2026 foi preciso
 `allowOverwrite: true` num script solto, com decisão do Bruno, para consertar uma frase
@@ -148,19 +193,19 @@ Melhor: revisar o texto antes de gravar. Um evento com erro de fato é pior do q
 
 ## Testar sem sujar o registro
 
-Testar no ar escreve no mesmo Blob de produção. A ordem segura:
+Testar no ar escreve no mesmo bucket de produção. A ordem segura:
 
 1. **Retrato dos ids atuais** — `curl .../api/revisao`, salvar a lista
 2. **Criar um evento, apagar, conferir que voltou ao número original** — validar o apagador antes
    de confiar nele
 3. Só então o teste completo
-4. Apagar **por id**, nunca `--zerar` (que apaga tudo)
+4. Apagar **por id**. O `--zerar` foi removido do script justamente porque apagava a história inteira
 5. Conferir: mesmo total antes e depois, nenhum original perdido
 
 O script de limpeza é temporário — escrever, usar, apagar. Não deixar no repositório.
 
 **O rodapé do painel diz ao cliente "Nada é apagado".** Vale para o registro dele, mas o token do
-Blob permite apagar. Se essa página um dia precisar valer como prova, a frase e o poder de apagar
+R2 permite apagar. Se essa página um dia precisar valer como prova, a frase e o poder de apagar
 precisam ser reconciliados.
 
 ## Escrevendo para o cliente
@@ -179,6 +224,6 @@ Ele lê no celular, entre um carro e outro. O que funciona:
 ## Deploy
 
 Mudança em `content/revisao.ts` ou nos componentes exige build e deploy — é código.
-Evento gravado pelo script aparece na hora, sem deploy: está no Blob, não no bundle.
+Evento gravado pelo script aparece na hora, sem deploy: está no R2, não no bundle.
 
 Deploy é manual: `cd app && vercel --prod --yes`.
