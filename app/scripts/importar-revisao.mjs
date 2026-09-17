@@ -28,10 +28,44 @@
  *   node --env-file=.env.local scripts/importar-revisao.mjs --lote arq.json # vários de uma vez
  */
 
-import { put, list } from "@vercel/blob";
+import { AwsClient } from "aws4fetch";
 import { readFileSync } from "node:fs";
 
 const PASTA = "revisao/eventos/";
+const CONSOLIDADO = "revisao/registro.json";
+
+/**
+ * Grava no Cloudflare R2, mesmo destino da aplicação.
+ *
+ * Antes escrevia no Vercel Blob. O registro migrou em 16/09/2026, depois de a cota gratuita do
+ * Blob estourar e suspender os armazenamentos da conta inteira; este script ficou para trás e
+ * quebrou na primeira vez que foi usado depois da migração.
+ */
+const r2 = new AwsClient({
+  accessKeyId: process.env.R2_ACCESS_KEY_ID,
+  secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+  service: "s3",
+  region: "auto",
+});
+const alvo = (chave) => `${process.env.R2_ENDPOINT}/${process.env.R2_BUCKET}/${chave}`;
+
+async function r2Gravar(chave, texto) {
+  const corpo = new TextEncoder().encode(texto);
+  // O R2 recusa PUT sem content-length e devolve 411.
+  const r = await r2.fetch(alvo(chave), {
+    method: "PUT",
+    body: corpo,
+    headers: { "content-type": "application/json", "content-length": String(corpo.byteLength) },
+  });
+  if (!r.ok) throw new Error(`R2 PUT ${chave}: ${r.status} ${await r.text()}`);
+}
+
+async function r2Ler(chave) {
+  const r = await r2.fetch(alvo(chave), { method: "GET" });
+  if (r.status === 404) return null;
+  if (!r.ok) throw new Error(`R2 GET ${chave}: ${r.status}`);
+  return r.text();
+}
 const ACOES = ["criado", "alteracao", "resposta", "ajustado", "aprovado", "desfeito", "confirmado"];
 const AUTORES = ["Bruno The Dark Film", "Michele The Dark Film", "Bruno WB Digital Solutions"];
 
@@ -96,11 +130,16 @@ async function gravar(e, i = 0) {
   if (!ACOES.includes(evento.acao)) throw new Error(`ação inválida: ${evento.acao}`);
   if (!AUTORES.includes(evento.autor)) throw new Error(`autor inválido: ${evento.autor}`);
   if (!evento.paginaId || !evento.secaoId) throw new Error("pagina e secao são obrigatórios");
-  await put(`${PASTA}${id}.json`, JSON.stringify(evento), {
-    access: "private",
-    contentType: "application/json",
-    addRandomSuffix: false,
-  });
+  await r2Gravar(`${PASTA}${id}.json`, JSON.stringify(evento));
+
+  // Atualiza o consolidado, que é o que a página lê. Sem isto o evento existiria só no arquivo
+  // individual e não apareceria na tela.
+  const cru = await r2Ler(CONSOLIDADO);
+  const todos = cru ? JSON.parse(cru) : [];
+  todos.push(evento);
+  todos.sort((a, b) => (a.em === b.em ? a.id.localeCompare(b.id) : a.em.localeCompare(b.em)));
+  await r2Gravar(CONSOLIDADO, JSON.stringify(todos));
+
   return evento;
 }
 
@@ -114,12 +153,14 @@ if (a.listar) {
   }
   console.log(`\n${paginas.length} páginas`);
 } else if (a.zerar) {
-  const l = await list({ prefix: PASTA });
-  if (l.blobs.length) {
-    const { del } = await import("@vercel/blob");
-    await del(l.blobs.map((b) => b.pathname));
-  }
-  console.log(`registro zerado (${l.blobs.length} eventos removidos)`);
+  // Apagar o registro inteiro deixou de existir aqui.
+  //
+  // Existia como atalho de desenvolvimento, de quando o registro estava vazio e recomeçar era
+  // barato. Hoje ele guarda o histórico de aprovação do cliente, e um `--zerar` disparado por
+  // engano apagaria meses de conversa sem nada para desfazer. Quem precisar mesmo limpar que
+  // escreva um script para a ocasião, olhando o que vai apagar.
+  console.error("--zerar foi removido: apagaria o histórico inteiro sem confirmação.");
+  process.exit(1);
 } else if (a.lote) {
   const itens = JSON.parse(readFileSync(a.lote, "utf8"));
   let n = 0;
