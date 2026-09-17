@@ -16,9 +16,10 @@ import { ABERTURA, CONSULTA, LINHAS } from "@/content/thule";
  * **Nenhum link para a Thule.** Ele foi explícito: nada de configurador nem loja virtual da marca.
  * A consulta acontece pelo WhatsApp da loja, com a mensagem já preenchida.
  *
- * As três fotos de produto ainda não existem. Ele mesmo adiou: "depois a gente pode separar umas
- * três imagens bem fortes da própria linha Thule", e disse preferir isso a imagem genérica. Os
- * cartões estão prontos para recebê-las sem mexer no layout.
+ * Os cartões das três linhas são só de texto. Ele vai separar depois "umas três imagens bem
+ * fortes da própria linha Thule", e disse preferir isso a imagem genérica: até lá, cartão com
+ * moldura de foto vazia faria a página parecer inacabada. Quando as fotos chegarem, entram como
+ * topo do cartão.
  */
 export const metadata: Metadata = {
   title: "Revenda Autorizada Thule",
@@ -69,24 +70,15 @@ export default function ThulePage() {
         <RevealGroup className="grid gap-4 md:grid-cols-3" stagger={0.08}>
           {LINHAS.map((l) => (
             <RevealItem key={l.id}>
-              <article className="flex h-full flex-col overflow-hidden rounded-xl border border-line bg-bg-2">
-                {/* Espaço da foto do produto. Fica marcado em vez de vazio para ninguém achar que
-                    quebrou, e some assim que a imagem entrar. */}
-                <div className="relative grid aspect-[4/3] place-items-center border-b border-line bg-bg-3">
-                  <Image
-                    src="/img/marcas/thule.svg"
-                    alt=""
-                    width={155}
-                    height={40}
-                    className="h-6 w-auto opacity-25"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-xl font-semibold uppercase leading-tight">
-                    {l.titulo}
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-fg-2">{l.texto}</p>
-                </div>
+              {/* Sem foto de produto, de propósito: as três imagens fortes da linha ele ainda vai
+                  separar, e ele mesmo disse preferir foto real da marca a imagem genérica. Cartão
+                  só de texto fecha a página agora e não finge que falta alguma coisa. */}
+              <article className="flex h-full flex-col rounded-xl border border-line bg-bg-2 p-6 md:p-7">
+                <span aria-hidden className="mb-5 block h-px w-12 bg-red" />
+                <h3 className="font-display text-xl font-semibold uppercase leading-tight md:text-2xl">
+                  {l.titulo}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-fg-2">{l.texto}</p>
               </article>
             </RevealItem>
           ))}
