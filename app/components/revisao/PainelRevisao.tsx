@@ -1297,6 +1297,9 @@ function LinhaParte({ blocoId, item }: { blocoId: string; item: Item }) {
         eventos={eventos}
         souAgencia={a.souAgencia}
         responder={(ev) => a.abrirEscrita(`${blocoId}/${item.id}`, ev.id)}
+        aprovar={(ev) =>
+          a.registrar(blocoId, item.id, a.souAgencia ? "confirmado" : "aprovado", undefined, ev.id)
+        }
       />
       <div className="pl-5">
         {/* Sem "Ver no site" aqui: é o mesmo endereço do cartão, e repeti-lo em cada uma das
@@ -1484,6 +1487,9 @@ function LinhaCompacta({
         eventos={eventos}
         souAgencia={a.souAgencia}
         responder={(ev) => a.abrirEscrita(chave, ev.id)}
+        aprovar={(ev) =>
+          a.registrar(paginaId, secaoId, a.souAgencia ? "confirmado" : "aprovado", undefined, ev.id)
+        }
       />
           <Acoes
             paginaId={paginaId}

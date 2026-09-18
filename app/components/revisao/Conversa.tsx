@@ -22,6 +22,9 @@ import { Aviso, Botao, apelido, dataCompleta, haQuanto } from "./ui";
 /** Ações que não carregam fala: são fatos do processo, não coisas que alguém disse. */
 const MARCO = new Set(["criado", "aprovado", "desfeito", "confirmado"]);
 
+/** As duas que aprovam. Quando vêm amarradas a uma fala, viram selo nela. */
+const VISTO = new Set(["aprovado", "confirmado"]);
+
 const FRASE: Record<string, string> = {
   criado: "abriu este assunto",
   aprovado: "aprovou",
@@ -49,21 +52,32 @@ export function Conversa({
   eventos,
   souAgencia,
   responder,
+  aprovar,
 }: {
   eventos: Evento[];
   souAgencia: boolean;
   /** Abre a escrita já amarrada a esta fala. Ausente = painel em modo leitura. */
   responder?: (e: Evento) => void;
+  /** Aprova uma fala do outro lado. Ausente = painel em modo leitura. */
+  aprovar?: (e: Evento) => void;
 }) {
   if (!eventos.length) return null;
 
   const respostas = new Map<string, Evento[]>();
+  /** Aprovação amarrada a uma fala vira selo NAQUELA fala, não uma linha solta na conversa. */
+  const selo = new Map<string, Evento>();
   for (const e of eventos) {
     if (!e.respondeA) continue;
+    if (VISTO.has(e.acao)) {
+      selo.set(e.respondeA, e);
+      continue;
+    }
     respostas.set(e.respondeA, [...(respostas.get(e.respondeA) ?? []), e]);
   }
   // Uma resposta pendurada não se repete na linha principal.
-  const raiz = eventos.filter((e) => !e.respondeA || !eventos.some((x) => x.id === e.respondeA));
+  const raiz = eventos.filter(
+    (e) => !selo.has(e.respondeA ?? "") && (!e.respondeA || !eventos.some((x) => x.id === e.respondeA)),
+  ).filter((e) => !(e.respondeA && VISTO.has(e.acao)));
 
   /** De que lado a fala se alinha: a de quem está lendo vai para a direita. */
   const meuLado = (e: Evento) => (LADO[e.autor] === "agencia") === souAgencia;
@@ -84,7 +98,10 @@ export function Conversa({
         key={e.id}
         e={e}
         alinhaDireita={ladoPai ?? meuLado(e)}
+        minha={meuLado(e)}
+        visto={selo.get(e.id)}
         responder={responder}
+        aprovar={aprovar}
       >
         {(respostas.get(e.id) ?? []).map((r) => nó(r, ladoPai ?? meuLado(e)))}
       </Balao>
@@ -108,13 +125,21 @@ function Marco({ e }: { e: Evento }) {
 function Balao({
   e,
   alinhaDireita,
+  minha,
+  visto,
   responder,
+  aprovar,
   children,
 }: {
   e: Evento;
   /** Lado do balão. Numa resposta é o lado do PEDIDO, não o do autor. */
   alinhaDireita: boolean;
+  /** Se esta fala é de quem está lendo. Só o outro lado se aprova. */
+  minha: boolean;
+  /** Aprovação amarrada a esta fala, quando já houve uma. */
+  visto?: Evento;
   responder?: (e: Evento) => void;
+  aprovar?: (e: Evento) => void;
   children?: React.ReactNode;
 }) {
   const daAgencia = LADO[e.autor] === "agencia";
@@ -144,14 +169,39 @@ function Balao({
           {e.texto}
         </p>
         {e.origem && <Origem origem={e.origem} />}
-        {responder && (
-          <button
-            type="button"
-            onClick={() => responder(e)}
-            className="wb-foco mt-2 -ml-1 block rounded-lg px-1 text-[12.5px] font-semibold text-[var(--wb-roxo)] underline underline-offset-2 transition-colors hover:text-[var(--wb-roxo-vivo)]"
-          >
-            responder a esta
-          </button>
+        {/* Aprovar a resposta, e não só a seção inteira: é o que ele pediu em 18/09/2026. Só
+            aparece na fala do OUTRO lado — ninguém aprova a própria — e some quando já houve
+            aprovação, dando lugar ao selo. */}
+        {visto ? (
+          <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-[var(--wb-verde-leve)] px-2 py-0.5 text-[12px] font-semibold text-[var(--wb-verde-tinta)]">
+            <svg viewBox="0 0 12 12" aria-hidden className="size-3">
+              <path d="M2.5 6.3l2.3 2.3 4.7-5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {apelido(visto.autor)} aprovou
+          </p>
+        ) : (
+          (responder || (aprovar && !minha)) && (
+            <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+              {aprovar && !minha && (
+                <button
+                  type="button"
+                  onClick={() => aprovar(e)}
+                  className="wb-foco rounded-lg text-[12.5px] font-bold text-[var(--wb-verde-tinta)] underline underline-offset-2"
+                >
+                  está certo
+                </button>
+              )}
+              {responder && (
+                <button
+                  type="button"
+                  onClick={() => responder(e)}
+                  className="wb-foco rounded-lg text-[12.5px] font-semibold text-[var(--wb-roxo)] underline underline-offset-2 transition-colors hover:text-[var(--wb-roxo-vivo)]"
+                >
+                  responder a esta
+                </button>
+              )}
+            </p>
+          )
         )}
         </div>
       </div>
