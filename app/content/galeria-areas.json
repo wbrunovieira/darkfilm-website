@@ -96,6 +96,30 @@
         "w": 1500,
         "h": 2000,
         "alt": "Chevrolet Chevette prata rebaixado, de perfil na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--defender-preto-farol-aceso.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Land Rover Defender preto de frente, com o farol aceso dentro da oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--datsun-240z-traseira.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Traseira do Datsun 240Z laranja customizado, na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--volvo-xc60-farol-aceso.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Volvo XC60 preto com o farol aceso, exposto na oficina"
+      },
+      {
+        "src": "/img/novo/vitrine--vw-quantum-piso-xadrez.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Volkswagen Quantum vinho no piso xadrez, sob o letreiro The Dark Film"
       }
     ]
   },
@@ -146,6 +170,30 @@
         "w": 1500,
         "h": 2000,
         "alt": "Audi TT azul em ângulo frontal, com os vidros escurecidos"
+      },
+      {
+        "src": "/img/novo/aplicacao--porsche-cayenne-vidros-escuros.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Porsche Cayenne branco na oficina, com os vidros traseiros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--porsche-panamera-oficina.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Porsche Panamera cinza na oficina, com os vidros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--audi-tt-frente.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Audi TT azul de frente, com os vidros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--bmw-serie-3-traseira.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "BMW Série 3 preto com a porta aberta, mostrando os vidros escurecidos por película"
       }
     ]
   },
