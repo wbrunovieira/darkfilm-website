@@ -17,7 +17,14 @@ import Image from "next/image";
  * `fill` claro e bem transparente é daqui, para a foto aparecer por baixo — no desenho vetorial
  * esse mesmo lugar recebe o gradiente de vidro.
  *
- * Coordenadas calibradas sobre uma grade projetada na própria foto e conferidas no navegador.
+ * Os contornos foram traçados sobre a cabine ampliada, com uma grade nas coordenadas do próprio
+ * `viewBox` projetada por cima, e conferidos a cada passe. São `path` com curva, não polígono:
+ * numa vista 3/4 nenhuma dessas áreas é um quadrilátero — o teto é curvo, a coluna A é diagonal e
+ * a linha de cintura desce para a frente. Quadrilátero reto fica visivelmente fora do vidro.
+ *
+ * São três, e não quatro: nesta foto o vidro traseiro não é área clicável clara — o que se vê ali
+ * é a coluna C e a carroceria virando. E ele cairia no mesmo grupo do vidro da porta traseira, que
+ * já está aqui, então não se perde nada.
  */
 export function CarroFoto() {
   return (
@@ -29,11 +36,34 @@ export function CarroFoto() {
         height={993}
         sizes="(max-width: 768px) 100vw, 640px"
       />
-      <svg className="carro-mascara" viewBox="0 0 400 248" preserveAspectRatio="none" aria-hidden>
-        <polygon data-vidro="parabrisa" fill="rgba(255,255,255,.10)" points="162,66 180,30 284,26 273,70" />
-        <polygon data-vidro="dianteiro" fill="rgba(255,255,255,.10)" points="290,30 330,27 332,57 290,61" />
-        <polygon data-vidro="traseiro" fill="rgba(255,255,255,.10)" points="336,27 364,29 366,54 336,57" />
-        <polygon data-vidro="vigia" fill="rgba(255,255,255,.10)" points="370,31 381,33 383,48 370,50" />
+      <svg
+        className="carro-mascara"
+        viewBox="0 0 400 248"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        {/* Para-brisa. O contorno segue o vidro em perspectiva: teto curvo em cima, a coluna A
+            em diagonal à direita, o capô embaixo e a coluna A do lado de lá à esquerda. */}
+        <path
+          data-vidro="parabrisa"
+          fill="rgba(255,255,255,.10)"
+          d="M 158,51 C 170,45 188,38 208,34 C 230,30 252,27.8 271,27.3
+             L 268,69 C 250,70 215,69.8 198,68.5 C 180,68 166,67 158,66 Z"
+        />
+        {/* Porta dianteira, entre as colunas A e B. A linha de cintura desce para a frente. */}
+        <path
+          data-vidro="dianteiro"
+          fill="rgba(255,255,255,.10)"
+          d="M 287.5,29.5 C 300,29.8 314,30.2 325,30.7 L 326,54
+             C 312,56 299,57.5 288.5,58.7 Z"
+        />
+        {/* Porta traseira, entre as colunas B e C. */}
+        <path
+          data-vidro="traseiro"
+          fill="rgba(255,255,255,.10)"
+          d="M 331.5,33 C 342,33.5 353,34.5 361,35.5 L 361,53.5
+             C 351,54.5 340,55.3 332,55.8 Z"
+        />
       </svg>
     </div>
   );

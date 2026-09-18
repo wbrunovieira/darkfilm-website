@@ -1,13 +1,15 @@
 # O carro do simulador — as duas opções para o cliente escolher
 
-Material para a conversa de 18/09/2026 com o cliente. **Nada aqui está publicado no site.**
+Material da conversa de 18/09/2026 com o cliente.
+
+**O que se manda para ele é a página `/carro`**, não um print: lá ele toca nos vidros dos dois
+carros e compara na prática. A página é interna — sem link em lugar nenhum, fora do sitemap,
+noindex nela e no robots. Sai do ar quando ele decidir.
 
 | Arquivo | O que é |
 | --- | --- |
-| `comparativo-simulador.png` | **É o que se manda para ele.** Desenho de hoje à esquerda, foto à direita, com os vidros de trás selecionados nos dois |
-| `abarth-tratada.jpg` | A foto já tratada: recortada, placa pixelada, uma cabeça ao fundo borrada. 3060×1900 |
-| `foto.jpg` | A mesma, reduzida para 1224 px — é a que o comparativo usa |
-| `comparativo.html` | Como o comparativo foi montado, caso precise refazer com outro texto |
+| `comparativo-simulador.png` | Print da página `/carro`, para quando não der para abrir o link |
+| `abarth-tratada.jpg` | A foto já tratada: recortada, placa pixelada, uma pessoa ao fundo borrada. 3060×1900. É a origem de `app/public/img/simulador/abarth-oficina.webp` |
 
 ## Por que existem duas opções
 
@@ -32,23 +34,28 @@ Carro de verdade é proporcional por definição: o problema que derrubou os cin
 existir.
 
 **Tratamento já aplicado:** placa `RJX9F20` pixelada e o topo de uma cabeça, que aparecia atrás do
-teto, borrado. Confira antes de publicar.
+teto, borrado.
 
-**Coordenadas dos quatro vidros**, em `viewBox="0 0 400 248"` sobre a foto tratada — calibradas
-sobre uma grade e conferidas no navegador:
+## Os contornos dos vidros
 
-```
-parabrisa  162,66 180,30 284,26 273,70
-dianteiro  290,30 330,27 332,57 290,61
-traseiro   336,27 364,29 366,54 336,57
-vigia      370,31 381,33 383,48 370,50
-```
+Estão em `app/components/simulador/CarroFoto.tsx`, em `viewBox="0 0 400 248"` sobre a foto tratada.
 
-Se ele escolher a foto, a implementação é curta: trocar o `dangerouslySetInnerHTML` do
-`CarDiagram` por `<Image>` mais um `<svg>` sobreposto com esses quatro polígonos. O CSS de
-`.carro-diagrama [data-vidro]` já faz o tracejado, o hover e o vermelho do selecionado — só o
-`fill` de repouso muda, de gradiente de vidro para um branco bem translúcido, para a foto aparecer
-por baixo.
+São **`path` com curva, não polígono**: numa vista 3/4 nenhuma dessas áreas é um quadrilátero — o
+teto é curvo, a coluna A é diagonal e a linha de cintura desce para a frente. Quadrilátero reto fica
+visivelmente fora do vidro, e foi a primeira coisa que o cliente notou.
+
+São **três, e não quatro**: nesta foto o vidro traseiro não é área clicável clara (ali se vê a
+coluna C e a carroceria virando), e ele cairia no mesmo grupo do vidro da porta traseira, que já
+está marcado.
+
+**Como foram traçados, caso precise refazer com outra foto:** ampliar a cabine num recorte
+conhecido, projetar por cima uma grade nas coordenadas do próprio `viewBox` (é o truque que torna
+a leitura direta, sem conta), ler os pontos, desenhar, renderizar e conferir. Quatro passes.
+
+Tamanho dos alvos no desktop, medidos no navegador: para-brisa 145×54 px, porta dianteira 49×38,
+porta traseira 38×29. Os dois últimos ficam abaixo dos 44 px recomendados para toque — **não dá
+para ampliar sem cortar o carro**, que já ocupa a largura toda da foto. A lista de vidros abaixo do
+desenho continua sendo o controle principal, e no simulador ela está sempre visível.
 
 ## O que ficou fora
 
