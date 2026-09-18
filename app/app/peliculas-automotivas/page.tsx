@@ -36,10 +36,15 @@ export default function LinhaAutomotivaPage() {
            dele, na própria oficina, com o painel de fuscas em cima e o letreiro The Dark Film ao
            fundo — a loja aparece junto com o carro, que é o que a de antes não fazia.
 
-           A placa dianteira estava legível e foi pixelada. As caixas foram medidas na versão de
-           2000px que vai ao ar, não no original de 4080px: foi medindo no original que a placa do
-           Peugeot escapou uma vez. Conferido ampliado depois de aplicar, e os carros ao fundo não
-           mostram placa. */
+           É o arquivo que ELE mandou (1448x1086), e não a foto parecida que existe no acervo em
+           4080x3060. São disparos diferentes do mesmo dia, e o dele é melhor: câmera mais alta,
+           carro inteiro, letreiro maior, e sem o Honda branco e a lixeira que aparecem no outro.
+           Resolução menor, mas composição certa — e o hero tem máscara escura por cima.
+
+           A placa dianteira estava legível e foi pixelada, com a caixa medida no arquivo que vai
+           ao ar e conferida ampliada depois de aplicar. Foi medindo no ORIGINAL, e não na versão
+           publicada, que a placa do Peugeot escapou uma vez. Os carros ao fundo não mostram placa
+           e não há rosto — os vídeos do mesmo dia têm, e por isso ficaram de fora. */
         image="/img/novo/aplicacao-carros--porsche-boxster-oficina.jpg"
         imagePosition="center 58%"
       />
