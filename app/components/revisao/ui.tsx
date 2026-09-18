@@ -16,10 +16,16 @@ import { LADO, type Autor, type Situacao } from "@/lib/revisao";
 export const NOME_CLIENTE = "The Dark Film";
 export const NOME_AGENCIA = "WB Digital Solutions";
 
-/** O nome do select não cabe num botão nem numa frase. "Bruno (WB)" basta para identificar. */
+/**
+ * O nome do select não cabe num botão nem numa frase. O primeiro nome mais o lado basta.
+ *
+ * Os DOIS lados levam o lado no nome. Antes só a agência levava — "Bruno (WB)" de um lado e
+ * "Bruno" solto do outro —, e como os dois se chamam Bruno, a fala sem sufixo não dizia de quem
+ * era. Quem lê precisa saber sem depender da cor do balão.
+ */
 export function apelido(a: Autor) {
   const [nome] = a.split(" ");
-  return LADO[a] === "agencia" ? `${nome} (WB)` : nome;
+  return LADO[a] === "agencia" ? `${nome} (WB)` : `${nome} (${NOME_CLIENTE})`;
 }
 
 /**

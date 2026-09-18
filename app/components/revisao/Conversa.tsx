@@ -107,7 +107,19 @@ export function Conversa({
       </Balao>
     );
 
-  return <ol className="mt-3 flex flex-col gap-2.5">{raiz.map((e) => nó(e))}</ol>;
+  /*
+   * Espaço grande ENTRE assuntos, espaço curto DENTRO de um, e um fio separando os dois.
+   *
+   * Antes tudo tinha o mesmo respiro: a resposta de um pedido encostava no pedido seguinte com a
+   * mesma distância que tinha do próprio pedido, e a conversa virava uma coluna contínua, sem
+   * começo nem fim de assunto. Só o espaço não bastou — os balões são altos e comem a diferença.
+   * O fio é fraco de propósito: ele marca a divisa sem virar mais um elemento na tela.
+   */
+  return (
+    <ol className="mt-3 flex flex-col [&>li+li]:mt-7 [&>li+li]:border-t [&>li+li]:border-[var(--wb-linha)] [&>li+li]:pt-7">
+      {raiz.map((e) => nó(e))}
+    </ol>
+  );
 }
 
 function Marco({ e }: { e: Evento }) {

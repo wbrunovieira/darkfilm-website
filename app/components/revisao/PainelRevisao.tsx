@@ -1192,7 +1192,9 @@ function CartaoPagina({
       }`}
     >
       <div className="p-4 pl-5 sm:p-5 sm:pl-6">
-        <div className="flex items-start justify-between gap-3">
+        {/* No celular os dois selos — página que deve aos dois lados — espremiam o título contra
+            a borda. Abaixo de 640px eles descem para a própria linha. */}
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
           <div className="min-w-0">
             <h3 className="text-[18px] font-bold leading-tight text-[var(--wb-tinta)] [text-wrap:balance]">
               {b.titulo}
@@ -1206,7 +1208,7 @@ function CartaoPagina({
           {/* Dois selos quando a página deve aos dois lados. Um selo só escondia metade do que
               falta: o desempate mandava "com-cliente" para a frente e a pendência da agência
               sumia do cartão inteiro. */}
-          <div className="flex shrink-0 flex-wrap justify-end gap-1.5">
+          <div className="flex shrink-0 flex-wrap gap-1.5 sm:justify-end">
             <Selo situacao={situacao} souAgencia={a.souAgencia} />
             {[...tambem]
               .filter((x) => x !== situacao)
