@@ -56,17 +56,24 @@ export function Hero() {
 
   return (
     <section className="relative isolate min-h-[100svh] overflow-hidden grain">
-      {/* Foto de fundo: fachada da loja na Rua Cel. Veiga, com os selos 3M e Thule visíveis
-          (material novo do cliente, 2024). Enquadrada em 62% da altura para que o letreiro
-          e a vitrine fiquem visíveis: acima disso entra o barranco, abaixo entra o asfalto. */}
+      {/* Foto de fundo: a fachada à noite com o Porsche 356 vermelho de corrida na frente,
+          escolhida pelo cliente em 12/09/2026 e confirmada por ele em 18/09. Já nasce escura e
+          com o vermelho da marca no carro, o que combina com o título branco sobre a máscara —
+          a fachada de dia, que estava aqui antes, tinha céu azul e brigava com o texto.
+
+          Enquadrada em 58% da altura: acima disso entra laje e céu vazio, abaixo entra asfalto.
+          O carro e o letreiro ficam na faixa visível em qualquer proporção de tela.
+
+          O arquivo tem 1536 por 1024, que é pouco para uma foto de fundo em tela grande — a
+          original em alta ainda não chegou. Trocar o arquivo aqui é suficiente quando ela vier. */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/img/novo/institucional--fachada-loja-dia.jpg"
+          src="/img/novo/institucional--fachada-noite-porsche.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="photo-hero object-cover object-[50%_62%] animate-slow-zoom"
+          className="photo-hero object-cover object-[50%_58%] animate-slow-zoom"
         />
         <div className="tint-overlay-hero" />
       </div>

@@ -105,19 +105,25 @@ body {
 /* Variante do hero: mais pesada em cima e à esquerda (onde o texto assenta sobre o
    mosaico preto-e-branco da oficina) e um "respiro" radial que preserva a Kombi
    à direita. O objetivo não é escurecer tudo — é tirar contraste de onde há letra. */
+/* Véu do hero. Existe para o título branco ter contraste, não para escurecer a foto — com a
+   foto noturna os dois pesos se somavam e sobrava um retângulo quase preto. O véu ficou forte
+   só onde mora o texto (esquerda e rodapé) e quase transparente na direita, onde está o carro. */
 @utility tint-overlay-hero {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(60% 55% at 72% 62%, rgba(11, 11, 13, 0) 0%, rgba(11, 11, 13, 0.55) 100%),
-    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.7) 40%, rgba(11, 11, 13, 0.5) 75%, rgba(11, 11, 13, 0.75) 100%),
-    linear-gradient(to right, rgba(11, 11, 13, 0.92) 0%, rgba(11, 11, 13, 0.6) 45%, rgba(11, 11, 13, 0.05) 100%);
+    radial-gradient(58% 55% at 74% 58%, rgba(11, 11, 13, 0) 0%, rgba(11, 11, 13, 0.3) 100%),
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.62) 34%, rgba(11, 11, 13, 0.22) 72%, rgba(11, 11, 13, 0.42) 100%),
+    linear-gradient(to right, rgba(11, 11, 13, 0.9) 0%, rgba(11, 11, 13, 0.55) 42%, rgba(11, 11, 13, 0) 78%);
 }
 
-/* Foto do hero: contraste abaixo de 1 para amansar o mosaico, sem lavar a Kombi */
+/* Foto do hero: contraste abaixo de 1 para amansar o mosaico, sem lavar a Kombi.
+   Este ajuste foi calibrado para a fachada DE DIA, que era clara demais. A foto de abertura
+   passou a ser a noturna do Porsche (18/09/2026), que já nasce escura: dessaturar e escurecer
+   de novo apagava o carro vermelho, que é justamente o motivo de ela ter sido escolhida. */
 @utility photo-hero {
-  filter: saturate(0.6) contrast(0.92) brightness(0.9);
+  filter: saturate(0.95) contrast(1.04) brightness(1.06);
 }
 
 /* Grain: disfarça baixa resolução e dá textura */
