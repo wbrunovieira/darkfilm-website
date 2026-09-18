@@ -61,11 +61,24 @@ export function Hero() {
           com o vermelho da marca no carro, o que combina com o título branco sobre a máscara —
           a fachada de dia, que estava aqui antes, tinha céu azul e brigava com o texto.
 
-          Enquadrada em 58% da altura: acima disso entra laje e céu vazio, abaixo entra asfalto.
-          O carro e o letreiro ficam na faixa visível em qualquer proporção de tela.
+          **O arquivo foi alargado de propósito, de 1536x1024 para 2048x1024.** A foto do cliente
+          é 3:2 e o hero em tela larga fica perto de 2:1: com `object-cover` sobrava um quarto da
+          altura fora do quadro, e o que se perdia era o pé da foto — as rodas do carro. Ele mandou
+          uma montagem mostrando o enquadramento que quer, com a fachada e o carro inteiros.
 
-          O arquivo tem 1536 por 1024, que é pouco para uma foto de fundo em tela grande — a
-          original em alta ainda não chegou. Trocar o arquivo aqui é suficiente quando ela vier. */}
+          Em vez de cortar o carro, o quadro ganhou laterais: ao fundo vai a própria foto ampliada,
+          borrada e escurecida, e a foto nítida entra por cima com as bordas esmaecidas em 200px.
+          Sem emenda visível, e o enquadramento dele cabe inteiro. Se um dia vier a original em
+          alta, o mesmo tratamento se refaz com o script em `scratchpad` ou à mão.
+
+          A foto nítida entra alinhada à direita dentro do quadro, e é isso que põe as duas portas
+          da loja na segunda coluna e deixa o Porsche inteiro, fora do texto — o arranjo da
+          montagem que ele mandou. À esquerda fica o borrão escuro, que é onde o texto mora.
+
+          Os carros estacionados ao fundo, na rua, foram apagados a pedido dele: não são da loja.
+
+          Em tela estreita não existe segunda coluna — o texto ocupa tudo — então ali o ponto
+          focal vai para 74%, senão o corte lateral fica só na loja e o carro sai do quadro. */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/img/novo/institucional--fachada-noite-porsche.jpg"
@@ -73,7 +86,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="photo-hero object-cover object-[50%_58%] animate-slow-zoom"
+          className="photo-hero object-cover object-[74%_58%] animate-slow-zoom lg:object-[50%_62%]"
         />
         <div className="tint-overlay-hero" />
       </div>
@@ -93,7 +106,13 @@ export function Hero() {
             estreita, e o pedido dele é que apareçam antes de a pessoa rolar. */}
         <CredenciaisMobile />
 
-        <h1 className="display max-w-5xl text-[clamp(2.75rem,min(9.5vw,14vh),8rem)] short:text-[clamp(2.5rem,min(8.5vw,12vh),6rem)] text-fg">
+        {/* O título fica preso à metade esquerda em tela larga. A montagem que o cliente mandou
+            em 12/09/2026 mostra o carro INTEIRO, livre, à direita do texto — e com `max-w-5xl`
+            ele ia até 69% da largura num monitor de 1900, passando por cima do Porsche. O teto
+            em 48vw mantém a coluna de texto no escuro da fachada, que é onde ela se lê melhor,
+            e devolve o carro por completo. Abaixo de 1024px não muda nada: ali o texto ocupa a
+            tela toda mesmo, e o carro aparece atrás, de propósito. */}
+        <h1 className="display max-w-5xl text-[clamp(2.75rem,min(9.5vw,14vh),8rem)] short:text-[clamp(2.5rem,min(8.5vw,12vh),6rem)] text-fg lg:max-w-[min(43vw,46rem)] lg:text-[clamp(2.5rem,min(4.6vw,11vh),4.6rem)]">
           <motion.span {...fade(0.4)} className="block">
             Película, som
           </motion.span>
@@ -107,7 +126,7 @@ export function Hero() {
 
         <motion.p
           {...fade(0.75)}
-          className="mt-6 max-w-lg text-base leading-relaxed text-fg-2 md:mt-8 md:text-lg short:mt-4 short:max-w-xl short:text-base"
+          className="mt-6 max-w-lg text-base leading-relaxed text-fg-2 md:mt-8 md:text-lg short:mt-4 short:max-w-xl short:text-base lg:max-w-[min(36vw,30rem)]"
         >
           Há mais de {decadasEmAtividade()}, a The Dark Film é referência em películas
           automotivas e arquitetônicas, som e acessórios em {site.city}. Produtos de

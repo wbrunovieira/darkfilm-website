@@ -27,6 +27,9 @@ const ease = [0.16, 1, 0.3, 1] as const;
  * Os três ficam sobre um painel escuro translúcido, como no desenho que ele mandou. Serve a duas
  * coisas: garante leitura sobre a foto do hero, que muda de claridade conforme a área, e acomoda
  * o logo do Mercado Livre, que é o único em bitmap e traz o próprio fundo escuro.
+ *
+ * Em telas grandes o bloco desceu de `top-32` para `top-44`: o letreiro The Dark Film da foto
+ * nova passa justamente por ali, e o cliente pediu que ele não ficasse escondido atrás daqui.
  */
 
 type Credencial = {
@@ -71,7 +74,7 @@ export function Credenciais() {
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.55, ease }}
-      className="absolute right-4 top-24 z-20 hidden rounded-lg border border-line bg-bg/65 px-4 py-3 backdrop-blur md:top-28 md:block lg:right-8 lg:top-32"
+      className="absolute right-4 top-24 z-20 hidden rounded-lg border border-line bg-bg/65 px-4 py-3 backdrop-blur md:top-28 md:block lg:right-8 lg:top-44"
       aria-label="Credenciais da loja"
     >
       <ul className="flex items-stretch">

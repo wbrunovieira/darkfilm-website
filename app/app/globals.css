@@ -106,16 +106,30 @@ body {
    mosaico preto-e-branco da oficina) e um "respiro" radial que preserva a Kombi
    à direita. O objetivo não é escurecer tudo — é tirar contraste de onde há letra. */
 /* Véu do hero. Existe para o título branco ter contraste, não para escurecer a foto — com a
-   foto noturna os dois pesos se somavam e sobrava um retângulo quase preto. O véu ficou forte
-   só onde mora o texto (esquerda e rodapé) e quase transparente na direita, onde está o carro. */
+   foto noturna os dois pesos se somavam e sobrava um retângulo quase preto.
+
+   O degradê de baixo emendava o hero com a seção seguinte, e subia a 34% da altura. Era ELE que
+   apagava as rodas do Porsche, não corte de enquadramento: a foto estava inteira ali embaixo, só
+   coberta. Agora a emenda acontece nos últimos 9%, o suficiente para não dar linha dura contra o
+   fundo e pouco para engolir o carro. */
 @utility tint-overlay-hero {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
     radial-gradient(58% 55% at 74% 58%, rgba(11, 11, 13, 0) 0%, rgba(11, 11, 13, 0.3) 100%),
-    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.62) 34%, rgba(11, 11, 13, 0.22) 72%, rgba(11, 11, 13, 0.42) 100%),
+    linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.55) 9%, rgba(11, 11, 13, 0.16) 26%, rgba(11, 11, 13, 0.1) 70%, rgba(11, 11, 13, 0.4) 100%),
     linear-gradient(to right, rgba(11, 11, 13, 0.9) 0%, rgba(11, 11, 13, 0.55) 42%, rgba(11, 11, 13, 0) 78%);
+}
+/* No celular o texto ocupa a largura toda, então o véu lateral — que existe para proteger uma
+   coluna à esquerda — deixa o corpo do texto sobre a vitrine acesa, sem contraste. Abaixo de
+   1024px ele vira um véu parelho, mais forte, e a foto passa a ser fundo mesmo. */
+@media (max-width: 1023px) {
+  .tint-overlay-hero {
+    background:
+      linear-gradient(to top, var(--bg) 0%, rgba(11, 11, 13, 0.55) 10%, rgba(11, 11, 13, 0.5) 60%, rgba(11, 11, 13, 0.68) 100%),
+      linear-gradient(to right, rgba(11, 11, 13, 0.55) 0%, rgba(11, 11, 13, 0.45) 100%);
+  }
 }
 
 /* Foto do hero: contraste abaixo de 1 para amansar o mosaico, sem lavar a Kombi.
@@ -257,9 +271,12 @@ body {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+/* Zoom lento do hero. Era 1.04 -> 1.12, calibrado para a fachada de dia, que tinha margem de
+   sobra em volta. Com a foto noturna o quadro é justo — o carro vai até a borda de baixo — e 12%
+   de ampliação comiam as rodas. 1.00 -> 1.05 mantém o movimento e cabe na folga que a imagem tem. */
 @keyframes slow-zoom {
-  from { transform: scale(1.04); }
-  to { transform: scale(1.12); }
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
 @keyframes pulse-ring {
   0% { transform: scale(1); opacity: 0.6; }
