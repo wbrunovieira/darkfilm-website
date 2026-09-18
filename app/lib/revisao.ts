@@ -91,6 +91,17 @@ export type Evento = {
    * para o assunto ficar fechado no mesmo lugar. Nenhum dos dois finge ter passado pelo painel.
    */
   origem?: "whatsapp" | "interno";
+  /**
+   * Id do evento que esta fala responde.
+   *
+   * Sem isto a conversa de uma seção era uma pilha corrida: três pedidos dele seguidos e duas
+   * respostas nossas no fim, sem dizer qual respondia qual. Ele pediu em 18/09/2026 para ver
+   * cada pedido já com a resposta dele junto, e poder responder ali mesmo.
+   *
+   * Opcional de propósito: tudo que foi registrado antes disto não tem vínculo, e continua
+   * válido — aparece na linha do tempo, como sempre apareceu.
+   */
+  respondeA?: string;
 };
 
 const PASTA = "revisao/eventos/";

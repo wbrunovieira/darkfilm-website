@@ -126,6 +126,10 @@ async function gravar(e, i = 0) {
         ? `registrado por ${e.por ?? "Bruno WB Digital Solutions"}`
         : `transcrito do WhatsApp por ${e.por ?? "Bruno WB Digital Solutions"}`,
     origem: e.origem ?? "whatsapp",
+    // `responde`: id da fala que esta responde. É o que faz a resposta aparecer pendurada no
+    // pedido dela, em vez de solta no fim da pilha. Opcional — sem ele a fala entra na linha
+    // do tempo como sempre entrou.
+    ...(e.responde ? { respondeA: e.responde } : {}),
   };
   if (!ACOES.includes(evento.acao)) throw new Error(`ação inválida: ${evento.acao}`);
   if (!AUTORES.includes(evento.autor)) throw new Error(`autor inválido: ${evento.autor}`);

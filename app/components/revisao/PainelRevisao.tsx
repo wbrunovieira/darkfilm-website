@@ -79,10 +79,17 @@ type Acoes = {
   erroDe: (alvo: string) => string | null;
   flash: string | null;
   escrevendo: string | null;
-  abrirEscrita: (chave: string | null) => void;
+  abrirEscrita: (chave: string | null, respondeA?: string | null) => void;
   rascunho: string;
   setRascunho: (v: string) => void;
-  registrar: (paginaId: string, secaoId: string | null, acao: string, texto?: string) => void;
+  registrar: (
+    paginaId: string,
+    secaoId: string | null,
+    acao: string,
+    texto?: string,
+    respondeA?: string | null,
+  ) => void;
+  respondendoA: string | null;
   sit: (paginaId: string, itemId: string) => Situacao;
   eventosDe: (paginaId: string, itemId?: string) => Evento[];
 };
@@ -112,6 +119,8 @@ export function PainelRevisao({
   const [erro, setErro] = useState<{ alvo: string; msg: string } | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
   const [escrevendo, setEscrevendo] = useState<string | null>(null);
+  /** Id da fala que a escrita aberta responde. Null = fala nova, solta na seção. */
+  const [respondendoA, setRespondendoA] = useState<string | null>(null);
   const [rascunho, setRascunho] = useState("");
   const [novoAssunto, setNovoAssunto] = useState(false);
   /**
@@ -200,7 +209,13 @@ export function PainelRevisao({
   );
 
   const registrar = useCallback(
-    async (paginaId: string, secaoId: string | null, acao: string, texto?: string) => {
+    async (
+      paginaId: string,
+      secaoId: string | null,
+      acao: string,
+      texto?: string,
+      respondeA?: string | null,
+    ) => {
       const alvo = `${paginaId}/${secaoId ?? "pagina"}`;
       setOcupado(`${alvo}/${acao}`);
       setErro(null);
@@ -208,7 +223,7 @@ export function PainelRevisao({
         const r = await fetch("/api/revisao", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ paginaId, secaoId, acao, autor, texto }),
+          body: JSON.stringify({ paginaId, secaoId, acao, autor, texto, respondeA: respondeA ?? undefined }),
           // Ele usa isto na loja, com sinal instável. Sem prazo, uma requisição pendurada deixa
           // o botão em "Enviando…" para sempre e não há como saber se gravou ou não.
           signal: AbortSignal.timeout(20000),
@@ -258,8 +273,9 @@ export function PainelRevisao({
 
   const erroDe = useCallback((alvo: string) => (erro?.alvo === alvo ? erro.msg : null), [erro]);
 
-  const abrirEscrita = useCallback((chave: string | null) => {
+  const abrirEscrita = useCallback((chave: string | null, respondeA?: string | null) => {
     setEscrevendo(chave);
+    setRespondendoA(respondeA ?? null);
     setRascunho("");
     setErro(null);
   }, []);
@@ -458,6 +474,7 @@ export function PainelRevisao({
     flash,
     escrevendo,
     abrirEscrita,
+    respondendoA,
     rascunho,
     setRascunho,
     registrar,
@@ -1071,7 +1088,13 @@ function Acoes({
           onChange={a.setRascunho}
           onCancelar={() => a.abrirEscrita(null)}
           onEnviar={() =>
-            a.registrar(paginaId, secaoId, conversando ? "resposta" : "alteracao", a.rascunho)
+            a.registrar(
+              paginaId,
+              secaoId,
+              conversando || a.respondendoA ? "resposta" : "alteracao",
+              a.rascunho,
+              a.respondendoA,
+            )
           }
           ocupado={oc("resposta") || oc("alteracao")}
           erro={erro}
@@ -1268,7 +1291,13 @@ function LinhaParte({ blocoId, item }: { blocoId: string; item: Item }) {
           {item.titulo}
         </p>
       </div>
-      <Conversa eventos={eventos} souAgencia={a.souAgencia} />
+      {/* A chave da escrita é a mesma que `Acoes` usa para esta parte: assim o campo abre logo
+          abaixo, no lugar de sempre, só que já amarrado à fala escolhida. */}
+      <Conversa
+        eventos={eventos}
+        souAgencia={a.souAgencia}
+        responder={(ev) => a.abrirEscrita(`${blocoId}/${item.id}`, ev.id)}
+      />
       <div className="pl-5">
         {/* Sem "Ver no site" aqui: é o mesmo endereço do cartão, e repeti-lo em cada uma das
             oito partes só acrescentava oito botões idênticos ao caminho do polegar. */}
@@ -1451,7 +1480,11 @@ function LinhaCompacta({
 
       <Sanfona aberta={aberto} id={`linha-${chave}`}>
         <div className="border-t border-[var(--wb-linha)] bg-[var(--wb-fundo)] px-4 pb-4 pt-1 sm:px-5">
-          <Conversa eventos={eventos} souAgencia={a.souAgencia} />
+          <Conversa
+        eventos={eventos}
+        souAgencia={a.souAgencia}
+        responder={(ev) => a.abrirEscrita(chave, ev.id)}
+      />
           <Acoes
             paginaId={paginaId}
             secaoId={secaoId}

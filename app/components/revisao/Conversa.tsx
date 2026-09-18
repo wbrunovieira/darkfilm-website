@@ -35,19 +35,46 @@ const ETIQUETA: Record<string, string> = {
   ajustado: "arrumado",
 };
 
-export function Conversa({ eventos, souAgencia }: { eventos: Evento[]; souAgencia: boolean }) {
+/**
+ * A conversa, com as respostas penduradas no pedido que responderam.
+ *
+ * Era uma pilha corrida: três pedidos dele seguidos e duas respostas nossas no fim, sem dizer
+ * qual respondia qual. Ele pediu para ver cada pedido já com a resposta junto. Agora a resposta
+ * aparece encostada embaixo do pedido, recuada e com um fio ligando os dois.
+ *
+ * Fala sem vínculo — tudo que foi registrado antes disto existir — continua na linha do tempo,
+ * na ordem de sempre. Nada some.
+ */
+export function Conversa({
+  eventos,
+  souAgencia,
+  responder,
+}: {
+  eventos: Evento[];
+  souAgencia: boolean;
+  /** Abre a escrita já amarrada a esta fala. Ausente = painel em modo leitura. */
+  responder?: (e: Evento) => void;
+}) {
   if (!eventos.length) return null;
-  return (
-    <ol className="mt-3 flex flex-col gap-2.5">
-      {eventos.map((e) =>
-        MARCO.has(e.acao) || !e.texto ? (
-          <Marco key={e.id} e={e} />
-        ) : (
-          <Balao key={e.id} e={e} souAgencia={souAgencia} />
-        ),
-      )}
-    </ol>
-  );
+
+  const respostas = new Map<string, Evento[]>();
+  for (const e of eventos) {
+    if (!e.respondeA) continue;
+    respostas.set(e.respondeA, [...(respostas.get(e.respondeA) ?? []), e]);
+  }
+  // Uma resposta pendurada não se repete na linha principal.
+  const raiz = eventos.filter((e) => !e.respondeA || !eventos.some((x) => x.id === e.respondeA));
+
+  const nó = (e: Evento, aninhada = false) =>
+    MARCO.has(e.acao) || !e.texto ? (
+      <Marco key={e.id} e={e} />
+    ) : (
+      <Balao key={e.id} e={e} souAgencia={souAgencia} responder={responder} aninhada={aninhada}>
+        {(respostas.get(e.id) ?? []).map((r) => nó(r, true))}
+      </Balao>
+    );
+
+  return <ol className="mt-3 flex flex-col gap-2.5">{raiz.map((e) => nó(e))}</ol>;
 }
 
 function Marco({ e }: { e: Evento }) {
@@ -62,13 +89,34 @@ function Marco({ e }: { e: Evento }) {
   );
 }
 
-function Balao({ e, souAgencia }: { e: Evento; souAgencia: boolean }) {
+function Balao({
+  e,
+  souAgencia,
+  responder,
+  aninhada,
+  children,
+}: {
+  e: Evento;
+  souAgencia: boolean;
+  responder?: (e: Evento) => void;
+  /** Resposta pendurada num pedido: entra recuada, com o fio ligando. */
+  aninhada?: boolean;
+  children?: React.ReactNode;
+}) {
   const daAgencia = LADO[e.autor] === "agencia";
   // "Minha" fala é a de quem está com o painel aberto. Alinhar à direita é a leitura que a
   // pessoa já tem no celular; a cor continua sendo do LADO, não de quem está lendo.
   const minha = daAgencia === souAgencia;
+  const temRespostas = !!children && (Array.isArray(children) ? children.length > 0 : true);
   return (
-    <li className={`flex ${minha ? "justify-end" : "justify-start"}`}>
+    <li className={aninhada ? "relative pl-5 sm:pl-7" : undefined}>
+      {aninhada && (
+        <span
+          aria-hidden
+          className="absolute left-1.5 top-0 h-5 w-3.5 rounded-bl-lg border-b border-l border-[var(--wb-lilas)] sm:left-2.5"
+        />
+      )}
+      <div className={`flex ${minha ? "justify-end" : "justify-start"}`}>
       <div
         className={`max-w-[min(46ch,92%)] rounded-2xl px-3.5 py-2.5 ring-1 ${
           daAgencia
@@ -91,7 +139,18 @@ function Balao({ e, souAgencia }: { e: Evento; souAgencia: boolean }) {
           {e.texto}
         </p>
         {e.origem && <Origem origem={e.origem} />}
+        {responder && (
+          <button
+            type="button"
+            onClick={() => responder(e)}
+            className="wb-foco mt-2 -ml-1 block rounded-lg px-1 text-[12.5px] font-semibold text-[var(--wb-roxo)] underline underline-offset-2 transition-colors hover:text-[var(--wb-roxo-vivo)]"
+          >
+            responder a esta
+          </button>
+        )}
+        </div>
       </div>
+      {temRespostas && <ol className="mt-2.5 flex flex-col gap-2.5">{children}</ol>}
     </li>
   );
 }

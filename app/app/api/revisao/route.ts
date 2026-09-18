@@ -45,7 +45,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ erro: "corpo inválido" }, { status: 400 });
   }
 
-  const { paginaId, secaoId, acao, autor, texto } = (corpo ?? {}) as Record<string, unknown>;
+  const { paginaId, secaoId, acao, autor, texto, respondeA } = (corpo ?? {}) as Record<
+    string,
+    unknown
+  >;
 
   if (typeof paginaId !== "string" || !paginaId) {
     return NextResponse.json({ erro: "paginaId obrigatório" }, { status: 400 });
@@ -58,6 +61,11 @@ export async function POST(req: Request) {
   }
   if (typeof autor !== "string" || !AUTORES.includes(autor as Autor)) {
     return NextResponse.json({ erro: "autor inválido" }, { status: 400 });
+  }
+  // Só o formato. Se o id não existir mais, a fala continua valendo e aparece solta na linha
+  // do tempo — perder a resposta seria pior que perder o vínculo.
+  if (respondeA !== undefined && (typeof respondeA !== "string" || respondeA.length > 120)) {
+    return NextResponse.json({ erro: "respondeA inválido" }, { status: 400 });
   }
   // pedir, responder e criar exigem texto; aprovar, desfazer, agradecer e ajustar não
   if (
@@ -97,6 +105,9 @@ export async function POST(req: Request) {
     acao: acao as Acao,
     autor: autor as Autor,
     texto: typeof texto === "string" && texto.trim() ? texto.trim().slice(0, 4000) : undefined,
+    // Vínculo só faz sentido numa fala isolada: aprovar a página inteira grava um evento por
+    // seção, e amarrar todos eles ao mesmo pedido de uma seção só não diria nada.
+    respondeA: !emLote && typeof respondeA === "string" ? respondeA : undefined,
     ip: ipDaRequisicao(req),
     userAgent: (req.headers.get("user-agent") ?? "").slice(0, 300),
   };
