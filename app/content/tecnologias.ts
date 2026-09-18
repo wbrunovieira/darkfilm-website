@@ -25,6 +25,9 @@ export type Tecnologia = {
   texto: string;
   /** Anos de garantia, palavra dele. */
   garantia: number;
+  /** Imagem que ele mandou junto com o texto, na ordem dos tópicos. */
+  img: string;
+  alt: string;
 };
 
 /**
@@ -38,6 +41,8 @@ export const TECNOLOGIAS: Tecnologia[] = [
     texto:
       "A linha mais tradicional de películas automotivas. Oferece diferentes níveis de transparência para controle de luminosidade, privacidade e estética, além de elevada proteção contra os raios UV. Uma excelente opção de custo-benefício.",
     garantia: 3,
+    img: "/img/tecnologias/poliester.jpg",
+    alt: "Aplicação de película na janela de um carro",
   },
   {
     id: "nanocarbono",
@@ -45,6 +50,8 @@ export const TECNOLOGIAS: Tecnologia[] = [
     texto:
       "Tecnologia com partículas de carbono que proporciona melhor desempenho térmico e maior estabilidade de cor em relação às películas convencionais. Oferece boa redução de calor, conforto e qualidade óptica, com opções em diferentes níveis de transparência.",
     garantia: 10,
+    img: "/img/tecnologias/nanocarbono.jpg",
+    alt: "SUV preto com os vidros escurecidos, em frente a uma loja",
   },
   {
     id: "nanoceramica",
@@ -52,6 +59,8 @@ export const TECNOLOGIAS: Tecnologia[] = [
     texto:
       "Tecnologia de alta performance desenvolvida para proporcionar elevada rejeição de calor sem depender apenas do escurecimento dos vidros. Disponível desde opções mais escuras até películas de alta transparência, combinando excelente conforto térmico e ótima visibilidade.",
     garantia: 12,
+    img: "/img/tecnologias/nanoceramica.jpg",
+    alt: "Sol baixo visto de dentro do carro, através do para-brisa",
   },
   {
     id: "multicamadas",
@@ -59,6 +68,8 @@ export const TECNOLOGIAS: Tecnologia[] = [
     texto:
       "Tecnologia avançada formada por múltiplas camadas extremamente finas, desenvolvida para oferecer alto desempenho no controle da energia solar e excelente qualidade óptica. Permite alcançar elevada proteção térmica inclusive em películas de alta transparência.",
     garantia: 15,
+    img: "/img/tecnologias/multicamadas.jpg",
+    alt: "Folha de película sendo manuseada sobre o vidro de um carro",
   },
 ];
 
@@ -74,4 +85,6 @@ export const SEGURANCA = {
   texto:
     "Película de maior espessura desenvolvida para aumentar a resistência do conjunto vidro + película. Em tentativas de invasão, ajuda a dificultar a ruptura e o acesso rápido ao interior do veículo. Em acidentes ou impactos, ajuda a manter os fragmentos de vidro unidos, reduzindo a projeção de estilhaços e podendo dificultar a passagem de objetos através do vidro para o interior do veículo. Disponível em diferentes níveis de transparência, permitindo combinar segurança, privacidade e estética.",
   garantia: 3,
+  img: "/img/tecnologias/seguranca.jpg",
+  alt: "Vidro lateral estilhaçado mantido inteiro pela película, visto de dentro do carro",
 } as const;
