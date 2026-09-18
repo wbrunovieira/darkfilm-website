@@ -32,8 +32,16 @@ export default function LinhaAutomotivaPage() {
           </>
         }
         intro="Trabalhamos com películas profissionais e de alta performance, com tecnologias que proporcionam maior conforto térmico, proteção UV, privacidade e excelente visibilidade. Tudo aliado a uma aplicação profissional, com cuidado no acabamento e mínima contaminação."
-        image="/img/novo/aplicacao-carros--peugeot-2008-frente-faixa-solar.jpg"
-        imagePosition="center 55%"
+        /* Pedido do cliente em 12/09/2026: o Porsche Boxster preto no lugar do 2008 azul. É foto
+           dele, na própria oficina, com o painel de fuscas em cima e o letreiro The Dark Film ao
+           fundo — a loja aparece junto com o carro, que é o que a de antes não fazia.
+
+           A placa dianteira estava legível e foi pixelada. As caixas foram medidas na versão de
+           2000px que vai ao ar, não no original de 4080px: foi medindo no original que a placa do
+           Peugeot escapou uma vez. Conferido ampliado depois de aplicar, e os carros ao fundo não
+           mostram placa. */
+        image="/img/novo/aplicacao-carros--porsche-boxster-oficina.jpg"
+        imagePosition="center 58%"
       />
 
       {/* Os três argumentos do texto de abertura, em tiles. Os nomes das marcas são os que o
