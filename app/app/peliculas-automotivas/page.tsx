@@ -3,10 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Callout, IconList, Section, Stat, Tiles } from "@/components/Section";
-import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { TintSimulator } from "@/components/TintSimulator";
-import { ArrowIcon } from "@/components/icons";
 import {
   AlertIcon,
   CurveIcon,
@@ -25,11 +24,10 @@ export const metadata: Metadata = {
     "Películas automotivas profissionais em Petrópolis: 3M, Garware, Llumar, Ultra IR Pro e Window Blue. Conforto térmico, proteção UV e aplicação com acabamento.",
 };
 
-// Sem lavagem a seco e polimento de faróis: o cliente não faz mais (03/09/2026).
-const related = [
-  { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos-v2/parabrisa.jpg" },
-  { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/servicos/envelopamento.jpg" },
-];
+// Aqui existia `related`, com os dois produtos que a seção do fim oferecia: conserto de
+// para-brisa e envelopamento. Saiu junto com a seção, a pedido do cliente em 12/09/2026. Os dois
+// continuam acessíveis pelo menu e pelo catálogo, mas deixaram de ser oferecidos a quem está
+// lendo sobre película — é o efeito colateral do pedido, e está registrado na issue.
 
 // Texto copiado da página "Películas Automotivas" do site original.
 export default function LinhaAutomotivaPage() {
@@ -87,6 +85,21 @@ export default function LinhaAutomotivaPage() {
           era a chancela que incomodava ou só o texto legal antigo que a acompanhava. */}
 
       <TintSimulator />
+
+      {/* O aviso de legislação morava no fim da página, dentro da seção "Mais para o seu carro".
+          Ele mandou tirar a seção em 12/09/2026; o aviso veio para cá em vez de sumir junto.
+          Aqui é o lugar certo dele: fica encostado no simulador, que é justamente sobre o que a
+          lei permite em cada vidro, e é a parte que o cliente elogiou. Os dois links continuam
+          sendo o caminho desta página para /simulador e /caracteristicas-do-film. */}
+      <div className="container-x pb-16 md:pb-20">
+        <Callout icon={<AlertIcon />}>
+          Consulte a legislação vigente para a transparência mínima de cada vidro. Na loja
+          medimos o valor final com equipamento próprio — veja também{" "}
+          <Link href="/simulador" className="text-fg underline underline-offset-4 hover:text-red-2">o que a lei permite em cada vidro</Link>{" "}
+          e as{" "}
+          <Link href="/caracteristicas-do-film" className="text-fg underline underline-offset-4 hover:text-red-2">características do film</Link>.
+        </Callout>
+      </div>
 
       <Section
         index="01"
@@ -160,44 +173,6 @@ export default function LinhaAutomotivaPage() {
           valor.
         </p>
       </Section>
-
-      <section className="container-x border-t border-line py-16 md:py-24">
-        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-3">Confira nossos produtos</p>
-            <h2 className="display text-3xl md:text-5xl">Mais para o seu carro</h2>
-          </div>
-          <Link href="/som-e-acessorios" className="group inline-flex min-h-11 items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.16em] text-fg-2 transition-colors hover:text-red-2">
-            Som e acessórios
-            <ArrowIcon className="size-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </Reveal>
-        <RevealGroup className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          {related.map((s) => (
-            <RevealItem key={s.href}>
-              <Link href={s.href} className="pel-card group flex h-full flex-col">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={s.img} alt="" fill sizes="(min-width: 1024px) 25vw, 50vw" className="photo object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg-2 to-transparent" />
-                </div>
-                <div className="relative flex flex-1 items-end justify-between gap-3 p-4 md:p-5">
-                  <h3 className="font-display text-xl font-semibold uppercase leading-none md:text-2xl">{s.title}</h3>
-                  <ArrowIcon className="size-5 shrink-0 text-fg-3 transition-all group-hover:translate-x-1 group-hover:text-red-2" />
-                </div>
-              </Link>
-            </RevealItem>
-          ))}
-        </RevealGroup>
-        <div className="mt-8">
-          <Callout icon={<AlertIcon />}>
-            Consulte a legislação vigente para a transparência mínima de cada vidro. Na loja
-            medimos o valor final com equipamento próprio — veja também{" "}
-            <Link href="/simulador" className="text-fg underline underline-offset-4 hover:text-red-2">o que a lei permite em cada vidro</Link>{" "}
-            e as{" "}
-            <Link href="/caracteristicas-do-film" className="text-fg underline underline-offset-4 hover:text-red-2">características do film</Link>.
-          </Callout>
-        </div>
-      </section>
 
       <ContactCTA />
     </>
