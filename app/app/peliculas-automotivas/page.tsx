@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { Callout, IconList, Section, Stat, Tiles } from "@/components/Section";
-import { Reveal } from "@/components/Reveal";
+import { Callout, Tiles } from "@/components/Section";
 import { ContactCTA } from "@/components/ContactCTA";
 import { TintSimulator } from "@/components/TintSimulator";
-import {
-  AlertIcon,
-  CurveIcon,
-  HeatIcon,
-  LayersIcon,
-  LockIcon,
-  NoiseIcon,
-  ShatterIcon,
-  ShieldIcon,
-  TimerIcon,
-} from "@/components/icons/peliculas";
+import { Tecnologias } from "@/components/peliculas/Tecnologias";
+import { AlertIcon, CurveIcon, HeatIcon, LayersIcon } from "@/components/icons/peliculas";
 
 export const metadata: Metadata = {
   title: "Películas Automotivas",
@@ -101,78 +90,17 @@ export default function LinhaAutomotivaPage() {
         </Callout>
       </div>
 
-      <Section
-        index="01"
-        eyebrow="Proteção e segurança"
-        title="Película automotiva de proteção e segurança."
-        tone="atmo-cool"
-        aside={
-          /* pelSeg4 já é uma foto "sem / com": cada metade vira um painel do comparativo. */
-          <figure className="pel-compare">
-            <div className="pel-compare__half pel-compare__half--left">
-              <Image src="/img/peliculas/pelSeg4.jpg" alt="" width={250} height={372} sizes="(min-width: 768px) 20vw, 45vw" />
-              <figcaption className="pel-compare__tag pel-compare__tag--bad">Sem película</figcaption>
-            </div>
-            <div className="pel-compare__half pel-compare__half--right">
-              <Image src="/img/peliculas/pelSeg4.jpg" alt="" width={250} height={372} sizes="(min-width: 768px) 20vw, 45vw" />
-              <figcaption className="pel-compare__tag">Com película</figcaption>
-            </div>
-          </figure>
-        }
-        after={
-          <div className="grid gap-4 md:grid-cols-[1fr_1.2fr]">
-            <Reveal className="relative flex flex-col justify-end overflow-hidden border border-line bg-bg-2 p-6 md:p-8">
-              <span aria-hidden className="pel-num absolute -right-2 -top-4 text-[8rem] md:text-[11rem]">5s</span>
-              <Stat value="< 5 s" label="Em menos de cinco segundos, um ladrão pode quebrar a janela do seu carro e roubar os objetos de valor." icon={<TimerIcon />} size="lg" />
-            </Reveal>
-            <Reveal delay={0.1} className="grain relative min-h-64 overflow-hidden border border-line">
-              <Image src="/img/peliculas/pelSeg2.jpg" alt="Impacto em vidro com película de segurança: os fragmentos ficam presos à película" fill sizes="(min-width: 768px) 45vw, 100vw" className="object-cover saturate-[0.35] contrast-110" />
-              <div className="tint-overlay" />
-              <p className="absolute bottom-5 left-5 right-5 font-display text-lg font-semibold uppercase leading-tight text-fg md:text-2xl">
-                A janela pode quebrar. Os fragmentos ficam na película.
-              </p>
-            </Reveal>
-          </div>
-        }
-      >
-        <p>
-          Acidentes de trânsito acontecem todos os dias, mesmo com os motoristas mais
-          responsáveis. Em um piscar de olhos, vidas podem ser transformadas. Em uma colisão de
-          impacto lateral:
-        </p>
-        <IconList
-          items={[
-            { icon: <ShatterIcon />, text: "Vidros laterais sem proteção podem estilhaçar facilmente, projetando fragmentos para dentro do carro." },
-            { icon: <AlertIcon />, text: "Esses fragmentos podem causar lacerações graves e lesões oculares." },
-            { icon: <ShieldIcon />, text: "A abertura da janela estilhaçada aumenta a probabilidade de os passageiros serem jogados para fora do carro — a causa principal de morte em acidentes de trânsito." },
-          ]}
-        />
-        <p>
-          As Películas de Proteção e Segurança fornecem uma forte barreira de proteção entre você
-          e o vidro. Na ocorrência de um acidente, a janela ainda pode vir a quebrar, porém os
-          fragmentos do vidro aderem à película. Os ocupantes do carro estão protegidos dos
-          perigosos cacos de vidro soltos pelo ar e destroços lançados em um acidente.
-        </p>
+      {/* Aqui morava o bloco "Película automotiva de proteção e segurança", com o comparativo
+          sem/com, o dado dos cinco segundos, a foto do vidro estilhaçado e duas listas sobre
+          acidente e arrombamento. Saiu a pedido do cliente em 12/09/2026: "substituir o conteúdo
+          atual, hoje muito concentrado em película de segurança, por uma apresentação mais
+          completa das tecnologias".
 
-        <h3>Proteja seus objetos de valor</h3>
-        <p>
-          Em menos de cinco segundos, um ladrão pode quebrar a janela de seu carro e roubar-lhe
-          os objetos de valor. Isto poderá ser ainda mais perigoso caso você esteja no veículo
-          durante o ataque. A película de proteção e de segurança é a melhor defesa contra um
-          ataque &ldquo;smash and grab&rdquo;.
-        </p>
-        <IconList
-          items={[
-            { icon: <LockIcon />, text: "Ao sustentar o vidro quebrado no lugar, a película retarda o acesso ao interior do veículo." },
-            { icon: <NoiseIcon />, text: "O aumento do tempo para a invasão e o barulho adicional chamam atenção para o ladrão." },
-            { icon: <TimerIcon />, text: "Caso você esteja no veículo durante o ataque, terá mais tempo para escapar." },
-          ]}
-        />
-        <p>
-          <strong>Não seja uma vítima!</strong> Proteja sua família, a si mesmo e seus objetos de
-          valor.
-        </p>
-      </Section>
+          Ele tem razão no diagnóstico — a página vendia uma tecnologia só. Mas o que saiu era o
+          material mais persuasivo da página, e isso está registrado na issue: se a conversão cair,
+          o caminho é trazer o comparativo e o dado dos cinco segundos de volta, agora ancorados no
+          cartão de segurança, sem voltar a dominar a página. */}
+      <Tecnologias />
 
       <ContactCTA />
     </>
