@@ -33,6 +33,8 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "tres-especialidades-uma-oficina", titulo: "Três especialidades, uma oficina." },
       { id: "veja-a-tonalidade-antes-de-aplicar", titulo: "Veja a tonalidade antes de aplicar." },
       { id: "aplicadora-credenciada-3m", titulo: "Aplicadora credenciada 3M." },
+      { id: "agencia-mercado-livre", titulo: "Agência Mercado Livre" },
+      { id: "revenda-autorizada-thule", titulo: "Revenda autorizada Thule" },
       { id: "nossa-qualidade-e-atestada-pelo-servico-prestado", titulo: "Nossa qualidade é atestada pelo serviço prestado aos clientes." },
       { id: "na-oficina", titulo: "Na oficina" },
       { id: "som-e-a-outra-metade-do-nome", titulo: "Som é a outra metade do nome" },
@@ -108,6 +110,17 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "lado-a-lado-comparativo", titulo: "Lado a lado. (comparativo)" },
       { id: "veja-a-3m-aplicada", titulo: "Veja a 3M aplicada" },
       { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+    ],
+  },
+  {
+    id: "thule",
+    titulo: "Revenda Thule",
+    href: "/thule",
+    grupo: "Páginas do site",
+    secoes: [
+      { id: "revenda-autorizada-thule", titulo: "Revenda autorizada Thule." },
+      { id: "the-dark-film-revenda-autorizada-thule", titulo: "The Dark Film, revenda autorizada Thule" },
+      { id: "encontre-a-solucao-thule-certa", titulo: "Encontre a solução Thule certa para o seu veículo" },
     ],
   },
   {

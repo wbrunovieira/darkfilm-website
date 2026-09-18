@@ -315,6 +315,15 @@ export function PainelRevisao({
    * Uma ferramenta de aprovação que esconde o que falta não serve para nada. Então a página entra
    * nas duas filas quando deve às duas.
    */
+  /** Quantas partes da página estão paradas de um lado. É o "2 partes" da fila. */
+  const quantasDoLado = useCallback(
+    (b: Bloco, alvo: Situacao) => {
+      const todos = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
+      return todos.filter((s) => s === alvo).length;
+    },
+    [sit],
+  );
+
   const pendencias = useCallback(
     (b: Bloco): Set<Situacao> => {
       const todos = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
@@ -487,6 +496,7 @@ export function PainelRevisao({
               lado="cliente"
               souAgencia={souAgencia}
               irPara={irPara}
+              partesPendentes={(b) => quantasDoLado(b, "com-cliente")}
             />
             <Fila
               titulo={`Esperando a ${NOME_AGENCIA}`}
@@ -495,6 +505,7 @@ export function PainelRevisao({
               lado="agencia"
               souAgencia={souAgencia}
               irPara={irPara}
+              partesPendentes={(b) => quantasDoLado(b, "com-agencia")}
             />
           </div>
         )}
@@ -796,6 +807,7 @@ function Fila({
   lado,
   souAgencia,
   irPara,
+  partesPendentes,
 }: {
   titulo: string;
   nota: string;
@@ -803,6 +815,8 @@ function Fila({
   lado: "cliente" | "agencia";
   souAgencia: boolean;
   irPara: (id: string) => void;
+  /** Quantas partes daquela página este lado ainda segura. */
+  partesPendentes: (b: Bloco) => number;
 }) {
   const n = blocos.length;
   const minha = souAgencia === (lado === "agencia");
@@ -844,6 +858,14 @@ function Fila({
                 <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--wb-tinta)]">
                   {b.titulo}
                 </span>
+                {/* O número do título conta PÁGINAS, porque é isso que a lista abaixo mostra.
+                    Duas pendências na mesma página viravam "1", e lia-se "falta uma coisa".
+                    Aqui vai quantas partes daquela página este lado ainda segura. */}
+                {partesPendentes(b) > 1 && (
+                  <span className="shrink-0 rounded-full bg-white/80 px-2 py-0.5 text-[12px] font-bold tabular-nums text-[var(--wb-tinta-3)] ring-1 ring-[var(--wb-linha)]">
+                    {partesPendentes(b)} partes
+                  </span>
+                )}
                 <svg viewBox="0 0 12 12" aria-hidden className="size-3.5 shrink-0 opacity-50">
                   <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
