@@ -19,8 +19,10 @@ import Image from "next/image";
  *
  * Os contornos foram traçados sobre a cabine ampliada, com uma grade nas coordenadas do próprio
  * `viewBox` projetada por cima — sempre sobre o MESMO arquivo que a página serve, e nunca sobre
- * um recorte intermediário. A primeira versão errou justamente aí: o recorte de conferência
- * cortava o vidro, então os contornos foram traçados até a borda do recorte e não até o vidro. São `path` com curva, não polígono:
+ * um recorte intermediário, e com linhas-âncora coloridas em coordenadas conhecidas para calibrar
+ * a leitura. Duas versões erraram antes disto: a primeira porque o recorte de conferência cortava
+ * o próprio vidro, a segunda porque a régua do recorte foi deduzida em vez de conferida contra um
+ * ponto conhecido da foto. Se for refazer: desenhe as âncoras primeiro. São `path` com curva, não polígono:
  * numa vista 3/4 nenhuma dessas áreas é um quadrilátero — o teto é curvo, a coluna A é diagonal e
  * a linha de cintura desce para a frente. Quadrilátero reto fica visivelmente fora do vidro.
  *
@@ -49,26 +51,27 @@ export function CarroFoto() {
         <path
           data-vidro="parabrisa"
           fill="rgba(255,255,255,.10)"
-          d="M 191.5,58.5 C 190.2,50 190.2,40 191,34.5 C 191.2,31 191.4,29.5 191.8,28.7
-             C 205,26.4 226,24.5 247,23.3 C 255,22.9 262,22.8 265.8,22.9
-             C 266.4,32 266.2,45 264.9,57 C 264.6,60.5 264.4,62.4 264.2,63.3
-             C 250,65.8 226,66.5 209,64.8 C 200,63.9 194,61.5 191.5,58.5 Z"
+          d="M 182.1,67.1 C 183,60 185,56 187.5,52.5 C 191,46 196,40 204.5,34.4
+             C 208,32 214,29.5 222.6,28.3 C 240,27.3 260,27 271.1,27.1
+             C 274,27.2 276,27.6 277.7,28.3
+             C 273.5,39.2 269.2,50.1 265,61 C 263.5,64.5 262,68 261.4,69.5
+             C 240,70.8 220,69.8 210.5,68.9 C 198,68 188,67.5 182.1,67.1 Z"
         />
         {/* Porta dianteira, entre as colunas A e B. A linha de cintura desce para a frente. */}
         <path
           data-vidro="dianteiro"
           fill="rgba(255,255,255,.10)"
-          d="M 289.1,58.1 C 287.6,50 287.6,38 289.1,30.4
-             C 300,30.2 313,30 324,30 C 324.5,38 324.7,46 324.8,53.6
-             C 313,55.2 301,56.7 289.1,58.1 Z"
+          d="M 287.4,58.6 C 287.5,48 287.8,38 288,29.5
+             C 300,30.2 312,31 323.7,31.7 C 324.2,39 324.6,48 324.9,55.6
+             C 312,56.7 299,57.8 287.4,58.6 Z"
         />
         {/* Porta traseira, entre as colunas B e C. */}
         <path
           data-vidro="traseiro"
           fill="rgba(255,255,255,.10)"
-          d="M 331.1,52.9 C 330.9,46 330.9,38 331.1,31.9
-             C 340,32.6 350,33.8 358.5,34.9 C 359,40 359.2,46 359.3,51
-             C 350,51.7 340,52.4 331.1,52.9 Z"
+          d="M 331.6,53.7 C 331.8,46 332,38 332.2,31.9
+             C 340,32.8 348,33.7 355.8,34.6 C 356.1,40 356.3,46 356.4,51.3
+             C 348,52.2 339,53 331.6,53.7 Z"
         />
       </svg>
     </div>
