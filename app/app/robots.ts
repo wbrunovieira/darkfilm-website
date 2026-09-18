@@ -10,9 +10,10 @@ export default function robots(): MetadataRoute.Robots {
     return { rules: { userAgent: "*", disallow: "/" } };
   }
   return {
-    // As duas maquetes comerciais não são o site e não podem entrar em buscador nem quando o
-    // domínio final estiver no ar. Cada uma também traz noindex na própria página.
-    rules: { userAgent: "*", allow: "/", disallow: ["/loja", "/painel-preview"] },
+    // As maquetes comerciais e a página de escolha do carro não são o site e não podem entrar
+    // em buscador nem quando o domínio final estiver no ar. Cada uma traz noindex na própria
+    // página também.
+    rules: { userAgent: "*", allow: "/", disallow: ["/loja", "/painel-preview", "/carro"] },
     sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

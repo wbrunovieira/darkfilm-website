@@ -281,6 +281,34 @@
   height: auto;
   max-height: 240px;
 }
+/* Na página de escolha do carro os dois carros precisam ter a mesma largura, então ali o
+   desenho perde o teto de altura. */
+.carro-diagrama .carro-grande .carro-svg {
+  max-height: none;
+}
+
+/* Variante em foto do mesmo diagrama: a foto por baixo, a máscara dos vidros por cima.
+   Existe para o cliente comparar desenho e foto em /carro. As duas variantes compartilham
+   o seletor `.carro-diagrama [data-vidro]` abaixo, então tracejado, hover e vermelho do
+   selecionado funcionam igual nas duas sem nenhuma regra a mais. */
+.carro-diagrama .carro-foto {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.carro-diagrama .carro-foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.carro-diagrama .carro-mascara {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* As áreas de vidro precisam se anunciar como clicáveis mesmo com o mouse longe:
    o carro é um desenho realista e, sem essa dica, parece só ilustração. O contorno
    tracejado é a dica; o preenchimento continua o gradiente de vidro do próprio SVG,
