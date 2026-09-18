@@ -46,7 +46,7 @@ export function Footer() {
           de maior valor comercial do rodapé cercado de vazio. */}
       <div className="container-x grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Image src="/img/marca/logo.png" alt={site.name} width={200} height={66} className="h-14 w-auto" />
+          <Image src="/img/marca/logo.png" alt={site.name} width={1200} height={347} className="h-14 w-auto" />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-2">
             Desde {site.founded} em {site.city}/{site.state}. Película de controle solar e
             segurança, envelopamento, som e acessórios, alarmes e recuperação de para-brisa.

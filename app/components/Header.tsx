@@ -69,8 +69,8 @@ export function Header() {
           <Image
             src="/img/marca/logo.png"
             alt={site.name}
-            width={412}
-            height={137}
+            width={1200}
+            height={347}
             priority
             className="h-10 w-auto md:h-12"
           />

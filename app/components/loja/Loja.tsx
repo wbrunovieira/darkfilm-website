@@ -79,7 +79,7 @@ export default function Loja() {
         <Container>
           <div className="flex h-20 items-center gap-4">
             <Link href="/loja" className="flex shrink-0 items-center gap-3">
-              <Image src="/img/marca/logo.png" alt={site.name} width={412} height={137} priority className="h-9 w-auto md:h-11" />
+              <Image src="/img/marca/logo.png" alt={site.name} width={1200} height={347} priority className="h-9 w-auto md:h-11" />
               <span className="hidden border-l border-line-strong pl-3 font-display text-xs font-semibold uppercase tracking-[0.3em] text-red-2 sm:block">
                 Loja
               </span>

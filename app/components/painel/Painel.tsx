@@ -53,7 +53,7 @@ export function PainelLoja() {
           }`}
         >
           <div className="flex h-20 items-center gap-3 border-b border-line px-5">
-            <Image src="/img/marca/logo.png" alt={site.name} width={412} height={137} priority className="h-8 w-auto" />
+            <Image src="/img/marca/logo.png" alt={site.name} width={1200} height={347} priority className="h-8 w-auto" />
             <span className="border-l border-line-strong pl-3 font-display text-[0.6rem] font-semibold uppercase leading-tight tracking-[0.16em] text-red-2">
               Painel
               <br />
