@@ -120,6 +120,24 @@
         "w": 1500,
         "h": 2000,
         "alt": "Volkswagen Quantum vinho no piso xadrez, sob o letreiro The Dark Film"
+      },
+      {
+        "src": "/img/novo/vitrine--kombi-azul-customizada.jpg",
+        "w": 2000,
+        "h": 1500,
+        "alt": "Kombi antiga customizada azul-petróleo, exposta na loja"
+      },
+      {
+        "src": "/img/novo/vitrine--defender-traseira-luzes.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Land Rover Defender preto visto de trás, com as luzes traseiras acesas"
+      },
+      {
+        "src": "/img/novo/vitrine--camaro-preto.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Chevrolet Camaro preto com friso branco, exposto na oficina"
       }
     ]
   },
@@ -194,6 +212,36 @@
         "w": 1500,
         "h": 2000,
         "alt": "BMW Série 3 preto com a porta aberta, mostrando os vidros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--jeep-wrangler-rubicon.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Jeep Wrangler Rubicon cinza na oficina, com os vidros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--porsche-panamera-traseira.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "Traseira do Porsche Panamera, com os vidros escurecidos e o porta-placa The Dark Film"
+      },
+      {
+        "src": "/img/novo/aplicacao--suv-branco-traseira.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "SUV branco visto de trás, com os vidros traseiros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--suv-branco-frente.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "SUV branco visto de frente, com os vidros escurecidos por película"
+      },
+      {
+        "src": "/img/novo/aplicacao--bmw-preto-traseira.jpg",
+        "w": 1500,
+        "h": 2000,
+        "alt": "BMW preto visto de trás, com os vidros escurecidos por película"
       }
     ]
   },
