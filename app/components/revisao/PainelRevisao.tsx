@@ -48,7 +48,6 @@ import {
   NOME_AGENCIA,
   NOME_CLIENTE,
   PONTO,
-  Selo,
   TRILHO,
   apelido,
   haQuanto,
@@ -59,6 +58,14 @@ import {
 
 type Item = SecaoRevisao;
 type Bloco = { id: string; titulo: string; href?: string; grupo: string; itens: Item[] };
+
+/**
+ * As contagens de uma página, todas tiradas da MESMA lista de partes.
+ *
+ * Existe como tipo para que fila e cartão não possam divergir de novo: quem quiser mostrar um
+ * número de partes recebe este objeto inteiro, e não tem como inventar outra conta.
+ */
+type Contagem = { total: number; aprovadas: number; cliente: number; agencia: number };
 
 /** Filtros pela ótica de quem lê, não pelos nomes internos dos estados. */
 type Filtro = "tudo" | "voce" | "eles" | "novo" | "pronto";
@@ -114,7 +121,22 @@ export function PainelRevisao({
   const [situacoes, setSituacoes] = useState(situacoesIniciais);
   const [autor, setAutor] = useState<Autor>(AUTORES[0]);
   const [filtro, setFiltro] = useState<Filtro>("tudo");
-  const [aberta, setAberta] = useState<string | null>(null);
+  /**
+   * A página aberta — uma de cada vez, e a primeira já aberta ao carregar.
+   *
+   * **Por que uma só.** São 56 páginas. Um cartão aberto no celular passa de 600px, e com dois
+   * ou três abertos a lista vira de novo o rolo infinito de que ele reclamou: ele perde o lugar
+   * onde estava e a próxima página fica a três deslizadas de distância. Fechar a anterior
+   * mantém a regra de que a lista cabe no polegar e que o item aberto é sempre o assunto da vez.
+   * O painel já trabalhava assim internamente (um `aberta` só), agora isso está visível.
+   *
+   * A Home nasce aberta porque uma lista inteira fechada não ensina que os cartões abrem.
+   */
+  const [aberta, setAberta] = useState<string | null>(paginasRevisao[0]?.id ?? null);
+  /** Dentro da página aberta, se a lista de partes está estendida. Segundo nível, opcional. */
+  const [partesAbertas, setPartesAbertas] = useState<string | null>(null);
+  /** Grupos recolhidos/estendidos à mão. Sem entrada aqui, vale o padrão de `grupoAberto`. */
+  const [gruposAbertos, setGruposAbertos] = useState<Record<string, boolean>>({});
   const [ocupado, setOcupado] = useState<string | null>(null);
   const [erro, setErro] = useState<{ alvo: string; msg: string } | null>(null);
   const [flash, setFlash] = useState<string | null>(null);
@@ -303,20 +325,55 @@ export function PainelRevisao({
       : dasPaginas;
   }, [eventos]);
 
+  /**
+   * As partes de uma página — uma definição só, usada em todo lugar.
+   *
+   * É aqui que mora o conserto do bug que ele apontou: a fila dizia "7 partes" e o cartão da
+   * mesma Home dizia "10 partes". Os dois números estavam certos e nasciam de listas
+   * diferentes — a fila contava o que estava pendente daquele lado, o cartão contava as seções
+   * da página — e nada na tela dizia isso. Agora existe UMA lista de partes (as seções, mais o
+   * item "página inteira" quando ele tem conversa) e todas as contagens saem dela, de modo que
+   * "7" e "10" passam a ser dois números da mesma conta: 7 de 10.
+   */
+  const situacoesDe = useCallback(
+    (b: Bloco): Situacao[] => {
+      const s = b.itens.map((i) => sit(b.id, i.id));
+      // O item da página inteira só conta quando existe de fato: nascer vazio inflava o total.
+      if ((porPagina.get(b.id) ?? []).some((e) => e.secaoId === ITEM_PAGINA)) {
+        s.push(sit(b.id, ITEM_PAGINA));
+      }
+      return s;
+    },
+    [porPagina, sit],
+  );
+
+  /** Total, aprovadas e quantas partes cada lado ainda segura. O cartão e a fila leem daqui. */
+  const contar = useCallback(
+    (b: Bloco): Contagem => {
+      const s = situacoesDe(b);
+      return {
+        total: s.length,
+        aprovadas: s.filter((x) => x === "aprovado" || x === "fechado").length,
+        cliente: s.filter((x) => x === "com-cliente").length,
+        agencia: s.filter((x) => x === "com-agencia").length,
+      };
+    },
+    [situacoesDe],
+  );
+
   /** O pior estado manda: uma bola pendente deixa a página pendente na lista. */
   const sitBloco = useCallback(
     (b: Bloco): Situacao => {
-      // Inclui o item da página inteira: um pedido feito ali também deixa a página pendente.
-      const itens = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
+      const s = situacoesDe(b);
       // Conversa aberta vem antes de tudo: é a única coisa que exige ação de alguém agora.
-      if (itens.includes("com-cliente")) return "com-cliente";
-      if (itens.includes("com-agencia")) return "com-agencia";
-      const secoes = b.itens.map((i) => sit(b.id, i.id));
-      if (secoes.every((x) => x === "fechado")) return "fechado";
-      if (secoes.every((x) => x === "aprovado" || x === "fechado")) return "aprovado";
+      if (s.includes("com-cliente")) return "com-cliente";
+      if (s.includes("com-agencia")) return "com-agencia";
+      if (!s.length) return "novo";
+      if (s.every((x) => x === "fechado")) return "fechado";
+      if (s.every((x) => x === "aprovado" || x === "fechado")) return "aprovado";
       return "novo";
     },
-    [sit],
+    [situacoesDe],
   );
 
   /**
@@ -331,21 +388,10 @@ export function PainelRevisao({
    * Uma ferramenta de aprovação que esconde o que falta não serve para nada. Então a página entra
    * nas duas filas quando deve às duas.
    */
-  /** Quantas partes da página estão paradas de um lado. É o "2 partes" da fila. */
-  const quantasDoLado = useCallback(
-    (b: Bloco, alvo: Situacao) => {
-      const todos = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
-      return todos.filter((s) => s === alvo).length;
-    },
-    [sit],
-  );
-
   const pendencias = useCallback(
-    (b: Bloco): Set<Situacao> => {
-      const todos = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
-      return new Set(todos.filter((s) => s === "com-cliente" || s === "com-agencia"));
-    },
-    [sit],
+    (b: Bloco): Set<Situacao> =>
+      new Set(situacoesDe(b).filter((s) => s === "com-cliente" || s === "com-agencia")),
+    [situacoesDe],
   );
 
   /**
@@ -390,12 +436,35 @@ export function PainelRevisao({
     return m;
   }, [blocos, filtro, porPagina, sit, souAgencia]);
 
+  /**
+   * O andamento, medido pelo que de fato anda.
+   *
+   * A barra antiga contava só páginas 100% aprovadas — e uma página só fica aprovada quando
+   * TODAS as partes dela fecham. Depois de 16 dias de conversa, 72 registros e 30 ajustes
+   * entregues, ela marcava "0 de 56 · 0%", o que é literalmente verdade e mente sobre o
+   * trabalho: dá a impressão de que nada aconteceu. É um indicador atrasado.
+   *
+   * Agora as 56 páginas são repartidas em três estados, e a barra mostra os três. Página com
+   * conversa aberta aparece como conversa — que é o que ela é — em vez de se somar às que
+   * ninguém abriu ainda.
+   */
   const paginas = useMemo(() => blocos.filter((b) => !!b.href), [blocos]);
-  const total = paginas.length;
-  const prontas = useMemo(
-    () => paginas.filter((b) => ["aprovado", "fechado"].includes(sitBloco(b))).length,
-    [paginas, sitBloco],
-  );
+  const resumo = useMemo(() => {
+    let prontas = 0;
+    let conversa = 0;
+    for (const b of paginas) {
+      if (["aprovado", "fechado"].includes(sitBloco(b))) prontas++;
+      else if ((porPagina.get(b.id) ?? []).length > 0) conversa++;
+    }
+    return { prontas, conversa, intocadas: paginas.length - prontas - conversa, total: paginas.length };
+  }, [paginas, porPagina, sitBloco]);
+
+  /** Quantas páginas cada grupo tem no total, para o título do grupo dizer se está filtrado. */
+  const totalPorGrupo = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const b of blocos) m.set(b.grupo, (m.get(b.grupo) ?? 0) + 1);
+    return m;
+  }, [blocos]);
 
   /** Contagem por tom — é o que rotula os filtros e a chamada do topo. */
   const contagem = useMemo(() => {
@@ -431,7 +500,6 @@ export function PainelRevisao({
     () => blocos.filter((b) => pendencias(b).has("com-agencia") || sitBloco(b) === "aprovado"),
     [blocos, pendencias, sitBloco],
   );
-  const praVoce = souAgencia ? comAgencia : comCliente;
 
   const combina = useCallback(
     (b: Bloco) => {
@@ -457,14 +525,58 @@ export function PainelRevisao({
     return [...m.entries()].sort((a, b) => peso(a[0]) - peso(b[0]));
   }, [blocos, combina]);
 
-  const pct = total ? Math.round((prontas / total) * 100) : 0;
+  /**
+   * Grupo aberto ou fechado.
+   *
+   * As 41 páginas de Som e Acessórios são 2.500px de lista no celular, todas em silêncio, e
+   * ficam entre ele e o fim da página. Grupo grande nasce fechado, com o número do lado; grupo
+   * pequeno — ou grupo que um filtro já encurtou — nasce aberto, porque aí não custa nada.
+   */
+  const grupoAberto = useCallback(
+    (grupo: string, quantos: number) =>
+      gruposAbertos[grupo] ??
+      (grupo === "Páginas do site" || grupo === GRUPO_ASSUNTOS || quantos <= 12),
+    [gruposAbertos],
+  );
 
-  const irPara = useCallback((id: string) => {
-    setAberta(id);
-    requestAnimationFrame(() =>
-      document.getElementById(`bloco-${id}`)?.scrollIntoView({ block: "start", behavior: "smooth" }),
-    );
-  }, []);
+  /**
+   * Abre uma página e leva a tela até ela.
+   *
+   * O `scrollIntoView` deixou de ser enfeite quando os cartões passaram a fechar: ao abrir um
+   * cartão lá embaixo, o que estava aberto lá em cima encolhe e a página inteira sobe debaixo
+   * do dedo. Rolar até o cartão recém-aberto devolve o lugar dele à tela.
+   */
+  const abrirPagina = useCallback(
+    (id: string, comPartes?: boolean) => {
+      setAberta(id);
+      if (comPartes) setPartesAbertas(id);
+      // O grupo pode estar recolhido — um produto pendente mora dentro dos 41 de Som e
+      // Acessórios. Sem isto o atalho da fila levaria a um elemento de altura zero.
+      const grupo = blocos.find((b) => b.id === id)?.grupo;
+      const precisaAbrirGrupo = !!grupo && !grupoAberto(grupo, 99);
+      if (grupo) setGruposAbertos((m) => ({ ...m, [grupo]: true }));
+      const rolar = () =>
+        document.getElementById(`bloco-${id}`)?.scrollIntoView({ block: "start", behavior: "smooth" });
+      // Se o grupo estava fechado, a sanfona ainda está abrindo (300ms) e o destino tem altura
+      // zero: rolar antes disso não leva a lugar nenhum.
+      if (precisaAbrirGrupo) setTimeout(rolar, 340);
+      else requestAnimationFrame(rolar);
+    },
+    [blocos, grupoAberto],
+  );
+
+  /** Alterna um cartão. Ao fechar, a lista de partes daquele cartão fecha junto. */
+  const alternarPagina = useCallback(
+    (id: string) => {
+      if (aberta === id) {
+        setAberta(null);
+        setPartesAbertas((p) => (p === id ? null : p));
+        return;
+      }
+      abrirPagina(id);
+    },
+    [aberta, abrirPagina],
+  );
 
   const acoes: Acoes = {
     autor,
@@ -485,13 +597,7 @@ export function PainelRevisao({
   return (
     <Ctx.Provider value={acoes}>
       <div className="mx-auto max-w-4xl px-4 pb-28 sm:px-6">
-        <Abertura
-          autor={autor}
-          setAutor={setAutor}
-          prontas={prontas}
-          total={total}
-          pct={pct}
-        />
+        <Abertura autor={autor} setAutor={setAutor} resumo={resumo} />
 
         <BarraFiltros
           filtro={filtro}
@@ -512,52 +618,71 @@ export function PainelRevisao({
               blocos={comCliente}
               lado="cliente"
               souAgencia={souAgencia}
-              irPara={irPara}
-              partesPendentes={(b) => quantasDoLado(b, "com-cliente")}
+              irPara={abrirPagina}
+              contar={contar}
             />
             <Fila
-              titulo={`Esperando a ${NOME_AGENCIA}`}
+              // "WB Digital Solutions" por extenso quebrava o título em duas linhas dentro da
+              // caixa. Os chips, os selos e a linha do cartão já dizem "a WB": é como ele nos
+              // chama, e um nome só em toda a tela é menos coisa para decifrar.
+              titulo="Esperando a WB"
               nota="Estamos resolvendo por aqui."
               blocos={comAgencia}
               lado="agencia"
               souAgencia={souAgencia}
-              irPara={irPara}
-              partesPendentes={(b) => quantasDoLado(b, "com-agencia")}
+              irPara={abrirPagina}
+              contar={contar}
             />
           </div>
         )}
 
-        {grupos.map(([grupo, itens]) => (
-          <section key={grupo} className="mt-9">
-            <TituloDeGrupo grupo={grupo} quantos={itens.length} total={total} />
-
-            {grupo === "Páginas do site" ? (
-              <ul className="mt-3 flex flex-col gap-3">
-                {itens.map((b, i) => (
-                  <CartaoPagina
-                    key={b.id}
-                    b={b}
-                    i={i}
-                    situacao={sitBloco(b)}
-                    tambem={pendencias(b)}
-                    aberto={aberta === b.id}
-                    alternar={() => setAberta(aberta === b.id ? null : b.id)}
-                    aberta={emAberto.get(b.id)}
-                  />
-                ))}
-              </ul>
-            ) : (
-              <GrupoCompacto
-                blocos={itens}
-                sitBloco={sitBloco}
-                emAberto={emAberto}
-                aberta={aberta}
-                setAberta={setAberta}
-                assuntos={grupo === GRUPO_ASSUNTOS}
+        {grupos.map(([grupo, itens]) => {
+          const g = grupoAberto(grupo, itens.length);
+          return (
+            <section key={grupo} className="mt-9">
+              <TituloDeGrupo
+                grupo={grupo}
+                quantos={itens.length}
+                totalGrupo={totalPorGrupo.get(grupo) ?? itens.length}
+                aprovadas={itens.filter((b) => ["aprovado", "fechado"].includes(sitBloco(b))).length}
+                aberto={g}
+                alternar={() => setGruposAbertos((m) => ({ ...m, [grupo]: !g }))}
               />
-            )}
-          </section>
-        ))}
+
+              <Sanfona aberta={g} id={`grupo-${grupo.replace(/\W+/g, "-")}`}>
+                {grupo === "Páginas do site" ? (
+                  <ul className="mt-3 flex flex-col gap-3">
+                    {itens.map((b, i) => (
+                      <CartaoPagina
+                        key={b.id}
+                        b={b}
+                        i={i}
+                        situacao={sitBloco(b)}
+                        contagem={contar(b)}
+                        aberto={aberta === b.id}
+                        alternar={() => alternarPagina(b.id)}
+                        partesAbertas={partesAbertas === b.id}
+                        alternarPartes={() =>
+                          setPartesAbertas((p) => (p === b.id ? null : b.id))
+                        }
+                        aberta={emAberto.get(b.id)}
+                      />
+                    ))}
+                  </ul>
+                ) : (
+                  <GrupoCompacto
+                    blocos={itens}
+                    sitBloco={sitBloco}
+                    emAberto={emAberto}
+                    aberta={aberta}
+                    setAberta={setAberta}
+                    assuntos={grupo === GRUPO_ASSUNTOS}
+                  />
+                )}
+              </Sanfona>
+            </section>
+          );
+        })}
 
         {grupos.length === 0 && (
           <p className="mt-10 rounded-2xl border border-[var(--wb-linha)] bg-white p-10 text-center text-[15px] text-[var(--wb-tinta-2)]">
@@ -585,16 +710,14 @@ export function PainelRevisao({
 function Abertura({
   autor,
   setAutor,
-  prontas,
-  total,
-  pct,
+  resumo,
 }: {
   autor: Autor;
   setAutor: (a: Autor) => void;
-  prontas: number;
-  total: number;
-  pct: number;
+  resumo: { prontas: number; conversa: number; intocadas: number; total: number };
 }) {
+  const { prontas, conversa, intocadas, total } = resumo;
+  const fatia = (n: number) => (total ? (n / total) * 100 : 0);
   return (
     <header className="pt-8 sm:pt-12">
       <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--wb-roxo-vivo)]">
@@ -633,35 +756,58 @@ function Abertura({
               // decide de quem é a assinatura do registro, errar nele adultera a auditoria.
               style={{ minHeight: 44 }}
             >
+              {/* O rótulo é o mesmo apelido que assina as falas — "Bruno (The Dark Film)" e
+                  "Bruno (WB)". Ver no seletor um nome e no balão outro obrigava a traduzir. */}
               {AUTORES.map((a) => (
                 <option key={a} value={a}>
-                  {a}
+                  {apelido(a)}
                 </option>
               ))}
             </select>
           </span>
         </label>
 
+        {/*
+          Três estados, não um.
+          A barra antiga só enchia quando a página inteira fechava, e por isso marcava 0% depois
+          de duas semanas de conversa. Aqui cada página cai num dos três: aprovada, em conversa,
+          ou ainda não olhada. O que já aconteceu aparece, e o que falta continua sendo dito.
+        */}
         <div className="p-3.5">
-          <div className="flex items-baseline justify-between gap-3">
-            <p className="text-[15px] font-bold text-[var(--wb-tinta)]">
-              {prontas} de {total} páginas prontas
-            </p>
-            <p className="text-[13px] font-semibold text-[var(--wb-tinta-3)]">{pct}%</p>
-          </div>
+          <p className="text-[15px] font-bold text-[var(--wb-tinta)]">
+            Andamento das {total} páginas
+          </p>
           <div
-            className="mt-2 h-2 overflow-hidden rounded-full bg-[var(--wb-linha)]"
-            role="progressbar"
-            aria-valuenow={prontas}
-            aria-valuemin={0}
-            aria-valuemax={total}
-            aria-label="Páginas prontas"
+            className="mt-2 flex h-2.5 gap-px overflow-hidden rounded-full bg-[var(--wb-linha)]"
+            role="img"
+            aria-label={`${prontas} aprovadas, ${conversa} em conversa, ${intocadas} ainda não olhadas, de ${total} páginas.`}
           >
-            <div
-              className="wb-progresso h-full rounded-full transition-[width] duration-700"
-              style={{ width: `${Math.max(pct, 1.5)}%` }}
-            />
+            {prontas > 0 && (
+              <span
+                className="block h-full bg-[var(--wb-verde)] transition-[width] duration-700"
+                style={{ width: `${fatia(prontas)}%` }}
+              />
+            )}
+            {conversa > 0 && (
+              <span
+                className="block h-full bg-[var(--wb-ambar-borda)] transition-[width] duration-700"
+                style={{ width: `${fatia(conversa)}%` }}
+              />
+            )}
           </div>
+          <ul className="mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-[var(--wb-tinta-2)]">
+            {[
+              ["bg-[var(--wb-verde)]", prontas, "aprovadas"],
+              ["bg-[var(--wb-ambar-borda)]", conversa, "em conversa"],
+              ["bg-[var(--wb-linha)]", intocadas, "ainda não olhadas"],
+            ].map(([cor, n, texto]) => (
+              <li key={texto as string} className="flex items-center gap-1.5">
+                <span aria-hidden className={`size-2 shrink-0 rounded-full ${cor}`} />
+                <strong className="font-bold tabular-nums text-[var(--wb-tinta)]">{n}</strong>
+                {texto}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </header>
@@ -783,27 +929,61 @@ function BarraFiltros({
   );
 }
 
+/**
+ * Cabeçalho de grupo, que também é o botão que recolhe o grupo inteiro.
+ *
+ * O grupo "Som e Acessórios" tem 41 páginas em silêncio e ficava entre ele e o fim da lista.
+ * Recolhido, o painel inteiro cabe em poucas rolagens e os produtos continuam a um toque.
+ */
 function TituloDeGrupo({
   grupo,
   quantos,
-  total,
+  totalGrupo,
+  aprovadas,
+  aberto,
+  alternar,
 }: {
   grupo: string;
+  /** Quantos aparecem agora (o filtro pode ter encurtado). */
   quantos: number;
-  total: number;
+  /** Quantos o grupo tem ao todo, para o título avisar quando está filtrado. */
+  totalGrupo: number;
+  aprovadas: number;
+  aberto: boolean;
+  alternar: () => void;
 }) {
+  const nome = grupo === GRUPO_ASSUNTOS ? "assunto" : "página";
+  const plural = grupo === GRUPO_ASSUNTOS ? "assuntos" : "páginas";
   const sufixo =
-    grupo === GRUPO_ASSUNTOS
-      ? `${quantos} ${quantos === 1 ? "assunto" : "assuntos"}`
-      : grupo === "Páginas do site"
-        ? `${quantos} de ${total}`
-        : `${quantos} ${quantos === 1 ? "página" : "páginas"}`;
+    quantos < totalGrupo
+      ? `${quantos} de ${totalGrupo} ${plural}`
+      : `${quantos} ${quantos === 1 ? nome : plural}`;
   return (
-    <h2 className="flex flex-wrap items-baseline gap-x-2 text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--wb-tinta-2)]">
-      {grupo}
-      <span className="font-medium normal-case tracking-normal text-[var(--wb-tinta-3)]">
-        {sufixo}
-      </span>
+    <h2>
+      <button
+        type="button"
+        onClick={alternar}
+        aria-expanded={aberto}
+        aria-controls={`grupo-${grupo.replace(/\W+/g, "-")}`}
+        className="wb-foco -mx-2 flex min-h-11 w-[calc(100%+1rem)] items-center gap-2 rounded-xl px-2 text-left text-[13px] font-bold uppercase tracking-[0.12em] text-[var(--wb-tinta-2)] transition-colors hover:text-[var(--wb-roxo)]"
+      >
+        {/* O nome e a contagem quebram juntos dentro deste bloco; a seta fica sempre na
+            primeira linha, à direita, onde o polegar a procura. */}
+        <span className="flex min-w-0 flex-1 flex-wrap items-baseline gap-x-2">
+          {grupo}
+          <span className="font-medium normal-case tracking-normal text-[var(--wb-tinta-3)]">
+            {sufixo}
+            {aprovadas > 0 && ` · ${aprovadas} aprovada${aprovadas > 1 ? "s" : ""}`}
+          </span>
+        </span>
+        <svg
+          viewBox="0 0 12 12"
+          aria-hidden
+          className={`size-3.5 shrink-0 transition-transform duration-300 ${aberto ? "rotate-180" : ""}`}
+        >
+          <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </h2>
   );
 }
@@ -824,7 +1004,7 @@ function Fila({
   lado,
   souAgencia,
   irPara,
-  partesPendentes,
+  contar,
 }: {
   titulo: string;
   nota: string;
@@ -832,16 +1012,22 @@ function Fila({
   lado: "cliente" | "agencia";
   souAgencia: boolean;
   irPara: (id: string) => void;
-  /** Quantas partes daquela página este lado ainda segura. */
-  partesPendentes: (b: Bloco) => number;
+  /** As contagens da página, na mesma conta que o cartão lá embaixo usa. */
+  contar: (b: Bloco) => Contagem;
 }) {
   const n = blocos.length;
   const minha = souAgencia === (lado === "agencia");
   const vazia = n === 0;
+  /** A caixa cortava em 6 e dizia "e mais 1 abaixo", sem levar a lugar nenhum. Agora abre. */
+  const [tudo, setTudo] = useState(false);
+  const CORTE = 6;
+  const visiveis = tudo ? blocos : blocos.slice(0, CORTE);
 
   return (
     <section
-      className={`wb-entra overflow-hidden rounded-2xl ring-1 ${
+      // `self-start`: sem isto a coluna vazia esticava até a altura da coluna cheia e virava
+      // um retângulo de 400px dizendo "nada por aqui".
+      className={`wb-entra self-start overflow-hidden rounded-2xl ring-1 ${
         vazia
           ? "bg-white/60 ring-[var(--wb-linha)]"
           : minha
@@ -849,7 +1035,9 @@ function Fila({
             : "bg-white ring-[var(--wb-linha)]"
       }`}
     >
-      <div className="px-4 pb-1 pt-3.5">
+      {/* Fila vazia é uma linha só. Com o mesmo corpo da fila cheia ela gastava 170px de um
+          celular para dizer "nada aqui" — e essa é justamente a informação que menos importa. */}
+      <div className={vazia ? "px-4 py-3" : "px-4 pb-1 pt-3.5"}>
         <h2 className="flex items-baseline gap-2 text-[15px] font-extrabold text-[var(--wb-tinta)]">
           <span
             aria-hidden
@@ -858,40 +1046,74 @@ function Fila({
             }`}
           />
           {titulo}
-          <span className="ml-auto text-[13px] font-bold tabular-nums text-[var(--wb-tinta-3)]">{n}</span>
+          {/* "7" sozinho aqui e "7 partes" na linha da Home eram dois "7" de coisas diferentes.
+              Este conta PÁGINAS e passa a dizer isso. */}
+          <span className="ml-auto whitespace-nowrap text-[13px] font-semibold text-[var(--wb-tinta-3)]">
+            {vazia ? "nada por aqui" : `${n} ${n === 1 ? "página" : "páginas"}`}
+          </span>
         </h2>
-        <p className="mt-0.5 text-[13px] text-[var(--wb-tinta-3)]">{vazia ? "Nada por aqui." : nota}</p>
+        {!vazia && <p className="mt-0.5 text-[13px] text-[var(--wb-tinta-3)]">{nota}</p>}
       </div>
 
       {!vazia && (
         <ul className="mt-1 px-1.5 pb-1.5">
-          {blocos.slice(0, 6).map((b) => (
-            <li key={b.id}>
+          {visiveis.map((b) => {
+            const c = contar(b);
+            const pendentes = lado === "cliente" ? c.cliente : c.agencia;
+            return (
+              <li key={b.id}>
+                <button
+                  type="button"
+                  onClick={() => irPara(b.id)}
+                  className="wb-foco flex min-h-11 w-full items-center gap-2 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-white/70"
+                >
+                  <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--wb-tinta)]">
+                    {b.titulo}
+                  </span>
+                  {/*
+                    O bug que ele apontou morava aqui. Esta linha dizia "7 partes" e o cartão da
+                    mesma Home dizia "10 partes": uma contava o que estava pendente deste lado, a
+                    outra contava as seções da página. Agora é uma fração — "7 de 10" —, que só
+                    tem uma leitura possível e amarra os dois números na mesma conta.
+                  */}
+                  {c.total > 1 && (
+                    <span className="shrink-0 whitespace-nowrap rounded-full bg-white/80 px-2 py-0.5 text-[12px] font-bold tabular-nums text-[var(--wb-tinta-3)] ring-1 ring-[var(--wb-linha)]">
+                      <span aria-hidden>
+                        {pendentes} de {c.total}
+                        <span className="hidden sm:inline"> partes</span>
+                      </span>
+                      <span className="sr-only">
+                        {pendentes} de {c.total} partes esperando
+                      </span>
+                    </span>
+                  )}
+                  <svg viewBox="0 0 12 12" aria-hidden className="size-3.5 shrink-0 opacity-50">
+                    <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </li>
+            );
+          })}
+          {n > CORTE && (
+            <li>
               <button
                 type="button"
-                onClick={() => irPara(b.id)}
-                className="wb-foco flex min-h-11 w-full items-center gap-2 rounded-xl px-2.5 py-2 text-left transition-colors hover:bg-white/70"
+                onClick={() => setTudo(!tudo)}
+                className="wb-foco flex min-h-11 w-full items-center gap-1.5 rounded-xl px-2.5 text-left text-[13px] font-bold text-[var(--wb-roxo)] transition-colors hover:bg-white/70"
               >
-                <span className="min-w-0 flex-1 truncate text-[15px] font-semibold text-[var(--wb-tinta)]">
-                  {b.titulo}
-                </span>
-                {/* O número do título conta PÁGINAS, porque é isso que a lista abaixo mostra.
-                    Duas pendências na mesma página viravam "1", e lia-se "falta uma coisa".
-                    Aqui vai quantas partes daquela página este lado ainda segura. */}
-                {partesPendentes(b) > 1 && (
-                  <span className="shrink-0 rounded-full bg-white/80 px-2 py-0.5 text-[12px] font-bold tabular-nums text-[var(--wb-tinta-3)] ring-1 ring-[var(--wb-linha)]">
-                    {partesPendentes(b)} partes
-                  </span>
-                )}
-                <svg viewBox="0 0 12 12" aria-hidden className="size-3.5 shrink-0 opacity-50">
-                  <path d="M4 2l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                {tudo
+                  ? "ver menos"
+                  : n - CORTE === 1
+                    ? "ver mais 1 página"
+                    : `ver as outras ${n - CORTE} páginas`}
+                <svg
+                  viewBox="0 0 12 12"
+                  aria-hidden
+                  className={`size-3.5 transition-transform duration-300 ${tudo ? "rotate-180" : ""}`}
+                >
+                  <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-            </li>
-          ))}
-          {n > 6 && (
-            <li className="px-2.5 py-2 text-[13px] font-medium text-[var(--wb-tinta-3)]">
-              e mais {n - 6} abaixo
             </li>
           )}
         </ul>
@@ -1153,29 +1375,49 @@ function PerguntaAberta({
 
 /* ------------------------------------------------------------------ cartão de página */
 
+/**
+ * Uma página do site, recolhida.
+ *
+ * **Por que fechar.** São 56 páginas. O cartão aberto mostra a pergunta em aberto, três botões
+ * e o atalho para as partes — cerca de 400px no celular —, e vezes 56 isso é um documento de
+ * vinte telas em que nada se acha. Fechado, cada página é uma linha de três informações: nome,
+ * quantas partes tem e quantas já foram aprovadas, mais a última fala quando há conversa
+ * parada. O que ele precisa para decidir *qual* abrir cabe na linha; o resto vem ao abrir.
+ *
+ * **Uma aberta de cada vez** (a decisão está em `aberta`, no painel): abrir a segunda fecha a
+ * primeira, senão a lista volta a crescer sem fim debaixo do dedo.
+ *
+ * **Sem selo em pílula.** O estado deixou de ser uma etiqueta ao lado do título e virou a
+ * própria linha de contagem — "10 partes · 7 esperando The Dark Film". Uma pílula escrita
+ * "Esperando The Dark Film" ao lado de "10 partes" era duas informações desencontradas
+ * disputando a mesma linha estreita; escrito por extenso, o número e o que ele significa ficam
+ * grudados, que é justamente o que faltava.
+ */
 function CartaoPagina({
   b,
   i,
   situacao,
-  tambem,
+  contagem,
   aberto,
   alternar,
+  partesAbertas,
+  alternarPartes,
   aberta,
 }: {
   b: Bloco;
   i: number;
   situacao: Situacao;
-  /** Todos os lados que a página ainda segura. Mais de um quando ela deve aos dois. */
-  tambem: Set<Situacao>;
+  contagem: Contagem;
   aberto: boolean;
   alternar: () => void;
+  /** Segundo nível: a lista de seções dentro da página já aberta. */
+  partesAbertas: boolean;
+  alternarPartes: () => void;
   aberta?: { ev: Evento; parte: string };
 }) {
   const a = useAcoes();
   const t = tom(situacao, a.souAgencia);
-  const prontas = b.itens.filter((it) =>
-    ["aprovado", "fechado"].includes(a.sit(b.id, it.id)),
-  ).length;
+  const { total, aprovadas, cliente, agencia } = contagem;
 
   // O item "página inteira" só entra na lista quando tem conversa: nascer vazio confundia.
   const partes = [
@@ -1183,92 +1425,151 @@ function CartaoPagina({
     { id: ITEM_PAGINA, titulo: "Sobre a página inteira" },
   ].filter((it) => it.id !== ITEM_PAGINA || a.eventosDe(b.id, ITEM_PAGINA).length > 0);
 
+  /**
+   * A linha de contagem, que é o conserto do "7 partes × 10 partes".
+   *
+   * Os dois números aparecem lado a lado e na mesma frase, então não há como confundir o total
+   * da página com o que está pendente de um lado. O trecho do lado de quem está lendo é o único
+   * em negrito: numa lista de 56 linhas, só o que exige ação de quem olha pode ter peso.
+   */
+  const pedacos: { texto: string; meu?: boolean }[] = [
+    { texto: `${total} ${total === 1 ? "parte" : "partes"}` },
+  ];
+  if (aprovadas > 0) {
+    pedacos.push({ texto: `${aprovadas} aprovada${aprovadas > 1 ? "s" : ""}` });
+  }
+  if (cliente > 0) {
+    pedacos.push({ texto: `${cliente} esperando ${NOME_CLIENTE}`, meu: !a.souAgencia });
+  }
+  if (agencia > 0) {
+    pedacos.push({ texto: `${agencia} esperando a WB`, meu: a.souAgencia });
+  }
+  if (pedacos.length === 1 && t === "silencio") pedacos.push({ texto: "ainda não olhada" });
+
   return (
     <li
       id={`bloco-${b.id}`}
       style={{ "--i": Math.min(i, 10), "--wb-cor-trilho": TRILHO[t] } as React.CSSProperties}
-      className={`wb-entra wb-cartao wb-trilho wb-alvo overflow-hidden rounded-2xl border border-[var(--wb-linha)] bg-white shadow-[0_8px_24px_-20px_rgba(53,5,69,0.55)] ${
-        a.flash === `${b.id}/pagina` ? "wb-flash" : ""
-      }`}
+      className={`wb-entra wb-cartao wb-trilho wb-alvo overflow-hidden rounded-2xl border bg-white shadow-[0_8px_24px_-20px_rgba(53,5,69,0.55)] ${
+        aberto ? "border-[var(--wb-lilas)]" : "border-[var(--wb-linha)]"
+      } ${a.flash === `${b.id}/pagina` ? "wb-flash" : ""}`}
     >
-      <div className="p-4 pl-5 sm:p-5 sm:pl-6">
-        {/* No celular os dois selos — página que deve aos dois lados — espremiam o título contra
-            a borda. Abaixo de 640px eles descem para a própria linha. */}
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
-          <div className="min-w-0">
-            <h3 className="text-[18px] font-bold leading-tight text-[var(--wb-tinta)] [text-wrap:balance]">
+      {/*
+        O cabeçalho inteiro é o botão. Num celular, dentro de uma oficina, o alvo tem de ser a
+        linha toda — mirar num chevron de 14px com a mão suja é o tipo de coisa que faz a pessoa
+        desistir e voltar para o WhatsApp.
+      */}
+      <h3>
+        <button
+          type="button"
+          onClick={alternar}
+          aria-expanded={aberto}
+          aria-controls={`corpo-${b.id}`}
+          className="wb-foco flex w-full items-center gap-3 p-4 pl-5 text-left sm:p-5 sm:pl-6"
+        >
+          <span
+            className={`mt-0.5 size-2.5 shrink-0 self-start rounded-full ${PONTO[t]}`}
+            role="img"
+            aria-label={rotulo(situacao, a.souAgencia)}
+          />
+          <span className="min-w-0 flex-1">
+            <span className="block text-[17px] font-bold leading-tight text-[var(--wb-tinta)]">
               {b.titulo}
-            </h3>
-            <p className="mt-1 text-[13px] text-[var(--wb-tinta-3)]">
-              {b.itens.length} {b.itens.length === 1 ? "parte" : "partes"}
-              {prontas > 0 && ` · ${prontas} já aprovada${prontas > 1 ? "s" : ""}`}
-              {t === "silencio" && " · ainda não olhada"}
-            </p>
-          </div>
-          {/* Dois selos quando a página deve aos dois lados. Um selo só escondia metade do que
-              falta: o desempate mandava "com-cliente" para a frente e a pendência da agência
-              sumia do cartão inteiro. */}
-          <div className="flex shrink-0 flex-wrap gap-1.5 sm:justify-end">
-            <Selo situacao={situacao} souAgencia={a.souAgencia} />
-            {[...tambem]
-              .filter((x) => x !== situacao)
-              .map((x) => (
-                <Selo key={x} situacao={x} souAgencia={a.souAgencia} />
+            </span>
+            <span className="mt-1 block text-[13px] leading-snug text-[var(--wb-tinta-3)]">
+              {/* `whitespace-nowrap` no pedaço, separador fora dele: assim a linha quebra ENTRE
+                  as contagens e nunca no meio de uma ("4 esperando The Dark / Film" fazia o
+                  número perder o dono). O separador precisa ficar de fora, senão não sobra
+                  nenhum ponto de quebra e a linha estoura para cima da seta. */}
+              {pedacos.map((p, k) => (
+                <span key={p.texto}>
+                  {k > 0 && " · "}
+                  <span
+                    className={`whitespace-nowrap ${p.meu ? "font-bold text-[var(--wb-ambar-tinta)]" : ""}`}
+                  >
+                    {p.texto}
+                  </span>
+                </span>
               ))}
-          </div>
+            </span>
+            {/*
+              Fechado, o cartão ainda mostra de que se trata a conversa parada. Sem isto ele
+              teria de abrir cada uma das páginas em âmbar para descobrir qual era o assunto.
+            */}
+            {aberta && !aberto && (
+              <span className="mt-1 block truncate text-[12.5px] text-[var(--wb-tinta-2)]">
+                {apelido(aberta.ev.autor)}: {aberta.ev.texto}
+              </span>
+            )}
+          </span>
+          <svg
+            viewBox="0 0 12 12"
+            aria-hidden
+            className={`size-4 shrink-0 text-[var(--wb-tinta-3)] transition-transform duration-300 ${
+              aberto ? "rotate-180" : ""
+            }`}
+          >
+            <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </h3>
+
+      <Sanfona aberta={aberto} id={`corpo-${b.id}`}>
+        <div className="px-4 pb-4 pl-5 sm:px-5 sm:pb-5 sm:pl-6">
+          {aberta && (
+            <PerguntaAberta
+              ev={aberta.ev}
+              parte={aberta.parte}
+              praVoce={t === "voce"}
+              abrir={() => {
+                if (!partesAbertas) alternarPartes();
+                requestAnimationFrame(() =>
+                  document
+                    .getElementById(`parte-${b.id}-${aberta.ev.secaoId}`)
+                    ?.scrollIntoView({ block: "center", behavior: "smooth" }),
+                );
+              }}
+            />
+          )}
+
+          <Acoes
+            paginaId={b.id}
+            secaoId={null}
+            titulo={b.titulo}
+            href={b.href}
+            situacao={situacao}
+            temPergunta={!!aberta}
+          />
+
+          {partes.length > 1 && (
+            <button
+              type="button"
+              onClick={alternarPartes}
+              aria-expanded={partesAbertas}
+              aria-controls={`partes-${b.id}`}
+              className="wb-foco -ml-2 mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[14px] font-semibold text-[var(--wb-tinta-3)] transition-colors hover:text-[var(--wb-roxo)]"
+            >
+              {partesAbertas
+                ? "esconder as partes"
+                : `ver as ${partes.length} partes, uma por uma`}
+              <svg
+                viewBox="0 0 12 12"
+                aria-hidden
+                className={`size-3.5 transition-transform duration-300 ${partesAbertas ? "rotate-180" : ""}`}
+              >
+                <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          )}
         </div>
 
-        {aberta && (
-          <PerguntaAberta
-            ev={aberta.ev}
-            parte={aberta.parte}
-            praVoce={t === "voce"}
-            abrir={() => {
-              if (!aberto) alternar();
-              requestAnimationFrame(() =>
-                document
-                  .getElementById(`parte-${b.id}-${aberta.ev.secaoId}`)
-                  ?.scrollIntoView({ block: "center", behavior: "smooth" }),
-              );
-            }}
-          />
-        )}
-
-        <Acoes
-          paginaId={b.id}
-          secaoId={null}
-          titulo={b.titulo}
-          href={b.href}
-          situacao={situacao}
-          temPergunta={!!aberta}
-        />
-
-        {b.itens.length > 1 && (
-          <button
-            type="button"
-            onClick={alternar}
-            aria-expanded={aberto}
-            aria-controls={`partes-${b.id}`}
-            className="wb-foco -ml-2 mt-3 inline-flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-[14px] font-semibold text-[var(--wb-tinta-3)] transition-colors hover:text-[var(--wb-roxo)]"
-          >
-            {aberto ? "esconder as partes" : `ver as ${b.itens.length} partes desta página`}
-            <svg
-              viewBox="0 0 12 12"
-              aria-hidden
-              className={`size-3.5 transition-transform duration-300 ${aberto ? "rotate-180" : ""}`}
-            >
-              <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        )}
-      </div>
-
-      <Sanfona aberta={aberto} id={`partes-${b.id}`}>
-        <ul className="divide-y divide-[var(--wb-linha)] border-t border-[var(--wb-linha)] bg-[var(--wb-fundo)]">
-          {partes.map((it) => (
-            <LinhaParte key={it.id} blocoId={b.id} item={it} />
-          ))}
-        </ul>
+        <Sanfona aberta={partesAbertas} id={`partes-${b.id}`}>
+          <ul className="divide-y divide-[var(--wb-linha)] border-t border-[var(--wb-linha)] bg-[var(--wb-fundo)]">
+            {partes.map((it) => (
+              <LinhaParte key={it.id} blocoId={b.id} item={it} />
+            ))}
+          </ul>
+        </Sanfona>
       </Sanfona>
     </li>
   );
