@@ -65,12 +65,28 @@ export function Conversa({
   // Uma resposta pendurada não se repete na linha principal.
   const raiz = eventos.filter((e) => !e.respondeA || !eventos.some((x) => x.id === e.respondeA));
 
-  const nó = (e: Evento, aninhada = false) =>
+  /** De que lado a fala se alinha: a de quem está lendo vai para a direita. */
+  const meuLado = (e: Evento) => (LADO[e.autor] === "agencia") === souAgencia;
+
+  /**
+   * A resposta herda o LADO do pedido, mesmo sendo de outra voz.
+   *
+   * Na primeira versão ela ficava no lado dela — pedido à direita, resposta à esquerda — e o fio
+   * que devia ligar as duas atravessava a largura toda, virando um risco solto na margem. Aqui a
+   * resposta entra encostada, recuada pelo mesmo lado do pedido, com um fio curto. A cor continua
+   * dizendo quem falou: âmbar The Dark Film, roxo WB.
+   */
+  const nó = (e: Evento, ladoPai?: boolean) =>
     MARCO.has(e.acao) || !e.texto ? (
       <Marco key={e.id} e={e} />
     ) : (
-      <Balao key={e.id} e={e} souAgencia={souAgencia} responder={responder} aninhada={aninhada}>
-        {(respostas.get(e.id) ?? []).map((r) => nó(r, true))}
+      <Balao
+        key={e.id}
+        e={e}
+        alinhaDireita={ladoPai ?? meuLado(e)}
+        responder={responder}
+      >
+        {(respostas.get(e.id) ?? []).map((r) => nó(r, ladoPai ?? meuLado(e)))}
       </Balao>
     );
 
@@ -91,38 +107,27 @@ function Marco({ e }: { e: Evento }) {
 
 function Balao({
   e,
-  souAgencia,
+  alinhaDireita,
   responder,
-  aninhada,
   children,
 }: {
   e: Evento;
-  souAgencia: boolean;
+  /** Lado do balão. Numa resposta é o lado do PEDIDO, não o do autor. */
+  alinhaDireita: boolean;
   responder?: (e: Evento) => void;
-  /** Resposta pendurada num pedido: entra recuada, com o fio ligando. */
-  aninhada?: boolean;
   children?: React.ReactNode;
 }) {
   const daAgencia = LADO[e.autor] === "agencia";
-  // "Minha" fala é a de quem está com o painel aberto. Alinhar à direita é a leitura que a
-  // pessoa já tem no celular; a cor continua sendo do LADO, não de quem está lendo.
-  const minha = daAgencia === souAgencia;
   const temRespostas = !!children && (Array.isArray(children) ? children.length > 0 : true);
   return (
-    <li className={aninhada ? "relative pl-5 sm:pl-7" : undefined}>
-      {aninhada && (
-        <span
-          aria-hidden
-          className="absolute left-1.5 top-0 h-5 w-3.5 rounded-bl-lg border-b border-l border-[var(--wb-lilas)] sm:left-2.5"
-        />
-      )}
-      <div className={`flex ${minha ? "justify-end" : "justify-start"}`}>
+    <li>
+      <div className={`flex ${alinhaDireita ? "justify-end" : "justify-start"}`}>
       <div
         className={`max-w-[min(46ch,92%)] rounded-2xl px-3.5 py-2.5 ring-1 ${
           daAgencia
             ? "bg-[var(--wb-roxo-leve)] ring-[var(--wb-roxo-borda)]"
             : "bg-[var(--wb-ambar-leve)] ring-[#f0d5a4]"
-        } ${minha ? "rounded-br-md" : "rounded-bl-md"}`}
+        } ${alinhaDireita ? "rounded-br-md" : "rounded-bl-md"}`}
       >
         <p className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
           <span className="text-[13px] font-bold text-[var(--wb-tinta)]">{apelido(e.autor)}</span>
@@ -150,7 +155,19 @@ function Balao({
         )}
         </div>
       </div>
-      {temRespostas && <ol className="mt-2.5 flex flex-col gap-2.5">{children}</ol>}
+      {/* Trilho contínuo ao lado das respostas, como citação. Antes era um fio curto em L, e ele
+          não encostava em nada: o pedido e a resposta ficam em alturas e larguras diferentes, e
+          o cotovelo sobrava solto entre os dois. O trilho corre ao lado de todas as respostas
+          daquele pedido, do começo ao fim — não tem como ler errado a quem elas pertencem. */}
+      {temRespostas && (
+        <ol
+          className={`mt-1.5 flex flex-col gap-1.5 border-[var(--wb-lilas)] ${
+            alinhaDireita ? "mr-2 border-r-2 pr-3 sm:mr-3" : "ml-2 border-l-2 pl-3 sm:ml-3"
+          }`}
+        >
+          {children}
+        </ol>
+      )}
     </li>
   );
 }
