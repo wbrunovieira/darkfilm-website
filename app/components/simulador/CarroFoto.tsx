@@ -18,7 +18,9 @@ import Image from "next/image";
  * esse mesmo lugar recebe o gradiente de vidro.
  *
  * Os contornos foram traçados sobre a cabine ampliada, com uma grade nas coordenadas do próprio
- * `viewBox` projetada por cima, e conferidos a cada passe. São `path` com curva, não polígono:
+ * `viewBox` projetada por cima — sempre sobre o MESMO arquivo que a página serve, e nunca sobre
+ * um recorte intermediário. A primeira versão errou justamente aí: o recorte de conferência
+ * cortava o vidro, então os contornos foram traçados até a borda do recorte e não até o vidro. São `path` com curva, não polígono:
  * numa vista 3/4 nenhuma dessas áreas é um quadrilátero — o teto é curvo, a coluna A é diagonal e
  * a linha de cintura desce para a frente. Quadrilátero reto fica visivelmente fora do vidro.
  *
@@ -47,22 +49,26 @@ export function CarroFoto() {
         <path
           data-vidro="parabrisa"
           fill="rgba(255,255,255,.10)"
-          d="M 158,51 C 170,45 188,38 208,34 C 230,30 252,27.8 271,27.3
-             L 268,69 C 250,70 215,69.8 198,68.5 C 180,68 166,67 158,66 Z"
+          d="M 191.5,58.5 C 190.2,50 190.2,40 191,34.5 C 191.2,31 191.4,29.5 191.8,28.7
+             C 205,26.4 226,24.5 247,23.3 C 255,22.9 262,22.8 265.8,22.9
+             C 266.4,32 266.2,45 264.9,57 C 264.6,60.5 264.4,62.4 264.2,63.3
+             C 250,65.8 226,66.5 209,64.8 C 200,63.9 194,61.5 191.5,58.5 Z"
         />
         {/* Porta dianteira, entre as colunas A e B. A linha de cintura desce para a frente. */}
         <path
           data-vidro="dianteiro"
           fill="rgba(255,255,255,.10)"
-          d="M 287.5,29.5 C 300,29.8 314,30.2 325,30.7 L 326,54
-             C 312,56 299,57.5 288.5,58.7 Z"
+          d="M 289.1,58.1 C 287.6,50 287.6,38 289.1,30.4
+             C 300,30.2 313,30 324,30 C 324.5,38 324.7,46 324.8,53.6
+             C 313,55.2 301,56.7 289.1,58.1 Z"
         />
         {/* Porta traseira, entre as colunas B e C. */}
         <path
           data-vidro="traseiro"
           fill="rgba(255,255,255,.10)"
-          d="M 331.5,33 C 342,33.5 353,34.5 361,35.5 L 361,53.5
-             C 351,54.5 340,55.3 332,55.8 Z"
+          d="M 331.1,52.9 C 330.9,46 330.9,38 331.1,31.9
+             C 340,32.6 350,33.8 358.5,34.9 C 359,40 359.2,46 359.3,51
+             C 350,51.7 340,52.4 331.1,52.9 Z"
         />
       </svg>
     </div>

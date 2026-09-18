@@ -48,14 +48,19 @@ São **três, e não quatro**: nesta foto o vidro traseiro não é área clicáv
 coluna C e a carroceria virando), e ele cairia no mesmo grupo do vidro da porta traseira, que já
 está marcado.
 
-**Como foram traçados, caso precise refazer com outra foto:** ampliar a cabine num recorte
-conhecido, projetar por cima uma grade nas coordenadas do próprio `viewBox` (é o truque que torna
-a leitura direta, sem conta), ler os pontos, desenhar, renderizar e conferir. Quatro passes.
+**Como foram traçados, caso precise refazer com outra foto:** projetar sobre a foto uma grade nas
+coordenadas do próprio `viewBox` (é o truque que torna a leitura direta, sem conta), ler os pontos,
+desenhar em contorno fino, renderizar e ampliar cada vidro para conferir canto a canto.
 
-Tamanho dos alvos no desktop, medidos no navegador: para-brisa 145×54 px, porta dianteira 49×38,
-porta traseira 38×29. Os dois últimos ficam abaixo dos 44 px recomendados para toque — **não dá
-para ampliar sem cortar o carro**, que já ocupa a largura toda da foto. A lista de vidros abaixo do
-desenho continua sendo o controle principal, e no simulador ela está sempre visível.
+**A armadilha, que já custou uma rodada:** a grade tem que ir sobre **o mesmo arquivo que a página
+serve**, nunca sobre um recorte intermediário. Na primeira versão o recorte de conferência cortava
+o próprio vidro, então os contornos foram traçados até a borda do recorte e não até o vidro — e
+ficaram 25 unidades à esquerda, sobrando no fundo e faltando no para-brisa.
+
+Tamanho dos alvos no desktop, medidos no navegador: para-brisa 97×55 px, porta dianteira 47×36,
+porta traseira 36×27. Os dois últimos ficam abaixo dos 44 px recomendados para toque — **não dá
+para ampliar sem cortar o carro**, que já ocupa a largura toda da foto (testado). A lista de vidros
+abaixo do desenho continua sendo o controle principal, e no simulador ela está sempre visível.
 
 ## O que ficou fora
 
