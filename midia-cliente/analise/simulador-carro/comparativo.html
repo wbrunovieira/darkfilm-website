@@ -1,4 +1,43 @@
-<svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carro de perfil">
+<!doctype html><meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap');
+  :root { --bg:#0a0b0d; --bg2:#121418; --bg3:#0d0f12; --line:#23272e; --fg:#e8eaed; --fg2:#9aa1ab; --red:#e22028; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:Barlow,system-ui,sans-serif;
+         padding:40px; width:1400px; }
+  h1 { font-family:'Barlow Condensed',sans-serif; font-size:30px; text-transform:uppercase;
+        letter-spacing:.02em; margin:0 0 6px; }
+  .sub { color:var(--fg2); font-size:15px; margin:0 0 30px; max-width:1100px; line-height:1.5; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  .col h2 { font-family:'Barlow Condensed',sans-serif; font-size:19px; text-transform:uppercase;
+             letter-spacing:.06em; margin:0 0 4px; }
+  .col p { color:var(--fg2); font-size:13.5px; margin:0 0 14px; line-height:1.5; min-height:42px; }
+  .card { border:1px solid var(--line); background:var(--bg2); border-radius:14px; padding:20px; }
+  .quadro { background:var(--bg3); border-radius:10px; overflow:hidden; position:relative;
+             display:flex; align-items:center; justify-content:center; height:300px; }
+  .quadro svg.carro-svg { display:block; width:100%; height:auto; max-height:270px; }
+  .foto { position:relative; width:100%; }
+  .foto img { display:block; width:100%; }
+  .foto svg { position:absolute; inset:0; width:100%; height:100%; }
+  [data-vidro] { fill:rgba(255,255,255,.10); stroke:rgba(255,255,255,.55); stroke-width:1.4;
+                  stroke-dasharray:5 4; }
+  .sel [data-vidro="traseiro"], .sel [data-vidro="vigia"] { fill:rgba(226,32,40,.5);
+                  stroke:#ff4d55; stroke-width:1.9; stroke-dasharray:none; }
+  .legenda { margin-top:14px; display:flex; gap:18px; font-size:12.5px; color:var(--fg2); }
+  .pt { display:flex; align-items:center; gap:7px; }
+  .sw { width:15px; height:15px; border-radius:3px; }
+  .sw.a { border:1.5px dashed rgba(255,255,255,.6); }
+  .sw.b { background:rgba(226,32,40,.5); border:1.5px solid #ff4d55; }
+</style>
+<h1>Simulador &mdash; o carro do passo 1</h1>
+<p class="sub">O visitante toca no vidro que quer escurecer. Nas duas op&ccedil;&otilde;es o funcionamento &eacute; o mesmo:
+para-brisa, vidro da porta dianteira e vidros de tr&aacute;s. Aqui os vidros de tr&aacute;s est&atilde;o selecionados, em vermelho.</p>
+<div class="grid">
+  <div class="col">
+    <h2>Op&ccedil;&atilde;o A &mdash; o desenho de hoje</h2>
+    <p>O que est&aacute; no ar. &Eacute; o desenho que voc&ecirc; achou quadrado e amassado atr&aacute;s.
+       Tentamos redesenhar cinco vezes e n&atilde;o ficou bom o bastante.</p>
+    <div class="card"><div class="quadro sel"><svg viewBox="0 0 400 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Carro de perfil">
 <defs>
   <linearGradient id="pBody" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0"   stop-color="#39414c"/>
@@ -313,3 +352,22 @@
   <path d="M252,43.6 C257,40.4 264,40 267,43.2 Z" fill="#181d24"/>
 </g>
 </svg>
+</div></div>
+  </div>
+  <div class="col">
+    <h2>Op&ccedil;&atilde;o B &mdash; foto da sua oficina</h2>
+    <p>O seu Fiat Abarth, fotografado a&iacute; dentro, com as placas The&nbsp;Dark&nbsp;Film ao fundo.
+       Carro de verdade, proporcional, e os vidros continuam clic&aacute;veis.</p>
+    <div class="card"><div class="quadro"><div class="foto sel"><img src="foto.jpg">
+      <svg viewBox="0 0 400 248" preserveAspectRatio="none">
+        <polygon data-vidro="parabrisa" points="162,66 180,30 284,26 273,70"/>
+        <polygon data-vidro="dianteiro" points="290,30 330,27 332,57 290,61"/>
+        <polygon data-vidro="traseiro"  points="336,27 364,29 366,54 336,57"/>
+        <polygon data-vidro="vigia"     points="370,31 381,33 383,48 370,50"/>
+      </svg></div></div></div>
+  </div>
+</div>
+<div class="legenda">
+  <span class="pt"><span class="sw a"></span> vidro dispon&iacute;vel para tocar</span>
+  <span class="pt"><span class="sw b"></span> vidro escolhido</span>
+</div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CARRO_PERFIL } from "./simulador/carros";
+import { CARRO_FRONTAL, CARRO_PERFIL } from "./simulador/carros";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { useId, useState } from "react";
@@ -37,12 +37,22 @@ export const WINDOW_POINTS = "5,16 56,5 95,9 96,84 5,89";
 /* ---------- Diagrama do carro (vista lateral, frente à esquerda) ---------- */
 // Áreas de vidro em coordenadas do viewBox 0 0 400 150. Só apresentação: os controles
 // reais são os radios; o SVG é aria-hidden e apenas atalho de clique.
-/* Desenho do carro: um SVG vetorial, injetado como HTML.
-   Era um par — perfil mais vista 3/4 frontal, esta última só para o para-brisa. O
-   cliente reclamou duas vezes que o carro estava deformado, e a 3/4 era a pior
-   parte. No perfil redesenhado o para-brisa é a faixa inclinada entre o capô e o
-   teto: aparece em escorço, mas aparece, e com área de toque suficiente. Um desenho
-   só evita ainda a troca brusca de imagem no meio da escolha.
+/* Desenho do carro: dois SVGs vetoriais, injetados como HTML.
+   São dois porque o seletor tem três opções e o para-brisa NÃO aparece num perfil
+   puro — fica escondido pela coluna A. Então o perfil serve aos vidros dianteiros e
+   traseiros, e a vista 3/4 frontal serve ao para-brisa.
+
+   Cinco tentativas de redesenhar este carro foram reprovadas pelo cliente entre 10 e
+   18/09/2026 ("quadrado", "deformado", "amassado atrás", "ainda distorcido", "piorou
+   muito"). O histórico e o que se aprendeu estão na issue do board; o resumo é que
+   acertar todas as relações de um carro à mão, em coordenadas, não convergiu — cada
+   correção quebrava outra coisa. O desenho voltou a ser este, que é o que ele já
+   conhece, e a decisão de trocar por foto real ou contratar ilustrador é dele.
+
+   Se for mexer aqui: o desenho aparece a 505x240 px no desktop e a ~330x157 no
+   celular, e a função dele é fazer o visitante reconhecer os vidros e clicar no
+   certo. Julgue nesses tamanhos, não ampliado — foi o erro que derrubou as cinco.
+
    Os quatro polígonos `data-vidro` são estilizados por CSS (ver .carro-diagrama em
    app/styles/home.css) e clicados por delegação, sem converter o SVG para JSX. */
 const VIDRO_DO_POLIGONO: Record<string, VidroId> = {
@@ -53,6 +63,7 @@ const VIDRO_DO_POLIGONO: Record<string, VidroId> = {
 };
 
 function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) => void }) {
+  const svg = vidro === "parabrisa" ? CARRO_FRONTAL : CARRO_PERFIL;
   return (
     <div
       className="carro-diagrama"
@@ -63,7 +74,7 @@ function CarDiagram({ vidro, onPick }: { vidro: VidroId; onPick: (v: VidroId) =>
         const destino = chave ? VIDRO_DO_POLIGONO[chave] : undefined;
         if (destino) onPick(destino);
       }}
-      dangerouslySetInnerHTML={{ __html: CARRO_PERFIL }}
+      dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
 }
