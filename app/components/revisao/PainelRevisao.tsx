@@ -304,6 +304,26 @@ export function PainelRevisao({
   );
 
   /**
+   * Os lados que a página ainda segura — pode ser mais de um.
+   *
+   * `sitBloco` devolve UM estado, porque o selo do cartão é um só. Mas uma página com oito
+   * partes pode, ao mesmo tempo, ter algo esperando o cliente e algo esperando a gente. Colapsar
+   * isso num estado só fazia a pendência da agência DESAPARECER da fila "Esperando a WB", porque
+   * "com-cliente" vinha primeiro no desempate. Aconteceu em 18/09/2026 com Películas Automotivas:
+   * respondemos uma parte, e as outras duas que ainda devíamos sumiram da nossa fila.
+   *
+   * Uma ferramenta de aprovação que esconde o que falta não serve para nada. Então a página entra
+   * nas duas filas quando deve às duas.
+   */
+  const pendencias = useCallback(
+    (b: Bloco): Set<Situacao> => {
+      const todos = [...b.itens.map((i) => sit(b.id, i.id)), sit(b.id, ITEM_PAGINA)];
+      return new Set(todos.filter((s) => s === "com-cliente" || s === "com-agencia"));
+    },
+    [sit],
+  );
+
+  /**
    * A última fala que ainda espera resposta, por bloco.
    *
    * É o que sobe para a frente do cartão. Sem isso a pergunta da WB ficava atrás de dois
@@ -314,23 +334,36 @@ export function PainelRevisao({
     const m = new Map<string, { ev: Evento; parte: string }>();
     for (const b of blocos) {
       const titulos = new Map(b.itens.map((i) => [i.id, i.titulo]));
-      let ultimo: Evento | null = null;
+      // Guardadas as duas: a última fala pendente de cada lado. Quem lê vê primeiro a sua
+      // própria dívida — mostrar a do outro lado quando existe a nossa escondia o trabalho.
+      const ultimo: Partial<Record<Situacao, Evento>> = {};
       for (const e of porPagina.get(b.id) ?? []) {
         if (!e.secaoId || !e.texto) continue;
         const s = sit(b.id, e.secaoId);
         if (s !== "com-cliente" && s !== "com-agencia") continue;
         // `eventos` já vem ordenado por data; o último que passar no filtro é o mais recente.
-        ultimo = e;
+        ultimo[s] = e;
       }
-      if (ultimo) {
+      // Com um lado filtrado, o trecho tem que ser o DAQUELE lado: clicar em "Esperando a WB"
+      // e ler no cartão a pendência do cliente é o filtro se contradizendo. Sem filtro, vale a
+      // dívida de quem está lendo.
+      const meu: Situacao =
+        filtro === "voce" || filtro === "eles"
+          ? ((filtro === "voce") === souAgencia ? "com-agencia" : "com-cliente")
+          : souAgencia
+            ? "com-agencia"
+            : "com-cliente";
+      const outro: Situacao = meu === "com-agencia" ? "com-cliente" : "com-agencia";
+      const ev = ultimo[meu] ?? ultimo[outro];
+      if (ev) {
         m.set(b.id, {
-          ev: ultimo,
-          parte: ultimo.secaoId === ITEM_PAGINA ? "" : (titulos.get(ultimo.secaoId!) ?? ""),
+          ev,
+          parte: ev.secaoId === ITEM_PAGINA ? "" : (titulos.get(ev.secaoId!) ?? ""),
         });
       }
     }
     return m;
-  }, [blocos, porPagina, sit]);
+  }, [blocos, filtro, porPagina, sit, souAgencia]);
 
   const paginas = useMemo(() => blocos.filter((b) => !!b.href), [blocos]);
   const total = paginas.length;
@@ -342,9 +375,18 @@ export function PainelRevisao({
   /** Contagem por tom — é o que rotula os filtros e a chamada do topo. */
   const contagem = useMemo(() => {
     const c: Record<Tom, number> = { silencio: 0, voce: 0, eles: 0, aprovado: 0, pronto: 0 };
-    for (const b of blocos) c[tom(sitBloco(b), souAgencia)]++;
+    for (const b of blocos) {
+      const p = pendencias(b);
+      // Página que deve aos dois conta nos dois chips. O número do chip precisa bater com a
+      // lista que ele abre, senão o filtro mente.
+      if (p.size) {
+        for (const s of p) c[tom(s, souAgencia)]++;
+      } else {
+        c[tom(sitBloco(b), souAgencia)]++;
+      }
+    }
     return c;
-  }, [blocos, sitBloco, souAgencia]);
+  }, [blocos, pendencias, sitBloco, souAgencia]);
 
   /**
    * As duas filas, nomeadas.
@@ -356,25 +398,29 @@ export function PainelRevisao({
    */
   // "novo" fica fora das filas de propósito: é o silêncio do padrão, não uma dívida de ninguém.
   const comCliente = useMemo(
-    () => blocos.filter((b) => sitBloco(b) === "com-cliente"),
-    [blocos, sitBloco],
+    () => blocos.filter((b) => pendencias(b).has("com-cliente")),
+    [blocos, pendencias],
   );
   // "aprovado" entra na fila da WB: o cliente já falou, falta a gente confirmar e fechar.
   const comAgencia = useMemo(
-    () => blocos.filter((b) => ["com-agencia", "aprovado"].includes(sitBloco(b))),
-    [blocos, sitBloco],
+    () => blocos.filter((b) => pendencias(b).has("com-agencia") || sitBloco(b) === "aprovado"),
+    [blocos, pendencias, sitBloco],
   );
   const praVoce = souAgencia ? comAgencia : comCliente;
 
   const combina = useCallback(
     (b: Bloco) => {
-      const t = tom(sitBloco(b), souAgencia);
       if (filtro === "tudo") return true;
+      const t = tom(sitBloco(b), souAgencia);
       if (filtro === "pronto") return t === "aprovado" || t === "pronto";
       if (filtro === "novo") return t === "silencio";
+      // "voce"/"eles" olham TODAS as pendências da página, não só a que ganhou o desempate
+      // do selo. É o que faz a página aparecer nos dois chips quando deve aos dois lados.
+      const p = pendencias(b);
+      if (p.size) return [...p].some((s) => tom(s, souAgencia) === filtro);
       return t === filtro;
     },
-    [filtro, sitBloco, souAgencia],
+    [filtro, pendencias, sitBloco, souAgencia],
   );
 
   const grupos = useMemo(() => {
@@ -465,6 +511,7 @@ export function PainelRevisao({
                     b={b}
                     i={i}
                     situacao={sitBloco(b)}
+                    tambem={pendencias(b)}
                     aberto={aberta === b.id}
                     alternar={() => setAberta(aberta === b.id ? null : b.id)}
                     aberta={emAberto.get(b.id)}
@@ -1065,6 +1112,7 @@ function CartaoPagina({
   b,
   i,
   situacao,
+  tambem,
   aberto,
   alternar,
   aberta,
@@ -1072,6 +1120,8 @@ function CartaoPagina({
   b: Bloco;
   i: number;
   situacao: Situacao;
+  /** Todos os lados que a página ainda segura. Mais de um quando ela deve aos dois. */
+  tambem: Set<Situacao>;
   aberto: boolean;
   alternar: () => void;
   aberta?: { ev: Evento; parte: string };
@@ -1108,7 +1158,17 @@ function CartaoPagina({
               {t === "silencio" && " · ainda não olhada"}
             </p>
           </div>
-          <Selo situacao={situacao} souAgencia={a.souAgencia} />
+          {/* Dois selos quando a página deve aos dois lados. Um selo só escondia metade do que
+              falta: o desempate mandava "com-cliente" para a frente e a pendência da agência
+              sumia do cartão inteiro. */}
+          <div className="flex shrink-0 flex-wrap justify-end gap-1.5">
+            <Selo situacao={situacao} souAgencia={a.souAgencia} />
+            {[...tambem]
+              .filter((x) => x !== situacao)
+              .map((x) => (
+                <Selo key={x} situacao={x} souAgencia={a.souAgencia} />
+              ))}
+          </div>
         </div>
 
         {aberta && (
