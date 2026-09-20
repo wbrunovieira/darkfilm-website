@@ -52,10 +52,14 @@ const featured: { href: string; title: string; text: string; img: string; video?
 
 // Lavagem a seco e polimento de faróis saíram em 03/09/2026: o cliente informou que
 // não faz mais esses serviços. Restaram para-brisa e envelopamento.
-// A capa do para-brisa foi recortada para tirar o logo "SALVA VIDROS", de marca de
-// terceiro. Ver a issue "Home — capas dos 4 cards pequenos".
+//
+// A capa do para-brisa é a que ele mandou em 19/09/2026. Veio como díptico 16:9 — reparo da
+// trinca à esquerda, polimento à direita — e aqui entra só a metade esquerda, recortada em 4:3:
+// é o cartão do CONSERTO, e o polimento virou serviço próprio na página, com foto dedicada.
+// A capa anterior tinha sido recortada para esconder o logo "SALVA VIDROS", de marca de
+// terceiro; esta não tem marca nenhuma.
 const more: { href: string; title: string; img: string; icon: Icon }[] = [
-  { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos-v2/parabrisa.jpg", icon: WindshieldIcon },
+  { href: "/produtos/nao-troque-seu-parabrisa-conserte", title: "Não troque seu para-brisa, conserte", img: "/img/servicos-v2/parabrisa-conserto.jpg", icon: WindshieldIcon },
   { href: "/produtos/envelopamento-automotivo", title: "Envelopamento automotivo", img: "/img/novo/aplicacao-carros--mustang-envelopamento-listras.jpg", icon: WrapIcon },
 ];
 

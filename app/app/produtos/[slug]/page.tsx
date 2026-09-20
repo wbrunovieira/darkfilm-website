@@ -11,6 +11,8 @@ import {
   GrupoIcon,
   PhotosIcon,
 } from "@/components/icons/catalogo";
+import { PolimentoVidros } from "@/components/produtos/PolimentoVidros";
+import { POLIMENTO } from "@/content/polimento-vidros";
 import { categorias, getProduto, grupoDe, produtos } from "@/lib/produtos";
 import { site, whatsappUrl } from "@/lib/site";
 
@@ -146,6 +148,10 @@ export default async function ProdutoPage({
           </div>
         </div>
       </section>
+
+      {/* Polimento de vidros: seção pedida pelo cliente em 19/09/2026 dentro desta página, e só
+          dela. Entra antes dos produtos relacionados porque é serviço da casa, não sugestão. */}
+      {p.slug === POLIMENTO.slug && <PolimentoVidros />}
 
       {related.length > 0 && (
         <section className="container-x mt-24 border-t border-line pt-16">
