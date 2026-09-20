@@ -12,3 +12,6 @@ midia-cliente/frames
 
 # backups pontuais de correcao dos CSVs de catalogo
 midia-cliente/**/*.bak
+
+# Link da CLI da Vercel na raiz (o projeto tem Root Directory = app)
+.vercel

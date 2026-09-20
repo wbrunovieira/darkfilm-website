@@ -1,0 +1,17 @@
+# O projeto na Vercel tem Root Directory = app, então o deploy é feito a partir da RAIZ do
+# repositório (é ela que precisa ser enviada para que `app/` exista dentro dela). Sem este
+# arquivo, cada deploy pela CLI carregaria junto quase 60 MB de material de referência que o
+# site não usa — e os 1,6 GB de mídia bruta do cliente, que nem versionada está.
+#
+# Nada aqui afeta o site: só o que está dentro de `app/` vira build.
+
+site-original/
+referencias/
+midia-cliente/
+conteudo-extraido/
+docs/
+*.md
+
+app/node_modules/
+app/.next/
+app/out/
