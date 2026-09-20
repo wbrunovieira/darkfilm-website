@@ -716,6 +716,12 @@
   aspect-ratio: 4 / 3;
   cursor: zoom-in;
 }
+.prod-stage--foto {
+  /* Capa que é fotografia, não produto recortado: fundo escuro, proporção de foto e imagem
+     preenchendo o palco. O branco do catálogo vira moldura em volta de uma foto de oficina. */
+  background: var(--bg-2);
+  aspect-ratio: 3 / 2;
+}
 .prod-stage::after {
   content: "";
   position: absolute;

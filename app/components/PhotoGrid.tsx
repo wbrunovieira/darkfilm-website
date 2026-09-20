@@ -213,18 +213,37 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
 /* Galeria de produto: palco + miniaturas                              */
 /* ------------------------------------------------------------------ */
 
-export function ProductGallery({ photos, title }: { photos: Photo[]; title: string }) {
+/**
+ * `variant`:
+ * - `catalogo` (padrão) — palco branco com respiro, para foto de produto recortado. É o que as
+ *   47 páginas de produto herdaram do catálogo antigo.
+ * - `foto` — palco escuro, sem respiro, imagem preenchendo. Para página cuja capa é uma
+ *   fotografia de verdade: o recorte branco com tarja em cima e embaixo, que funciona para um
+ *   alto-falante em fundo branco, transforma a foto de um carro dentro da oficina em selo.
+ */
+export function ProductGallery({
+  photos,
+  title,
+  variant = "catalogo",
+}: {
+  photos: Photo[];
+  title: string;
+  variant?: "catalogo" | "foto";
+}) {
   const [current, setCurrent] = useState(0);
   const [open, setOpen] = useState<number | null>(null);
   const photo = photos[current];
   if (!photo) return null;
+
+  const foto = variant === "foto";
+  const imgClass = foto ? "object-cover" : "object-contain p-6 md:p-8";
 
   return (
     <div className="space-y-3">
       <button
         type="button"
         onClick={() => setOpen(current)}
-        className="prod-stage block w-full"
+        className={`prod-stage block w-full${foto ? " prod-stage--foto" : ""}`}
         aria-label={`Ampliar foto ${current + 1} de ${photos.length}`}
       >
         <AnimatePresence initial={false} mode="popLayout">
@@ -242,7 +261,7 @@ export function ProductGallery({ photos, title }: { photos: Photo[]; title: stri
               fill
               priority={current === 0}
               sizes="(min-width: 768px) 55vw, 100vw"
-              className="object-contain p-6 md:p-8"
+              className={imgClass}
             />
           </motion.div>
         </AnimatePresence>
@@ -262,7 +281,13 @@ export function ProductGallery({ photos, title }: { photos: Photo[]; title: stri
               aria-label={`Foto ${i + 1}`}
               className="prod-thumb"
             >
-              <Image src={p.src} alt="" fill sizes="12vw" className="object-contain p-1.5" />
+              <Image
+                src={p.src}
+                alt=""
+                fill
+                sizes="12vw"
+                className={foto ? "object-cover" : "object-contain p-1.5"}
+              />
             </button>
           ))}
         </div>

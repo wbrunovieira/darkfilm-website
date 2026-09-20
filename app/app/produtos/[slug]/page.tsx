@@ -12,7 +12,9 @@ import {
   PhotosIcon,
 } from "@/components/icons/catalogo";
 import { PolimentoVidros } from "@/components/produtos/PolimentoVidros";
+import { EnvelopamentoTrabalhos } from "@/components/produtos/EnvelopamentoTrabalhos";
 import { POLIMENTO } from "@/content/polimento-vidros";
+import { SLUG as ENVELOPAMENTO, TEXTO as ENVEL_TEXTO } from "@/content/envelopamento";
 import { categorias, getProduto, grupoDe, produtos } from "@/lib/produtos";
 import { site, whatsappUrl } from "@/lib/site";
 
@@ -57,6 +59,16 @@ export default async function ProdutoPage({
     .slice(0, 4);
   const photos = p.photos.map((ph) => ({ ...ph, alt: p.title }));
 
+  /* Envelopamento tem capa fotográfica e rótulo de botão próprios, os dois pedidos pelo cliente
+     em 19/09/2026 ("SOLICITAR ORÇAMENTO", no lugar do padrão do catálogo). */
+  const envelopamento = p.slug === ENVELOPAMENTO;
+  const cta = envelopamento
+    ? { rotulo: ENVEL_TEXTO.botao, mensagem: ENVEL_TEXTO.mensagem }
+    : {
+        rotulo: "Consultar disponibilidade",
+        mensagem: `Olá! Tenho interesse em: ${p.title}. Podem me passar mais informações?`,
+      };
+
   return (
     <>
       <section className="relative isolate overflow-hidden pt-28 md:pt-36">
@@ -86,7 +98,11 @@ export default async function ProdutoPage({
 
           <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-14 lg:gap-20">
             <Reveal>
-              <ProductGallery photos={photos} title={p.title} />
+              <ProductGallery
+                photos={photos}
+                title={p.title}
+                variant={envelopamento ? "foto" : "catalogo"}
+              />
             </Reveal>
 
             <Reveal delay={0.1} className="md:pt-2">
@@ -130,15 +146,13 @@ export default async function ProdutoPage({
 
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <a
-                  href={whatsappUrl(
-                    `Olá! Tenho interesse em: ${p.title}. Podem me passar mais informações?`,
-                  )}
+                  href={whatsappUrl(cta.mensagem)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-cta"
                 >
                   <WhatsAppIcon className="size-5" />
-                  Consultar disponibilidade
+                  {cta.rotulo}
                 </a>
                 <span className="text-sm text-fg-3">
                   WhatsApp {site.whatsapp.label}
@@ -152,6 +166,10 @@ export default async function ProdutoPage({
       {/* Polimento de vidros: seção pedida pelo cliente em 19/09/2026 dentro desta página, e só
           dela. Entra antes dos produtos relacionados porque é serviço da casa, não sugestão. */}
       {p.slug === POLIMENTO.slug && <PolimentoVidros />}
+
+      {/* Envelopamento: a transformação da Hilux e a galeria "Alguns dos nossos trabalhos",
+          pedidas pelo cliente em 19/09/2026 para substituir a área que tinha uma foto só. */}
+      {envelopamento && <EnvelopamentoTrabalhos />}
 
       {related.length > 0 && (
         <section className="container-x mt-24 border-t border-line pt-16">
