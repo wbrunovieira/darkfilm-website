@@ -141,7 +141,7 @@ export const paginasRevisao: PaginaRevisao[] = [
     href: "/som-e-acessorios",
     grupo: "Páginas do site",
     secoes: [
-      { id: "nacionais-e-importados-tudo-em-um-lugar", titulo: "Nacionais e importados, tudo em um lugar." },
+      { id: "nacionais-e-importados-tudo-em-um-lugar", titulo: "Som e Acessórios. Tudo em um só lugar." },
       { id: "escolha-o-grupo-ou-busque-catalogo", titulo: "Escolha o grupo ou busque. (catálogo)" },
       { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],

@@ -3,12 +3,12 @@ import { PageHero } from "@/components/PageHero";
 import { Catalogo } from "@/components/Catalogo";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Reveal } from "@/components/Reveal";
-import { catalogoSom, grupos } from "@/lib/produtos";
+import { catalogoSom } from "@/lib/produtos";
 
 export const metadata: Metadata = {
   title: "Som e Acessórios",
   description:
-    "Equipamentos nacionais e importados: kits multimídia, alarmes, sensores de ré, xenon, amplificadores, subwoofers, engates e acessórios em geral. Petrópolis/RJ.",
+    "Equipamentos nacionais e importados: kits multimídia, alarmes, sensores de ré, iluminação LED, amplificadores, alto-falantes, subwoofers, engates, capotas marítimas e racks de teto. Petrópolis/RJ.",
 };
 
 // Texto copiado da página "Som e Acessórios" do site original.
@@ -19,12 +19,16 @@ export default function SomEAcessoriosPage() {
         crumbs={[{ label: "Início", href: "/" }, { label: "Som e Acessórios" }]}
         title={
           <>
-            Nacionais e importados,
+            Som e Acessórios.
             <br />
-            <span className="text-red-2">tudo em um lugar.</span>
+            <span className="text-red-2">Tudo em um só lugar.</span>
           </>
         }
-        intro={`Trabalhamos com toda linha de equipamentos nacionais e importados, kits multimídia, alarmes, sensores de ré, xenon, amplificadores, subwoofers, engates e acessórios em geral. Faça-nos uma visita! São ${catalogoSom.length} itens em ${grupos.length} grupos.`}
+        /* Texto reescrito pelo cliente em 22/09/2026. A contagem automática ("São 41 itens em
+           4 grupos") saiu a pedido dele — era o único lugar do site que anunciava o tamanho do
+           catálogo, e anunciar 41 itens vendia menos do que a lista do que existe. Com ela sai
+           também o "xenon", que ele trocou por "iluminação LED". */
+        intro="Trabalhamos com uma ampla linha de equipamentos nacionais e importados: kits multimídia, alarmes, sensores de ré, iluminação LED, amplificadores, alto-falantes, subwoofers, engates, capotas marítimas, racks de teto e acessórios em geral."
         /* Painel de Volvo com a central instalada e a câmera de ré na tela, com a parede
            da oficina aparecendo pelo para-brisa: liga o equipamento ao lugar onde ele é
            instalado. Enquadrado a 38% para cortar as pernas de quem fotografou, no rodapé. */
