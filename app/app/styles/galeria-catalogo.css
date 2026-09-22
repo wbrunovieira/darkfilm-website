@@ -207,18 +207,35 @@
 .lb {
   position: fixed;
   inset: 0;
+  /* Acima do cabeçalho (z-40) e do botão flutuante do WhatsApp (z-30). O componente é
+     renderizado num portal no <body>, então este valor compete no contexto raiz e não é mais
+     engolido pelo `isolate` da seção que chama o lightbox. */
   z-index: 60;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
   background: rgba(8, 8, 10, 0.94);
   backdrop-filter: blur(10px);
 }
 .lb__bar {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.25rem;
+}
+/* O X é o único controle que a pessoa PRECISA achar de primeira. Sai do cinza dos demais
+   botões e ganha contorno cheio. */
+.lb__btn--fechar {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+}
+.lb__btn--fechar:hover {
+  border-color: var(--red-2);
+  background: rgba(209, 20, 31, 0.28);
 }
 .lb__stage {
   position: relative;
@@ -236,7 +253,7 @@
   width: auto;
   height: min(72dvh, 820px);
   max-width: min(92vw, 1200px);
-  max-height: calc(100dvh - 9.5rem);
+  max-height: calc(100dvh - 13rem);
   object-fit: contain;
   border-radius: 0.375rem;
   box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8);
@@ -244,11 +261,63 @@
   -webkit-user-drag: none;
 }
 .lb__foot {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 0.875rem 1.25rem 1.25rem;
+}
+
+/* Tira de miniaturas */
+.lb__tiras {
+  min-width: 0;
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0.25rem;
+  scroll-padding: 0 1rem;
+}
+.lb__tiras::-webkit-scrollbar {
+  display: none;
+}
+.lb__tira {
+  position: relative;
+  flex: 0 0 auto;
+  width: 4rem;
+  height: 3rem;
+  overflow: hidden;
+  border-radius: 0.3rem;
+  border: 1px solid transparent;
+  opacity: 0.45;
+  transition:
+    opacity 0.25s ease,
+    border-color 0.25s ease;
+}
+.lb__tira:hover,
+.lb__tira:focus-visible {
+  opacity: 0.85;
+}
+.lb__tira[aria-selected="true"] {
+  opacity: 1;
+  border-color: var(--red-2);
+}
+@media (width >= 48rem) {
+  .lb__tira {
+    width: 5rem;
+    height: 3.75rem;
+  }
+}
+
+/* Sem teclado não há o que dizer sobre teclas, e a dica disputava a linha com a tira. Some
+   por ponteiro grosso E por largura: o emulador de celular nem sempre reporta `hover: none`,
+   e o defeito de a dica empurrar o palco para fora da tela não pode depender disso. */
+@media (hover: none), (width < 48rem) {
+  .lb__hint {
+    display: none;
+  }
 }
 .lb__btn {
   display: grid;
@@ -275,11 +344,23 @@
   outline: 2px solid var(--fg);
   outline-offset: 3px;
 }
+/* As setas eram um contorno fino sobre fundo quase preto: existiam, mas não se viam, e a
+   pessoa não descobria que dava para passar de foto. Agora têm fundo próprio e sombra. */
 .lb__nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
+  width: 3rem;
+  height: 3rem;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+}
+.lb__nav:hover {
+  background: rgba(209, 20, 31, 0.9);
+  border-color: var(--red-2);
 }
 .lb__nav--prev {
   left: 0.75rem;

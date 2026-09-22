@@ -67,8 +67,8 @@ export const CATEGORIAS: CategoriaSom[] = [
     fotos: [
       { src: "/img/som/som--camera-re-mitsubishi.jpg", w: 1400, h: 1050, alt: "Central de um Mitsubishi exibindo a imagem da câmera de ré", real: true },
       { src: "/img/som/som--camera-360-volvo.jpg", w: 1400, h: 756, alt: "Tela de um Volvo exibindo a visão de câmeras de 360 graus", real: true },
-      { src: "/img/produtos/cameras-de-re-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores — item do catálogo", real: false },
-      { src: "/img/produtos/sensor-de-estacionamento-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores — item do catálogo", real: false },
+      { src: "/img/produtos/cameras-de-re-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores", real: false },
+      { src: "/img/produtos/sensor-de-estacionamento-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores", real: false },
     ],
   },
   {
@@ -76,14 +76,14 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Som automotivo",
     texto:
       "Alto-falantes, kits duas vias, amplificadores e subwoofers para melhorar a qualidade e a potência do sistema de áudio do veículo.",
-    capa: { src: "/img/produtos/subwoofer-2.jpg", w: 1000, h: 892, alt: "Som automotivo — item do catálogo", real: false },
+    capa: { src: "/img/produtos/subwoofer-2.jpg", w: 1000, h: 892, alt: "Som automotivo", real: false },
     fotos: [
-      { src: "/img/produtos/subwoofer-2.jpg", w: 1000, h: 892, alt: "Som automotivo — item do catálogo", real: false },
-      { src: "/img/produtos/kit-duas-vias-3.jpg", w: 1000, h: 1000, alt: "Som automotivo — item do catálogo", real: false },
-      { src: "/img/produtos/auto-falantes-triaxiais-4.jpg", w: 800, h: 800, alt: "Som automotivo — item do catálogo", real: false },
-      { src: "/img/produtos/amplificadores-de-potencia-3.jpg", w: 900, h: 754, alt: "Som automotivo — item do catálogo", real: false },
-      { src: "/img/produtos/subwoofer-5.jpg", w: 1000, h: 973, alt: "Som automotivo — item do catálogo", real: false },
-      { src: "/img/produtos/subwoofer-3.jpg", w: 1000, h: 750, alt: "Som automotivo — item do catálogo", real: false },
+      { src: "/img/produtos/subwoofer-2.jpg", w: 1000, h: 892, alt: "Som automotivo", real: false },
+      { src: "/img/produtos/kit-duas-vias-3.jpg", w: 1000, h: 1000, alt: "Som automotivo", real: false },
+      { src: "/img/produtos/auto-falantes-triaxiais-4.jpg", w: 800, h: 800, alt: "Som automotivo", real: false },
+      { src: "/img/produtos/amplificadores-de-potencia-3.jpg", w: 900, h: 754, alt: "Som automotivo", real: false },
+      { src: "/img/produtos/subwoofer-5.jpg", w: 1000, h: 973, alt: "Som automotivo", real: false },
+      { src: "/img/produtos/subwoofer-3.jpg", w: 1000, h: 750, alt: "Som automotivo", real: false },
     ],
   },
   {
@@ -91,13 +91,13 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Alarmes, travas e vidros elétricos",
     texto:
       "Alarmes automotivos, travas elétricas, módulos de vidro e soluções para segurança e conforto, com instalação profissional.",
-    capa: { src: "/img/produtos/alarmes-automotivos-positron-px-fx-1.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
+    capa: { src: "/img/produtos/alarmes-automotivos-positron-px-fx-1.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos", real: false },
     fotos: [
-      { src: "/img/produtos/alarmes-automotivos-positron-px-fx-1.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
-      { src: "/img/produtos/alarmes-automotivos-positron-px-fx-2.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
-      { src: "/img/produtos/vidros-e-travas-eletricas-2.jpg", w: 1000, h: 537, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
-      { src: "/img/produtos/modulos-de-levantamento-de-vidros-anti-esmagamento-2.jpg", w: 600, h: 600, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
-      { src: "/img/produtos/vidros-e-travas-eletricas-1.jpg", w: 500, h: 500, alt: "Alarmes, travas e vidros elétricos — item do catálogo", real: false },
+      { src: "/img/produtos/alarmes-automotivos-positron-px-fx-1.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos", real: false },
+      { src: "/img/produtos/alarmes-automotivos-positron-px-fx-2.jpg", w: 1000, h: 1000, alt: "Alarmes, travas e vidros elétricos", real: false },
+      { src: "/img/produtos/vidros-e-travas-eletricas-2.jpg", w: 1000, h: 537, alt: "Alarmes, travas e vidros elétricos", real: false },
+      { src: "/img/produtos/modulos-de-levantamento-de-vidros-anti-esmagamento-2.jpg", w: 600, h: 600, alt: "Alarmes, travas e vidros elétricos", real: false },
+      { src: "/img/produtos/vidros-e-travas-eletricas-1.jpg", w: 500, h: 500, alt: "Alarmes, travas e vidros elétricos", real: false },
     ],
   },
   {
@@ -105,12 +105,12 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Iluminação automotiva",
     texto:
       "Lâmpadas originais e de reposição, lâmpadas superbrancas, iluminação LED, faróis auxiliares e outras soluções para melhorar a iluminação e o visual do veículo.",
-    capa: { src: "/img/produtos/farois-de-led-1.jpg", w: 1000, h: 666, alt: "Iluminação automotiva — item do catálogo", real: false },
+    capa: { src: "/img/produtos/farois-de-led-1.jpg", w: 1000, h: 666, alt: "Iluminação automotiva", real: false },
     fotos: [
-      { src: "/img/produtos/farois-de-led-1.jpg", w: 1000, h: 666, alt: "Iluminação automotiva — item do catálogo", real: false },
-      { src: "/img/produtos/farois-de-led-2.jpg", w: 920, h: 613, alt: "Iluminação automotiva — item do catálogo", real: false },
-      { src: "/img/produtos/farois-auxiliares-2.jpg", w: 500, h: 359, alt: "Iluminação automotiva — item do catálogo", real: false },
-      { src: "/img/produtos/lampadas-crystal-vision-philips-1.jpg", w: 390, h: 470, alt: "Iluminação automotiva — item do catálogo", real: false },
+      { src: "/img/produtos/farois-de-led-1.jpg", w: 1000, h: 666, alt: "Iluminação automotiva", real: false },
+      { src: "/img/produtos/farois-de-led-2.jpg", w: 920, h: 613, alt: "Iluminação automotiva", real: false },
+      { src: "/img/produtos/farois-auxiliares-2.jpg", w: 500, h: 359, alt: "Iluminação automotiva", real: false },
+      { src: "/img/produtos/lampadas-crystal-vision-philips-1.jpg", w: 390, h: 470, alt: "Iluminação automotiva", real: false },
     ],
   },
   {
@@ -118,10 +118,10 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Engates e elétrica para reboque",
     texto:
       "Engates fixos ou removíveis para diferentes modelos de veículos, instalação da parte elétrica e módulos eletrônicos específicos quando necessários.",
-    capa: { src: "/img/produtos/engates-dhf-1.jpg", w: 600, h: 600, alt: "Engates e elétrica para reboque — item do catálogo", real: false },
+    capa: { src: "/img/produtos/engates-dhf-1.jpg", w: 600, h: 600, alt: "Engates e elétrica para reboque", real: false },
     fotos: [
-      { src: "/img/produtos/engates-dhf-1.jpg", w: 600, h: 600, alt: "Engates e elétrica para reboque — item do catálogo", real: false },
-      { src: "/img/produtos/engates-enforth-1.jpg", w: 500, h: 319, alt: "Engates e elétrica para reboque — item do catálogo", real: false },
+      { src: "/img/produtos/engates-dhf-1.jpg", w: 600, h: 600, alt: "Engates e elétrica para reboque", real: false },
+      { src: "/img/produtos/engates-enforth-1.jpg", w: 500, h: 319, alt: "Engates e elétrica para reboque", real: false },
     ],
   },
   {
@@ -133,10 +133,10 @@ export const CATEGORIAS: CategoriaSom[] = [
     fotos: [
       { src: "/img/som/som--pickup-santo-antonio.jpg", w: 1050, h: 1400, alt: "Santo Antônio e capota marítima instalados na caçamba de uma Hilux", real: true },
       { src: "/img/som/som--pickup-capota-maritima.jpg", w: 1400, h: 1082, alt: "Traseira de Hilux branca com capota marítima e Santo Antônio instalados", real: true },
-      { src: "/img/produtos/capotas-maritimas-1.jpg", w: 1000, h: 1000, alt: "Capotas e acessórios para pickups — item do catálogo", real: false },
-      { src: "/img/produtos/acessorios-automotivos-bepo-1.jpg", w: 500, h: 323, alt: "Capotas e acessórios para pickups — item do catálogo", real: false },
-      { src: "/img/produtos/acessorios-automotivos-bepo-3.jpg", w: 500, h: 500, alt: "Capotas e acessórios para pickups — item do catálogo", real: false },
-      { src: "/img/produtos/protetores-de-carter-1.jpg", w: 500, h: 358, alt: "Capotas e acessórios para pickups — item do catálogo", real: false },
+      { src: "/img/produtos/capotas-maritimas-1.jpg", w: 1000, h: 1000, alt: "Capotas e acessórios para pickups", real: false },
+      { src: "/img/produtos/acessorios-automotivos-bepo-1.jpg", w: 500, h: 323, alt: "Capotas e acessórios para pickups", real: false },
+      { src: "/img/produtos/acessorios-automotivos-bepo-3.jpg", w: 500, h: 500, alt: "Capotas e acessórios para pickups", real: false },
+      { src: "/img/produtos/protetores-de-carter-1.jpg", w: 500, h: 358, alt: "Capotas e acessórios para pickups", real: false },
     ],
   },
   {
@@ -147,9 +147,9 @@ export const CATEGORIAS: CategoriaSom[] = [
     capa: { src: "/img/som/som--rack-defender-teto.jpg", w: 1400, h: 1050, alt: "Land Rover Defender preto com rack de teto e estribos laterais", real: true },
     fotos: [
       { src: "/img/som/som--rack-defender-teto.jpg", w: 1400, h: 1050, alt: "Land Rover Defender preto com rack de teto e estribos laterais", real: true },
-      { src: "/img/produtos/bagageiros-e-racks-1.jpg", w: 1000, h: 1000, alt: "Racks, transbikes e bagageiros — item do catálogo", real: false },
-      { src: "/img/produtos/bagageiros-e-racks-2.jpg", w: 1000, h: 1000, alt: "Racks, transbikes e bagageiros — item do catálogo", real: false },
-      { src: "/img/produtos/bagageiros-e-racks-6.jpg", w: 625, h: 625, alt: "Racks, transbikes e bagageiros — item do catálogo", real: false },
+      { src: "/img/produtos/bagageiros-e-racks-1.jpg", w: 1000, h: 1000, alt: "Racks, transbikes e bagageiros", real: false },
+      { src: "/img/produtos/bagageiros-e-racks-2.jpg", w: 1000, h: 1000, alt: "Racks, transbikes e bagageiros", real: false },
+      { src: "/img/produtos/bagageiros-e-racks-6.jpg", w: 625, h: 625, alt: "Racks, transbikes e bagageiros", real: false },
     ],
   },
   {
@@ -157,10 +157,10 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Tapetes automotivos",
     texto:
       "Tapetes específicos para diferentes modelos de veículos, com opções em borracha, carpete e materiais de fácil limpeza e manutenção.",
-    capa: { src: "/img/produtos/tapetes-borcol-1.jpg", w: 782, h: 838, alt: "Tapetes automotivos — item do catálogo", real: false },
+    capa: { src: "/img/produtos/tapetes-borcol-1.jpg", w: 782, h: 838, alt: "Tapetes automotivos", real: false },
     fotos: [
-      { src: "/img/produtos/tapetes-borcol-1.jpg", w: 782, h: 838, alt: "Tapetes automotivos — item do catálogo", real: false },
-      { src: "/img/produtos/tapetes-borcol-2.jpg", w: 800, h: 800, alt: "Tapetes automotivos — item do catálogo", real: false },
+      { src: "/img/produtos/tapetes-borcol-1.jpg", w: 782, h: 838, alt: "Tapetes automotivos", real: false },
+      { src: "/img/produtos/tapetes-borcol-2.jpg", w: 800, h: 800, alt: "Tapetes automotivos", real: false },
     ],
   },
   {
@@ -181,9 +181,9 @@ export const CATEGORIAS: CategoriaSom[] = [
     titulo: "Filtros esportivos",
     texto:
       "Filtros de ar esportivos para diferentes veículos, com orientação sobre compatibilidade e aplicação.",
-    capa: { src: "/img/produtos/filtro-de-ar-esportivo-1.jpg", w: 1000, h: 670, alt: "Filtros esportivos — item do catálogo", real: false },
+    capa: { src: "/img/produtos/filtro-de-ar-esportivo-1.jpg", w: 1000, h: 670, alt: "Filtros esportivos", real: false },
     fotos: [
-      { src: "/img/produtos/filtro-de-ar-esportivo-1.jpg", w: 1000, h: 670, alt: "Filtros esportivos — item do catálogo", real: false },
+      { src: "/img/produtos/filtro-de-ar-esportivo-1.jpg", w: 1000, h: 670, alt: "Filtros esportivos", real: false },
     ],
   },
 ];

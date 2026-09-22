@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon, ExpandIcon } from "./icons/catalogo";
 
 /**
@@ -36,10 +37,27 @@ type LightboxProps = {
   label?: string;
 };
 
+/**
+ * **Por que vai num portal.** O lightbox é `position: fixed` com z-index alto, mas isso não
+ * basta: ele nascia dentro da página, e tanto `/som-e-acessorios` quanto `/produtos/[slug]`
+ * envolvem o conteúdo numa `<section class="relative isolate">`. `isolate` cria um contexto de
+ * empilhamento, e dentro dele o z-index do lightbox só compete com irmãos — o cabeçalho do
+ * site, que é `z-40` no contexto raiz, passava por cima. O efeito prático era o pior possível:
+ * a barra superior, que é onde mora o X de fechar, ficava escondida atrás do menu, e o
+ * lightbox parecia não ter como fechar. Em `/galeria` não acontecia, porque lá não há `isolate`
+ * — o mesmo componente se comportava de dois jeitos dependendo de quem o renderizava.
+ *
+ * Ancorar no `document.body` tira essa decisão das mãos de quem usa o componente: não importa
+ * mais em que árvore ele é chamado.
+ */
 export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
   const [dir, setDir] = useState(0);
+  const [montado, setMontado] = useState(false);
+  const tiras = useRef<HTMLDivElement>(null);
   const open = index !== null;
   const total = photos.length;
+
+  useEffect(() => setMontado(true), []);
 
   const close = useCallback(() => onChange(null), [onChange]);
   const step = useCallback(
@@ -76,9 +94,18 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
     });
   }, [index, photos, total]);
 
+  /* A tira acompanha a navegação: sem isto, quem passa as fotos pelo teclado ou deslizando
+     perde de vista onde está assim que a miniatura ativa sai da área visível. */
+  useEffect(() => {
+    if (index === null) return;
+    tiras.current?.children[index]?.scrollIntoView({ block: "nearest", inline: "center" });
+  }, [index]);
+
   const photo = index !== null ? photos[index] : null;
 
-  return (
+  if (!montado) return null;
+
+  return createPortal(
     <AnimatePresence>
       {photo && index !== null && (
         <motion.div
@@ -107,9 +134,22 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
                 <p className="truncate text-xs text-fg-3">{photo.alt}</p>
               )}
             </div>
-            <button type="button" onClick={close} aria-label="Fechar (Esc)" className="lb__btn">
-              <CloseIcon className="size-5" />
-            </button>
+            <div className="flex shrink-0 items-center gap-3">
+              {total > 1 && (
+                <p className="lb__counter" aria-live="polite">
+                  {String(index + 1).padStart(2, "0")}
+                  <small> / {String(total).padStart(2, "0")}</small>
+                </p>
+              )}
+              <button
+                type="button"
+                onClick={close}
+                aria-label="Fechar (Esc)"
+                className="lb__btn lb__btn--fechar"
+              >
+                <CloseIcon className="size-5" />
+              </button>
+            </div>
           </div>
 
           <div className="lb__stage">
@@ -192,10 +232,33 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
             )}
           </div>
 
+          {/* A tira de miniaturas é o que responde à pergunta "dá para passar?" sem precisar
+              escrever. Mostra quantas fotos existem, qual está aberta e leva direto a qualquer
+              uma — e no celular, onde as setas são pequenas e o deslize é invisível, ela é o
+              controle principal. Com uma foto só não aparece: não haveria o que dizer. */}
           <div className="lb__foot" onClick={(e) => e.stopPropagation()}>
-            <p className="lb__counter" aria-live="polite">
-              {String(index + 1).padStart(2, "0")} <small>/ {String(total).padStart(2, "0")}</small>
-            </p>
+            {total > 1 ? (
+              <div className="lb__tiras" ref={tiras} role="tablist" aria-label="Fotos desta categoria">
+                {photos.map((p, i) => (
+                  <button
+                    key={p.src}
+                    type="button"
+                    role="tab"
+                    aria-selected={i === index}
+                    aria-label={`Foto ${i + 1} de ${total}`}
+                    onClick={() => {
+                      setDir(i > index ? 1 : -1);
+                      onChange(i);
+                    }}
+                    className="lb__tira"
+                  >
+                    <Image src={p.src} alt="" fill sizes="80px" className="object-cover" />
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span />
+            )}
             <p className="lb__hint" aria-hidden>
               <kbd>←</kbd>
               <kbd>→</kbd> navegar
@@ -205,7 +268,8 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }
 
