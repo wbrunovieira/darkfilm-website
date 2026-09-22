@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Catalogo } from "@/components/Catalogo";
+import { CategoriasSom } from "@/components/CategoriasSom";
 import { ContactCTA } from "@/components/ContactCTA";
 import { Reveal } from "@/components/Reveal";
-import { catalogoSom } from "@/lib/produtos";
 
 export const metadata: Metadata = {
   title: "Som e Acessórios",
@@ -46,14 +45,17 @@ export default function SomEAcessoriosPage() {
             <div>
               <p className="eyebrow mb-3">Catálogo</p>
               <h2 className="display text-3xl md:text-5xl">
-                Escolha o grupo <span className="text-fg-3">ou busque.</span>
+                O que fazemos <span className="text-fg-3">em som e acessórios.</span>
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-fg-2">
-              Cada item abre uma página com fotos e descrição. Disponibilidade e valores sob consulta pelo WhatsApp.
+              Clique na foto de cada categoria para ver mais imagens.
             </p>
           </Reveal>
-          <Catalogo items={catalogoSom} />
+          {/* 11 categorias no lugar dos 41 produtos individuais, a pedido do cliente em
+              22/09/2026. A busca e o filtro por grupo saíram junto com a grade: não se busca
+              entre onze cartões que cabem na tela. */}
+          <CategoriasSom />
         </div>
       </section>
 

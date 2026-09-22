@@ -23,7 +23,18 @@ export type Produto = {
  */
 const DESCONTINUADOS = new Set(["lavagem-a-seco", "polimento-dos-farois"]);
 
-export const produtos: Produto[] = (data as Produto[]).filter((p) => !DESCONTINUADOS.has(p.slug));
+/**
+ * O catálogo de som virou 11 CATEGORIAS em 22/09/2026, a pedido do cliente, e os 41 produtos
+ * individuais saíram da página. Eles saem também do site: a grade era a única entrada para
+ * /produtos/<slug>, e manter 41 URLs vivas no sitemap sem link nenhum apontando para elas é o
+ * mesmo erro já corrigido com a lavagem a seco — vitrine fechada, porta dos fundos aberta.
+ *
+ * É filtro de dados, não exclusão: o conteúdo continua inteiro em content/produtos.json. O que
+ * a loja oferece nesses 41 itens está descrito, por categoria, em content/som-categorias.ts.
+ */
+export const produtos: Produto[] = (data as Produto[]).filter(
+  (p) => !DESCONTINUADOS.has(p.slug) && p.category !== 3,
+);
 
 /**
  * O Header precisa saber a que seção do menu cada produto pertence, mas é componente de
@@ -59,52 +70,8 @@ export const categorias: Record<number, { nome: string; href: string }> = {
   3: { nome: "Som e Acessórios", href: "/som-e-acessorios" },
 };
 
-/** Agrupamento do catálogo de som e acessórios (classificação editorial para filtro). */
-export const grupos: { id: string; nome: string; slugs: string[] }[] = [
-  {
-    id: "som",
-    nome: "Som e multimídia",
-    slugs: [
-      "subwoofer", "kit-duas-vias", "auto-falantes-triaxiais", "amplificadores-de-potencia",
-      "caixas-seladas-regency", "bazookas-regency", "auto-radio-usb-bluetooth", "kits-multimidia",
-      "receptor-de-tv-digital-automotivo", "gps-navegador-portatil", "antenas", "cameras-de-re",
-    ],
-  },
-  {
-    id: "seguranca",
-    nome: "Alarmes e segurança",
-    slugs: [
-      "alarmes-automotivos-positron-px-fx", "alarmes-automotivos-sistec", "alarmes-automotivos-kostal",
-      "alarme-para-motocicletas-positron-duoblock", "sensor-de-estacionamento", "vidros-e-travas-eletricas",
-      "modulos-de-levantamento-de-vidros-anti-esmagamento",
-    ],
-  },
-  {
-    id: "iluminacao",
-    nome: "Iluminação",
-    slugs: [
-      "lampadas-xenon-6000k-8000k", "lampadas-crystal-vision-philips", "lampadas-blue-vision-philips",
-      "farois-auxiliares", "farois-de-led",
-    ],
-  },
-  {
-    id: "acessorios",
-    nome: "Acessórios",
-    slugs: [
-      "engates-dhf", "engates-enforth", "buzinas-esportivas", "buzina-caracol", "protetores-de-carter",
-      "acessorios-automotivos-tg-poli", "acessorios-automotivos-bepo", "capotas-maritimas", "tapetes-borcol",
-      "bagageiros-e-racks", "capas-para-estepe", "rodas-e-pneus-esportivos", "filtro-de-ar-esportivo",
-      "manometros", "linha-de-personalizacao-shutt", "palhetas-para-limpador-de-parabrisas", "baterias-moura",
-    ],
-  },
-];
-
-export function grupoDe(slug: string) {
-  return grupos.find((g) => g.slugs.includes(slug));
-}
 
 export function getProduto(slug: string) {
   return produtos.find((p) => p.slug === slug);
 }
 
-export const catalogoSom = produtos.filter((p) => p.category === 3);

@@ -6,16 +6,12 @@ import { ProductGallery } from "@/components/PhotoGrid";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { ContactCTA } from "@/components/ContactCTA";
 import { ArrowIcon, WhatsAppIcon } from "@/components/icons";
-import {
-  ChevronSmallIcon,
-  GrupoIcon,
-  PhotosIcon,
-} from "@/components/icons/catalogo";
+import { ChevronSmallIcon, PhotosIcon } from "@/components/icons/catalogo";
 import { PolimentoVidros } from "@/components/produtos/PolimentoVidros";
 import { EnvelopamentoTrabalhos } from "@/components/produtos/EnvelopamentoTrabalhos";
 import { POLIMENTO } from "@/content/polimento-vidros";
 import { SLUG as ENVELOPAMENTO, TEXTO as ENVEL_TEXTO } from "@/content/envelopamento";
-import { categorias, getProduto, grupoDe, produtos } from "@/lib/produtos";
+import { categorias, getProduto, produtos } from "@/lib/produtos";
 import { site, whatsappUrl } from "@/lib/site";
 
 type Params = { slug: string };
@@ -49,13 +45,11 @@ export default async function ProdutoPage({
   if (!p) notFound();
 
   const cat = categorias[p.category];
-  const grupo = grupoDe(p.slug);
+  /* O nível "grupo" era do catálogo de som, que virou categorias em 22/09/2026 e levou os 41
+     produtos junto. Restaram só as seis páginas de película, que nunca tiveram grupo — o
+     relacionamento volta a ser pela categoria, que é o que sempre foi para elas. */
   const related = produtos
-    .filter(
-      (o) =>
-        o.slug !== p.slug &&
-        (grupo ? grupo.slugs.includes(o.slug) : o.category === p.category),
-    )
+    .filter((o) => o.slug !== p.slug && o.category === p.category)
     .slice(0, 4);
   const photos = p.photos.map((ph) => ({ ...ph, alt: p.title }));
 
@@ -81,15 +75,6 @@ export default async function ProdutoPage({
             <Link href="/">Início</Link>
             <ChevronSmallIcon aria-hidden />
             <Link href={cat.href}>{cat.nome}</Link>
-            {grupo && (
-              <>
-                <ChevronSmallIcon aria-hidden />
-                {/* Antes este link ia para `cat.href`, a MESMA URL do crumb anterior: clicava-se
-                    no grupo esperando os itens dele e caía na lista completa com o filtro em
-                    "Todos". Agora leva ao catálogo já filtrado por este grupo. */}
-                <Link href={`${cat.href}?grupo=${grupo.id}`}>{grupo.nome}</Link>
-              </>
-            )}
             <ChevronSmallIcon aria-hidden />
             <span aria-current="page" className="truncate">
               {p.title}
@@ -106,10 +91,7 @@ export default async function ProdutoPage({
             </Reveal>
 
             <Reveal delay={0.1} className="md:pt-2">
-              <p className="eyebrow mb-4 inline-flex items-center gap-2">
-                {grupo && <GrupoIcon id={grupo.id} className="size-4" />}
-                {grupo?.nome ?? cat.nome}
-              </p>
+              <p className="eyebrow mb-4">{cat.nome}</p>
               <h1 className="display text-[clamp(2.5rem,6vw,4.5rem)]">
                 {p.title}
               </h1>
@@ -124,12 +106,6 @@ export default async function ProdutoPage({
                     <Link href={cat.href}>{cat.nome}</Link>
                   </dd>
                 </div>
-                {grupo && (
-                  <div>
-                    <dt>Grupo</dt>
-                    <dd>{grupo.nome}</dd>
-                  </div>
-                )}
                 <div>
                   <dt>Fotos</dt>
                   <dd className="inline-flex items-center gap-1.5">
@@ -175,7 +151,7 @@ export default async function ProdutoPage({
         <section className="container-x mt-24 border-t border-line pt-16">
           <Reveal className="mb-8 flex items-end justify-between gap-6">
             <div>
-              <p className="eyebrow mb-3">{grupo?.nome ?? cat.nome}</p>
+              <p className="eyebrow mb-3">{cat.nome}</p>
               <h2 className="display text-3xl md:text-4xl">Veja também</h2>
             </div>
             <Link
@@ -191,18 +167,10 @@ export default async function ProdutoPage({
             role="list"
             className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
           >
-            {related.map((r) => {
-              const rg = grupoDe(r.slug);
-              return (
+            {related.map((r) => (
                 <RevealItem key={r.slug} role="listitem" className="h-full">
                   <Link href={`/produtos/${r.slug}`} className="cat-card">
                     <div className="cat-card__media">
-                      {rg && (
-                        <span className="cat-card__tag">
-                          <GrupoIcon id={rg.id} />
-                          {rg.nome}
-                        </span>
-                      )}
                       {r.photos[0] && (
                         <Image
                           src={r.photos[0].src}
@@ -221,8 +189,7 @@ export default async function ProdutoPage({
                     </div>
                   </Link>
                 </RevealItem>
-              );
-            })}
+            ))}
           </RevealGroup>
           <Link
             href={cat.href}

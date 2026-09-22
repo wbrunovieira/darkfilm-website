@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { grupos } from "@/lib/produtos";
+import { CATEGORIAS } from "@/content/som-categorias";
 import { nav, site, whatsappUrl } from "@/lib/site";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "./icons";
 import { GoogleBadge } from "./GoogleBadge";
@@ -31,7 +31,10 @@ const colunas = [
     titulo: "Catálogo",
     links: [
       { href: "/som-e-acessorios", label: "Som e Acessórios" },
-      ...grupos.map((g) => ({ href: `/som-e-acessorios?grupo=${g.id}`, label: g.nome })),
+      /* As quatro primeiras das 11 categorias novas. Antes eram os grupos do catálogo, que
+         filtravam por querystring; os grupos saíram com os 41 produtos e a âncora leva ao
+         cartão da categoria na própria página. */
+      ...CATEGORIAS.slice(0, 4).map((c) => ({ href: `/som-e-acessorios#${c.id}`, label: c.titulo })),
     ],
   },
 ];
