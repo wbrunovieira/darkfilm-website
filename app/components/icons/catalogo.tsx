@@ -20,16 +20,6 @@ function Base({ children, ...p }: P) {
   );
 }
 
-/** Som e multimídia: alto-falante com ondas. */
-export function SpeakerIcon(p: P) {
-  return (
-    <Base {...p}>
-      <path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" />
-      <path d="M15.5 9a4 4 0 0 1 0 6" />
-      <path d="M18 6.5a7.5 7.5 0 0 1 0 11" />
-    </Base>
-  );
-}
 
 /** Alarmes e segurança: escudo com cadeado. */
 export function ShieldIcon(p: P) {
@@ -52,35 +42,8 @@ export function HeadlightIcon(p: P) {
   );
 }
 
-/** Acessórios: chave de boca. */
-export function WrenchIcon(p: P) {
-  return (
-    <Base {...p}>
-      <path d="M14.2 6.2a4 4 0 0 1 5-1.1l-2.6 2.6.9 2.2 2.2.9 2.6-2.6a4 4 0 0 1-5.7 4.9L8.4 21.3a1.8 1.8 0 0 1-2.6-2.6l8.2-8.2a4 4 0 0 1 .2-4.3z" />
-    </Base>
-  );
-}
 
-/** Grade: "todos". */
-export function GridIcon(p: P) {
-  return (
-    <Base {...p}>
-      <rect x="4" y="4" width="6.5" height="6.5" rx="1" />
-      <rect x="13.5" y="4" width="6.5" height="6.5" rx="1" />
-      <rect x="4" y="13.5" width="6.5" height="6.5" rx="1" />
-      <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1" />
-    </Base>
-  );
-}
 
-export function SearchIcon(p: P) {
-  return (
-    <Base {...p}>
-      <circle cx="11" cy="11" r="6.5" />
-      <path d="m20 20-3.8-3.8" />
-    </Base>
-  );
-}
 
 export function CloseIcon(p: P) {
   return (
@@ -135,17 +98,3 @@ export function PhotosIcon(p: P) {
 }
 
 /** Ícone do grupo do catálogo (lib/produtos.ts → grupos[].id). */
-export function GrupoIcon({ id, ...p }: P & { id: string }) {
-  switch (id) {
-    case "som":
-      return <SpeakerIcon {...p} />;
-    case "seguranca":
-      return <ShieldIcon {...p} />;
-    case "iluminacao":
-      return <HeadlightIcon {...p} />;
-    case "acessorios":
-      return <WrenchIcon {...p} />;
-    default:
-      return <GridIcon {...p} />;
-  }
-}

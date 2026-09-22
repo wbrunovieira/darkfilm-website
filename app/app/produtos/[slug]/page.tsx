@@ -46,7 +46,7 @@ export default async function ProdutoPage({
 
   const cat = categorias[p.category];
   /* O nível "grupo" era do catálogo de som, que virou categorias em 22/09/2026 e levou os 41
-     produtos junto. Restaram só as seis páginas de película, que nunca tiveram grupo — o
+     produtos junto. Restaram só as quatro páginas de película, que nunca tiveram grupo — o
      relacionamento volta a ser pela categoria, que é o que sempre foi para elas. */
   const related = produtos
     .filter((o) => o.slug !== p.slug && o.category === p.category)

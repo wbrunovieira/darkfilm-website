@@ -520,7 +520,7 @@ export function PainelRevisao({
     const m = new Map<string, Bloco[]>();
     for (const b of blocos) if (combina(b)) m.set(b.grupo, [...(m.get(b.grupo) ?? []), b]);
     // Ordem de leitura: as páginas do site primeiro, os assuntos avulsos depois, e só então os
-    // 45 produtos — que são volume, não prioridade.
+    // páginas de produto — que são volume, não prioridade.
     const peso = (g: string) => (g === "Páginas do site" ? 0 : g === GRUPO_ASSUNTOS ? 1 : 2);
     return [...m.entries()].sort((a, b) => peso(a[0]) - peso(b[0]));
   }, [blocos, combina]);

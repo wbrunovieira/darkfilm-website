@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Lightbox } from "./PhotoGrid";
 import { Reveal, RevealGroup, RevealItem } from "./Reveal";
 import { ExpandIcon } from "./icons/catalogo";
@@ -28,6 +28,13 @@ export function CategoriasSom() {
   /** Categoria aberta e índice dentro dela. `null` = lightbox fechado. */
   const [aberta, setAberta] = useState<{ cat: number; foto: number } | null>(null);
   const cat = aberta !== null ? CATEGORIAS[aberta.cat] : null;
+
+  /* `useCallback` porque o Lightbox usa `onChange` em dependência de efeito: uma arrow nova a
+     cada render faria ele remover e recolocar o listener de teclado o tempo todo. */
+  const trocar = useCallback(
+    (i: number | null) => setAberta((a) => (i === null || a === null ? null : { ...a, foto: i })),
+    [],
+  );
 
   return (
     <>
@@ -91,14 +98,17 @@ export function CategoriasSom() {
         </p>
       </Reveal>
 
-      {cat && (
-        <Lightbox
-          photos={cat.fotos}
-          index={aberta!.foto}
-          onChange={(i) => setAberta(i === null ? null : { cat: aberta!.cat, foto: i })}
-          label={cat.titulo}
-        />
-      )}
+      {/* Sempre montado, com `index={null}` quando fechado — e não `{cat && <Lightbox/>}`.
+          O <AnimatePresence> que anima a saída vive DENTRO do Lightbox: desmontando o
+          componente ao fechar, a animação de saída nunca chega a rodar e o lightbox some de
+          estalo aqui, enquanto dissolve na galeria e nas páginas de produto. Mesmo componente,
+          dois comportamentos. */}
+      <Lightbox
+        photos={(cat ?? CATEGORIAS[0]).fotos}
+        index={aberta?.foto ?? null}
+        onChange={trocar}
+        label={(cat ?? CATEGORIAS[0]).titulo}
+      />
     </>
   );
 }

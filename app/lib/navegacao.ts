@@ -6,7 +6,7 @@
  * indicador de posição do site — uma das causas medidas do "cada hora clico num link e me perco".
  *
  * Não importa `produtos.json` (29 KB) porque o Header é componente de cliente e isso iria
- * inteiro para o bundle. Dos 45 produtos, 41 são de som; só 4 fogem à regra, e estão listados
+ * inteiro para o bundle. Depois de 22/09/2026 restaram 4 produtos, todos de película; só 4 fogem à regra, e estão listados
  * abaixo. `lib/produtos.ts` tem uma checagem que quebra o build se essa lista sair de sincronia
  * com os dados — ou seja, dá para confiar nela sem carregar o catálogo.
  */

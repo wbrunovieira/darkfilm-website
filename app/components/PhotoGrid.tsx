@@ -216,7 +216,7 @@ export function Lightbox({ photos, index, onChange, label }: LightboxProps) {
 /**
  * `variant`:
  * - `catalogo` (padrão) — palco branco com respiro, para foto de produto recortado. É o que as
- *   47 páginas de produto herdaram do catálogo antigo.
+ *   páginas de produto herdaram do catálogo antigo.
  * - `foto` — palco escuro, sem respiro, imagem preenchendo. Para página cuja capa é uma
  *   fotografia de verdade: o recorte branco com tarja em cima e embaixo, que funciona para um
  *   alto-falante em fundo branco, transforma a foto de um carro dentro da oficina em selo.

@@ -16,6 +16,15 @@
  * `real: true` marca o que é foto de trabalho da casa, para saber exatamente o que substituir
  * quando as fotos novas chegarem. Não é decoração: é a lista de pendências embutida no dado.
  *
+ * **Três fotos foram retiradas depois da revisão de 22/09:**
+ * - a versão NÃO recortada da foto do Volvo, que estava na galeria de câmeras ao lado da
+ *   recortada — mesma fotografia duas vezes, e a inteira era a que mostrava as pernas de quem
+ *   fotografou. O recorte já existia; o erro foi publicar as duas.
+ * - um pneu Maxxis em "Rodas esportivas": a categoria que ele escreveu é de RODA, e o comentário
+ *   abaixo já afirmava que as fotos de pneu tinham saído. Afirmava errado.
+ * - a lâmpada Philips Blue Vision, cuja caixa estampa "Xenon effect". "Xenon" saiu do texto desta
+ *   mesma página a pedido dele, em 22/09, e voltaria pela foto.
+ *
  * **Duas fotos foram recortadas, e por motivo:**
  * - `som--pickup-capota-maritima`: o terço de cima trazia um cartaz de PREÇO da loja ("a partir
  *   de 4 x R$ 70,00") e um pôster da FARAD. Preço o site inteiro evita, por escolha de projeto;
@@ -58,7 +67,6 @@ export const CATEGORIAS: CategoriaSom[] = [
     fotos: [
       { src: "/img/som/som--camera-re-mitsubishi.jpg", w: 1400, h: 1050, alt: "Central de um Mitsubishi exibindo a imagem da câmera de ré", real: true },
       { src: "/img/som/som--camera-360-volvo.jpg", w: 1400, h: 756, alt: "Tela de um Volvo exibindo a visão de câmeras de 360 graus", real: true },
-      { src: "/img/novo/multimidia--volvo-camera-re.jpg", w: 2400, h: 1800, alt: "Painel de Volvo com a câmera de ré na tela da central", real: true },
       { src: "/img/produtos/cameras-de-re-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores — item do catálogo", real: false },
       { src: "/img/produtos/sensor-de-estacionamento-1.jpg", w: 1000, h: 1000, alt: "Câmeras e sensores — item do catálogo", real: false },
     ],
@@ -103,7 +111,6 @@ export const CATEGORIAS: CategoriaSom[] = [
       { src: "/img/produtos/farois-de-led-2.jpg", w: 920, h: 613, alt: "Iluminação automotiva — item do catálogo", real: false },
       { src: "/img/produtos/farois-auxiliares-2.jpg", w: 500, h: 359, alt: "Iluminação automotiva — item do catálogo", real: false },
       { src: "/img/produtos/lampadas-crystal-vision-philips-1.jpg", w: 390, h: 470, alt: "Iluminação automotiva — item do catálogo", real: false },
-      { src: "/img/produtos/lampadas-blue-vision-philips-1.jpg", w: 370, h: 370, alt: "Iluminação automotiva — item do catálogo", real: false },
     ],
   },
   {
@@ -167,7 +174,6 @@ export const CATEGORIAS: CategoriaSom[] = [
     capa: { src: "/img/produtos/rodas-e-pneus-esportivos-1.jpg", w: 625, h: 625, alt: "Roda esportiva cromada de aro largo", real: false },
     fotos: [
       { src: "/img/produtos/rodas-e-pneus-esportivos-1.jpg", w: 625, h: 625, alt: "Roda esportiva cromada de aro largo", real: false },
-      { src: "/img/produtos/rodas-e-pneus-esportivos-3.jpg", w: 304, h: 304, alt: "Roda esportiva aro claro montada com pneu", real: false },
     ],
   },
   {
