@@ -7,6 +7,9 @@ import { CountUp } from "@/components/CountUp";
 import { GoogleBadge } from "@/components/GoogleBadge";
 import { ContactCTA } from "@/components/ContactCTA";
 import { decadasEmAtividade, site, yearsInBusiness } from "@/lib/site";
+/* Mesma lista que a home usa. Ver o comentário em `content/clientes.ts`: o cliente trocou os
+   quatro destaques em 21/09/2026, e manter duas listas faria as duas páginas divergirem. */
+import { CLIENTES } from "@/content/clientes";
 import {
   AlarmIcon,
   FilmIcon,
@@ -240,11 +243,11 @@ export default function AEmpresaPage() {
             </p>
           </Reveal>
           <RevealGroup stagger={0.1} className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
-            {site.clients.map((c, i) => {
-              const [name, sub] = c.split(" — ");
+            {CLIENTES.map((c, i) => {
+              const { nome: name, complemento: sub } = c;
               return (
                 <RevealItem
-                  key={c}
+                  key={name}
                   className={`client-cell flex min-h-52 flex-col justify-between border-b border-line p-6 text-fg-2 md:min-h-72 md:p-10 ${
                     i % 2 === 0 ? "sm:border-r" : ""
                   }`}

@@ -39,13 +39,14 @@ export const site = {
   },
   // PENDÊNCIA: horário de funcionamento não consta no site antigo — pedir ao cliente.
   hours: null as null | string,
-  // Clientes atendidos, conforme página "A Empresa" do site original.
-  clients: [
-    "GE Celma",
-    "Tec Auto — Concessionária Ford",
-    "Fundação Cultural de Petrópolis",
-    "Carl Zeiss",
-  ],
+  /**
+   * Os clientes em destaque saíram daqui para `content/clientes.ts` em 22/09/2026, quando
+   * ganharam imagem de fundo. Lista única para a home e para "A Empresa": duas listas
+   * divergiriam no primeiro pedido de troca, e o site passaria a dizer duas coisas.
+   *
+   * A troca foi pedida pelo cliente em 21/09 — "retirando os clientes antigos" — e tirou do ar
+   * Tec Auto (Concessionária Ford) e Carl Zeiss, que constavam do site de 2013.
+   */
 } as const;
 
 export function whatsappUrl(message?: string) {
