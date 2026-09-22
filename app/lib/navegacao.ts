@@ -15,8 +15,6 @@
 export const PRODUTO_FORA_DO_SOM: Record<string, string> = {
   "envelopamento-automotivo": "/peliculas-automotivas",
   "nao-troque-seu-parabrisa-conserte": "/peliculas-automotivas",
-  "pelicula-comercial": "/peliculas-arquitetonicas",
-  "distribuicao-de-peliculas-ferramentas-para-aplicadores-e-chancelas": "/peliculas-arquitetonicas",
 };
 
 /**

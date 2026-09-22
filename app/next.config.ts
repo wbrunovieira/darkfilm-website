@@ -19,6 +19,16 @@ const nextConfig: NextConfig = {
          nível existe. Quem edita a URL na barra, ou segue a lógica do rastro, caía num erro.
          O catálogo mora em /som-e-acessorios. */
       { source: "/produtos", destination: "/som-e-acessorios", permanent: true },
+      /* Absorvidas pela página de Películas Arquitetônicas em 22/09/2026, a pedido do cliente.
+         As três eram URLs públicas — e `/caracteristicas-do-film` existia também no site de
+         2013 —, então saem da navegação, mas quem tiver o link não cai em 404. */
+      { source: "/caracteristicas-do-film", destination: "/peliculas-arquitetonicas", permanent: true },
+      { source: "/produtos/pelicula-comercial", destination: "/peliculas-arquitetonicas", permanent: true },
+      {
+        source: "/produtos/distribuicao-de-peliculas-ferramentas-para-aplicadores-e-chancelas",
+        destination: "/peliculas-arquitetonicas#distribuicao",
+        permanent: true,
+      },
     ];
   },
 };

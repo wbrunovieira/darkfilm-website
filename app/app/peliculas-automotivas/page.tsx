@@ -92,14 +92,14 @@ export default function LinhaAutomotivaPage() {
           Ele mandou tirar a seção em 12/09/2026; o aviso veio para cá em vez de sumir junto.
           Aqui é o lugar certo dele: fica encostado no simulador, que é justamente sobre o que a
           lei permite em cada vidro, e é a parte que o cliente elogiou. Os dois links continuam
-          sendo o caminho desta página para /simulador e /caracteristicas-do-film. */}
+          sendo o caminho desta página para /simulador e para os benefícios da arquitetônica. */}
       <div className="container-x pb-16 md:pb-20">
         <Callout icon={<AlertIcon />}>
           Consulte a legislação vigente para a transparência mínima de cada vidro. Na loja
           medimos o valor final com equipamento próprio — veja também{" "}
           <Link href="/simulador" className="text-fg underline underline-offset-4 hover:text-red-2">o que a lei permite em cada vidro</Link>{" "}
           e as{" "}
-          <Link href="/caracteristicas-do-film" className="text-fg underline underline-offset-4 hover:text-red-2">características do film</Link>.
+          <Link href="/peliculas-arquitetonicas#principais-beneficios" className="text-fg underline underline-offset-4 hover:text-red-2">o que a película faz</Link>.
         </Callout>
       </div>
 

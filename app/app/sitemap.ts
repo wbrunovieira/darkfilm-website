@@ -7,7 +7,6 @@ const paginas = [
   "/a-empresa",
   "/peliculas-automotivas",
   "/peliculas-arquitetonicas",
-  "/caracteristicas-do-film",
   "/3m",
   "/simulador",
   "/som-e-acessorios",

@@ -21,7 +21,16 @@ export type Produto = {
  * É filtro de dados, não exclusão: o conteúdo original continua em content/produtos.json.
  * Se voltarem a oferecer o serviço, basta tirar o slug daqui.
  */
-const DESCONTINUADOS = new Set(["lavagem-a-seco", "polimento-dos-farois"]);
+const DESCONTINUADOS = new Set([
+  "lavagem-a-seco",
+  "polimento-dos-farois",
+  /* Os dois abaixo foram absorvidos pela página de Películas Arquitetônicas em 22/09/2026, a
+     pedido do cliente: "não precisa abrir outra página para Película Comercial", e
+     "ferramentas para aplicadores" e "chancelas" saíram de vez. O bloco de distribuição que
+     sobreviveu virou seção lá. Ambos ganharam redirecionamento em next.config.ts. */
+  "pelicula-comercial",
+  "distribuicao-de-peliculas-ferramentas-para-aplicadores-e-chancelas",
+]);
 
 /**
  * O catálogo de som virou 11 CATEGORIAS em 22/09/2026, a pedido do cliente, e os 41 produtos

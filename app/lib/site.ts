@@ -88,7 +88,6 @@ export const nav: NavItem[] = [
     children: [
       { href: "/peliculas-automotivas", label: "Películas Automotivas" },
       { href: "/peliculas-arquitetonicas", label: "Películas Arquitetônicas" },
-      { href: "/caracteristicas-do-film", label: "Características do Film" },
       /* "Legislação", não "Simulador": em 03/09/2026 o cliente simplificou a página para
          mostrar só o que a lei exige em cada vidro — sem escolha de tonalidade e sem a cena
          pelo vidro, que ficaram na home e em Películas Automotivas. Um item de menu chamado
