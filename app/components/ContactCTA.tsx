@@ -19,10 +19,15 @@ export function ContactCTA() {
             <p className="font-display text-xs font-medium uppercase tracking-[0.22em] text-white/70">
               Fale com a gente
             </p>
+            {/* "Venha nos visitar." — o cliente encurtou o título em 22/09/2026. A quebra
+                continua: a linha inteira não cabe na largura do celular no corpo 5xl, e sem
+                ela o navegador quebraria em "Venha nos vi-sitar" ou empurraria a palavra
+                inteira para baixo sozinha. Este bloco aparece no fim de TODAS as páginas —
+                é um componente só, usado em dez arquivos, incluindo a rota dos 47 produtos. */}
             <h2 className="display mt-4 text-5xl md:text-7xl">
               Venha nos
               <br />
-              fazer uma visita.
+              visitar.
             </h2>
             <p className="mt-6 max-w-sm text-white/80">
               {site.city}/{site.state}, desde {site.founded}. Orçamento pelo WhatsApp ou na loja.

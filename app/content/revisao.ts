@@ -38,7 +38,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "nossa-qualidade-e-atestada-pelo-servico-prestado", titulo: "Nossa qualidade é atestada pelo serviço prestado aos clientes." },
       { id: "na-oficina", titulo: "Na oficina" },
       { id: "som-e-a-outra-metade-do-nome", titulo: "Som é a outra metade do nome" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -52,7 +52,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "de-1992-ate-hoje", titulo: "De 1992 até hoje." },
       { id: "qualidade-e-rapidez-buscando-sempre-a-satisfacao", titulo: "Qualidade e rapidez, buscando sempre a satisfação total do cliente." },
       { id: "nossa-qualidade-e-atestada-pelo-servico-prestado", titulo: "Nossa qualidade é atestada pelo serviço prestado aos clientes." },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -65,7 +65,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "simule-a-sua-pelicula", titulo: "Simule a sua película." },
       { id: "pelicula-automotiva-de-protecao-e-seguranca", titulo: "Película automotiva de proteção e segurança." },
       { id: "mais-para-o-seu-carro", titulo: "Mais para o seu carro" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -81,7 +81,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "aparencia-adequada-e-decoracao-de-interiores", titulo: "Aparência adequada e decoração de interiores." },
       { id: "peliculas-arquitetonicas-produtos", titulo: "Películas arquitetônicas (produtos)" },
       { id: "continue-por-aqui", titulo: "Continue por aqui" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -95,7 +95,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "conforto-seguranca-e-economia", titulo: "Conforto, segurança e economia." },
       { id: "economico-ou-profissional-garantia", titulo: "Econômico ou profissional. (garantia)" },
       { id: "onde-aplicar", titulo: "Onde aplicar" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -109,7 +109,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "cinco-peliculas-cinco-propositos", titulo: "Cinco películas, cinco propósitos." },
       { id: "lado-a-lado-comparativo", titulo: "Lado a lado. (comparativo)" },
       { id: "veja-a-3m-aplicada", titulo: "Veja a 3M aplicada" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -132,7 +132,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "veja-a-tonalidade-antes-de-aplicar", titulo: "Veja a tonalidade antes de aplicar." },
       { id: "qual-vidro-voce-quer-consultar-o-que-a-lei-permi", titulo: "Qual vidro você quer consultar? / O que a lei permite" },
       { id: "o-que-o-numero-da-pelicula-significa", titulo: "O que o número da película significa." },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -143,7 +143,7 @@ export const paginasRevisao: PaginaRevisao[] = [
     secoes: [
       { id: "nacionais-e-importados-tudo-em-um-lugar", titulo: "Nacionais e importados, tudo em um lugar." },
       { id: "escolha-o-grupo-ou-busque-catalogo", titulo: "Escolha o grupo ou busque. (catálogo)" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
@@ -160,7 +160,7 @@ export const paginasRevisao: PaginaRevisao[] = [
       { id: "pelicula-arquitetonica", titulo: "Película arquitetônica" },
       { id: "a-loja", titulo: "A loja" },
       { id: "o-que-fazemos", titulo: "O que fazemos" },
-      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos fazer uma visita." },
+      { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },
   {
