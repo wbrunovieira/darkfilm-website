@@ -46,12 +46,17 @@ export const paginasRevisao: PaginaRevisao[] = [
     titulo: "A Empresa",
     href: "/a-empresa",
     grupo: "Páginas do site",
+    /* Reescrita em 22/09/2026. Os ids que sobrevivem mantêm o nome antigo de propósito: o
+       primeiro carrega o pedido que originou a reescrita, e trocá-lo esconderia a conversa.
+       Os três que sumiram — linha do tempo, missão antiga e clientes — não tinham evento
+       nenhum gravado contra eles, então nada de histórico se perdeu. */
     secoes: [
-      { id: "a-mais-experiente-e-reconhecida-da-regiao", titulo: "A mais experiente e reconhecida da região." },
-      { id: "desde-1992-anos-de-mercado-e-credencial", titulo: "Desde 1992, anos de mercado e credencial" },
-      { id: "de-1992-ate-hoje", titulo: "De 1992 até hoje." },
-      { id: "qualidade-e-rapidez-buscando-sempre-a-satisfacao", titulo: "Qualidade e rapidez, buscando sempre a satisfação total do cliente." },
-      { id: "nossa-qualidade-e-atestada-pelo-servico-prestado", titulo: "Nossa qualidade é atestada pelo serviço prestado aos clientes." },
+      { id: "a-mais-experiente-e-reconhecida-da-regiao", titulo: "Uma história que começou da paixão por carros." },
+      { id: "desde-1992-anos-de-mercado-e-credencial", titulo: "Desde 1992, credencial 3M e nota do Google" },
+      { id: "do-hobby-para-a-empresa", titulo: "Do hobby para a empresa" },
+      { id: "evoluindo-com-o-mercado", titulo: "Evoluindo com o mercado" },
+      { id: "nossa-missao", titulo: "Nossa missão" },
+      { id: "a-loja-endereco-e-como-chegar", titulo: "A loja (endereço e como chegar)" },
       { id: "venha-nos-fazer-uma-visita", titulo: "Venha nos visitar." },
     ],
   },

@@ -2,275 +2,156 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
-import { CountUp } from "@/components/CountUp";
+import { Reveal } from "@/components/Reveal";
 import { GoogleBadge } from "@/components/GoogleBadge";
 import { ContactCTA } from "@/components/ContactCTA";
-import { decadasEmAtividade, site, yearsInBusiness } from "@/lib/site";
-/* Mesma lista que a home usa. Ver o comentário em `content/clientes.ts`: o cliente trocou os
-   quatro destaques em 21/09/2026, e manter duas listas faria as duas páginas divergirem. */
-import { CLIENTES } from "@/content/clientes";
-import {
-  AlarmIcon,
-  FilmIcon,
-  LongArrowIcon,
-  SoundIcon,
-  ToolIcon,
-  WindshieldIcon,
-  WrapIcon,
-} from "@/components/icons/empresa";
+import { site } from "@/lib/site";
+import { ABERTURA, HISTORIA, MISSAO } from "@/content/empresa";
+import { LongArrowIcon } from "@/components/icons/empresa";
 
 export const metadata: Metadata = {
   title: "A Empresa",
+  /* A descrição antiga repetia "a mais experiente e reconhecida da região" — afirmação que o
+     cliente pediu para tirar do título em 22/09/2026. Mantê-la no meta faria o Google continuar
+     anunciando o que ele acabou de remover da página. */
   description:
-    "Fundada em 1992 em Petrópolis/RJ, a The Dark Film é a mais experiente e reconhecida em película, envelopamento, som, alarmes e recuperação de para-brisas da região.",
+    "Como a The Dark Film começou, em Petrópolis/RJ: das primeiras aplicações de película na garagem de casa, nos anos 90, até a loja da Rua Coronel Veiga.",
 };
-
-/**
- * Esta página mostra o tempo de casa calculado da data atual ("34 anos", "três décadas").
- * Sendo estática, esse número é carimbado no build e ficaria errado na virada do ano até
- * o próximo deploy — e, no Hero, que é componente de cliente, o navegador recalcularia e
- * daria divergência de hidratação. Um dia de revalidação resolve os dois.
- */
-export const revalidate = 86400;
-
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// Serviços conforme a página "A Empresa" do site original.
-const services = [
-  { icon: FilmIcon, label: "Película de controle solar e segurança" },
-  { icon: WrapIcon, label: "Envelopamento" },
-  { icon: SoundIcon, label: "Instalação de som" },
-  { icon: AlarmIcon, label: "Alarmes" },
-  { icon: ToolIcon, label: "Acessórios" },
-  { icon: WindshieldIcon, label: "Recuperação de para-brisas" },
-];
-
-// Marcos reais, tirados do conteúdo do site (A Empresa, Películas Automotivas, Home, 3M).
-// Só 1992 e "hoje" têm data confirmada; os demais são apresentados sem ano.
-const timeline: { when: string; title: string; text: string; hot?: boolean }[] = [
-  {
-    when: String(site.founded),
-    title: "Fundação em Petrópolis",
-    text: "A The Dark Film começa a prestar serviços de alto nível em Petrópolis-RJ, tornando-se a mais experiente e reconhecida no mercado da região.",
-    hot: true,
-  },
-  {
-    when: "Marco",
-    title: "Chancela ABRAWF",
-    text: "Em Petrópolis, a única com chancela registrada na Associação Brasileira de Representantes e Aplicadores de Window Film, a entidade que chancela aplicadores de película no país.",
-  },
-  {
-    when: "Marco",
-    title: "Aplicadora credenciada 3M",
-    text: "Credenciamento para aplicar as Películas para Vidros da 3M, referência em rejeição de calor e proteção contra raios solares.",
-  },
-  {
-    when: "Marco",
-    title: "Película de segurança e medição de luz",
-    text: "A The Dark Film inova mais uma vez e lança a película de segurança, e passa a usar equipamento próprio para medir a transmissão luminosa do filme.",
-  },
-  {
-    when: "Hoje",
-    title: `${yearsInBusiness()} anos de mercado`,
-    text: `A mesma missão de sempre: qualidade e rapidez, buscando a satisfação total do cliente. ${site.google.rating.toLocaleString("pt-BR")} de 5 no Google, com ${site.google.reviews} avaliações.`,
-    hot: true,
-  },
-];
-
+/**
+ * A Empresa, refeita a pedido do cliente em 22/09/2026.
+ *
+ * Palavras dele: "a página está com muitas informações repetidas, tanto dentro dela própria
+ * quanto em relação à Home". Estava mesmo — a linha do tempo repetia a credencial 3M que já tem
+ * página inteira, o bloco de missão repetia a lista de serviços que cada seção do site já
+ * detalha, e a grade de clientes era a mesma que acabou de ganhar destaque na Home.
+ *
+ * Saíram: linha do tempo (Fundação, ABRAWF, 3M, película de segurança, "34 anos"), lista de
+ * serviços e bloco de clientes. Entrou a história que ele escreveu, com as fotos de arquivo.
+ *
+ * **Os indicadores continuam, mas discretos** — foi o que ele pediu: "podem ser mantidos no
+ * início, de forma discreta, apenas os indicadores que agregam credibilidade... sem repeti-los
+ * novamente ao longo da página". Antes eram três números gigantes ocupando uma tela inteira;
+ * agora é uma régua de uma linha logo abaixo da abertura.
+ */
 export default function AEmpresaPage() {
-  const years = yearsInBusiness();
-
   return (
     <>
       <PageHero
         crumbs={[{ label: "Início", href: "/" }, { label: "A Empresa" }]}
         title={
           <>
-            A mais experiente
+            Uma história que começou
             <br />
-            e reconhecida <span className="text-red-2">da região.</span>
+            <span className="text-red-2">da paixão por carros.</span>
           </>
         }
-        intro="Fundada em 1992, em Petrópolis-RJ, a The Dark Film vem prestando serviços de alto nível para seus clientes, tornando-se a mais experiente e reconhecida no mercado."
+        intro={ABERTURA.intro}
         image="/img/novo/institucional--fachada-3m-entardecer.jpg"
         imagePosition="center 38%"
       />
 
-      {/* ---------- Números ---------- */}
-      <section className="relative isolate overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-[radial-gradient(50%_60%_at_0%_50%,rgba(209,20,31,0.1),transparent_70%)]"
-        />
-        <div className="container-x py-16 md:py-24">
-          <RevealGroup stagger={0.12} className="grid gap-y-12 md:grid-cols-12 md:gap-x-8">
-            <RevealItem className="md:col-span-5">
-              <p className="eyebrow mb-4">Desde</p>
-              <p className="num-xl text-fg">
-                <CountUp value={String(site.founded)} duration={2} />
-              </p>
-              <p className="mt-4 max-w-xs text-fg-2">
-                Ano de fundação, em Petrópolis/RJ.
-              </p>
-            </RevealItem>
-
-            <RevealItem className="border-line md:col-span-3 md:border-l md:pl-8">
-              <p className="eyebrow mb-4">Mercado</p>
-              <p className="num-xl text-fg">
-                <CountUp value={String(years)} duration={1.8} delay={0.2} />
-              </p>
-              <p className="mt-4 text-fg-2">anos de mercado em Petrópolis e região.</p>
-            </RevealItem>
-
-            <RevealItem className="border-line md:col-span-4 md:border-l md:pl-8">
-              <p className="eyebrow mb-4">Credencial</p>
-              <p className="num-xl text-fg">3M</p>
-              <p className="mt-4 text-fg-2">aplicadora credenciada das Películas para Vidros da 3M.</p>
-            </RevealItem>
-          </RevealGroup>
-
-          <Reveal delay={0.2} className="mt-14 flex flex-wrap items-end justify-between gap-6 border-t border-line pt-8">
-            <GoogleBadge variant="card" />
-            <p className="max-w-sm text-sm text-fg-3">
-              Nota e contagem da ficha da empresa no Google, atualizadas em{" "}
-              {new Date(site.google.updatedAt).toLocaleDateString("pt-BR", { month: "2-digit", year: "numeric" })}.
+      {/* ---------- Credenciais, em uma linha ---------- */}
+      <section className="border-t border-line">
+        <div className="container-x py-8">
+          <Reveal className="flex flex-wrap items-center gap-x-10 gap-y-5">
+            <p className="text-sm text-fg-2">
+              <strong className="font-display text-base font-semibold text-fg">
+                Desde {site.founded}
+              </strong>{" "}
+              em Petrópolis/RJ
             </p>
+            <span aria-hidden className="hidden h-5 w-px bg-line sm:block" />
+            <p className="text-sm text-fg-2">
+              <strong className="font-display text-base font-semibold text-fg">3M</strong>{" "}
+              aplicadora credenciada
+            </p>
+            <span aria-hidden className="hidden h-5 w-px bg-line sm:block" />
+            <GoogleBadge />
           </Reveal>
         </div>
       </section>
 
-      {/* ---------- Linha do tempo ---------- */}
-      <section className="relative isolate overflow-hidden border-t border-line">
-        <div className="container-x grid gap-12 py-16 md:grid-cols-[1fr_1.4fr] md:gap-16 md:py-28">
-          <div className="relative md:sticky md:top-32 md:self-start">
-            <Reveal>
-              <p className="eyebrow mb-3">História</p>
-              <h2 className="display text-4xl md:text-6xl">
-                De 1992
-                <br />
-                até <span className="text-red-2">hoje.</span>
-              </h2>
-              <p className="mt-6 max-w-sm text-fg-2">
-                Mais de {decadasEmAtividade()} prestando serviços de alto nível em Petrópolis: película,
-                envelopamento, som, alarmes, acessórios e recuperação de para-brisas.
-              </p>
-              <LongArrowIcon className="mt-8 hidden size-8 text-fg-3 md:block" />
-            </Reveal>
-            <p
-              aria-hidden
-              className="num-ghost pointer-events-none absolute -left-4 -bottom-24 -z-10 hidden md:block"
-            >
-              {site.founded}
-            </p>
-          </div>
-
-          <div className="tl pl-10 md:pl-12">
+      {/* ---------- A história ---------- */}
+      {HISTORIA.map((bloco, i) => (
+        <section key={bloco.id} id={bloco.id} className="border-t border-line">
+          <div
+            className={`container-x grid items-center gap-10 py-14 md:gap-16 md:py-20 ${
+              bloco.fotos ? "md:grid-cols-2" : ""
+            }`}
+          >
+            {/* A foto alterna de lado a cada bloco: três blocos seguidos com a imagem sempre
+                à direita viram uma lista, e a página deixa de ser lida como narrativa. */}
             <Reveal
-              aria-hidden
-              className="tl-rail"
-              variants={{ hidden: { scaleY: 0 }, show: { scaleY: 1 } }}
-              transition={{ duration: 1.6, ease }}
-              viewport={{ once: true, margin: "0px 0px -20% 0px" }}
-            />
-            <RevealGroup stagger={0.14} className="grid gap-12 md:gap-16">
-              {timeline.map((t) => (
-                <RevealItem key={t.title} className="tl-item relative">
-                  <span aria-hidden className="tl-node -left-10 md:-left-12" data-hot={t.hot ? "true" : "false"} />
-                  <p className={`eyebrow mb-3 ${t.hot ? "" : "text-fg-3"}`}>{t.when}</p>
-                  <h3 className="display text-2xl text-fg md:text-4xl">{t.title}</h3>
-                  <p className="mt-3 max-w-lg text-fg-2">{t.text}</p>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-          </div>
-        </div>
-      </section>
+              delay={0.05}
+              className={i % 2 === 1 ? "md:order-2" : undefined}
+            >
+              {bloco.titulo && (
+                <h2 className="display text-3xl md:text-5xl [text-wrap:balance]">
+                  {bloco.titulo}
+                </h2>
+              )}
+              <div className={bloco.titulo ? "mt-6 space-y-5" : "space-y-5"}>
+                {bloco.paragrafos.map((p) => (
+                  <p key={p.slice(0, 24)} className="text-base leading-relaxed text-fg-2 md:text-lg">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
 
-      {/* ---------- Missão + serviços ---------- */}
+            {bloco.fotos && (
+              <Reveal
+                delay={0.15}
+                className={`space-y-4 ${i % 2 === 1 ? "md:order-1" : ""}`}
+                variants={{ hidden: { opacity: 0, scale: 1.03 }, show: { opacity: 1, scale: 1 } }}
+                transition={{ duration: 1.1, ease }}
+              >
+                {bloco.fotos.map((foto) => (
+                  <figure key={foto.src}>
+                    <div className="grain relative overflow-hidden rounded-lg border border-line">
+                      <Image
+                        src={foto.src}
+                        alt={foto.alt}
+                        width={foto.w}
+                        height={foto.h}
+                        sizes="(min-width: 768px) 46vw, 92vw"
+                        className="block h-full w-full object-cover"
+                      />
+                    </div>
+                    <figcaption className="mt-2 text-xs text-fg-3">{foto.legenda}</figcaption>
+                  </figure>
+                ))}
+              </Reveal>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {/* ---------- Missão ---------- */}
       <section className="relative isolate overflow-hidden border-t border-line">
         <div
           aria-hidden
           className="absolute inset-0 -z-10 bg-[radial-gradient(45%_70%_at_100%_100%,rgba(209,20,31,0.12),transparent_70%)]"
         />
-        <div className="container-x grid gap-12 py-16 md:grid-cols-[1.1fr_1fr] md:gap-16 md:py-28">
+        <div className="container-x grid gap-10 py-16 md:grid-cols-[1fr_1.1fr] md:gap-16 md:py-24">
           <Reveal>
             <p className="eyebrow mb-3">Missão</p>
-            <h2 className="display text-4xl md:text-6xl [text-wrap:balance]">
-              Qualidade e rapidez, buscando sempre a satisfação total do cliente.
-            </h2>
+            <h2 className="display text-4xl md:text-6xl [text-wrap:balance]">{MISSAO.titulo}</h2>
           </Reveal>
-          <div>
-            <Reveal delay={0.1} className="prose-dark">
-              <p>
-                Nossa missão é executar serviços com qualidade e rapidez, buscando sempre a
-                satisfação total do cliente.
+          <Reveal delay={0.1} className="space-y-5 md:pt-4">
+            {MISSAO.paragrafos.map((p) => (
+              <p key={p.slice(0, 24)} className="text-base leading-relaxed text-fg-2 md:text-lg">
+                {p}
               </p>
-              <p>Dentre os serviços oferecidos podemos citar:</p>
-            </Reveal>
-            <RevealGroup stagger={0.06} className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2">
-              {services.map(({ icon: Icon, label }) => (
-                <RevealItem
-                  key={label}
-                  className="group flex items-center gap-4 bg-bg p-5 transition-colors duration-300 hover:bg-bg-2"
-                >
-                  <span className="grid size-10 shrink-0 place-items-center rounded-full border border-line text-fg-2 transition-[color,border-color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5 group-hover:border-red group-hover:text-red-2">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="text-sm leading-snug text-fg-2 transition-colors group-hover:text-fg md:text-base">
-                    {label}
-                  </span>
-                </RevealItem>
-              ))}
-            </RevealGroup>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- Clientes ---------- */}
-      <section className="border-t border-line">
-        <div className="container-x py-16 md:py-28">
-          <Reveal className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <p className="eyebrow mb-3">Clientes</p>
-              <h2 className="display max-w-2xl text-4xl md:text-6xl [text-wrap:balance]">
-                Nossa qualidade é atestada pelo serviço prestado aos clientes.
-              </h2>
-            </div>
-            <p className="max-w-xs text-sm text-fg-3">
-              Entre eles, empresas e instituições de Petrópolis e da região.
-            </p>
+            ))}
           </Reveal>
-          <RevealGroup stagger={0.1} className="grid grid-cols-1 border-t border-line sm:grid-cols-2">
-            {CLIENTES.map((c, i) => {
-              const { nome: name, complemento: sub } = c;
-              return (
-                <RevealItem
-                  key={name}
-                  className={`client-cell flex min-h-52 flex-col justify-between border-b border-line p-6 text-fg-2 md:min-h-72 md:p-10 ${
-                    i % 2 === 0 ? "sm:border-r" : ""
-                  }`}
-                >
-                  <span className="font-display text-sm tabular-nums tracking-[0.2em] text-fg-3">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span>
-                    <span className="display block text-4xl md:text-6xl">{name}</span>
-                    {sub && (
-                      <span className="mt-3 block text-sm uppercase tracking-[0.18em] text-fg-3">
-                        {sub}
-                      </span>
-                    )}
-                  </span>
-                </RevealItem>
-              );
-            })}
-          </RevealGroup>
         </div>
       </section>
 
-      {/* ---------- Foto da loja ---------- */}
+      {/* ---------- Foto da loja + endereço ---------- */}
       <section className="relative isolate overflow-hidden border-t border-line">
         <Reveal
           className="relative h-[52vw] max-h-[560px] min-h-[320px] w-full grain"
